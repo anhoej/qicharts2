@@ -1,0 +1,102 @@
+---
+title: "Quality Improvement Charts with R"
+author: "Jacob Anhøj"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, echo = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE, 
+  comment = "#>",
+  fig.width = 7.15)
+```
+
+Run and control charts are line graphs showing a measure (y axis) over time (x axis). A horizontal line represents the process centre expressed by either the median (run charts) or the mean (control charts). Additionally, in control charts, two lines representing the boundaries of the natural, random variation inherent in the process.
+
+```{r}
+# Load qicharts2.
+library(qicharts2)
+
+# Lock random number generator to make exampels reproducible.
+set.seed(9)
+
+# Generate 12 random numbers from a normal distribution.
+y <- rnorm(12)
+
+# Make run chart.
+qic(y)
+
+# Make I control chart.
+qic(y, chart = 'i')
+```
+
+
+[Walther A. Shewhart](http://en.wikipedia.org/wiki/Walter_A._Shewhart), who invented the control chart, described two types of variation, *chance cause variation* and *assignable cause variation*. These were later renamed to common cause and special cause variation.
+
+**Common cause variation**
+
+* is present in any process,
+* is caused by phenomena that are always present within the system,
+* makes the process predictable (within limits),
+* is also called random variation or noise.
+
+**Special cause variation**
+
+* is present in some processes,
+* is caused by phenomena that are not normally present in the system,
+* makes the process unpredictable,
+* is also called non-random variation or signal.
+
+## Faceting
+
+```{r}
+# Load dataset.
+data("hospital_infections")
+
+# Make U control chart of hospital infections.
+qic(month, n, days,
+    data     = hospital_infections,
+    chart    = 'u',
+    multiply = 10000,
+    main     = 'Hospital acquired infections in the Capital Region of Denmark',
+    ylab     = 'Count per 10,000 risk days',
+    xlab     = 'Month')
+
+# Facet control chart by type of infection.
+qic(month, n, days,
+    data     = hospital_infections,
+    facets   = ~ infection,
+    chart    = 'u',
+    multiply = 10000,
+    main     = 'Hospital acquired infections in the Capital Region of Denmark',
+    ylab     = 'Count per 10,000 risk days',
+    xlab     = 'Month')
+
+# Facet control chart by hospital (vertical) and type of infection (horizontal).
+qic(month, n, days,
+    data     = hospital_infections,
+    facets   = infection ~ hospital,
+    chart    = 'u',
+    multiply = 10000,
+    main     = 'Hospital acquired infections in the Capital Region of Denmark',
+    ylab     = 'Count per 10,000 risk days',
+    xlab     = 'Month')
+
+# Free y axis and rotate x axis labels
+qic(month, n, days,
+    data     = hospital_infections,
+    facets   = infection ~ hospital,
+    chart    = 'u',
+    multiply = 10000,
+    scales   = 'free_y',
+    x.angle  = 45,
+    main     = 'Hospital acquired infections in the Capital Region of Denmark',
+    ylab     = 'Count per 10,000 risk days',
+    xlab     = 'Month')
+```
+
