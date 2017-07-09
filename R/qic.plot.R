@@ -1,7 +1,7 @@
 #' @import ggplot2
 plot.qic <- function(x, main, ylab, xlab, subtitle, caption, part.labels,
                      nrow, ncol, scales, show.linelabels, show.grid, digits,
-                     flip, dots.only, x.format, y.expand, y.percent,
+                     flip, dots.only, x.format, x.angle, y.expand, y.percent,
                      ...) {
   # Set colours
   col1      <- '#8C8C8C' #rgb(140, 140, 140, maxColorValue = 255) # grey
@@ -149,12 +149,10 @@ plot.qic <- function(x, main, ylab, xlab, subtitle, caption, part.labels,
     p <- p + facet_wrap( ~ facet1,
                          nrow = nrow,
                          ncol = ncol,
-                         scales = scales,
-                         ...)
+                         scales = scales)
   } else if (n.facets == 2) {
     p <- p + facet_grid(facet1 ~ facet2,
-                        scales = scales,
-                        ...)
+                        scales = scales)
   } else {
     p <- p + facet_null()
   }
@@ -170,6 +168,11 @@ plot.qic <- function(x, main, ylab, xlab, subtitle, caption, part.labels,
   # Format x axis labels
   if (!is.null(x.format) && inherits(x$x, 'POSIXct')) {
     p <- p + scale_x_datetime(date_labels = x.format)
+  }
+  
+  if (!is.null(x.angle)) {
+    p <- p +
+      theme(axis.text.x = element_text(angle = x.angle, vjust = 0.6))
   }
 
   # Expand y limits

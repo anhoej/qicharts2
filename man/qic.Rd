@@ -11,8 +11,9 @@ qic(x, y = NULL, n = NULL, notes = NULL, data = NULL, facets = NULL,
   1, nrow = NULL, ncol = NULL, scales = "fixed", main = NULL,
   ylab = "Value", xlab = "Subgroup", subtitle = NULL, caption = NULL,
   part.labels = NULL, show.linelabels = is.null(facets), digits = 3,
-  x.format = NULL, y.expand = NULL, y.neg = TRUE, y.percent = FALSE,
-  show.grid = FALSE, flip = FALSE, print.summary = FALSE, ...)
+  x.format = NULL, x.angle = NULL, y.expand = NULL, y.neg = TRUE,
+  y.percent = FALSE, show.grid = FALSE, flip = FALSE,
+  print.summary = FALSE, ...)
 }
 \arguments{
 \item{x}{Vector of subgroup values to plot along the x axis.}
@@ -21,38 +22,37 @@ qic(x, y = NULL, n = NULL, notes = NULL, data = NULL, facets = NULL,
 
 \item{n}{Vector of subgroup sizes (denominator).}
 
-\item{notes}{Character vector of notes to be added to individual. data
-points.}
+\item{notes}{Character vector of notes to be added to individual data points.}
 
 \item{data}{Data frame containing variables used in the plot.}
 
 \item{facets}{One or two sided formula with factors used for facetting plots.
 E.g ~ facet1 or facet1 ~ facet2.}
 
-\item{chart}{Character value indicating the chart type. Possible values are:
+\item{chart}{Character value indicating the chart type. Possible values are: 
 'run' (default), 'i', 'mr', 'xbar', 't', 's', 'c', 'u', 'p', and 'g'.}
 
-\item{freeze}{Integer indicating the last data point to include in
-calculation of calculating baseline paramenters for centre and control
+\item{freeze}{Integer indicating the last data point to include in 
+calculation of calculating baseline paramenters for centre and control 
 lines. Ignored if break.points argument is given.}
 
-\item{break.points}{Integer vector indicating break points before
+\item{break.points}{Integer vector indicating break points before 
 recalculation of centre and control lines.}
 
-\item{exclude}{Integer vector indicating data points to exclude from
+\item{exclude}{Integer vector indicating data points to exclude from 
 calculations of centre and control lines.}
 
 \item{agg.fun}{Aggregate function for summarising the y variable if there are
-more than one observation per subgroup. Only relevant for run charts and I
+more than one observation per subgroup. Only relevant for run charts and I 
 charts. Possible values are: 'mean' (default), 'median', 'sum', 'sd'.}
 
-\item{multiply}{Number indicating a number to multiply y axis by, e.g. 100
+\item{multiply}{Number indicating a number to multiply y axis by, e.g. 100 
 for percents rather than proportions. See also \code{y.percent} argument.}
 
-\item{target}{Numeric value indicating a target value to be plotted as a
+\item{target}{Numeric value indicating a target value to be plotted as a 
 horizontal line (same for each facet).}
 
-\item{nrow, ncol}{Number indicating the preferred number of rows and columns
+\item{nrow, ncol}{Number indicating the preferred number of rows and columns 
 in facets.}
 
 \item{scales}{Character string, one of 'fixed' (default), 'free_y', 'free_x',
@@ -72,21 +72,23 @@ panels or free.}
 \item{part.labels}{Character vector of length two specifying before and after
 labels for chart parts created with freeze arguments.}
 
-\item{show.linelabels}{Logical indicating whether to show labels for centre
+\item{show.linelabels}{Logical indicating whether to show labels for centre 
 and control lines on chart. Defaults to TRUE when \code{facets} is NULL.}
 
 \item{digits}{Integer indicating the preferred number of digits in centre and
 control line labels.}
 
-\item{x.format}{Date format of x axis labels. See \code{?strftime()} for
+\item{x.format}{Date format of x axis labels. See \code{?strftime()} for 
 possible date formats.}
+
+\item{x.angle}{Number indicating the angle of x axis labels.}
 
 \item{y.expand}{Numeric value to include in y axis. Useful e.g. for beginning}
 
-\item{y.neg}{If TRUE (default), the y axis is allowed to be negative (only
+\item{y.neg}{If TRUE (default), the y axis is allowed to be negative (only 
 relevant for I and Xbar charts).}
 
-\item{y.percent}{Logical. If TRUE, formats y axis labels as percent. y axis
+\item{y.percent}{Logical. If TRUE, formats y axis labels as percent. y axis 
 at zero.}
 
 \item{show.grid}{If TRUE shows grid.}
@@ -101,9 +103,12 @@ at zero.}
 A \code{qic} object.
 }
 \description{
-\code{qic} makes run charts and Shewhart control charts for process control
-and improvement. Included charts are: I, MR, Xbar, S, T, C, U, Uprime, P,
-Pprime, G, and run charts.
+The \code{qic} function creates run charts and Shewhart control charts for 
+process control and improvement. Included control charts are: I, MR, Xbar, S,
+T, C, U, Uprime, P, Pprime, and G charts.
+}
+\details{
+Long explanation.
 }
 \examples{
 set.seed(2)
