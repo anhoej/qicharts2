@@ -9,9 +9,10 @@ runs.analysis <- function(x) {
     run.lengths      <- rle(runs)$lengths
     n.runs           <- length(run.lengths)
     longest.run      <- max(run.lengths)
-    longest.run.max  <- round(log2(n.useful)) + 3               # Schilling 2012
+    longest.run.max  <- round(log2(n.useful)) + 3  # Schilling 2012
     n.crossings      <- max(n.runs - 1, 0)
-    n.crossings.min  <- stats::qbinom(0.05, max(n.useful - 1, 0), 0.5) # Chen 2010 (7)
+    n.crossings.min  <- stats::qbinom(0.05,        # Chen 2010 (7)
+                                      max(n.useful - 1, 0), 0.5)
     runs.signal      <- longest.run > longest.run.max ||
       n.crossings < n.crossings.min
   } else {
@@ -32,8 +33,9 @@ runs.analysis <- function(x) {
 }
 
 qic.run <- function(x) {
-  base <- x$baseline & x$include
-  x$cl <- stats::median(x$y[base], na.rm = TRUE)
+  base  <- x$baseline & x$include
+  if (is.null(x$cl))
+    x$cl  <- stats::median(x$y[base], na.rm = TRUE)
   x$ucl <- as.numeric(NA)
   x$lcl <- as.numeric(NA)
 
@@ -42,7 +44,8 @@ qic.run <- function(x) {
 
 qic.i <- function(x) {
   base <- x$baseline & x$include
-  x$cl <- mean(x$y[base], na.rm = TRUE)
+  if (is.null(x$cl))
+    x$cl <- mean(x$y[base], na.rm = TRUE)
 
   # Average moving range
   mr  <- abs(diff(x$y[base]))
@@ -67,10 +70,11 @@ qic.i <- function(x) {
 
 qic.mr <- function(x) {
   base <- x$baseline & x$include
-  x$y    <- c(NA, abs(diff(x$y)))
+  x$y  <- c(NA, abs(diff(x$y)))
 
   # Calculate centre line
-  x$cl <- mean(x$y[base], na.rm = TRUE)
+  if (is.null(x$cl))
+    x$cl <- mean(x$y[base], na.rm = TRUE)
 
   # Calculate upper limit for moving ranges
   x$lcl <- 0
@@ -84,8 +88,10 @@ qic.xbar <- function(x){
   var.n <- as.logical(length(unique(x$y.length)) - 1)
 
   # Calculate centre line, Montgomery 6.30
-  x$cl <- sum(x$y.length[base] * x$y.mean[base], na.rm = TRUE) /
-    sum(x$y.length[base], na.rm = TRUE)
+  if (is.null(x$cl)) {
+    x$cl <- sum(x$y.length[base] * x$y.mean[base], na.rm = TRUE) /
+      sum(x$y.length[base], na.rm = TRUE)
+  }
 
   # Calculate standard deviation and control limits, Montgomery 6.29 or 6.31
   if (var.n) {
@@ -109,14 +115,17 @@ qic.s <- function(x){
 
   x$y <- x$y.sd
 
-  # Calculate centre line and control limits, Montgomery 6.29 or 6.31
-  if (var.n) {
-    # x$cl <- sqrt(sum(x$y.sd[base]^2 * (x$y.length[base] - 1), na.rm = TRUE) /
-    #                (sum(x$y.length[base], na.rm = TRUE) - sum(base)))
-    x$cl <- sqrt(sum((x$y.length[base] - 1) * x$y.sd[base]^2, na.rm = TRUE) /
-                   sum(x$y.length[base] - 1, na.rm = TRUE))
-  } else {
-    x$cl <- mean(x$y.sd, na.rm = TRUE)
+  # Calculate centre line and control limits
+  if (is.null(x$cl)) {
+    if (var.n) { # Variable subgroup size: Montgomery 6.31
+      # x$cl <- sqrt(sum(x$y.sd[base]^2 * (x$y.length[base] - 1), na.rm = TRUE) /
+      #                (sum(x$y.length[base], na.rm = TRUE) - sum(base)))
+      x$cl <- sqrt(sum((x$y.length[base] - 1) * x$y.sd[base]^2, na.rm = TRUE) /
+                     sum(x$y.length[base] - 1, na.rm = TRUE))
+      # x$cl <- sum(x$y[base] * x$y.length[base]) / sum(x$y.length[base])
+    } else { # Constant subgroup size: Montgomery 6.29
+      x$cl <- mean(x$y.sd, na.rm = TRUE)
+    }
   }
   B3     <- b3(x$y.length)
   B4     <- b4(x$y.length)
@@ -131,12 +140,11 @@ qic.t <- function(x) {
     stop('Time between events must be greater than zero')
   }
 
+  # Transform y variable and make I chart calculations
   x$y <- x$y^(1 / 3.6)
-
   x <- qic.i(x)
 
   # Back transform centre line and control limits
-  # y = d$y^3.6
   x$y <- x$y^3.6
   x$cl  <- x$cl^3.6
   x$ucl <- x$ucl^3.6
@@ -149,8 +157,10 @@ qic.t <- function(x) {
 qic.p <- function(x) {
   base <- x$baseline & x$include
 
-  x$cl <- sum(x$y.sum[base], na.rm = TRUE) /
-    sum(x$n[base], na.rm = TRUE)
+  if (is.null(x$cl)) {
+    x$cl <- sum(x$y.sum[base], na.rm = TRUE) /
+      sum(x$n[base], na.rm = TRUE)
+  }
 
   # Calculate standard deviation
   stdev <- sqrt(x$cl * (1 - x$cl) / x$n)
@@ -166,8 +176,11 @@ qic.p <- function(x) {
 
 qic.pprime <- function(x) {
   base <- x$baseline & x$include
-  x$cl <- sum(x$y.sum[base], na.rm = TRUE) /
-    sum(x$n[base], na.rm = TRUE)
+  
+  if (is.null(x$cl)) {
+    x$cl <- sum(x$y.sum[base], na.rm = TRUE) /
+      sum(x$n[base], na.rm = TRUE)
+  }
 
   # Calculate standard deviation
   stdev <- sqrt(x$cl * (1 - x$cl) / x$n)
@@ -188,7 +201,10 @@ qic.pprime <- function(x) {
 
 qic.c <- function(x){
   base <- x$baseline & x$include
-  x$cl <- mean(x$y[base], na.rm = TRUE)
+  
+  if (is.null(x$cl)) {
+    x$cl <- mean(x$y[base], na.rm = TRUE)
+  }
 
   # Calculate standard deviation, Montgomery 7.17
   stdev <- sqrt(x$cl)
@@ -203,7 +219,10 @@ qic.c <- function(x){
 
 qic.u <- function(x){
   base <- x$baseline & x$include
-  x$cl   <- sum(x$y.sum[base], na.rm = TRUE) / sum(x$n[base], na.rm = TRUE)
+  
+  if (is.null(x$cl)) {
+    x$cl   <- sum(x$y.sum[base], na.rm = TRUE) / sum(x$n[base], na.rm = TRUE)
+  }
 
   # Calculate standard deviation, Montgomery 7.19
   stdev <- sqrt(x$cl / x$n)
@@ -218,7 +237,10 @@ qic.u <- function(x){
 
 qic.uprime <- function(x){
   base <- x$baseline & x$include
-  x$cl   <- sum(x$y.sum[base], na.rm = TRUE) / sum(x$n[base], na.rm = TRUE)
+  
+  if (is.null(x$cl)) {
+    x$cl   <- sum(x$y.sum[base], na.rm = TRUE) / sum(x$n[base], na.rm = TRUE)
+  }
 
   # Calculate standard deviation, Montgomery 7.19
   stdev <- sqrt(x$cl / x$n)
@@ -241,7 +263,10 @@ qic.g <- function(x){
   base <- x$baseline & x$include
 
   # Calculate centre line
-  x$cl <- mean(x$y[base], na.rm = TRUE)
+  if (is.null(x$cl)) {
+    x$cl <- mean(x$y[base], na.rm = TRUE)
+  }
+  
 
   # Calculate standard deviation, Montgomery, p. 319
   stdev <- sqrt(x$cl * (x$cl + 1))

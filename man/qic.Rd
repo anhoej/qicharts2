@@ -6,9 +6,9 @@
 \usage{
 qic(x, y = NULL, n = NULL, notes = NULL, data = NULL, facets = NULL,
   chart = c("run", "i", "mr", "xbar", "s", "t", "p", "pprime", "c", "u",
-  "uprime", "g"), freeze = NULL, break.points = NULL, exclude = NULL,
-  agg.fun = c("mean", "median", "sum", "sd"), multiply = 1, target = NA *
-  1, nrow = NULL, ncol = NULL, scales = "fixed", main = NULL,
+  "uprime", "g"), agg.fun = c("mean", "median", "sum", "sd"), multiply = 1,
+  freeze = NULL, break.points = NULL, exclude = NULL, target = NA * 1,
+  cl = NULL, nrow = NULL, ncol = NULL, scales = "fixed", main = NULL,
   ylab = "Value", xlab = "Subgroup", subtitle = NULL, caption = NULL,
   part.labels = NULL, show.linelabels = is.null(facets), digits = 3,
   x.format = NULL, x.angle = NULL, y.expand = NULL, y.neg = TRUE,
@@ -26,15 +26,22 @@ qic(x, y = NULL, n = NULL, notes = NULL, data = NULL, facets = NULL,
 
 \item{data}{Data frame containing variables used in the plot.}
 
-\item{facets}{One or two sided formula with factors used for facetting plots.
-E.g ~ facet1 or facet1 ~ facet2.}
+\item{facets}{One or two sided formula with factors used for facetting plots.}
 
 \item{chart}{Character value indicating the chart type. Possible values are: 
-'run' (default), 'i', 'mr', 'xbar', 't', 's', 'c', 'u', 'p', and 'g'.}
+'run' (default), 'i', 'mr', 'xbar', 't', 's', 'c', 'u', 'uprime', 'p', 
+'pprime', and 'g'.}
+
+\item{agg.fun}{Aggregate function for summarising the y variable if there are
+more than one observation per subgroup. Only relevant for run charts and I 
+charts. Possible values are: 'mean' (default), 'median', 'sum', and 'sd'.}
+
+\item{multiply}{Number indicating a number to multiply y axis by, e.g. 100 
+for percents rather than proportions. See also \code{y.percent} argument.}
 
 \item{freeze}{Integer indicating the last data point to include in 
-calculation of calculating baseline paramenters for centre and control 
-lines. Ignored if break.points argument is given.}
+calculation of baseline paramenters for centre and control lines. Ignored 
+if break.points argument is given.}
 
 \item{break.points}{Integer vector indicating break points before 
 recalculation of centre and control lines.}
@@ -42,15 +49,10 @@ recalculation of centre and control lines.}
 \item{exclude}{Integer vector indicating data points to exclude from 
 calculations of centre and control lines.}
 
-\item{agg.fun}{Aggregate function for summarising the y variable if there are
-more than one observation per subgroup. Only relevant for run charts and I 
-charts. Possible values are: 'mean' (default), 'median', 'sum', 'sd'.}
-
-\item{multiply}{Number indicating a number to multiply y axis by, e.g. 100 
-for percents rather than proportions. See also \code{y.percent} argument.}
-
 \item{target}{Numeric value indicating a target value to be plotted as a 
 horizontal line (same for each facet).}
+
+\item{cl}{Numeric value indicating the centre line if known in advance.}
 
 \item{nrow, ncol}{Number indicating the preferred number of rows and columns 
 in facets.}
@@ -83,7 +85,8 @@ possible date formats.}
 
 \item{x.angle}{Number indicating the angle of x axis labels.}
 
-\item{y.expand}{Numeric value to include in y axis. Useful e.g. for beginning}
+\item{y.expand}{Numeric value to include in y axis. Useful e.g. for starting
+the y axis at zero.}
 
 \item{y.neg}{If TRUE (default), the y axis is allowed to be negative (only 
 relevant for I and Xbar charts).}
@@ -100,7 +103,7 @@ at zero.}
 \item{...}{Additional arguments to plot function.}
 }
 \value{
-A \code{qic} object.
+A \code{qic} object. Inherits from 'ggplot'.
 }
 \description{
 The \code{qic} function creates run charts and Shewhart control charts for 
@@ -111,6 +114,7 @@ T, C, U, Uprime, P, Pprime, and G charts.
 Long explanation.
 }
 \examples{
+# Lock random number generator to make reproducible results.
 set.seed(2)
 
 # Run chart from 24 random normal values

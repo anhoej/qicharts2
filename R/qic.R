@@ -12,23 +12,24 @@
 #' @param notes Character vector of notes to be added to individual data points.
 #' @param data Data frame containing variables used in the plot.
 #' @param facets One or two sided formula with factors used for facetting plots.
-#'   E.g ~ facet1 or facet1 ~ facet2.
 #' @param chart Character value indicating the chart type. Possible values are: 
-#'   'run' (default), 'i', 'mr', 'xbar', 't', 's', 'c', 'u', 'p', and 'g'.
+#'   'run' (default), 'i', 'mr', 'xbar', 't', 's', 'c', 'u', 'uprime', 'p', 
+#'   'pprime', and 'g'.
+#' @param agg.fun Aggregate function for summarising the y variable if there are
+#'   more than one observation per subgroup. Only relevant for run charts and I 
+#'   charts. Possible values are: 'mean' (default), 'median', 'sum', and 'sd'.
+#' @param multiply Number indicating a number to multiply y axis by, e.g. 100 
+#'   for percents rather than proportions. See also \code{y.percent} argument.
 #' @param freeze Integer indicating the last data point to include in 
-#'   calculation of calculating baseline paramenters for centre and control 
-#'   lines. Ignored if break.points argument is given.
+#'   calculation of baseline paramenters for centre and control lines. Ignored 
+#'   if break.points argument is given.
 #' @param break.points Integer vector indicating break points before 
 #'   recalculation of centre and control lines.
 #' @param exclude Integer vector indicating data points to exclude from 
 #'   calculations of centre and control lines.
-#' @param agg.fun Aggregate function for summarising the y variable if there are
-#'   more than one observation per subgroup. Only relevant for run charts and I 
-#'   charts. Possible values are: 'mean' (default), 'median', 'sum', 'sd'.
-#' @param multiply Number indicating a number to multiply y axis by, e.g. 100 
-#'   for percents rather than proportions. See also \code{y.percent} argument.
 #' @param target Numeric value indicating a target value to be plotted as a 
 #'   horizontal line (same for each facet).
+#' @param cl Numeric value indicating the centre line if known in advance.
 #' @param nrow,ncol Number indicating the preferred number of rows and columns 
 #'   in facets.
 #' @param scales Character string, one of 'fixed' (default), 'free_y', 'free_x',
@@ -48,7 +49,8 @@
 #' @param x.format Date format of x axis labels. See \code{?strftime()} for 
 #'   possible date formats.
 #' @param x.angle Number indicating the angle of x axis labels.
-#' @param y.expand Numeric value to include in y axis. Useful e.g. for beginning
+#' @param y.expand Numeric value to include in y axis. Useful e.g. for starting
+#'   the y axis at zero.
 #' @param y.neg If TRUE (default), the y axis is allowed to be negative (only 
 #'   relevant for I and Xbar charts).
 #' @param y.percent Logical. If TRUE, formats y axis labels as percent. y axis 
@@ -58,9 +60,10 @@
 #' @param print.summary If TRUE, prints summary.
 #' @param ... Additional arguments to plot function.
 #'   
-#' @return A \code{qic} object.
+#' @return A \code{qic} object. Inherits from 'ggplot'.
 #'   
 #' @examples
+#' # Lock random number generator to make reproducible results.
 #' set.seed(2)
 #' 
 #' # Run chart from 24 random normal values
@@ -97,12 +100,13 @@ qic <- function(x,
                 facets          = NULL,
                 chart           = c('run', 'i', 'mr', 'xbar', 's', 't',
                                     'p', 'pprime', 'c', 'u', 'uprime', 'g'),
+                agg.fun         = c('mean', 'median', 'sum', 'sd'),
+                multiply        = 1,
                 freeze          = NULL,
                 break.points    = NULL,
                 exclude         = NULL,
-                agg.fun         = c('mean', 'median', 'sum', 'sd'),
-                multiply        = 1,
                 target          = NA * 1,
+                cl              = NULL,
                 nrow            = NULL,
                 ncol            = NULL,
                 scales          = 'fixed',
@@ -126,6 +130,7 @@ qic <- function(x,
   
   # Preserve show.linelabels value
   show.linelabels <- show.linelabels
+  y.name <- deparse(substitute(y))
   
   # Get chart type
   chart.fun <- get(paste0('qic.', match.arg(chart)))
@@ -146,7 +151,7 @@ qic <- function(x,
   } else {
     facets <- mget(facets, as.environment(data))
   }
-  
+
   facets <- as.data.frame(facets)
   
   if(ncol(facets) %in% 1:2) {
@@ -229,6 +234,7 @@ qic <- function(x,
                 )
               })
   d <- do.call(rbind, d)
+  
   # Add part and include variables
   d <- split(d, d[c('facet1', 'facet2')])
   d <- lapply(d,
@@ -244,13 +250,21 @@ qic <- function(x,
                 return(x)
               })
   d <- do.call(rbind, d)
-  d$baseline <- d$xx <= freeze
+
+  # Fix notes variables
   d$notes    <- gsub("\\|{2, }", "\\|", d$notes)
   d$notes    <- gsub("^\\||\\|$", "", d$notes)
   d$notes    <- gsub("\\|", " | ", d$notes)
   d$notes    <- gsub("^$", NA, d$notes)
   
+  # Add baseline variable
+  d$baseline <- d$xx <= freeze
+  
   # Add centre and control lines
+  if (!is.null(cl)) {
+    d$cl <- cl
+  }
+
   d <- split(d, d[c('facet1', 'facet2', 'part')])
   d <- lapply(d, chart.fun)
   d <- lapply(d, runs.analysis)
@@ -266,15 +280,20 @@ qic <- function(x,
                 return(x)
               })
   d <- do.call(rbind, d)
-  
   rownames(d) <- NULL
   
-  d$sigma.signal                        <- d$y > d$ucl | d$y < d$lcl
-  d$sigma.signal[is.na(d$sigma.signal)] <- FALSE
-  d$target                              <- target
+  # Remove control lines from missing subgroups
   d$ucl[is.na(d$y)] <- NA
   d$lcl[is.na(d$y)] <- NA
   
+  # Add sigma signals
+  d$sigma.signal                        <- d$y > d$ucl | d$y < d$lcl
+  d$sigma.signal[is.na(d$sigma.signal)] <- FALSE
+  
+  # Add target line
+  d$target <- target
+  
+  # Ignore runs analysis if subgroups are categorical
   if (dots.only) {
     d$runs.signal <- FALSE
   }
