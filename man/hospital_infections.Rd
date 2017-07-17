@@ -3,12 +3,13 @@
 \docType{data}
 \name{hospital_infections}
 \alias{hospital_infections}
-\title{Hospital infections}
-\format{A data frame with 432 rows and 5 variables: \itemize{ \item
-  \strong{hospital} Abbreviated hospital name. \item \strong{infection} Type
-  of infection. BAC: Bacteremia, CDI: Clostridium difficile infection, UTI,
+\title{Hospital acquired infections}
+\format{A data frame with 432 rows and 5 variables: \itemize{ \item 
+  \strong{hospital} Abbreviated hospital name. \item \strong{infection} Type 
+  of infection. BAC: Bacteremia, CDI: Clostridium difficile infection. UTI:
   Urinary tract infection. \item \strong{month} First day of month. \item
-  \strong{n} Number of cases. \item \strong{days} Number of risk days. }}
+  \strong{n} Number of cases. \item \strong{days} Number of risk days. A risk
+  day is a patient day without infection }}
 \source{
 \url{http://www.haiba.dk/}
 }
@@ -16,7 +17,8 @@
 hospital_infections
 }
 \description{
-A dataset containing the number and types of hospital acquired infections in
-six hospitals in the Capital Region of Denmark 2015-2016.
+A dataset containing the number of hospital acquired bacteremia, Clostridium 
+difficile infections, and urinary tract infections in six hospitals in the 
+Capital Region of Denmark 2015-2016.
 }
 \keyword{datasets}
