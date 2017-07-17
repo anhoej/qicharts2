@@ -28,7 +28,7 @@
 #'
 summary.qic <- function(object, ...) {
   x <- object$data
-  x <- x[c('facet1', 'facet2', 'part', 'lcl', 'cl', 'ucl',
+  x <- x[c('facet1', 'facet2', 'part', 'lcl', 'cl', 'ucl', 'n.obs', 'n.useful',
            'longest.run', 'longest.run.max', 'n.crossings', 'n.crossings.min',
            'runs.signal', 'sigma.signal')]
 
@@ -38,14 +38,16 @@ summary.qic <- function(object, ...) {
       facet1 = x$facet1[1],
       facet2 = x$facet2[1],
       part = x$part[1],
-      aLCL = mean(x$lcl, na.rm = TRUE),
-      CL = mean(x$cl, na.rm = TRUE),
-      aUCL = mean(x$ucl, na.rm = TRUE),
+      n.obs = x$n.obs[1],
+      n.useful = x$n.useful[1],
       longest.run = x$longest.run[1],
       longest.run.max = x$longest.run.max[1],
       n.crossings = x$n.crossings[1],
       n.crossings.min = x$n.crossings.min[1],
       runs.signal = max(x$runs.signal),
+      aLCL = mean(x$lcl, na.rm = TRUE),
+      CL = mean(x$cl, na.rm = TRUE),
+      aUCL = mean(x$ucl, na.rm = TRUE),
       sigma.signal = sum(x$sigma.signal, na.rm = TRUE)
     )
   })

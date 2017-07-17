@@ -192,7 +192,7 @@ qic <- function(x,
   
   # Convert dates and datetimes to POSIXct
   if (inherits(x, c('Date', 'POSIXt'))) {
-    x <- as.POSIXct(x)
+    x <- as.POSIXct(as.character(x))
   }
   
   # Fix missing values and get aggregate function
@@ -212,7 +212,8 @@ qic <- function(x,
   
   # Prepare data frame
   d <- data.frame(x, y, n, notes, facets)
-  
+  d <- droplevels(d)
+
   # Aggregate data by subgroup
   d <- split(d, d[c('x', 'facet1', 'facet2')])
   d <- lapply(d,
@@ -282,6 +283,10 @@ qic <- function(x,
   d <- do.call(rbind, d)
   rownames(d) <- NULL
   
+  if(y.percent) {
+    # d$cl.lab <- scales::percent(d$cl.lab)
+  }
+
   # Remove control lines from missing subgroups
   d$ucl[is.na(d$y)] <- NA
   d$lcl[is.na(d$y)] <- NA
@@ -299,8 +304,9 @@ qic <- function(x,
   }
   
   # Prevent negative y axis if negy argument is FALSE
-  if(!y.neg & min(d$y, na.rm = TRUE) >= 0)
+  if(!y.neg & min(d$y, na.rm = TRUE) >= 0) {
     d$lcl[d$lcl < 0] <- 0
+  }
   
   # Return
   p <- plot.qic(d, main = main, xlab = xlab, ylab = ylab,

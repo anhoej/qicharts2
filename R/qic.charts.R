@@ -4,6 +4,7 @@ runs.analysis <- function(x) {
   runs               <- sign(y - cl)
   runs               <- runs[runs != 0 & !is.na(runs)]
   n.useful           <- length(runs)
+  n.obs <- length(y)
 
   if(n.useful) {
     run.lengths      <- rle(runs)$lengths
@@ -23,6 +24,8 @@ runs.analysis <- function(x) {
     runs.signal      <- FALSE
   }
 
+  x$n.obs           <- n.obs
+  x$n.useful        <- n.useful
   x$runs.signal     <- runs.signal
   x$longest.run     <- longest.run
   x$longest.run.max <- longest.run.max
@@ -185,7 +188,7 @@ qic.pprime <- function(x) {
   # Calculate standard deviation
   stdev <- sqrt(x$cl * (1 - x$cl) / x$n)
 
-  # Calculate standard deviation for Laney's u-prime chart, incorporating
+  # Calculate standard deviation for Laney's p-prime chart, incorporating
   # between-subgroup variation.
   z_i     <- (x$y[base] - x$cl[base]) / stdev[base]
   sigma_z <- mean(abs(diff(z_i)), na.rm = TRUE) / 1.128
