@@ -1,8 +1,11 @@
 ---
-title: "Quality Improvement Charts with R"
+title: "Quality Improvement Charts"
+subtitle: "An implementation of statistical process control for R"
 author: "Jacob Anhøj"
 date: "`r Sys.Date()`"
-output: rmarkdown::html_vignette
+output: 
+  rmarkdown::html_vignette:
+    toc: true
 vignette: >
   %\VignetteIndexEntry{Vignette Title}
   %\VignetteEngine{knitr::rmarkdown}
@@ -16,49 +19,414 @@ knitr::opts_chunk$set(
   fig.width = 7.15)
 ```
 
-Run and control charts are line graphs showing a measure (y axis) over time (x axis). A horizontal line represents the process centre expressed by either the median (run charts) or the mean (control charts). Additionally, in control charts, two lines representing the boundaries of the natural, random variation inherent in the process.
+Statistical process control (SPC) is the application of statistical methods for quality improvement and control. Central to SPC is the study of process variation over time.
+
+[Walther A. Shewhart](http://en.wikipedia.org/wiki/Walter_A._Shewhart), who founded SPC, described two types of variation, *chance cause variation* and *assignable cause variation*. Today, the terms common cause and special cause variation are commonly used.
+
+**Common cause variation**
+
+* is also called random variation or noise,
+* is present in any process,
+* is caused by phenomena that are always present within the system,
+* makes the process predictable within limits.
+
+**Special cause variation**
+
+* is also called non-random variation or signal,
+* is present in some processes,
+* is caused by phenomena that are not normally present in the system,
+* makes the process unpredictable.
+
+Run charts and control charts are point-and-line graphs showing a measure over time with the purpose of telling common from special cause variation. A horizontal line represents the process centre expressed by the either the median (run charts) or the mean (control charts). The centre line is used for testing for non-random patterns in the distribution of data points over time. In addition, control charts have two control lines representing the limits of the random variation inherent in the process.
 
 ```{r}
 # Load qicharts2.
 library(qicharts2)
 
-# Lock random number generator to make exampels reproducible.
-set.seed(9)
+# Lock random number generator to make examples reproducible.
+seed <- 19
+set.seed(seed)
 
 # Generate 12 random numbers from a normal distribution.
-y <- rnorm(12)
+y <- rnorm(24)
 
 # Make run chart.
 qic(y)
-
 # Make I control chart.
 qic(y, chart = 'i')
 ```
 
+## Testing for non-random variation
 
-[Walther A. Shewhart](http://en.wikipedia.org/wiki/Walter_A._Shewhart), who invented the control chart, described two types of variation, *chance cause variation* and *assignable cause variation*. These were later renamed to common cause and special cause variation.
-
-**Common cause variation**
-
-* is present in any process,
-* is caused by phenomena that are always present within the system,
-* makes the process predictable (within limits),
-* is also called random variation or noise.
-
-**Special cause variation**
-
-* is present in some processes,
-* is caused by phenomena that are not normally present in the system,
-* makes the process unpredictable,
-* is also called non-random variation or signal.
-
-## Faceting
+Shewhart devised one test to identify special causes, the 3-sigma rule, which is positive if one or more data points fall outside the control limits. The 3-sigma test is effective in detecting sudden large shifts in data.
 
 ```{r}
-# Load dataset.
-data("hospital_infections")
+# Add special cause to y in the form of a large, transient shift of 4 standard deviations.
+set.seed(seed)
+y[22] <- 4
 
-# Make U control chart of hospital infections.
+qic(y, chart = 'i')
+```
+
+However, minor to moderate shifts may go unnoticed by the 3-sigma test for long times.
+
+```{r}
+# Add special cause to y in the form of a moderate, persistent shift of 2 standard deviations.
+set.seed(seed)
+y[13:24] <- rnorm(12, mean = 2)
+
+qic(y, chart = 'i')
+```
+
+Therefore, many additional tests to increase the sensitivity to non-random variation have been proposed.
+
+It is important to realise that while it may be tempting to apply more tests in order to increase the sensitivity of the chart, more test will increase the risk of false positives thereby reducing the specificity of the chart. The choice of which and how many tests to apply is therefore a critical one.
+
+### The Western Electric rules
+
+The Best known tests for non-random variation are probably the Western Electric Rules described in the Statistical Quality Control Handbook (Western Electric Company 1956). The WE rules consist of four simple tests that can be applied to the control chart by visual inspection and are based on the identification of unusual patterns in the distribution of data points in relation to the control and centre lines.
+
+1. one or more points outside of the control limits (Shewhart's original 3-sigma rule),
+
+2. two out of three successive points beyond a 2-sigma limit (two thirds of the distance between the centre line and the control line),
+
+3. four out of five successive points beyond a 1-sigma limit,
+
+4. a run of eight successive points on one side of the centre line,
+
+The WE rules have proven their worth during half a century. One thing to notice is that the WE rules are most effective with control charts that have between 20 and 30 data points. With fewer data points, they loose sensitivity, and with more data points they loose specificity.
+
+### The Anhoej rules
+
+The least known tests for non-random variation are probably the Anhoej rules proposed and validated by me in two recent publications (Anhøj 2014, Anhøj 2015). The Anhoej rules are the core of `qicharts` and consist of two tests that are based solely on the distribution of data points in relation to the centre line:
+
+* **Unusually long runs**: A run is one or more consecutive data points on the same side of the centre line. Data points that fall on the centre line do neither break nor contribute to the run. The upper 95% prediction limit for longest run is approximately $log_2(n)+3$ (rounded to the nearest integer), where $n$ is the number of useful data points. For example, in a run chart with 24 data points a run of *more* than `round(log2(24) + 3)` = `r round(log2(24) + 3)` would suggest a shift in the process.
+
+* **Unusually few crossings**: A crossing is when two consecutive data points are on opposite sides of the centre line. The lower 5% prediction limit for number of crossings is $qbinom(p = 0.05, size = n - 1, prob = 0.5)$. Thus, in a run chart with 24 useful data points, *fewer* than `qbinom(0.05, 24 - 1, 0.5)` = `r qbinom(0.05, 24 - 1, 0.5)` crossings would suggest that the process is shifting.
+
+Critical values for longest runs and number of crossings for 10 -- 100 data points are tabulated in Anhøj 2014.
+
+Apart from being comparable in diagnostic value (sensitivity and specificity) to the WE rules with 20-30 data points, the Anhøj rules have some advantages:
+
+* They can be applied to run charts without control lines.
+
+* They adapt dynamically to the number of available data points and can be applied to charts with as few as 10 and up to indefinitely many data points without loosing sensitivity and specificity.
+
+In the previous control chart, a shift of 2 standard deviations was introduced halfway through the process. The shift was too small to be picked up by the 3-sigma rule (no data points outside the control limits). But both Anhoej rules were activated. The longest run is 11 data points, and the number of crossings is 1. Both values suggest non-random variation. Note that the shift is also picked up by WE rules 2 and 4.
+
+Non-random variation found by the Anhoej rules are visualised by `qicharts` using a red, dashed centre line.
+
+## Choice of control chart
+
+By default, `qic()` produces run charts. To make a control chart, the `chart` argument must be specified.
+
+While there is only one type of run chart, there are many different types of control charts. They all use an assumed probability model to compute the control limits.
+
+`qicharts` include eleven control charts.
+
+Chart | Description | Theoretical distribution 
+----- | ----------- | ------------------------
+*Charts for variables data* ||
+I    | Individual measurements                                    | Gaussian
+MR   | Moving ranges of individual measurements                   | Gaussian
+Xbar | Sample means                                               | Gaussian
+S    | Sample standard deviations                                 | Gaussian
+T    | Time between rare events                                   | Exponential
+*Charts for attributes data* ||
+C       | Defect counts                                           | Poisson
+U       | Defect rates                                            | Poisson
+U prime | U chart using Laney's correction for large sample sizes | Poisson
+P       | Proportion of defectives                                | Binomial
+P prime | P chart using Laney's correction for large sample sizes | Binomial
+G       | Opportunities between rare events                       | Geometric
+
+I recommend to always begin an analysis with a run chart. If the Anhøj rules find non-random variation, it makes no sense to apply control limits based on assumptions regarding the location and dispersion of data expressed by their mean and standard deviation, because these figures are meaningless when one or more shifts have already been identified.
+
+## Case 1: Clostridium difficile infections
+
+The cdi dataset contain data on hospital acquired Clostridium difficile infections (CDI) before and after an intervention to reduce the risk of CDI at Hvidovre Hospital in the Capital Region of Denmark.
+
+```{r}
+head(cdi)
+```
+
+We begin by plotting a run chart of the number of CDIs per month.
+
+```{r}
+qic(month, n,
+    notes = notes,
+    data  = cdi,
+    main  = 'Hospital acquired Clostridium difficile infections',
+    ylab  = 'Count',
+    xlab  = 'Month',
+    print.summary = T)
+```
+
+A downward shift in the number of CDIs is clearly visible to the naked eye and is "confirmed" by the runs analysis resulting in the centre line being dashed red. The shift seem to begin around the time of the intervention. 
+
+Even though it is not necessary in this case, we can strengthen the analysis by using the median of the before-intervention period to test for non-random variation in the after period.
+
+```{r}
+qic(month, n,
+    data        = cdi,
+    freeze      = 24,
+    part.labels = c('Before intervention', 'After intervention'),
+    main        = 'Hospital acquired Clostridium difficile infections',
+    ylab        = 'Count',
+    xlab        = 'Month')
+```
+
+The median number of CDIs per month in the before period is 19. An unusually long run of 15 data points below the median proves that the CDI rate is reduced.
+
+Next, we split the chart to compare the CDI rates before and after the intervention.
+
+```{r}
+qic(month, n,
+    data         = cdi,
+    break.points = 24,
+    main         = 'Hospital acquired Clostridium difficile infections',
+    ylab         = 'Count',
+    xlab         = 'Month')
+```
+
+Since both periods show only random variation a control chart may be applied to test for larger, possibly transient, shifts in data. The correct chart in this case is the C chart for number of defects (infections).
+
+```{r}
+qic(month, n,
+    data         = cdi,
+    chart        = 'c',
+    break.points = 24,
+    main         = 'Hospital acquired Clostridium difficile infections (C chart)',
+    ylab         = 'Count',
+    xlab         = 'Month')
+```
+
+The split C chart shows that the CDI rate has dropped from an average of 19 to 7 per month. Furthermore, the control limits tell us that the new process is predictable and that we in the future should expect between 0 and 15 CDIs per month.
+
+Until now we have assumed that the area of opportunity is constant, i.e. the number of patients or patient days have not changed significantly. When the area of opportunity varies over time, a U chart (U for *unequal* area of opportunity) is more appropiate.
+
+```{r}
+qic(month, n, 
+    n            = days,
+    data         = cdi,
+    chart        = 'u',
+    break.points = 24,
+    multiply     = 10000, 
+    main         = 'Hospital acquired Clostridium difficile infections (U chart)',
+    ylab         = 'Count per 10,000 risk days',
+    xlab         = 'Month')
+```
+
+In fact, U charts can always be used instead of C charts. When the area of opportunity is constant the two charts will reach the same conclusion. But the raw numbers in a C chart may be easier to communicate than counts per something.
+
+It is very important to recognise that while run and control charts can identify non-random variation, they cannot identify its causes. The analysis only tells that the CDI rate was reduced after an intervention. The causal relationship between the intervention and the shift must be established using other methods.
+
+## Case 2: Coronary artery bypass graft
+
+The cabg dataset contains data on individual coronary artery bypass operations. See `?cabg` for details.
+
+```{r}
+head(cabg)
+```
+
+### I and MR charts for age of individual patients
+
+First, we will make a control chart of the age of the last 100 patients. Since age is expected to be well modelled by the Gaussian distribution and we are plotting individual measurements, we use an I chart.
+
+```{r}
+qic(age,
+    data  = tail(cabg, 100), 
+    chart = 'i',
+    main  = 'Age of the last 100 patients (I chart)',
+    ylab  = 'Years',
+    xlab  = 'Patient #')
+```
+
+Two data points (patients number 45 and 70) are below the lower control limit indicating that these patients are "unusually" young, i.e. representative of phenomena that are not normally present in the process. 
+
+I charts are often displayed along with a moving range chart.
+
+```{r}
+qic(age,
+    data  = tail(cabg, 100), 
+    chart = 'mr',
+    main  = 'Age of the last 100 patients (I chart)',
+    ylab  = 'Years',
+    xlab  = 'Patient #')
+```
+
+The MR chart identifies three unusually large moving ranges, which are clearly produced by the two unsusually young patients also found in the I chart. Note that each data point in an I chart is contained in two moving ranges in the MR chart.
+
+We should seek the cause(s) of these special causes. We may then chose to eliminate the outliers from the calculation of the process centre and control limits in order to predict (within limits) the expected age of future patients. 
+
+```{r}
+qic(age,
+    data  = tail(cabg, 100), 
+    chart = 'i',
+    exclude = c(45, 70),
+    main  = 'Age of the last 100 patients (I chart)',
+    ylab  = 'Years',
+    xlab  = 'Patient #')
+```
+
+Thus, on average we should expect future patients to be 67 years of age, and patients younger than 43 years or older than 91 years would be unusual.
+
+### Xbar and S chart for average and standard deviation of patient age
+
+We could also plot the mean age of patients by month. For this we should choose an Xbar chart. First, we need to add month as the grouping variable.
+
+```{r}
+suppressPackageStartupMessages(library(dplyr))
+
+cabg <- cabg %>% 
+  mutate(month = as.Date(cut(date, 'month')))
+```
+
+Using month as the x axis variable, `qic()` automatically calculates the average age per month.
+
+```{r}
+qic(month, age,
+    data  = cabg,
+    chart = 'xbar',
+    main  = 'Average age (Xbar chart)',
+    ylab  = 'Years',
+    xlab  = 'Month')
+```
+
+Xbar charts are usually displayed along an S chart displaying the sample standard deviation.
+
+```{r}
+qic(month, age,
+    data  = cabg,
+    chart = 's',
+    main  = 'Age standard deviation (S chart)',
+    ylab  = 'Years',
+    xlab  = 'Month')
+```
+
+Since both the Xbar and the S chart displays common cause variation, we may conclude that the monthly average age of patients is predictable. Note that the mean of the Xbar chart is close to the mean of the individuals chart but that the control limits are narrower.
+
+### P charts for proportion of patients who were readmitted or died within 30 after surgery
+
+To plot readmissions and mortality we first need to summarise data by month.
+
+```{r}
+cabg_by_month <- cabg %>% 
+  group_by(month) %>% 
+  summarise(deaths       = sum(death),
+            readmissions = sum(readmission),
+            n            = n())
+
+head(cabg_by_month)
+```
+
+Then we use P charts for proportion defectives.
+
+```{r}
+qic(month, readmissions, 
+    n         = n,
+    data      = cabg_by_month,
+    chart     = 'p',
+    y.percent = TRUE,
+    main      = 'Readmissions within 30 days (P chart)',
+    ylab      = '',
+    xlab      = 'Month')
+
+```
+
+```{r}
+qic(month, deaths, 
+    n         = n,
+    data      = cabg_by_month,
+    chart     = 'p',
+    y.percent = TRUE,
+    main      = '30 days mortality (P chart)',
+    ylab      = '',
+    xlab      = 'Month')
+```
+
+Mortality is clearly a rare event. Even if the P chart shows common cause variation, we get the impression that something unusual happened during the summer of 2012 where only one patient died during a 5 month period.
+
+### Studying rare events with T and G charts
+
+Rare events are often better analysed as time or opportunities between events.
+
+For this, we need to calculate the number of surgeries and days between fatalities.
+
+```{r}
+fatalities <- cabg %>% 
+  mutate(x = row_number()) %>% 
+  filter(death) %>% 
+  mutate(dd = x - lag(x),
+         dt = date - lag(date))
+```
+
+The we may use a G chart for opportunities (surgeries) between events (deaths).
+
+```{r}
+qic(dd,
+    data  = fatalities,
+    chart = 'g',
+    main  = 'Surgeries between deaths (G chart)',
+    ylab  = 'Count',
+    xlab  = 'Death #')
+```
+
+If we do not have information on the non-events, we may instead use a T chart for time between events.
+
+```{r}
+qic(dt,
+    data  = fatalities,
+    chart = 't',
+    main  = 'Days between deaths (T chart)',
+    ylab  = 'Days',
+    xlab  = 'Death #')
+```
+
+The conclusion from the G and the T chart is -- in this case -- the same: The distance between deaths number 24 and 25 was unusually long. We should look for an assignable cause to explain this as this may help us find ways to reduce postoperative mortality in the future.
+
+### Faceting reamission rates by gender
+
+To demonstrate the use of faceted charts, we first summarise readmissions by month and gender.
+
+```{r}
+cabg_by_month_gender <- cabg %>% 
+  group_by(month, gender) %>% 
+  summarise(readmissions = sum(readmission),
+            n            = n())
+
+head(cabg_by_month_gender)
+```
+
+Then we may use the `facets` argument to make a control chart for each gender while keeping the x and y axes the same.
+
+```{r}
+qic(month, readmissions, 
+    n         = n,
+    data      = cabg_by_month_gender,
+    facets    = ~ gender, 
+    chart     = 'p',
+    y.percent = TRUE,
+    main      = 'Readmissions within 30 days (P chart)',
+    ylab      = '',
+    xlab      = 'Month')
+```
+
+This chart suggests a shift in readmission rates for females alone. Again, we should investigate this to find and -- in this case -- eliminate the special cause.
+
+## Case 3: Faceting with hospital infections
+
+The hospital_infection dataset contain data on hospital acquired bacteremia (BAC), Clostridium difficile infections (CDI), and urinary tract infections (UTI) from six hospitals in the Capital Region of Denmark.
+
+See `?hospital_infections` for details.
+
+```{r}
+head(hospital_infections)
+```
+
+Make U chart of the total number of infections per 10,000 risk days.
+
+```{r}
 qic(month, n, days,
     data     = hospital_infections,
     chart    = 'u',
@@ -66,8 +434,13 @@ qic(month, n, days,
     main     = 'Hospital acquired infections in the Capital Region of Denmark',
     ylab     = 'Count per 10,000 risk days',
     xlab     = 'Month')
+```
 
-# Facet control chart by type of infection.
+The infection rate seems predictable. However, plotting three types of infection together is like mixing apples and oranges.
+
+Facet chart by type of infection.
+
+```{r, fig.height=2}
 qic(month, n, days,
     data     = hospital_infections,
     facets   = ~ infection,
@@ -76,18 +449,13 @@ qic(month, n, days,
     main     = 'Hospital acquired infections in the Capital Region of Denmark',
     ylab     = 'Count per 10,000 risk days',
     xlab     = 'Month')
+```
 
-# Facet control chart by hospital (vertical) and type of infection (horizontal).
-qic(month, n, days,
-    data     = hospital_infections,
-    facets   = infection ~ hospital,
-    chart    = 'u',
-    multiply = 10000,
-    main     = 'Hospital acquired infections in the Capital Region of Denmark',
-    ylab     = 'Count per 10,000 risk days',
-    xlab     = 'Month')
+Now each infection has each own chart. We see that all three infections appear to be predictable and that UTI is the most common infection.
 
-# Free y axis and rotate x axis labels
+But since these data come from six very different hospitals, we should also facet by hospital.
+
+```{r, fig.height=4}
 qic(month, n, days,
     data     = hospital_infections,
     facets   = infection ~ hospital,
@@ -99,4 +467,80 @@ qic(month, n, days,
     ylab     = 'Count per 10,000 risk days',
     xlab     = 'Month')
 ```
+
+This plot makes it easy to display the differences between both hospitals and types of infection. Non-random variation is present in UTI rates of two hospitals (BOH, NOH).
+
+## References
+
+1. Douglas C. Montgomery (2009). Introduction to Statistical Process Control, Sixth Edition, John Wiley & Sons.
+
+1. Jacob Anhøj, Anne Vingaard Olesen (2014). [Run Charts Revisited: A Simulation Study of Run Chart Rules for Detection of Non-Random Variation in Health Care Processes](http://www.plosone.org/article/info%3Adoi%2F10.1371%2Fjournal.pone.0113825). PLoS ONE 9(11): e113825.
+
+1. Jacob Anhøj (2015). [Diagnostic Value of Run Chart Analysis: Using Likelihood Ratios to Compare Run Chart Rules on Simulated Data Series](http://www.plosone.org/article/info%3Adoi%2F10.1371%2Fjournal.pone.0121349). PLoS ONE 10(3): e0121349.
+
+1. David B. Laney (2002). [Improved control charts for attributes](http://www.tandfonline.com/doi/abs/10.1081/QEN-120003555). Quality Engineering, 14(4), 531-537.
+
+----
+
+## Appendix: Calculating control limits
+
+The functions for calculating control limits with `qicharts` are based on the formulas provided by Montgomery (Montgomery 2009). Laney's correction factor for prime charts is from Laney 2002.
+
+The general model for a control charts is
+
+$$\bar{\bar{x}}\pm3SD$$
+
+where $\bar{\bar{x}}$ is the pooled average of the sample statistic and $SD$ is the pooled sample standard deviation.
+
+The procedure for calculating $SD$ depends on the type type of data involved:
+
+**I**: $\bar{x}\pm2.66\overline{MR}$,
+<span style='font-size:small'>
+  $\bar{x}=$, sample average, $\overline{MR}=$ average moving range of successive observations.
+</span>
+
+**MR**: $\overline{MR}+3.267\overline{MR}$,
+<span style='font-size:small'>
+  $\overline{MR}=$ average moving range (no lower control limit).
+</span>
+
+**Xbar**: $\bar{\bar{x}}\pm A_{3}\bar{s}$,
+<span style='font-size:small'>
+  $A_{3}=$ constant depending on the sample size,
+  $\bar{s}=$ pooled sample standard deviation.
+</span>
+
+**S**: $CL=\bar{\bar{s}}, LCL=B_{3}\bar{s}, UCL=B_{4}\bar{s}$,
+<span style='font-size:small'>
+  $\bar{s}=$ pooled sample standard deviation,
+  $B_{3} and B_{4}=$ constants depending on the sample size.
+</span>
+
+**C**: $\bar{c}\pm3\sqrt{\bar{c}}$,
+<span style='font-size:small'>
+  $\bar{c}=$ average number of defects.
+</span>
+
+**U**: $\bar{u}\pm3\sqrt{\frac{\bar{u}}{n_{i}}}$,
+<span style='font-size:small'>
+  $\bar{u}=$ average number of defects per unit,
+  $n_{i}=$ size of inspection unit.
+</span>
+
+**P**: $\bar{p}\pm3\sqrt{\frac{\bar{p}(1-\bar{p})}{n_{i}}}$,
+<span style='font-size:small'>
+  $\bar{p}=$ average number of defectives,
+  $n_{i}=$ sample size.
+</span>
+
+**G**: $\bar{\bar{x}}\pm3\sqrt{\bar{\bar{x}}(\bar{\bar{x}}+1)}$,
+<span style='font-size:small'>
+  $\bar{\bar{x}}=$ average number of opportunities between events.
+</span>
+
+Control limits for the T chart for time between rare events are calculated by applying an I chart to transformed data ($y=y^0.2777$) and back transforming data.
+
+With prime charts the calculated standard deviation is multiplied by Laney's correction factor, which is the average moving range of standardised y values divided by the constant 1.128.
+
+Note that since the count data on a G chart are usually highly skewed, the centre line of the G chart is the median rather than the mean. This way the application of the Anhoej rules is still valid.
 
