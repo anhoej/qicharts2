@@ -11,7 +11,7 @@
   \strong{n} Number of cases. \item \strong{days} Number of risk days. A risk
   day is a patient day without infection }}
 \source{
-\url{http://www.haiba.dk/}
+\url{http://www.haiba.dk/} (Capital Region of Denmark)
 }
 \usage{
 hospital_infections

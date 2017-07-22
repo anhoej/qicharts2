@@ -3,13 +3,13 @@ Title: Quality Improvement Charts
 Version: 0.0.0.9000
 Authors@R: person('Jacob', 'Anhoej', email = 'jacob@anhoej.net',
     role = c('aut', 'cre'))
-Description: Shewhart control charts and run charts for process control and
-    improvement. Included charts are: I, MR, Xbar, S, T, C, U, P, G, 
-    and run charts. Run charts use the Anhoej rules for identification of 
-    non-random variation in the form of persistens shifts in data over time.
-    In addition to the Anhoej rules, control charts use Shewhart's 3-sigma rule
-    to identify special cause variation in the form of sudden, large, possibly
-    transient shifts in data.
+Description: Run charts and Shewhart control charts for process control and
+    improvement. Included control charts are: I, MR, Xbar, S, T, C, U, U', P, 
+    P', and G charts. Non-random variation in the form of minor to moderate
+    persistens shifts in data over time is identified by the Anhoej rules for
+    unusually long runs and unusually few crossing. Special cause variation in
+    the form of larger, possibly transient shifts in data is identified by
+    Shewhart's 3-sigma rule.
 Depends:
     R (>= 3.0.0)
 Imports:

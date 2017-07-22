@@ -4,9 +4,9 @@
 \alias{qic}
 \title{Quality improvement charts.}
 \usage{
-qic(x, y = NULL, n = NULL, notes = NULL, data = NULL, facets = NULL,
-  chart = c("run", "i", "mr", "xbar", "s", "t", "p", "pprime", "c", "u",
-  "uprime", "g"), agg.fun = c("mean", "median", "sum", "sd"), multiply = 1,
+qic(x, y = NULL, n = NULL, data = NULL, notes = NULL, facets = NULL,
+  chart = c("run", "i", "mr", "xbar", "s", "t", "p", "pp", "c", "u", "up",
+  "g"), agg.fun = c("mean", "median", "sum", "sd"), multiply = 1,
   freeze = NULL, break.points = NULL, exclude = NULL, target = NA * 1,
   cl = NULL, nrow = NULL, ncol = NULL, scales = "fixed", main = NULL,
   ylab = "Value", xlab = "Subgroup", subtitle = NULL, caption = NULL,
@@ -22,15 +22,15 @@ qic(x, y = NULL, n = NULL, notes = NULL, data = NULL, facets = NULL,
 
 \item{n}{Vector of subgroup sizes (denominator).}
 
-\item{notes}{Character vector of notes to be added to individual data points.}
-
 \item{data}{Data frame containing variables used in the plot.}
+
+\item{notes}{Character vector of notes to be added to individual data points.}
 
 \item{facets}{One or two sided formula with factors used for facetting plots.}
 
 \item{chart}{Character value indicating the chart type. Possible values are: 
-'run' (default), 'i', 'mr', 'xbar', 't', 's', 'c', 'u', 'uprime', 'p', 
-'pprime', and 'g'.}
+'run' (default), 'i', 'mr', 'xbar', 't', 's', 'c', 'u', 'up', 'p', 'pp', 
+and 'g'.}
 
 \item{agg.fun}{Aggregate function for summarising the y variable if there are
 more than one observation per subgroup. Only relevant for run charts and I 
@@ -71,8 +71,8 @@ panels or free.}
 
 \item{caption}{Character string specifying the caption.}
 
-\item{part.labels}{Character vector of length two specifying before and after
-labels for chart parts created with freeze arguments.}
+\item{part.labels}{Character vector of length two specifying  labels for
+chart parts created with the freeze or break.points argument.}
 
 \item{show.linelabels}{Logical indicating whether to show labels for centre 
 and control lines on chart. Defaults to TRUE when \code{facets} is NULL.}
@@ -85,14 +85,13 @@ possible date formats.}
 
 \item{x.angle}{Number indicating the angle of x axis labels.}
 
-\item{y.expand}{Numeric value to include in y axis. Useful e.g. for starting
+\item{y.expand}{Numeric value to include in y axis. Useful e.g. for starting 
 the y axis at zero.}
 
 \item{y.neg}{If TRUE (default), the y axis is allowed to be negative (only 
 relevant for I and Xbar charts).}
 
-\item{y.percent}{Logical. If TRUE, formats y axis labels as percent. y axis 
-at zero.}
+\item{y.percent}{Logical. If TRUE, formats y axis labels as percentages.}
 
 \item{show.grid}{If TRUE shows grid.}
 
@@ -106,38 +105,42 @@ at zero.}
 A \code{qic} object. Inherits from 'ggplot'.
 }
 \description{
-The \code{qic} function creates run charts and Shewhart control charts for 
+The \code{qic()} function creates run charts and Shewhart control charts for 
 process control and improvement. Included control charts are: I, MR, Xbar, S,
-T, C, U, Uprime, P, Pprime, and G charts.
+T, C, U, U', P, P', and G charts.
 }
 \details{
-Long explanation.
+Non-random variation in the form of minor to moderate persistens shifts in 
+data over time is identified by the Anhoej rules for unusually long runs and 
+unusually few crossing. Special cause variation in the form of larger, 
+possibly transient, shifts in data is identified by Shewhart's 3-sigma rule.
 }
 \examples{
 # Lock random number generator to make reproducible results.
 set.seed(2)
 
-# Run chart from 24 random normal values
-qic(rnorm(24))
+# Generate vector of 24 random normal numbers
+y <- rnorm(24)
 
-# Run chart with non-random variation
-qic(c(rnorm(12), rnorm(12, 2)))
+# Run chart
+qic(y)
 
-# C control chart from 24 random poisson variables
-qic(rpois(24, 16), chart = 'c')
+# I control chart
+qic(y, chart = 'i')
 
-# C control chart with special cause variation
-qic(c(rpois(23, 16), 36), chart = 'c')
-
-# U chart from build-in data set of hospital infection rates faceted
+# U control chart from build-in data set of hospital infection rates faceted
 #   by hospital and type of infection.
-qic(month, n, days,
-  data = hospital_infections,
-  facets = hospital ~ infection,
-  chart = 'u',
-  multiply = 10000,
-  main = 'Hospital infection rates',
-  ylab = 'Number of infections per 10.000 risk days',
-  xlab = 'Month')
+qic(month, n, 
+    n        = days,
+    data     = hospital_infections,
+    facets   = infection ~ hospital,
+    chart    = 'u',
+    multiply = 10000,
+    main     = 'Hospital infection rates',
+    ylab     = 'Number of infections per 10.000 risk days',
+    xlab     = 'Month')
 
+}
+\seealso{
+\code{vignette('qic')}
 }
