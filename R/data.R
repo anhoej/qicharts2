@@ -10,7 +10,7 @@
 #'   Urinary tract infection. \item \strong{month} First day of month. \item
 #'   \strong{n} Number of cases. \item \strong{days} Number of risk days. A risk
 #'   day is a patient day without infection }
-#' @source \url{http://www.haiba.dk/}
+#' @source \url{http://www.haiba.dk/} (Capital Region of Denmark)
 "hospital_infections"
 
 #' Coronary artery bypass graft operations
@@ -37,4 +37,16 @@
 #'   'pre' or 'post' intervention. \item \strong{notes} Annotations. }
 #' @source \url{http://www.haiba.dk/} (Amager Hvidovre Hospital)
 "cdi"
-#'   
+
+#' NHS accidents
+#' 
+#' The number of attendances to major accident and emergency hospital 
+#' departments in the NHS that were seen within 4 hours of arrival over twenty 
+#' weeks.
+#' 
+#' @format A data frame with 20 rows and 3 variables: \itemize{ \item i Week 
+#'   number. \item r Attendances seen within 4 hours. \item n Total number of 
+#'   attendances. }
+#' @source Mohammed MA, et al. Quality and Safety in Health Care
+#'   2013;22:362–368. \url{http://dx.doi.org/10.1136/bmjqs-2012-001373}
+"nhs_accidents"

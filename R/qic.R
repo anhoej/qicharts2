@@ -1,20 +1,23 @@
 #' Quality improvement charts.
 #' 
-#' The \code{qic} function creates run charts and Shewhart control charts for 
+#' The \code{qic()} function creates run charts and Shewhart control charts for 
 #' process control and improvement. Included control charts are: I, MR, Xbar, S,
-#' T, C, U, Uprime, P, Pprime, and G charts.
+#' T, C, U, U', P, P', and G charts.
 #' 
-#' Long explanation.
+#' Non-random variation in the form of minor to moderate persistens shifts in 
+#' data over time is identified by the Anhoej rules for unusually long runs and 
+#' unusually few crossing. Special cause variation in the form of larger, 
+#' possibly transient, shifts in data is identified by Shewhart's 3-sigma rule.
 #' 
 #' @param x Vector of subgroup values to plot along the x axis.
 #' @param y Vector of measures or counts to plot on the y axis (numerator).
 #' @param n Vector of subgroup sizes (denominator).
-#' @param notes Character vector of notes to be added to individual data points.
 #' @param data Data frame containing variables used in the plot.
+#' @param notes Character vector of notes to be added to individual data points.
 #' @param facets One or two sided formula with factors used for facetting plots.
 #' @param chart Character value indicating the chart type. Possible values are: 
-#'   'run' (default), 'i', 'mr', 'xbar', 't', 's', 'c', 'u', 'uprime', 'p', 
-#'   'pprime', and 'g'.
+#'   'run' (default), 'i', 'mr', 'xbar', 't', 's', 'c', 'u', 'up', 'p', 'pp', 
+#'   and 'g'.
 #' @param agg.fun Aggregate function for summarising the y variable if there are
 #'   more than one observation per subgroup. Only relevant for run charts and I 
 #'   charts. Possible values are: 'mean' (default), 'median', 'sum', and 'sd'.
@@ -40,8 +43,8 @@
 #' @param ylab Character string specifying the y axis label.
 #' @param subtitle Character string specifying the subtitle.
 #' @param caption Character string specifying the caption.
-#' @param part.labels Character vector of length two specifying before and after
-#'   labels for chart parts created with freeze arguments.
+#' @param part.labels Character vector of length two specifying  labels for
+#'   chart parts created with the freeze or break.points argument.
 #' @param show.linelabels Logical indicating whether to show labels for centre 
 #'   and control lines on chart. Defaults to TRUE when \code{facets} is NULL.
 #' @param digits Integer indicating the preferred number of digits in centre and
@@ -49,45 +52,44 @@
 #' @param x.format Date format of x axis labels. See \code{?strftime()} for 
 #'   possible date formats.
 #' @param x.angle Number indicating the angle of x axis labels.
-#' @param y.expand Numeric value to include in y axis. Useful e.g. for starting
+#' @param y.expand Numeric value to include in y axis. Useful e.g. for starting 
 #'   the y axis at zero.
 #' @param y.neg If TRUE (default), the y axis is allowed to be negative (only 
 #'   relevant for I and Xbar charts).
-#' @param y.percent Logical. If TRUE, formats y axis labels as percent. y axis 
-#'   at zero.
+#' @param y.percent Logical. If TRUE, formats y axis labels as percentages.
 #' @param show.grid If TRUE shows grid.
 #' @param flip If TRUE rotates the plot 90 degrees.
 #' @param print.summary If TRUE, prints summary.
 #' @param ... Additional arguments to plot function.
 #'   
 #' @return A \code{qic} object. Inherits from 'ggplot'.
+#' 
+#' @seealso \code{vignette('qic')}
 #'   
 #' @examples
 #' # Lock random number generator to make reproducible results.
 #' set.seed(2)
 #' 
-#' # Run chart from 24 random normal values
-#' qic(rnorm(24))
+#' # Generate vector of 24 random normal numbers
+#' y <- rnorm(24)
 #' 
-#' # Run chart with non-random variation
-#' qic(c(rnorm(12), rnorm(12, 2)))
+#' # Run chart
+#' qic(y)
 #' 
-#' # C control chart from 24 random poisson variables
-#' qic(rpois(24, 16), chart = 'c')
+#' # I control chart
+#' qic(y, chart = 'i')
 #' 
-#' # C control chart with special cause variation
-#' qic(c(rpois(23, 16), 36), chart = 'c')
-#' 
-#' # U chart from build-in data set of hospital infection rates faceted
+#' # U control chart from build-in data set of hospital infection rates faceted
 #' #   by hospital and type of infection.
-#' qic(month, n, days,
-#'   data = hospital_infections,
-#'   facets = hospital ~ infection,
-#'   chart = 'u',
-#'   multiply = 10000,
-#'   main = 'Hospital infection rates',
-#'   ylab = 'Number of infections per 10.000 risk days',
-#'   xlab = 'Month')
+#' qic(month, n, 
+#'     n        = days,
+#'     data     = hospital_infections,
+#'     facets   = infection ~ hospital,
+#'     chart    = 'u',
+#'     multiply = 10000,
+#'     main     = 'Hospital infection rates',
+#'     ylab     = 'Number of infections per 10.000 risk days',
+#'     xlab     = 'Month')
 #' 
 #' @importFrom stats median
 #' @export
@@ -95,11 +97,11 @@
 qic <- function(x,
                 y               = NULL,
                 n               = NULL,
-                notes           = NULL,
                 data            = NULL,
+                notes           = NULL,
                 facets          = NULL,
                 chart           = c('run', 'i', 'mr', 'xbar', 's', 't',
-                                    'p', 'pprime', 'c', 'u', 'uprime', 'g'),
+                                    'p', 'pp', 'c', 'u', 'up', 'g'),
                 agg.fun         = c('mean', 'median', 'sum', 'sd'),
                 multiply        = 1,
                 freeze          = NULL,
@@ -131,6 +133,15 @@ qic <- function(x,
   # Preserve show.linelabels value
   show.linelabels <- show.linelabels
   y.name <- deparse(substitute(y))
+  n.name <- deparse(substitute(n))
+  
+  if (n.name != 'NULL') {
+    y.name <- paste(y.name, '/', n.name)
+  }
+  
+  if (multiply != 1) {
+    y.name <- paste(y.name, 'x', multiply)
+  }
   
   # Get chart type
   chart.fun <- get(paste0('qic.', match.arg(chart)))
@@ -207,7 +218,7 @@ qic <- function(x,
   
   # Get title
   if(is.null(main)) {
-    main <- paste(toupper(match.arg(chart)), 'Chart')
+    main <- paste(toupper(match.arg(chart)), 'Chart', 'of', y.name)
   }
   
   # Prepare data frame
@@ -282,10 +293,6 @@ qic <- function(x,
               })
   d <- do.call(rbind, d)
   rownames(d) <- NULL
-  
-  if(y.percent) {
-    # d$cl.lab <- scales::percent(d$cl.lab)
-  }
 
   # Remove control lines from missing subgroups
   d$ucl[is.na(d$y)] <- NA
@@ -298,8 +305,8 @@ qic <- function(x,
   # Add target line
   d$target <- target
   
-  # Ignore runs analysis if subgroups are categorical
-  if (dots.only) {
+  # Ignore runs analysis if subgroups are categorical or if chart type is MR
+  if (dots.only && chart == 'mr') {
     d$runs.signal <- FALSE
   }
   

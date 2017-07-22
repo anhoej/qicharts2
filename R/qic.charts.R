@@ -57,7 +57,7 @@ qic.i <- function(x) {
   # Upper limit for moving ranges
   ulmr <- 3.267 * amr
 
-  # Remove moving ranges greater than ulmr and recalculate amr, Provost p.156
+  # Remove moving ranges greater than ulmr and recalculate amr, Nelson 1982
   mr  <- mr[mr < ulmr]
   amr <- mean(mr, na.rm = TRUE)
 
@@ -98,17 +98,15 @@ qic.xbar <- function(x){
 
   # Calculate standard deviation and control limits, Montgomery 6.29 or 6.31
   if (var.n) {
-    # stdev <- sqrt(sum(x$y.sd[base]^2 * (x$y.length[base] - 1), na.rm = TRUE) /
-    #                (sum(x$y.length[base], na.rm = TRUE) - sum(base)))
     stdev <- sqrt(sum((x$y.length[base] - 1) * x$y.sd[base]^2, na.rm = TRUE) /
                     sum(x$y.length[base] - 1, na.rm = TRUE))
   } else {
     stdev <- mean(x$y.sd, na.rm = TRUE)
   }
-
   A3    <- a3(x$y.length)
   x$ucl <- x$cl + A3 * stdev
   x$lcl <- x$cl - A3 * stdev
+  
   return(x)
 }
 
@@ -121,8 +119,6 @@ qic.s <- function(x){
   # Calculate centre line and control limits
   if (is.null(x$cl)) {
     if (var.n) { # Variable subgroup size: Montgomery 6.31
-      # x$cl <- sqrt(sum(x$y.sd[base]^2 * (x$y.length[base] - 1), na.rm = TRUE) /
-      #                (sum(x$y.length[base], na.rm = TRUE) - sum(base)))
       x$cl <- sqrt(sum((x$y.length[base] - 1) * x$y.sd[base]^2, na.rm = TRUE) /
                      sum(x$y.length[base] - 1, na.rm = TRUE))
       # x$cl <- sum(x$y[base] * x$y.length[base]) / sum(x$y.length[base])
@@ -143,7 +139,7 @@ qic.t <- function(x) {
     stop('Time between events must be greater than zero')
   }
 
-  # Transform y variable and make I chart calculations
+  # Transform y variable and run I chart calculations
   x$y <- x$y^(1 / 3.6)
   x <- qic.i(x)
 
@@ -177,7 +173,7 @@ qic.p <- function(x) {
   return(x)
 }
 
-qic.pprime <- function(x) {
+qic.pp <- function(x) {
   base <- x$baseline & x$include
   
   if (is.null(x$cl)) {
@@ -188,7 +184,7 @@ qic.pprime <- function(x) {
   # Calculate standard deviation
   stdev <- sqrt(x$cl * (1 - x$cl) / x$n)
 
-  # Calculate standard deviation for Laney's p-prime chart, incorporating
+  # Calculate standard deviation for Laney's P prime chart, incorporating
   # between-subgroup variation.
   z_i     <- (x$y[base] - x$cl[base]) / stdev[base]
   sigma_z <- mean(abs(diff(z_i)), na.rm = TRUE) / 1.128
@@ -238,7 +234,7 @@ qic.u <- function(x){
   return(x)
 }
 
-qic.uprime <- function(x){
+qic.up <- function(x){
   base <- x$baseline & x$include
   
   if (is.null(x$cl)) {

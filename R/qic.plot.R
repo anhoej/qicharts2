@@ -96,7 +96,6 @@ plot.qic <- function(x, main, ylab, xlab, subtitle, caption, part.labels,
                  size = lab.size,
                  hjust = lab.just) +
       geom_label(aes_(y = ~ cl.lab,
-                      # label = ~ prettyNum(cl.lab, digits = digits)),
                       label = if (y.percent) {
                         ~ scales::percent(round(cl.lab, digits = digits)) 
                       } else {
@@ -108,7 +107,6 @@ plot.qic <- function(x, main, ylab, xlab, subtitle, caption, part.labels,
                  size = lab.size,
                  hjust = lab.just) +
       geom_label(aes_(y = ~ lcl.lab,
-                      # label = ~ prettyNum(lcl.lab, digits = digits)),
                       label = if (y.percent) {
                         ~ scales::percent(round(lcl.lab, digits = digits)) 
                       } else {
@@ -120,7 +118,6 @@ plot.qic <- function(x, main, ylab, xlab, subtitle, caption, part.labels,
                  size = lab.size,
                  hjust = lab.just) +
       geom_label(aes_(y = ~ ucl.lab,
-                      # label = ~ prettyNum(ucl.lab, digits = digits)),
                       label = if (y.percent) {
                         ~ scales::percent(round(ucl.lab, digits = digits)) 
                       } else {
@@ -134,15 +131,22 @@ plot.qic <- function(x, main, ylab, xlab, subtitle, caption, part.labels,
   }
   
   # Add freeze line and part labels
-  if (is.finite(freeze)) {
-    p <- p + geom_vline(aes_(xintercept = freeze), colour = col1, linetype = 5)
-    
-    if (!is.null(part.labels)) {
+  if (!is.null(part.labels)) {
+    if (is.finite(freeze)) {
+      p <- p + 
+        geom_vline(aes_(xintercept = freeze), colour = col1, linetype = 5)
       plabs <- split(x, x['baseline'])
-      plabs <- lapply(plabs, function(x) {median(x$x)})
-      plabs <- as.data.frame(do.call(rbind, plabs))
-      colnames(plabs) <- 'x'
-      plabs$z <- rev(part.labels)
+      part.labels <- rev(part.labels)
+    } else {
+      plabs <- split(x, x['part'])
+    }
+    
+    plabs <- lapply(plabs, function(x) {median(x$x)})
+    plabs <- as.data.frame(do.call(rbind, plabs))
+    colnames(plabs) <- 'x'
+    
+    if (length(part.labels) == nrow(plabs)) {
+      plabs$z <- part.labels
       plabs$y <- Inf
       
       if (inherits(x$x, 'POSIXct')) {
@@ -157,6 +161,8 @@ plot.qic <- function(x, main, ylab, xlab, subtitle, caption, part.labels,
                    alpha = 0.9,
                    vjust = ifelse(flip, 'center', 'inward'),
                    hjust = ifelse(flip, 'inward', 'center'))
+    } else {
+      warning('Length of part.labels argument must match the number of parts to label.')
     }
   }
   
