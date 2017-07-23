@@ -50,3 +50,17 @@
 #' @source Mohammed MA, et al. Quality and Safety in Health Care
 #'   2013;22:362–368. \url{http://dx.doi.org/10.1136/bmjqs-2012-001373}
 "nhs_accidents"
+
+#' Patient harm indentified using the Global Trigger Tool
+#' 
+#' A dataset with data on adverse events during hospitalisation found by the
+#' Global Trigger Tool.
+#' 
+#' @format A data frame with 340 rows and 11 variables: \itemize{ \item 
+#'   admission_id Admission ID. \item admission_dte Date of admission. \item 
+#'   discharge_dte Date of discharge. \item month Month of discharge. \item days
+#'   Duration of hospital stay in days. \item harms Number of adverse events
+#'   \item {E-I} Type of adverse event by severity category. E-F: Temporary
+#'   harm; G-H: Permanent harm; I: Fatal harm. }
+#' @references \url{http://www.ihi.org/resources/Pages/Tools/IHIGlobalTriggerToolforMeasuringAEs.aspx}
+"gtt"
