@@ -133,23 +133,23 @@ qic <- function(x,
   # Preserve show.linelabels value
   show.linelabels <- show.linelabels
   y.name <- deparse(substitute(y))
+  if (y.name == 'NULL') 
+    y.name = deparse(substitute(x))
+  
   n.name <- deparse(substitute(n))
   
-  if (n.name != 'NULL') {
+  if (n.name != 'NULL')  
     y.name <- paste(y.name, '/', n.name)
-  }
-  
-  if (multiply != 1) {
+
+  if (multiply != 1)  
     y.name <- paste(y.name, 'x', multiply)
-  }
   
   # Get chart type
   chart.fun <- get(paste0('qic.', match.arg(chart)))
   
   # Check data and get variables
-  if (missing(x)) {
+  if (missing(x))
     stop('Missing mandatory argument \"x\"')
-  }
   
   x      <- eval(substitute(x), data, parent.frame())
   y      <- eval(substitute(y), data, parent.frame())
@@ -184,13 +184,11 @@ qic <- function(x,
     got.n <- TRUE
   }
   
-  if (is.null(freeze) || !is.null(break.points)) {
+  if (is.null(freeze) || !is.null(break.points)) 
     freeze <- Inf
-  }
   
-  if (is.null(exclude)) {
+  if (is.null(exclude)) 
     exclude <- Inf
-  }
   
   if (is.null(notes)) {
     notes <- ''
@@ -202,9 +200,8 @@ qic <- function(x,
   dots.only <- is.factor(x) || mode(x) != 'numeric'
   
   # Convert dates and datetimes to POSIXct
-  if (inherits(x, c('Date', 'POSIXt'))) {
+  if (inherits(x, c('Date', 'POSIXt')))
     x <- as.POSIXct(as.character(x))
-  }
   
   # Fix missing values and get aggregate function
   if (got.n) {
@@ -217,9 +214,8 @@ qic <- function(x,
   }
   
   # Get title
-  if(is.null(main)) {
+  if(is.null(main)) 
     main <- paste(toupper(match.arg(chart)), 'Chart', 'of', y.name)
-  }
   
   # Prepare data frame
   d <- data.frame(x, y, n, notes, facets)
@@ -276,6 +272,9 @@ qic <- function(x,
   if (!is.null(cl)) {
     d$cl <- cl
   }
+  
+  # Add target line
+  d$target <- target
 
   d <- split(d, d[c('facet1', 'facet2', 'part')])
   d <- lapply(d, chart.fun)
@@ -289,6 +288,7 @@ qic <- function(x,
                 x$cl.lab  <- ifelse(x$xx == max(x$xx), x$cl, NA)
                 x$lcl.lab <- ifelse(x$xx == max(x$xx), x$lcl, NA)
                 x$ucl.lab <- ifelse(x$xx == max(x$xx), x$ucl, NA)
+                x$target.lab <- ifelse(x$xx == max(x$xx), x$target, NA)
                 return(x)
               })
   d <- do.call(rbind, d)
@@ -302,9 +302,6 @@ qic <- function(x,
   d$sigma.signal                        <- d$y > d$ucl | d$y < d$lcl
   d$sigma.signal[is.na(d$sigma.signal)] <- FALSE
   
-  # Add target line
-  d$target <- target
-  
   # Ignore runs analysis if subgroups are categorical or if chart type is MR
   if (dots.only && chart == 'mr') {
     d$runs.signal <- FALSE
@@ -314,7 +311,7 @@ qic <- function(x,
   if(!y.neg & min(d$y, na.rm = TRUE) >= 0) {
     d$lcl[d$lcl < 0] <- 0
   }
-  
+
   # Return
   p <- plot.qic(d, main = main, xlab = xlab, ylab = ylab,
                 subtitle = subtitle, caption = caption, part.labels,
@@ -334,6 +331,6 @@ qic <- function(x,
   if (print.summary) {
     print(summary(p))
   }
-  
+
   return(p)
 }

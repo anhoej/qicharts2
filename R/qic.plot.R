@@ -14,7 +14,6 @@ plot.qic <- function(x, main, ylab, xlab, subtitle, caption, part.labels,
                  'col3' = col3,
                  'col4' = col4,
                  'col5' = col5)
-  
   x$dotcol  <- ifelse(x$sigma.signal, 'col3', 'col2')
   x$dotcol  <- ifelse(x$include, x$dotcol, 'col5')
   x$linecol <- ifelse(x$runs.signal, 'col3', 'col1')
@@ -87,42 +86,62 @@ plot.qic <- function(x, main, ylab, xlab, subtitle, caption, part.labels,
   
   # Add labels for centre and control lines
   if (show.linelabels) {
+    lab.format <- function(x) {
+      x = if (y.percent) {
+        paste0(round(x, digits = digits) * 100, '%')
+      } else {
+        prettyNum(x, digits = digits)
+      }
+    }
     p <- p +
-      geom_label(aes_(x = ~ x[length(x)], y = ~ target[length(x)],
-                      label = ~ prettyNum(target, digits = digits)),
+      geom_label(aes_(y = ~ target.lab,
+                      label = ~ lab.format(target.lab)),
+                      # label = if (y.percent) {
+                      #   # ~ scales::percent(round(target.lab, digits = digits))
+                      #   ~ paste0(round(target.lab, digits = digits) * 100, '%')
+                      # } else {
+                      #   ~ prettyNum(target.lab, digits = digits)
+                      # }),
                  na.rm = TRUE,
                  label.size = 0,
                  label.padding = lab.pad,
                  size = lab.size,
                  hjust = lab.just) +
       geom_label(aes_(y = ~ cl.lab,
-                      label = if (y.percent) {
-                        ~ scales::percent(round(cl.lab, digits = digits)) 
-                      } else {
-                        ~ prettyNum(cl.lab, digits = digits)
-                      }),
+                      label = ~ lab.format(cl.lab)),
+                      # label = if (y.percent) {
+                      #   # ~ scales::percent(round(cl.lab, digits = digits))
+                      #   ~ paste0(round(cl.lab, digits = digits) * 100, '%')
+                      # } else {
+                      #   ~ prettyNum(cl.lab, digits = digits)
+                      # }
+                      # ),
                  label.size = 0,
                  na.rm = TRUE,
                  label.padding = lab.pad,
                  size = lab.size,
                  hjust = lab.just) +
       geom_label(aes_(y = ~ lcl.lab,
-                      label = if (y.percent) {
-                        ~ scales::percent(round(lcl.lab, digits = digits)) 
-                      } else {
-                        ~ prettyNum(lcl.lab, digits = digits)
-                      }),
+                      label = ~ lab.format(lcl.lab)),
+                      # label = if (y.percent) {
+                      #   # ~ scales::percent(round(lcl.lab, digits = digits))
+                      #   ~ paste0(round(lcl.lab, digits = digits) * 100, '%')
+                      # } else {
+                      #   ~ prettyNum(lcl.lab, digits = digits)
+                      # }),
                  na.rm = TRUE,
                  label.size = 0,
                  label.padding = lab.pad,
                  size = lab.size,
                  hjust = lab.just) +
       geom_label(aes_(y = ~ ucl.lab,
-                      label = if (y.percent) {
-                        ~ scales::percent(round(ucl.lab, digits = digits)) 
-                      } else {
-                        ~ prettyNum(ucl.lab, digits = digits)
-                      }),
+                      label = ~ lab.format(ucl.lab)),
+                      # label = if (y.percent) {
+                      #   # ~ scales::percent(round(ucl.lab, digits = digits))
+                      #   ~ paste0(round(ucl.lab, digits = digits) * 100, '%')
+                      # } else {
+                      #   ~ prettyNum(ucl.lab, digits = digits)
+                      # }),
                  na.rm = TRUE,
                  label.size = 0,
                  label.padding = lab.pad,
