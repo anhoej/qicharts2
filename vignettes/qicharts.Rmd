@@ -6,6 +6,7 @@ date: "`r Sys.Date()`"
 output: 
   rmarkdown::html_vignette:
     toc: true
+    toc_depth: 2
 vignette: >
   %\VignetteIndexEntry{Vignette Title}
   %\VignetteEngine{knitr::rmarkdown}
@@ -23,16 +24,26 @@ library(qicharts2)
 
 ----
 
-`qic()` from `qicharts2` provide a simple interface for constructing faceted statistical process control charts for time series data.
+The `qicharts2` package contains two main functions for analysis of data for quality improvement, `qic()` and `paretochart()`.
+
+`qic()` provide a simple interface for constructing faceted statistical process control charts for time series data.
 
 ```{r, echo=FALSE}
 qic(month, n,
     data  = head(cdi, 24),
     chart = 'c',
-    main  = 'Hospital acquired Clostridium difficile infections (C chart)',
+    main  = 'C control chart for hospital acquired Clostridium difficile infections',
     ylab  = 'Count',
     xlab  = 'Month')
 ```
+
+`paretochart()` constructs pareto charts from categorical variables.
+
+```{r, echo=FALSE}
+paretochart(unlist(gtt[7:11]),
+            title = 'Pareto chart of patient harm during hospitalisation')
+```
+
 
 > Statistical Process Control is not about statistics, it is not about "process-hyphen-control", and it is not about conformance to specifications. [...] It is about the continual improvement of processes and outcomes. And it is, first and foremost, *a way of thinking* with some tools attached.
 >
@@ -156,7 +167,7 @@ summary(o)
 ```
 
 
-## Choice of control chart
+## Choosing the right control chart
 
 By default, `qic()` produces run charts. To make a control chart, the `chart` argument must be specified.
 
@@ -182,7 +193,117 @@ G       | Opportunities between rare events                       | Geometric
 
 I recommend to always begin any analysis with an "assumption free" run chart. If the Anhøj rules find non-random variation, it makes no sense to apply 3-sigma limits based on assumptions regarding the location and dispersion of data expressed by their mean and standard deviation, because these figures are meaningless when one or more shifts have already been identified.
 
-## Case 1: Clostridium difficile infections
+## Case 1: Patient harm
+
+The gtt dataset contains data on patient harm during hospital admission. Harm is defined as any unintended physical injury resulting from treatment or care during hospitalisation and not a result of the disease itself. The Global Trigger Tool is a methodology for detection of adverse events in hospital patients using a retrospective record review approach. Each month a random sample of 20 patient records is reviewed and the number of adverse events and patient days found are counted. See `?gtt` for details.
+
+```{r}
+head(gtt)
+```
+
+### Run chart of adverse events per 1000 patient days
+
+```{r}
+qic(month, harms,
+    n = days,
+    data = gtt,
+    multiply = 1000,
+    main = 'Patient harm',
+    ylab = 'Adverse events per 1000 patient days',
+    xlab = 'Month')
+```
+
+Since only random variation is present in the run chart, a U control chart for harm rate is appropriate for calculating the limits of the common cause variation.
+
+### U chart of adverse events per 1000 patient days
+
+```{r}
+qic(month, harms,
+    n = days,
+    data = gtt,
+    chart = 'u',
+    multiply = 1000,
+    main = 'Patient harm (U chart)',
+    ylab = 'Adverse events per 1000 patient days',
+    xlab = 'Month')
+```
+
+### Run and P control charts of percent harmed patients
+
+To plot the percentage of harmed patients (patient with 1 or more harms) we need to add a variable and to aggregate data by month.
+
+```{r}
+suppressPackageStartupMessages(library(dplyr))
+
+gtt_by_month <- gtt %>%
+  mutate(harmed = harms > 0) %>% 
+  group_by(month) %>% 
+  summarise(harms = sum(harms),
+            days = sum(days),
+            n.harmed = sum(harmed),
+            n = n())
+
+head(gtt_by_month)
+```
+
+```{r}
+qic(month, n.harmed,
+    n = n,
+    data = gtt_by_month,
+    y.percent = TRUE,
+    main = 'Harmed patients',
+    ylab = '',
+    xlab = 'Month')
+```
+
+Again, since the run chart finds random variation, a control chart may be applied. For proportion (or percent) harmed patients we use a P chart.
+
+```{r}
+qic(month, n.harmed,
+    n = n,
+    data = gtt_by_month,
+    chart = 'p',
+    y.percent = TRUE,
+    main = 'Harmed patients (P chart)',
+    ylab = '',
+    xlab = 'Month')
+```
+
+### Pareto analysis of adverse event types and severity
+
+The Pareto chart, named after [Vilfred Pareto](https://en.wikipedia.org/wiki/Vilfredo_Pareto), was invented by [Joseph M. Juran](https://en.wikipedia.org/wiki/Joseph_M._Juran) as tool to identify the most important causes of a problem.
+
+To analyse the distribution of harm types and harm severity we must first transform data from wide to tall format. This gives us two categorical columns, which we can be analysed by the `paretochart()` function.
+
+```{r}
+suppressPackageStartupMessages(library(tidyr))
+
+gtt_ae_types <- gtt %>%
+  gather(severity, category, E:I) %>% 
+  filter(complete.cases(.))
+
+head(gtt_ae_types)
+```
+
+Then we apply a pareto chart to categories of harm.
+
+```{r}
+paretochart(gtt_ae_types$category,
+            title = 'Pareto chart of harm category')
+```
+
+80% of harms come from 3 categories: gastrointestinal, infection, and procedure. 
+
+Finally, we study harm severity.
+
+```{r}
+paretochart(gtt_ae_types$severity,
+            title = 'Pareto chart of harm severity')
+```
+
+Almost all adverse events are temporary (E-F).
+
+## Case 2: Clostridium difficile infections
 
 The cdi dataset contains data on hospital acquired Clostridium difficile infections (CDI) before and after an intervention to reduce the risk of CDI at Hvidovre Hospital in the Capital Region of Denmark.
 
@@ -266,7 +387,7 @@ In fact, U charts can always be used instead of C charts. When the area of oppor
 
 It is very important to recognise that while run and control charts can identify non-random variation, they cannot identify its causes. The analysis only tells that the CDI rate was reduced after an intervention. The causal relationship between the intervention and the shift must be established using other methods.
 
-## Case 2: Coronary artery bypass graft
+## Case 3: Coronary artery bypass graft
 
 The cabg dataset contains data on individual coronary artery bypass operations. See `?cabg` for details.
 
@@ -460,7 +581,7 @@ qic(month, readmissions,
 
 This chart suggests that the readmission rate for females is increasing. Again, we should investigate this to find and -- in this case -- eliminate the special cause.
 
-## Case 3: Faceting hospital infections by hospital and type of infection
+## Case 4: Faceting hospital infections by hospital and type of infection
 
 The hospital_infection dataset contains data on hospital acquired bacteremia (BAC), Clostridium difficile infections (CDI), and urinary tract infections (UTI) from six hospitals in the Capital Region of Denmark. See `?hospital_infections` for details.
 
@@ -545,7 +666,7 @@ One hospital, NOH, have unusually few bacteremias and urinary tract infections c
 
 What can we learn from NOH and BFH? It is important to stress that data presented in funnel plots should be used for learning rather than for judgement. While it may be interesting for some politicians and administrators in need of a "case" to point fingers at the good, the bad and the ugly, the full power of SPC will only be released when data are used for learning and improvement.
 
-## Case 4: Prime charts for attribute data with very large sample sizes
+## Case 5: Prime charts for attribute data with very large sample sizes
 
 P and U charts with very large sample sizes sometimes produce narrow 3-sigma limits with most of the data points outside the 3-sigma limits.
 

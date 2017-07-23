@@ -17,10 +17,11 @@ Imports:
     scales,
     stats
 Suggests: 
-    testthat,
     dplyr,
     knitr,
-    rmarkdown
+    rmarkdown,
+    testthat,
+    tidyr
 License: GPL-3 + file LICENSE
 Encoding: UTF-8
 LazyData: true
