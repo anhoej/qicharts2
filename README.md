@@ -25,7 +25,7 @@ Non-random variation in the form of larger, possibly transient shifts in data is
 
 ## Instructions
     
-* Install from github: `devtools::install_github('anhoej/qicharts2')`.
+* Install from github: `devtools::install_github('anhoej/qicharts2', build_vignettes = TRUE)`.
 
 * Read documentation: `?qic`.
 

@@ -14,18 +14,18 @@
 \value{
 A data frame of summary values of each facet and part of a qic plot.
   \itemize{
-    \item facet1: Vertical facets.
-    \item facet2: Horizontal facets
-    \item part: Number of chart part when argument break.points is given.
-    \item aLCL: Average of lower control limit.
-    \item CL: Centre line.
-    \item aUCL: Average of upper control limit.
-    \item longest.run: Length of the longest run of data points on the same side of the centre line.
-    \item longest.run.max: Upper limit of expected length of longest run.
-    \item n.crossings: Number of times the data line crosses the centre line.
+    \item facet1 Vertical facets.
+    \item facet2 Horizontal facets
+    \item part Number of chart part when argument break.points is given.
+    \item aLCL Average of lower control limit.
+    \item CL Centre line.
+    \item aUCL Average of upper control limit.
+    \item longest.run Length of the longest run of data points on the same side of the centre line.
+    \item longest.run.max Upper limit of expected length of longest run.
+    \item n.crossings Number of times the data line crosses the centre line.
     \item n.crossings.min Lower limit of expected number of crossings.
-    \item runs.signal: 1 if either longest run or number of crossings are outside expected limits.
-    \item sigma.signal: Number of data points outside control limits.
+    \item runs.signal 1 if either longest run or number of crossings are outside expected limits.
+    \item sigma.signal Number of data points outside control limits.
   }
 }
 \description{

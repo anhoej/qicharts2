@@ -5,10 +5,10 @@
 \alias{cabg}
 \title{Coronary artery bypass graft operations}
 \format{A data frame with 2205 rows and 6 variables: \itemize{ \item
-  \strong{data} Date of operation. \item \strong{age} Patient age in years.
-  \item \strong{gender} Patient gender. \item \strong{los} Length og stay in
-  days. \item \strong{death} TRUE if patient died within 30 days after
-  surgery. \item \strong{readmission} TRUE if patient were readmitted for any
+ {data} Date of operation. \item{age} Patient age in years.
+  \item{gender} Patient gender. \item{los} Length og stay in
+  days. \item{death} TRUE if patient died within 30 days after
+  surgery. \item{readmission} TRUE if patient were readmitted for any
   reason within 30 days after surgery. }}
 \usage{
 cabg

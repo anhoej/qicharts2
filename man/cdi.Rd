@@ -5,10 +5,10 @@
 \alias{cdi}
 \title{Clostridium difficile infections}
 \format{A data frame with 36 rows and 5 variables: \itemize{ \item 
-  \strong{month} Month of observation. \item \strong{n} Number of hospital 
-  acquired CDI. \item \strong{days} Number of risk days. A risk day is a 
-  patient day without CDI. \item \strong{period} Factor indicating the period
-  'pre' or 'post' intervention. \item \strong{notes} Annotations. }}
+ {month} Month of observation. \item{n} Number of hospital 
+  acquired CDI. \item{days} Number of risk days. A risk day is a 
+  patient day without CDI. \item{period} Factor indicating the period
+  'pre' or 'post' intervention. \item{notes} Annotations. }}
 \source{
 \url{http://www.haiba.dk/} (Amager Hvidovre Hospital)
 }
