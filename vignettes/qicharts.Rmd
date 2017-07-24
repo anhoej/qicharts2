@@ -208,7 +208,7 @@ qic(month, harms,
     n = days,
     data = gtt,
     multiply = 1000,
-    main = 'Patient harm',
+    title = 'Patient harm',
     ylab = 'Adverse events per 1000 patient days',
     xlab = 'Month')
 ```
@@ -223,7 +223,7 @@ qic(month, harms,
     data = gtt,
     chart = 'u',
     multiply = 1000,
-    main = 'Patient harm (U chart)',
+    title = 'Patient harm (U chart)',
     ylab = 'Adverse events per 1000 patient days',
     xlab = 'Month')
 ```
@@ -251,7 +251,7 @@ qic(month, n.harmed,
     n = n,
     data = gtt_by_month,
     y.percent = TRUE,
-    main = 'Harmed patients',
+    title = 'Harmed patients',
     ylab = '',
     xlab = 'Month')
 ```
@@ -264,7 +264,7 @@ qic(month, n.harmed,
     data = gtt_by_month,
     chart = 'p',
     y.percent = TRUE,
-    main = 'Harmed patients (P chart)',
+    title = 'Harmed patients (P chart)',
     ylab = '',
     xlab = 'Month')
 ```
@@ -666,7 +666,7 @@ One hospital, NOH, have unusually few bacteremias and urinary tract infections c
 
 What can we learn from NOH and BFH? It is important to stress that data presented in funnel plots should be used for learning rather than for judgement. While it may be interesting for some politicians and administrators in need of a "case" to point fingers at the good, the bad and the ugly, the full power of SPC will only be released when data are used for learning and improvement.
 
-## Case 5: Prime charts for attribute data with very large sample sizes
+## Case 5: Prime charts for count data with very large sample sizes
 
 P and U charts with very large sample sizes sometimes produce narrow 3-sigma limits with most of the data points outside the 3-sigma limits.
 
@@ -683,7 +683,7 @@ qic(i, r,
     n = n, 
     data = nhs_accidents, 
     chart = 'p',
-    main = 'Proportion of patients seen within 4 hours of attendance (P chart)',
+    title = 'Proportion of patients seen within 4 hours of attendance (P chart)',
     ylab = '',
     xlab = 'Week #')
 ```
@@ -697,7 +697,7 @@ qic(i, r,
     n = n, 
     data = nhs_accidents, 
     chart = 'i',
-    main = 'Proportion of patients seen within 4 hours of attendance (I chart)',
+    title = 'Proportion of patients seen within 4 hours of attendance (I chart)',
     ylab = '',
     xlab = 'Week #')
 ```
@@ -711,7 +711,7 @@ qic(i, r,
     n = n, 
     data = nhs_accidents, 
     chart = 'pp',
-    main = 'Proportion of patients seen within 4 hours of attendance (P\' chart)',
+    title = 'Proportion of patients seen within 4 hours of attendance (P\' chart)',
     ylab = '',
     xlab = 'Week #')
 ```
