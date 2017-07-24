@@ -38,7 +38,7 @@
 #' @param scales Character string, one of 'fixed' (default), 'free_y', 'free_x',
 #'   or 'free' indicating whether y and x axis scales should be the same for all
 #'   panels or free.
-#' @param main Character string specifying the title of the plot.
+#' @param title Character string specifying the title of the plot.
 #' @param xlab Character string specifying the x axis label.
 #' @param ylab Character string specifying the y axis label.
 #' @param subtitle Character string specifying the subtitle.
@@ -87,7 +87,7 @@
 #'     facets   = infection ~ hospital,
 #'     chart    = 'u',
 #'     multiply = 10000,
-#'     main     = 'Hospital infection rates',
+#'     title     = 'Hospital infection rates',
 #'     ylab     = 'Number of infections per 10.000 risk days',
 #'     xlab     = 'Month')
 #' 
@@ -112,7 +112,7 @@ qic <- function(x,
                 nrow            = NULL,
                 ncol            = NULL,
                 scales          = 'fixed',
-                main            = NULL,
+                title            = NULL,
                 ylab            = 'Value',
                 xlab            = 'Subgroup',
                 subtitle        = NULL,
@@ -214,8 +214,8 @@ qic <- function(x,
   }
   
   # Get title
-  if(is.null(main)) 
-    main <- paste(toupper(match.arg(chart)), 'Chart', 'of', y.name)
+  if(is.null(title)) 
+    title <- paste(toupper(match.arg(chart)), 'Chart', 'of', y.name)
   
   # Prepare data frame
   d <- data.frame(x, y, n, notes, facets)
@@ -313,7 +313,7 @@ qic <- function(x,
   }
 
   # Return
-  p <- plot.qic(d, main = main, xlab = xlab, ylab = ylab,
+  p <- plot.qic(d, title = title, xlab = xlab, ylab = ylab,
                 subtitle = subtitle, caption = caption, part.labels,
                 nrow = nrow, ncol = ncol, scales = scales,
                 show.linelabels,

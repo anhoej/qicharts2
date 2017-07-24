@@ -1,5 +1,5 @@
 #' @import ggplot2
-plot.qic <- function(x, main, ylab, xlab, subtitle, caption, part.labels,
+plot.qic <- function(x, title, ylab, xlab, subtitle, caption, part.labels,
                      nrow, ncol, scales, show.linelabels, show.grid, digits,
                      flip, dots.only, x.format, x.angle, y.expand, y.percent,
                      ...) {
@@ -200,7 +200,7 @@ plot.qic <- function(x, main, ylab, xlab, subtitle, caption, part.labels,
   
   # Add title and axis labels
   p <- p +
-    labs(title = main,
+    labs(title = title,
          x = xlab,
          y = ylab,
          caption = caption,

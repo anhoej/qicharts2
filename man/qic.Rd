@@ -8,7 +8,7 @@ qic(x, y = NULL, n = NULL, data = NULL, notes = NULL, facets = NULL,
   chart = c("run", "i", "mr", "xbar", "s", "t", "p", "pp", "c", "u", "up",
   "g"), agg.fun = c("mean", "median", "sum", "sd"), multiply = 1,
   freeze = NULL, break.points = NULL, exclude = NULL, target = NA * 1,
-  cl = NULL, nrow = NULL, ncol = NULL, scales = "fixed", main = NULL,
+  cl = NULL, nrow = NULL, ncol = NULL, scales = "fixed", title = NULL,
   ylab = "Value", xlab = "Subgroup", subtitle = NULL, caption = NULL,
   part.labels = NULL, show.linelabels = is.null(facets), digits = 3,
   x.format = NULL, x.angle = NULL, y.expand = NULL, y.neg = TRUE,
@@ -61,7 +61,7 @@ in facets.}
 or 'free' indicating whether y and x axis scales should be the same for all
 panels or free.}
 
-\item{main}{Character string specifying the title of the plot.}
+\item{title}{Character string specifying the title of the plot.}
 
 \item{ylab}{Character string specifying the y axis label.}
 
@@ -136,7 +136,7 @@ qic(month, n,
     facets   = infection ~ hospital,
     chart    = 'u',
     multiply = 10000,
-    main     = 'Hospital infection rates',
+    title     = 'Hospital infection rates',
     ylab     = 'Number of infections per 10.000 risk days',
     xlab     = 'Month')
 
