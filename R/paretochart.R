@@ -8,7 +8,8 @@
 #' @param caption Chart caption.
 #' @param ylab Y axis label.
 #' @param xlab X axis label.
-#'
+#' @param x.angle Number indicating the angle of x axis labels.
+#' 
 #' @return An object of class ggplot.
 #' 
 #' @examples
@@ -28,11 +29,12 @@
 #' @export
 
 paretochart <- function(x,
-                        title = NULL,
+                        title    = NULL,
                         subtitle = NULL,
-                        caption = NULL,
-                        ylab       = NULL,
-                        xlab       = NULL) {
+                        caption  = NULL,
+                        ylab     = NULL,
+                        xlab     = NULL,
+                        x.angle  = NULL) {
   varname  <- deparse(substitute(x))
   x        <- factor(x)
   x        <- table(x)
@@ -62,6 +64,13 @@ paretochart <- function(x,
          caption = caption,
          y = ylab,
          x = xlab)
+  
+  # Rotate x axis labels
+  if (!is.null(x.angle)) {
+    p <- p +
+      theme(axis.text.x = element_text(angle = x.angle, vjust = 1, hjust = 1))
+  }
+  
   
   return(p)
 }
