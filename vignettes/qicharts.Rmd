@@ -319,8 +319,6 @@ gtt_ae_types <- gtt %>%
 head(gtt_ae_types)
 ```
 
-Now we have data in separate categorical columns.
-
 ```{r}
 paretochart(gtt_ae_types$category,
             title = 'Pareto chart of harm category')
@@ -372,7 +370,7 @@ qic(month, n,
 
 The median number of CDIs per month in the before period is 19. An unusually long run of 15 data points below the median proves that the CDI rate is reduced.
 
-Next, we split the chart to compare the CDI rates before and after the intervention.
+When a shift in the desired direction is the result of a deliberate change to the process, we may split the chart to compare the numbers before and after the intervention.
 
 ```{r}
 qic(month, n,
@@ -419,6 +417,24 @@ In fact, U charts can always be used instead of C charts. When the area of oppor
 
 It is very important to recognise that while run and control charts can identify non-random variation, they cannot identify its causes. The analysis only tells that the CDI rate was reduced after an intervention. The causal relationship between the intervention and the shift must be established using other methods.
 
+### When should you recompute the limits?
+
+When splitting a chart as in the example above you make a deliberate decision based on your understanding of the process. Some software packages offer automated recalculation of limits whenever a shift is detected. I find this approach very wrong. Limits are the voice of the process and recomputing limits without understanding the context from which the process speaks is like telling someone to shut up, when really they are trying to tell you something important.
+
+Wheeler suggests that limits *may* be recomputed when the answers to all four of these question is "yes" (Wheeler 2010, p. 224):
+
+* Do the data display a distinctly different kind of behaviour than in the past?
+
+* Is the reason for this change in behaviour known?
+
+* Is the new process behaviour desirable?
+
+* Is it intended and expected that the new behaviour will continue?
+
+If the answer to any of these question is "no" you should rather seek to find the assignable cause of the shift and, if need be, eliminate it.
+
+Thus, when a deliberate change has been made to the process and the chart finds a shift attributable to this change, it may be time to recompute the limits.
+
 ## Case 3: Coronary artery bypass graft
 
 The cabg dataset contains data on individual coronary artery bypass operations. See `?cabg` for details.
@@ -442,7 +458,7 @@ qic(age,
 
 Two data points (patients number 45 and 70) are below the lower 3-sigma limit indicating that these patients are "unusually" young, i.e. representative of phenomena that are not normally present in the process. 
 
-I charts are often displayed along moving range charts that show the ranges of neighboring data points.
+I charts are often displayed along moving range charts that show the ranges of neighbouring data points.
 
 ```{r}
 qic(age,
@@ -489,7 +505,7 @@ qic(month, age,
     xlab  = 'Month')
 ```
 
-Xbar charts are usually displayed along S charts displaying the sample standard deviation.
+Xbar charts are usually displayed along S charts displaying the within sample standard deviation.
 
 ```{r}
 qic(month, age,
@@ -528,6 +544,10 @@ qic(month, readmissions,
     ylab      = NULL,
     xlab      = 'Month')
 ```
+
+On average, 22% of patients are readmitted within 30 days after surgery, and if nothing changes we would expect this to continue.
+
+What about mortality?
 
 ```{r}
 qic(month, deaths, 
@@ -578,11 +598,11 @@ qic(dt,
     xlab  = 'Death #')
 ```
 
-The conclusions from the G and the T chart are the same: The distance between deaths number 24 and 25 was unusually long. We should look for an assignable cause to explain this as this may help us find ways to reduce postoperative mortality in the future.
+The conclusions from the G and the T chart are the same: The distance between deaths number 24 and 25 is unusually long. We should look for an assignable cause to explain this as this may help us find ways to reduce postoperative mortality in the future.
 
 ### Faceting readmission rates by gender
 
-To demonstrate the use of faceted charts, we first summarise readmissions by month and gender.
+To demonstrate the use of faceted charts, we summarise readmissions by month and gender.
 
 ```{r}
 cabg_by_month_gender <- cabg %>% 
@@ -593,7 +613,7 @@ cabg_by_month_gender <- cabg %>%
 head(cabg_by_month_gender)
 ```
 
-Then we may use the `facets` argument to make a control chart for each gender while keeping the x and y axes the same.
+Then we use the `facets` argument to make a control chart for each gender while keeping the x and y axes the same.
 
 ```{r}
 qic(month, readmissions, 
@@ -607,11 +627,11 @@ qic(month, readmissions,
     xlab      = 'Month')
 ```
 
-This chart suggests that the readmission rate for females is increasing. Again, we should investigate this to find and -- in this case -- eliminate the special cause.
+This chart suggests that the readmission rate for females is increasing. This is clearly undesirable and we should investigate this to find and eliminate the special cause.
 
 ## Case 4: Faceting hospital infections by hospital and infection
 
-The hospital_infection dataset contains data on hospital acquired bacteremia (BAC), Clostridium difficile infections (CDI), and urinary tract infections (UTI) from six hospitals in the Capital Region of Denmark. See `?hospital_infections` for details.
+The hospital_infection dataset contains data on hospital acquired bacteremias (BAC), Clostridium difficile infections (CDI), and urinary tract infections (UTI) from six hospitals in the Capital Region of Denmark. See `?hospital_infections` for details.
 
 ```{r}
 head(hospital_infections)
@@ -698,7 +718,7 @@ What can we learn from NOH and BFH? It is important to stress that data presente
 
 P and U charts with very large sample sizes sometimes produce narrow 3-sigma limits with most of the data points outside the limits even when the process is stable.
 
-The NHS accidents dataset contains the number of emergency patients seen within 4 hours of attendance. The sample sizes are large, larger than 250,000. See `?nhs_accidents`
+The NHS accidents dataset contains the number of emergency patients seen within 4 hours of attendance. The sample sizes are very large (> 250,000). See `?nhs_accidents` for details.
 
 ```{r}
 head(nhs_accidents)
@@ -783,6 +803,8 @@ Since runs analysis based on the Anhoej rules makes no assumptions about the dis
 1. Jacob Anhøj, Anne Vingaard Olesen (2014). [Run Charts Revisited: A Simulation Study of Run Chart Rules for Detection of Non-Random Variation in Health Care Processes](http://www.plosone.org/article/info%3Adoi%2F10.1371%2Fjournal.pone.0113825). PLoS ONE 9(11): e113825.
 
 1. Jacob Anhøj (2015). [Diagnostic Value of Run Chart Analysis: Using Likelihood Ratios to Compare Run Chart Rules on Simulated Data Series](http://www.plosone.org/article/info%3Adoi%2F10.1371%2Fjournal.pone.0121349). PLoS ONE 10(3): e0121349.
+
+1. Donald J. Wheeler (2010). [Understanding Statistical Process Control](https://www.spcpress.com/book_understanding_statistical_process_control.php), third edition. SPC press.
 
 1. Douglas C. Montgomery (2009). [Statistical Quality Control -- A Modern Introduction](http://eu.wiley.com/WileyCDA/WileyTitle/productCd-1118322576.html), sixth edition. John Wiley & Sons.
 
