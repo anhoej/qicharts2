@@ -5,16 +5,20 @@ skip_on_cran()
 # Example 6.3 ----
 test_that('Example 6.3_1 is equal to reference', {
   expect_equal_to_reference(
-    qic(sample, obs,
-        data = tbl_06.03,
-        chart = 'xbar'),
+    summary(
+      qic(sample, obs,
+          data = tbl_06.03,
+          chart = 'xbar')
+    ),
     'ex_6.3_1.rds'
   )
-
+  
   expect_equal_to_reference(
-    qic(sample, obs,
-        data = tbl_06.03,
-        chart = 's'),
+    summary(
+      qic(sample, obs,
+          data = tbl_06.03,
+          chart = 's')
+    ),
     'ex_6.3_2.rds'
   )
 })
@@ -22,16 +26,20 @@ test_that('Example 6.3_1 is equal to reference', {
 # Example 6.4 ----
 test_that('Example 6.4 is equal to reference', {
   expect_equal_to_reference(
-    qic(sample, obs,
-        data = tbl_06.04,
-        chart = 'xbar'),
+    summary(
+      qic(sample, obs,
+          data = tbl_06.04,
+          chart = 'xbar')
+    ),
     'ex_6.4_1.rds'
   )
-
+  
   expect_equal_to_reference(
-    qic(sample, obs,
-        data = tbl_06.04,
-        chart = 's'),
+    summary(
+      qic(sample, obs,
+          data = tbl_06.04,
+          chart = 's')
+    ),
     'ex_6.4_2.rds'
   )
 })
@@ -39,18 +47,22 @@ test_that('Example 6.4 is equal to reference', {
 # Example 6.5 ----
 test_that('Example 6.5 is equal to reference', {
   expect_equal_to_reference(
-    qic(weeks, cost,
-        data = tbl_06.07,
-        chart = 'i',
-        freeze = 20),
+    summary(
+      qic(weeks, cost,
+          data = tbl_06.07,
+          chart = 'i',
+          freeze = 20)
+    ),
     'ex_6.5_3.rds'
   )
-
+  
   expect_equal_to_reference(
-    qic(weeks, cost,
-        data = tbl_06.07,
-        chart = 'mr',
-        freeze = 20),
+    summary(
+      qic(weeks, cost,
+          data = tbl_06.07,
+          chart = 'mr',
+          freeze = 20)
+    ),
     'ex_6.5_4.rds'
   )
 })
@@ -58,12 +70,14 @@ test_that('Example 6.5 is equal to reference', {
 # Example 7.1 ----
 test_that('Example 7.1 is equal to reference', {
   expect_equal_to_reference(
-    qic(sample, count, size, notes = note,
-        data = tbl_07.03,
-        chart = 'p',
-        digits = 4,
-        exclude = c(15, 23),
-        break.points = 30),
+    summary(
+      qic(sample, count, size, notes = note,
+          data = tbl_07.03,
+          chart = 'p',
+          digits = 4,
+          exclude = c(15, 23),
+          break.points = 30)
+    ),
     'ex_7.1_5.rds'
   )
 })
@@ -71,9 +85,11 @@ test_that('Example 7.1 is equal to reference', {
 # Table 7.4 ----
 test_that('Table 7.4 is equal to reference', {
   expect_equal_to_reference(
-    qic(sample, count, size,
-        data = tbl_07.04,
-        chart = 'p'),
+    summary(
+      qic(sample, count, size,
+          data = tbl_07.04,
+          chart = 'p')
+    ),
     'tbl_7.4_1.rds'
   )
 })
@@ -81,12 +97,14 @@ test_that('Table 7.4 is equal to reference', {
 # Example 7.3 ----
 test_that('Example 7.3 is equal to reference', {
   expect_equal_to_reference(
-    qic(sample, count,
-        data = tbl_07.08,
-        chart = 'c',
-        digits = 4,
-        exclude = c(6, 20),
-        freeze = 26),
+    summary(
+      qic(sample, count,
+          data = tbl_07.08,
+          chart = 'c',
+          digits = 4,
+          exclude = c(6, 20)
+      ),
+      freeze = 26),
     'ex_7.3_3.rds'
   )
 })
@@ -94,9 +112,11 @@ test_that('Example 7.3 is equal to reference', {
 # Example 7.4 ----
 test_that('Example 7.4 is equal to reference', {
   expect_equal_to_reference(
-    qic(sample, count, size,
-        data = tbl_07.10,
-        chart = 'u'),
+    summary(
+      qic(sample, count, size,
+          data = tbl_07.10,
+          chart = 'u')
+    ),
     'ex_7.4_1.rds'
   )
 })
@@ -104,10 +124,12 @@ test_that('Example 7.4 is equal to reference', {
 # Example 7.5 ----
 test_that('Example 7.5 is equal to reference', {
   expect_equal_to_reference(
-    qic(roll, count, meters,
-        data = tbl_07.11,
-        chart = 'u',
-        multiply = 50),
+    summary(
+      qic(roll, count, meters,
+          data = tbl_07.11,
+          chart = 'u',
+          multiply = 50)
+    ),
     'ex_7.5_1.rds'
   )
 })
@@ -115,9 +137,11 @@ test_that('Example 7.5 is equal to reference', {
 # Example 7.6 ----
 test_that('Example 7.6 is equal to reference', {
   expect_equal_to_reference(
-    qic(failure, hours,
-        data = tbl_07.14,
-        chart = 't'),
+    summary(
+      qic(failure, hours,
+          data = tbl_07.14,
+          chart = 't')
+    ),
     'ex_7.6_1.rds'
   )
 })
@@ -125,9 +149,11 @@ test_that('Example 7.6 is equal to reference', {
 # NA test ----
 test_that('NA test is equal to reference', {
   expect_equal_to_reference(
-    qic(sample, obs,
-        data = NA_test,
-        chart = 'xbar'),
+    summary(
+      qic(sample, obs,
+          data = NA_test,
+          chart = 'xbar')
+    ),
     'NA_test.rds'
   )
 })
