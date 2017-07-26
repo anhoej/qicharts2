@@ -5,7 +5,7 @@
 \title{Paretochart}
 \usage{
 paretochart(x, title = NULL, subtitle = NULL, caption = NULL,
-  ylab = NULL, xlab = NULL)
+  ylab = NULL, xlab = NULL, x.angle = NULL)
 }
 \arguments{
 \item{x}{Categorical variable to plot.}
@@ -19,6 +19,8 @@ paretochart(x, title = NULL, subtitle = NULL, caption = NULL,
 \item{ylab}{Y axis label.}
 
 \item{xlab}{X axis label.}
+
+\item{x.angle}{Number indicating the angle of x axis labels.}
 }
 \value{
 An object of class ggplot.
