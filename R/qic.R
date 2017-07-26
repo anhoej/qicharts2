@@ -32,7 +32,8 @@
 #'   calculations of centre and control lines.
 #' @param target Numeric value indicating a target value to be plotted as a 
 #'   horizontal line (same for each facet).
-#' @param cl Numeric value indicating the centre line if known in advance.
+#' @param cl Numeric, either a value indicating the centre line if known in
+#'   advance or a vector if centre line is variable.
 #' @param nrow,ncol Number indicating the preferred number of rows and columns 
 #'   in facets.
 #' @param scales Character string, one of 'fixed' (default), 'free_y', 'free_x',
@@ -43,7 +44,7 @@
 #' @param ylab Character string specifying the y axis label.
 #' @param subtitle Character string specifying the subtitle.
 #' @param caption Character string specifying the caption.
-#' @param part.labels Character vector of length two specifying  labels for
+#' @param part.labels Character vector of length two specifying  labels for 
 #'   chart parts created with the freeze or break.points argument.
 #' @param show.linelabels Logical indicating whether to show labels for centre 
 #'   and control lines on chart. Defaults to TRUE when \code{facets} is NULL.
@@ -63,7 +64,7 @@
 #' @param ... Additional arguments to plot function.
 #'   
 #' @return A \code{qic} object. Inherits from 'ggplot'.
-#' 
+#'   
 #' @seealso \code{vignette('qic')}
 #'   
 #' @examples
@@ -155,6 +156,8 @@ qic <- function(x,
   y      <- eval(substitute(y), data, parent.frame())
   n      <- eval(substitute(n), data, parent.frame())
   notes  <- eval(substitute(notes), data, parent.frame())
+  cl     <- eval(substitute(cl), data, parent.frame())
+  target <- eval(substitute(target), data, parent.frame())
   facets <- all.vars(facets)
   
   if(is.null(data)) {
@@ -220,7 +223,18 @@ qic <- function(x,
   # Prepare data frame
   d <- data.frame(x, y, n, notes, facets)
   d <- droplevels(d)
-
+  
+  # Add centre line
+  if (!is.null(cl)) {
+    d$cl <- cl
+  } else {
+    d$cl <- NA
+  }
+  
+  # Add target line
+  d$target <- target
+  
+  
   # Aggregate data by subgroup
   d <- split(d, d[c('x', 'facet1', 'facet2')])
   d <- lapply(d,
@@ -238,6 +252,8 @@ qic <- function(x,
                                       sum(x$n, na.rm = TRUE),
                                     do.call(agg.fun, list(x$y, na.rm = TRUE))),
                   n         = sum(x$n, na.rm = got.n),
+                  cl        = x$cl[1],
+                  target    = x$target[1],
                   notes     = paste(x$notes, collapse = '|')
                 )
               })
@@ -267,15 +283,15 @@ qic <- function(x,
   
   # Add baseline variable
   d$baseline <- d$xx <= freeze
+  # 
+  # # Add centre and control lines
+  # if (!is.null(cl)) {
+  #   d$cl <- cl
+  # }
+  # 
+  #   # Add target line
+  #   d$target <- target
   
-  # Add centre and control lines
-  if (!is.null(cl)) {
-    d$cl <- cl
-  }
-  
-  # Add target line
-  d$target <- target
-
   d <- split(d, d[c('facet1', 'facet2', 'part')])
   d <- lapply(d, chart.fun)
   d <- lapply(d, runs.analysis)

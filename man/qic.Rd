@@ -52,7 +52,8 @@ calculations of centre and control lines.}
 \item{target}{Numeric value indicating a target value to be plotted as a 
 horizontal line (same for each facet).}
 
-\item{cl}{Numeric value indicating the centre line if known in advance.}
+\item{cl}{Numeric, either a value indicating the centre line if known in
+advance or a vector if centre line is variable.}
 
 \item{nrow, ncol}{Number indicating the preferred number of rows and columns 
 in facets.}
@@ -71,7 +72,7 @@ panels or free.}
 
 \item{caption}{Character string specifying the caption.}
 
-\item{part.labels}{Character vector of length two specifying  labels for
+\item{part.labels}{Character vector of length two specifying  labels for 
 chart parts created with the freeze or break.points argument.}
 
 \item{show.linelabels}{Logical indicating whether to show labels for centre 
