@@ -37,7 +37,7 @@ runs.analysis <- function(x) {
 
 qic.run <- function(x) {
   base  <- x$baseline & x$include
-  if (is.null(x$cl))
+  if (anyNA(x$cl))
     x$cl  <- stats::median(x$y[base], na.rm = TRUE)
   x$ucl <- as.numeric(NA)
   x$lcl <- as.numeric(NA)
@@ -47,13 +47,13 @@ qic.run <- function(x) {
 
 qic.i <- function(x) {
   base <- x$baseline & x$include
-  if (is.null(x$cl))
+  if (anyNA(x$cl))
     x$cl <- mean(x$y[base], na.rm = TRUE)
-
+  
   # Average moving range
-  mr  <- abs(diff(x$y[base]))
+  mr  <- abs(diff(x$y[base] - x$cl[base]))
   amr <- mean(mr, na.rm = TRUE)
-
+  
   # Upper limit for moving ranges
   ulmr <- 3.267 * amr
 
@@ -76,7 +76,7 @@ qic.mr <- function(x) {
   x$y  <- c(NA, abs(diff(x$y)))
 
   # Calculate centre line
-  if (is.null(x$cl))
+  if (anyNA(x$cl))
     x$cl <- mean(x$y[base], na.rm = TRUE)
 
   # Calculate upper limit for moving ranges
@@ -91,7 +91,7 @@ qic.xbar <- function(x){
   var.n <- as.logical(length(unique(x$y.length)) - 1)
 
   # Calculate centre line, Montgomery 6.30
-  if (is.null(x$cl)) {
+  if (anyNA(x$cl)) {
     x$cl <- sum(x$y.length[base] * x$y.mean[base], na.rm = TRUE) /
       sum(x$y.length[base], na.rm = TRUE)
   }
@@ -117,7 +117,7 @@ qic.s <- function(x){
   x$y <- x$y.sd
 
   # Calculate centre line and control limits
-  if (is.null(x$cl)) {
+  if (anyNA(x$cl)) {
     if (var.n) { # Variable subgroup size: Montgomery 6.31
       x$cl <- sqrt(sum((x$y.length[base] - 1) * x$y.sd[base]^2, na.rm = TRUE) /
                      sum(x$y.length[base] - 1, na.rm = TRUE))
@@ -156,7 +156,7 @@ qic.t <- function(x) {
 qic.p <- function(x) {
   base <- x$baseline & x$include
 
-  if (is.null(x$cl)) {
+  if (anyNA(x$cl)) {
     x$cl <- sum(x$y.sum[base], na.rm = TRUE) /
       sum(x$n[base], na.rm = TRUE)
   }
@@ -176,7 +176,7 @@ qic.p <- function(x) {
 qic.pp <- function(x) {
   base <- x$baseline & x$include
   
-  if (is.null(x$cl)) {
+  if (anyNA(x$cl)) {
     x$cl <- sum(x$y.sum[base], na.rm = TRUE) /
       sum(x$n[base], na.rm = TRUE)
   }
@@ -201,7 +201,7 @@ qic.pp <- function(x) {
 qic.c <- function(x){
   base <- x$baseline & x$include
   
-  if (is.null(x$cl)) {
+  if (anyNA(x$cl)) {
     x$cl <- mean(x$y[base], na.rm = TRUE)
   }
 
@@ -219,7 +219,7 @@ qic.c <- function(x){
 qic.u <- function(x){
   base <- x$baseline & x$include
   
-  if (is.null(x$cl)) {
+  if (anyNA(x$cl)) {
     x$cl   <- sum(x$y.sum[base], na.rm = TRUE) / sum(x$n[base], na.rm = TRUE)
   }
 
@@ -237,7 +237,7 @@ qic.u <- function(x){
 qic.up <- function(x){
   base <- x$baseline & x$include
   
-  if (is.null(x$cl)) {
+  if (anyNA(x$cl)) {
     x$cl   <- sum(x$y.sum[base], na.rm = TRUE) / sum(x$n[base], na.rm = TRUE)
   }
 
@@ -262,7 +262,7 @@ qic.g <- function(x){
   base <- x$baseline & x$include
 
   # Calculate centre line
-  if (is.null(x$cl)) {
+  if (anyNA(x$cl)) {
     x$cl <- mean(x$y[base], na.rm = TRUE)
   }
   
@@ -340,4 +340,13 @@ c4 <- function(n) {
   x[w]         <- tbl[n[w]]
   x[is.nan(x)] <- NA
   return(x)
+}
+
+lab.format <- function(x, digits = 1, percent = FALSE) {
+  x <- sprintf(paste0("%.", digits, "f"), x)
+  
+  if (percent)
+    x <- paste0(x, '%')
+  
+  x
 }
