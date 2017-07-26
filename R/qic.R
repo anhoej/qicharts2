@@ -295,8 +295,10 @@ qic <- function(x,
   rownames(d) <- NULL
 
   # Remove control lines from missing subgroups
-  d$ucl[is.na(d$y)] <- NA
-  d$lcl[is.na(d$y)] <- NA
+  # d$ucl[is.na(d$y)] <- NA
+  # d$lcl[is.na(d$y)] <- NA
+  d$ucl[!is.finite(d$ucl)] <- NA
+  d$lcl[!is.finite(d$lcl)] <- NA
   
   # Add sigma signals
   d$sigma.signal                        <- d$y > d$ucl | d$y < d$lcl

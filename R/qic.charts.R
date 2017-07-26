@@ -167,8 +167,8 @@ qic.p <- function(x) {
   # Calculate control limits
   x$ucl          <- x$cl + 3 * stdev
   x$lcl          <- x$cl - 3 * stdev
-  x$ucl[x$ucl > 1] <- 1
-  x$lcl[x$lcl < 0] <- 0
+  x$ucl[x$ucl > 1 & is.finite(x$ucl)] <- 1
+  x$lcl[x$lcl < 0 & is.finite(x$lcl)] <- 0
 
   return(x)
 }
@@ -192,9 +192,9 @@ qic.pp <- function(x) {
 
   x$ucl          <- x$cl + 3 * stdev
   x$lcl          <- x$cl - 3 * stdev
-  x$ucl[x$ucl > 1] <- 1
-  x$lcl[x$lcl < 0] <- 0
-
+  x$ucl[x$ucl > 1 & is.finite(x$ucl)] <- 1
+  x$lcl[x$lcl < 0 & is.finite(x$lcl)] <- 0
+  
   return(x)
 }
 
@@ -211,7 +211,7 @@ qic.c <- function(x){
   # Calculate control limits
   x$ucl          <- x$cl + 3 * stdev
   x$lcl          <- x$cl - 3 * stdev
-  x$lcl[x$lcl < 0] <- 0
+  x$lcl[x$lcl < 0 & is.finite(x$lcl)] <- 0
 
   return(x)
 }
@@ -229,7 +229,7 @@ qic.u <- function(x){
   # Calculate control limits
   x$ucl          <- x$cl + 3 * stdev
   x$lcl          <- x$cl - 3 * stdev
-  x$lcl[x$lcl < 0] <- 0
+  x$lcl[x$lcl < 0 & is.finite(x$lcl)] <- 0
 
   return(x)
 }
@@ -253,7 +253,7 @@ qic.up <- function(x){
   # Calculate limits
   x$ucl          <- x$cl + 3 * stdev
   x$lcl          <- x$cl - 3 * stdev
-  x$lcl[x$lcl < 0] <- 0
+  x$lcl[x$lcl < 0 & is.finite(x$lcl)] <- 0
 
   return(x)
 }
