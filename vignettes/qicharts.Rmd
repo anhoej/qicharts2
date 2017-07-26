@@ -6,7 +6,7 @@ date: "`r Sys.Date()`"
 output: 
   rmarkdown::html_vignette:
     toc: true
-    toc_depth: 2
+    toc_depth: 3
 vignette: >
   %\VignetteIndexEntry{Vignette Title}
   %\VignetteEngine{knitr::rmarkdown}
@@ -17,7 +17,8 @@ vignette: >
 knitr::opts_chunk$set(
   collapse = TRUE, 
   comment = "#>",
-  fig.width = 7.15)
+  fig.width = 7.15,
+  dev = 'svg')
 
 library(qicharts2)
 ```
@@ -48,7 +49,7 @@ paretochart(unlist(gtt[7:11]),
 >
 > Donald J. Wheeler, Understanding Variation, 2. ed., p 152
 
-This vignette will teach you the easy part of SPC, *the tools*, as implemented by `qicharts2` for R. I strongly recommend that you also study the difficult part of SPC, *the way of thinking*, for example by reading Wheeler's excellent book.
+This vignette will teach you the easy part of SPC, *the tools*, as implemented by `qicharts2` for R. I strongly recommend that you also study *the way of thinking*, for example by reading Wheeler's excellent book.
 
 ## Installation
 
@@ -92,7 +93,7 @@ The interpretation and use of run and control charts should become clear from th
 
 SPC is the application of statistical thinking and statistical tools to continuous quality improvement. Central to SPC is the understanding of process variation over time.
 
-The purpose of analysing process data is to know when a change occurs so that we can take appropriate action. However, numbers may change even if the process stays the same. So how do we distinguish changes in numbers that represent change of the underlying process from those that are essentially noise?
+The purpose of analysing process data is to know when a change occurs so that we can take appropriate action. However, numbers may change even if the process stays the same (and vice versa). So how do we distinguish changes in numbers that represent change of the underlying process from those that are essentially noise?
 
 [Walther A. Shewhart](http://en.wikipedia.org/wiki/Walter_A._Shewhart), who founded SPC, described two types of variation, *chance cause variation* and *assignable cause variation*. Today, the terms *common cause* and *special cause* variation are commonly used.
 
@@ -116,6 +117,10 @@ The purpose of analysing process data is to know when a change occurs so that we
 
 * makes the process unpredictable.
 
+> A process will be said to be predictabe when, through the use of past experience, we can describe, at least within limits, how the process will behave in the future.
+>
+> Donald J. Wheeler, Understanding Variation, 2. ed., p 153
+
 The overall purpose of SPC charts is to tell the two types of variation apart.
 
 ## Testing for special cause variation
@@ -124,7 +129,7 @@ As expected from random numbers, the previous run and control charts exhibit com
 
 ### Shewhart's 3-sigma rule
 
-Shewhart devised one test to identify special cause variation, the 3-sigma rule, which is positive if one or more data points fall outside the 3-sigma limits. The 3-sigma rule is effective in detecting larger (> 2SD) shifts in data.
+Shewhart devised one test to identify special cause variation, the 3-sigma rule, which signals if one or more data points fall outside the 3-sigma limits. The 3-sigma rule is effective in detecting larger (> 2SD) shifts in data.
 
 ```{r}
 # Simulate a special cause to y in the form of a large, transient shift of 4 standard deviations.
@@ -133,7 +138,7 @@ y[22] <- 4
 qic(y, chart = 'i')
 ```
 
-However, minor to moderate shifts may go unnoticed by the 3-sigma rule for longer periods.
+However, minor to moderate shifts may go unnoticed by the 3-sigma rule for long periods of time.
 
 ```{r}
 # Simulate a special cause to y in the form of a moderate, persistent shift of 2 standard deviations.
@@ -166,7 +171,7 @@ The least known tests for non-random variation are probably the Anhoej rules pro
 
 * **Unusually long runs**: A run is one or more consecutive data points on the same side of the centre line. Data points that fall on the centre line do neither break nor contribute to the run. The upper 95% prediction limit for longest run is approximately $log_2(n)+3$ (rounded to the nearest integer), where $n$ is the number of useful data points. For example, in a run chart with 24 data points a run of *more* than `round(log2(24) + 3)` = `r round(log2(24) + 3)` would suggest a shift in the process.
 
-* **Unusually few crossings**: A crossing is when two consecutive data points are on opposite sides of the centre line. In a random process, the number of crossings is expected to have a binomial distribution, $b(n-1,0.5)$. The lower 5% prediction limit for number of crossings is found using `qbinom(p = 0.05, size = n - 1, prob = 0.5)`. Thus, in a run chart with 24 useful data points, *fewer* than `qbinom(0.05, 24 - 1, 0.5)` = `r qbinom(0.05, 24 - 1, 0.5)` crossings would suggest that the process is shifting.
+* **Unusually few crossings**: A crossing is when two consecutive data points are on opposite sides of the centre line. In a random process, the number of crossings has a binomial distribution, $b(n-1,0.5)$. The lower 5% prediction limit for number of crossings is found using `qbinom(p = 0.05, size = n - 1, prob = 0.5)`. Thus, in a run chart with 24 useful data points, *fewer* than `qbinom(0.05, 24 - 1, 0.5)` = `r qbinom(0.05, 24 - 1, 0.5)` crossings would suggest that the process is shifting.
 
 Critical values for longest runs and number of crossings for 10 -- 100 data points are tabulated in Appendix 2.
 
@@ -176,7 +181,7 @@ Apart from being comparable in sensitivity and specificity to WE rules 2-4 with 
 
 * They adapt dynamically to the number of available data points and can be applied to charts with as few as 10 and up to indefinitely many data points without loosing sensitivity and specificity.
 
-In the previous control chart, a shift of 2 standard deviations is introduced halfway through the process. While the shift is too small to be picked up by the 3-sigma rule both Anhoej rules detect the signal. The longest run include `r summary(qic(y, chart = 'i'))$longest.run` data points (upper limit = `r summary(qic(y, chart = 'i'))$longest.run.max`), and the number of crossings is `r summary(qic(y, chart = 'i'))$n.crossings` (lower limit = `r summary(qic(y, chart = 'i'))$n.crossings.min`). Note that the shift is also picked up by WE rule 4.
+In the previous control chart, a shift of 2 standard deviations was introduced halfway through the process. While the shift is too small to be picked up by the 3-sigma rule both Anhoej rules detect the signal. The longest run include `r summary(qic(y, chart = 'i'))$longest.run` data points (upper limit = `r summary(qic(y, chart = 'i'))$longest.run.max`), and the number of crossings is `r summary(qic(y, chart = 'i'))$n.crossings` (lower limit = `r summary(qic(y, chart = 'i'))$n.crossings.min`). Note that the shift is also picked up by WE rule 4.
 
 Non-random variation found by the Anhoej rules is visualised by `qic()` using a red and dashed centre line.
 
@@ -200,7 +205,7 @@ While there is only one type of run charts, there are many types of control char
 
 `qic()` includes eleven control charts.
 
-Chart | Description | Theoretical distribution 
+Chart | Description | Assumed distribution 
 ----- | ----------- | ------------------------
 *Charts for measures*                                             |
 I       | Individual measurements                                 | Gaussian
@@ -253,7 +258,7 @@ qic(month, harms,
     xlab     = 'Month')
 ```
 
-Because the sample sizes (number of patient days) are not the same each month, the 3-sigma limits vary. Large samples give narrow limits and vice versa. Varying limits are also seen in P and Xbar charts.
+Because the sample sizes (number of patient days) are not the same each month, the 3-sigma limits vary. Large samples give narrow limits and vice versa. Varying limits are also seen in P and Xbar charts with variable sample size.
 
 ### Run and P control charts of percent harmed patients
 
@@ -296,12 +301,7 @@ qic(month, n.harmed,
     xlab      = 'Month')
 ```
 
-Since both the harm rate and the proportion of harmed patients exhibit common cause variation only, we conclude that the risk of adverse events during hospitalisation is predictable.
-
-> A process will be said to be predictabe when, through the use of past experience, we can describe, at least within limits, how the process will behave in the future.
->
-> Donald J. Wheeler, Understanding Variation, 2. ed., p 153
-
+Since both the harm rate and the proportion of harmed patients exhibit common cause variation only, we conclude that the risk of adverse events during hospitalisation is predictable and that we in the future should expect around 60 adverse events per 1000 patient days harming around 33% of patients.
 
 ### Pareto analysis of adverse event types and severity
 
