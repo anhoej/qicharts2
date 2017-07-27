@@ -10,7 +10,7 @@ qic(x, y = NULL, n = NULL, data = NULL, notes = NULL, facets = NULL,
   freeze = NULL, break.points = NULL, exclude = NULL, target = NA * 1,
   cl = NULL, nrow = NULL, ncol = NULL, scales = "fixed", title = NULL,
   ylab = "Value", xlab = "Subgroup", subtitle = NULL, caption = NULL,
-  part.labels = NULL, show.linelabels = is.null(facets), digits = 3,
+  part.labels = NULL, show.linelabels = is.null(facets), decimals = 1,
   x.format = NULL, x.angle = NULL, y.expand = NULL, y.neg = TRUE,
   y.percent = FALSE, show.grid = FALSE, flip = FALSE,
   print.summary = FALSE, ...)
@@ -78,7 +78,7 @@ chart parts created with the freeze or break.points argument.}
 \item{show.linelabels}{Logical indicating whether to show labels for centre 
 and control lines on chart. Defaults to TRUE when \code{facets} is NULL.}
 
-\item{digits}{Integer indicating the preferred number of digits in centre and
+\item{decimals}{Integer indicating the preferred number of decimals in centre and
 control line labels.}
 
 \item{x.format}{Date format of x axis labels. See \code{?strftime()} for 

@@ -342,11 +342,10 @@ c4 <- function(n) {
   return(x)
 }
 
-lab.format <- function(x, digits = 1, percent = FALSE) {
-  x <- sprintf(paste0("%.", digits, "f"), x)
-  
-  if (percent)
-    x <- paste0(x, '%')
+lab.format <- function(x, decimals = 1, percent = FALSE) {
+  if (percent) x <- x * 100
+  x <- sprintf(paste0("%.", decimals, "f"), x)
+  if (percent) x <- paste0(x, '%')
   
   x
 }

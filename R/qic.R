@@ -48,7 +48,7 @@
 #'   chart parts created with the freeze or break.points argument.
 #' @param show.linelabels Logical indicating whether to show labels for centre 
 #'   and control lines on chart. Defaults to TRUE when \code{facets} is NULL.
-#' @param digits Integer indicating the preferred number of digits in centre and
+#' @param decimals Integer indicating the preferred number of decimals in centre and
 #'   control line labels.
 #' @param x.format Date format of x axis labels. See \code{?strftime()} for 
 #'   possible date formats.
@@ -113,14 +113,14 @@ qic <- function(x,
                 nrow            = NULL,
                 ncol            = NULL,
                 scales          = 'fixed',
-                title            = NULL,
+                title           = NULL,
                 ylab            = 'Value',
                 xlab            = 'Subgroup',
                 subtitle        = NULL,
                 caption         = NULL,
                 part.labels     = NULL,
                 show.linelabels = is.null(facets),
-                digits          = 3,
+                decimals        = 1,
                 x.format        = NULL,
                 x.angle         = NULL,
                 y.expand        = NULL,
@@ -336,7 +336,7 @@ qic <- function(x,
                 nrow = nrow, ncol = ncol, scales = scales,
                 show.linelabels,
                 show.grid,
-                digits,
+                decimals,
                 flip,
                 dots.only,
                 x.format,

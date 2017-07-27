@@ -1,6 +1,6 @@
 #' @import ggplot2
 plot.qic <- function(x, title, ylab, xlab, subtitle, caption, part.labels,
-                     nrow, ncol, scales, show.linelabels, show.grid, digits,
+                     nrow, ncol, scales, show.linelabels, show.grid, decimals,
                      flip, dots.only, x.format, x.angle, y.expand, y.percent,
                      ...) {
   # Set colours
@@ -88,36 +88,28 @@ plot.qic <- function(x, title, ylab, xlab, subtitle, caption, part.labels,
   if (show.linelabels) {
     p <- p +
       geom_label(aes_(y = ~ target.lab,
-                      label = ~ lab.format(target.lab, 
-                                           digits = digits,
-                                           percent = y.percent)),
+                      label = ~ lab.format(target.lab, decimals, y.percent)),
                  na.rm = TRUE,
                  label.size = 0,
                  label.padding = lab.pad,
                  size = lab.size,
                  hjust = lab.just) +
       geom_label(aes_(y = ~ cl.lab,
-                      label = ~ lab.format(cl.lab, 
-                                           digits = digits,
-                                           percent = y.percent)),
+                      label = ~ lab.format(cl.lab, decimals, y.percent)),
                  label.size = 0,
                  na.rm = TRUE,
                  label.padding = lab.pad,
                  size = lab.size,
                  hjust = lab.just) +
       geom_label(aes_(y = ~ lcl.lab,
-                      label = ~ lab.format(lcl.lab, 
-                                           digits = digits,
-                                           percent = y.percent)),
+                      label = ~ lab.format(lcl.lab, decimals, y.percent)),
                  na.rm = TRUE,
                  label.size = 0,
                  label.padding = lab.pad,
                  size = lab.size,
                  hjust = lab.just) +
       geom_label(aes_(y = ~ ucl.lab,
-                      label = ~ lab.format(ucl.lab, 
-                                           digits = digits,
-                                           percent = y.percent)),
+                      label = ~ lab.format(ucl.lab, decimals, y.percent)),
                  na.rm = TRUE,
                  label.size = 0,
                  label.padding = lab.pad,
