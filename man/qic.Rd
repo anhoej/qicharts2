@@ -4,15 +4,15 @@
 \alias{qic}
 \title{Quality improvement charts.}
 \usage{
-qic(x, y = NULL, n = NULL, data = NULL, notes = NULL, facets = NULL,
-  chart = c("run", "i", "mr", "xbar", "s", "t", "p", "pp", "c", "u", "up",
-  "g"), agg.fun = c("mean", "median", "sum", "sd"), multiply = 1,
-  freeze = NULL, break.points = NULL, exclude = NULL, target = NA * 1,
-  cl = NULL, nrow = NULL, ncol = NULL, scales = "fixed", title = NULL,
-  ylab = "Value", xlab = "Subgroup", subtitle = NULL, caption = NULL,
-  part.labels = NULL, show.linelabels = is.null(facets), decimals = 1,
-  x.format = NULL, x.angle = NULL, y.expand = NULL, y.neg = TRUE,
-  y.percent = FALSE, show.grid = FALSE, flip = FALSE,
+qic(x, y = NULL, n = NULL, data = NULL, notes = NULL, chart = c("run",
+  "i", "mr", "xbar", "s", "t", "p", "pp", "c", "u", "up", "g"),
+  agg.fun = c("mean", "median", "sum", "sd"), multiply = 1, freeze = NULL,
+  break.points = NULL, exclude = NULL, target = NA * 1, cl = NA * 1,
+  facets = NULL, nrow = NULL, ncol = NULL, scales = "fixed",
+  title = NULL, ylab = "Value", xlab = "Subgroup", subtitle = NULL,
+  caption = NULL, part.labels = NULL, show.linelabels = is.null(facets),
+  decimals = 1, x.format = NULL, x.angle = NULL, y.expand = NULL,
+  y.neg = TRUE, y.percent = FALSE, show.grid = FALSE, flip = FALSE,
   print.summary = FALSE, ...)
 }
 \arguments{
@@ -25,8 +25,6 @@ qic(x, y = NULL, n = NULL, data = NULL, notes = NULL, facets = NULL,
 \item{data}{Data frame containing variables used in the plot.}
 
 \item{notes}{Character vector of notes to be added to individual data points.}
-
-\item{facets}{One or two sided formula with factors used for facetting plots.}
 
 \item{chart}{Character value indicating the chart type. Possible values are: 
 'run' (default), 'i', 'mr', 'xbar', 't', 's', 'c', 'u', 'up', 'p', 'pp', 
@@ -54,6 +52,8 @@ horizontal line (same for each facet).}
 
 \item{cl}{Numeric, either a value indicating the centre line if known in
 advance or a vector if centre line is variable.}
+
+\item{facets}{One or two sided formula with factors used for facetting plots.}
 
 \item{nrow, ncol}{Number indicating the preferred number of rows and columns 
 in facets.}
