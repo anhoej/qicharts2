@@ -1,6 +1,6 @@
 #' @import ggplot2
 plot.qic <- function(x, title, ylab, xlab, subtitle, caption, part.labels,
-                     nrow, ncol, scales, show.linelabels, show.grid, decimals,
+                     nrow, ncol, scales, show.linelabs, show.grid, decimals,
                      flip, dots.only, x.format, x.angle, y.expand, y.percent,
                      ...) {
   # Set colours
@@ -85,7 +85,7 @@ plot.qic <- function(x, title, ylab, xlab, subtitle, caption, part.labels,
   p <- p + scale_colour_manual(values = cols)
   
   # Add labels for centre and control lines
-  if (show.linelabels) {
+  if (show.linelabs) {
     p <- p +
       geom_label(aes_(y = ~ target.lab,
                       label = ~ lab.format(target.lab, decimals, y.percent)),

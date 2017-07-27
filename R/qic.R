@@ -14,6 +14,7 @@
 #' @param n Vector of subgroup sizes (denominator).
 #' @param data Data frame containing variables used in the plot.
 #' @param notes Character vector of notes to be added to individual data points.
+#' @param facets One or two sided formula with factors used for facetting plots.
 #' @param chart Character value indicating the chart type. Possible values are: 
 #'   'run' (default), 'i', 'mr', 'xbar', 't', 's', 'c', 'u', 'up', 'p', 'pp', 
 #'   and 'g'.
@@ -24,16 +25,15 @@
 #'   for percents rather than proportions. See also \code{y.percent} argument.
 #' @param freeze Integer indicating the last data point to include in 
 #'   calculation of baseline paramenters for centre and control lines. Ignored 
-#'   if break.points argument is given.
-#' @param break.points Integer vector indicating break points before 
+#'   if part argument is given.
+#' @param part Integer vector indicating data points before 
 #'   recalculation of centre and control lines.
 #' @param exclude Integer vector indicating data points to exclude from 
 #'   calculations of centre and control lines.
 #' @param target Numeric value indicating a target value to be plotted as a 
 #'   horizontal line (same for each facet).
-#' @param cl Numeric, either a value indicating the centre line if known in
+#' @param cl Numeric, either a value indicating the centre line if known in 
 #'   advance or a vector if centre line is variable.
-#' @param facets One or two sided formula with factors used for facetting plots.
 #' @param nrow,ncol Number indicating the preferred number of rows and columns 
 #'   in facets.
 #' @param scales Character string, one of 'fixed' (default), 'free_y', 'free_x',
@@ -45,11 +45,11 @@
 #' @param subtitle Character string specifying the subtitle.
 #' @param caption Character string specifying the caption.
 #' @param part.labels Character vector of length two specifying  labels for 
-#'   chart parts created with the freeze or break.points argument.
-#' @param show.linelabels Logical indicating whether to show labels for centre 
-#'   and control lines on chart. Defaults to TRUE when \code{facets} is NULL.
-#' @param decimals Integer indicating the preferred number of decimals in centre and
-#'   control line labels.
+#'   chart parts created with the freeze or part argument.
+#' @param show.linelabs Logical indicating whether to show labels for centre and
+#'   control lines on chart. Defaults to TRUE when \code{facets} is NULL.
+#' @param decimals Integer indicating the preferred number of decimals in centre
+#'   and control line labels.
 #' @param x.format Date format of x axis labels. See \code{?strftime()} for 
 #'   possible date formats.
 #' @param x.angle Number indicating the angle of x axis labels.
@@ -96,47 +96,47 @@
 #' @export
 
 qic <- function(x,
-                y               = NULL,
-                n               = NULL,
-                data            = NULL,
-                notes           = NULL,
-                chart           = c('run', 'i', 'mr', 'xbar', 's', 't',
-                                    'p', 'pp', 'c', 'u', 'up', 'g'),
-                agg.fun         = c('mean', 'median', 'sum', 'sd'),
-                multiply        = 1,
-                freeze          = NULL,
-                break.points    = NULL,
-                exclude         = NULL,
-                target          = NA * 1,
-                cl              = NA * 1, #NULL,
-                facets          = NULL,
-                nrow            = NULL,
-                ncol            = NULL,
-                scales          = 'fixed',
-                title           = NULL,
-                ylab            = 'Value',
-                xlab            = 'Subgroup',
-                subtitle        = NULL,
-                caption         = NULL,
-                part.labels     = NULL,
-                show.linelabels = is.null(facets),
-                decimals        = 1,
-                x.format        = NULL,
-                x.angle         = NULL,
-                y.expand        = NULL,
-                y.neg           = TRUE,
-                y.percent       = FALSE,
-                show.grid       = FALSE,
-                flip            = FALSE,
-                print.summary   = FALSE,
+                y             = NULL,
+                n             = NULL,
+                data          = NULL,
+                facets        = NULL,
+                notes         = NULL,
+                chart         = c('run', 'i', 'mr', 'xbar', 's', 't',
+                                  'p', 'pp', 'c', 'u', 'up', 'g'),
+                agg.fun       = c('mean', 'median', 'sum', 'sd'),
+                multiply      = 1,
+                freeze        = NULL,
+                part          = NULL,
+                exclude       = NULL,
+                target        = NA * 1,
+                cl            = NA * 1, #NULL,
+                nrow          = NULL,
+                ncol          = NULL,
+                scales        = 'fixed',
+                title         = NULL,
+                ylab          = 'Value',
+                xlab          = 'Subgroup',
+                subtitle      = NULL,
+                caption       = NULL,
+                part.labels   = NULL,
+                show.linelabs = is.null(facets),
+                decimals      = 1,
+                x.format      = NULL,
+                x.angle       = NULL,
+                y.expand      = NULL,
+                y.neg         = TRUE,
+                y.percent     = FALSE,
+                show.grid     = FALSE,
+                flip          = FALSE,
+                print.summary = FALSE,
                 ...) {
   
   # Check data
   if (missing(x))
     stop('Missing mandatory argument \"x\"')
   
-  # Preserve show.linelabels value
-  show.linelabels <- show.linelabels
+  # Preserve show.linelabs value
+  show.linelabs <- show.linelabs
   
   # Build title
   y.name <- deparse(substitute(y))
@@ -147,7 +147,7 @@ qic <- function(x,
   
   if (n.name != 'NULL')  
     y.name <- paste(y.name, '/', n.name)
-
+  
   if (multiply != 1)  
     y.name <- paste(y.name, 'x', multiply)
   
@@ -174,7 +174,7 @@ qic <- function(x,
   } else {
     facets <- mget(facets, as.environment(data))
   }
-
+  
   facets <- as.data.frame(facets)
   
   if (ncol(facets) %in% 1:2) {
@@ -196,7 +196,7 @@ qic <- function(x,
     got.n <- TRUE
   }
   
-  if (is.null(freeze) || !is.null(break.points)) 
+  if (is.null(freeze) || !is.null(part)) 
     freeze <- Inf
   
   if (is.null(exclude)) 
@@ -262,18 +262,17 @@ qic <- function(x,
   d <- split(d, d[c('facet1', 'facet2')])
   d <- lapply(d,
               function(x) {
-                break.points <- unique(c(0, break.points))
-                break.points <- break.points[break.points >= 0 &
-                                               break.points < nrow(x)]
-                break.points <- break.points[order(break.points)]
-                x$part       <- rep(c(seq_along(break.points)),
-                                    diff(c(break.points, nrow(x))))
-                x$xx         <- seq_along(x$part)
-                x$include    <- !x$xx %in% exclude
+                part      <- unique(c(0, part))
+                part      <- part[part >= 0 & part < nrow(x)]
+                part      <- part[order(part)]
+                x$part    <- rep(c(seq_along(part)),
+                                 diff(c(part, nrow(x))))
+                x$xx      <- seq_along(x$part)
+                x$include <- !x$xx %in% exclude
                 return(x)
               })
   d <- do.call(rbind, d)
-
+  
   # Fix notes variables
   d$notes    <- gsub("\\|{2, }", "\\|", d$notes)
   d$notes    <- gsub("^\\||\\|$", "", d$notes)
@@ -282,7 +281,7 @@ qic <- function(x,
   
   # Add baseline variable
   d$baseline <- d$xx <= freeze
-
+  
   d <- split(d, d[c('facet1', 'facet2', 'part')])
   d <- lapply(d, chart.fun)
   d <- lapply(d, runs.analysis)
@@ -300,7 +299,7 @@ qic <- function(x,
               })
   d <- do.call(rbind, d)
   rownames(d) <- NULL
-
+  
   # Remove control lines from missing subgroups
   d$ucl[!is.finite(d$ucl)] <- NA
   d$lcl[!is.finite(d$lcl)] <- NA
@@ -316,7 +315,7 @@ qic <- function(x,
   # Prevent negative y axis if negy argument is FALSE
   if (!y.neg & min(d$y, na.rm = TRUE) >= 0)
     d$lcl[d$lcl < 0] <- 0
-
+  
   # Build plot
   p <- plot.qic(d, 
                 title           = title, 
@@ -328,7 +327,7 @@ qic <- function(x,
                 nrow            = nrow, 
                 ncol            = ncol, 
                 scales          = scales,
-                show.linelabels = show.linelabels,
+                show.linelabs = show.linelabs,
                 show.grid       = show.grid,
                 decimals        = decimals,
                 flip            = flip,
@@ -344,7 +343,7 @@ qic <- function(x,
   # Print summary
   if (print.summary)
     print(summary(p))
-
+  
   # Return plot object
   return(p)
 }

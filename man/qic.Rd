@@ -4,15 +4,15 @@
 \alias{qic}
 \title{Quality improvement charts.}
 \usage{
-qic(x, y = NULL, n = NULL, data = NULL, notes = NULL, chart = c("run",
-  "i", "mr", "xbar", "s", "t", "p", "pp", "c", "u", "up", "g"),
-  agg.fun = c("mean", "median", "sum", "sd"), multiply = 1, freeze = NULL,
-  break.points = NULL, exclude = NULL, target = NA * 1, cl = NA * 1,
-  facets = NULL, nrow = NULL, ncol = NULL, scales = "fixed",
-  title = NULL, ylab = "Value", xlab = "Subgroup", subtitle = NULL,
-  caption = NULL, part.labels = NULL, show.linelabels = is.null(facets),
-  decimals = 1, x.format = NULL, x.angle = NULL, y.expand = NULL,
-  y.neg = TRUE, y.percent = FALSE, show.grid = FALSE, flip = FALSE,
+qic(x, y = NULL, n = NULL, data = NULL, facets = NULL, notes = NULL,
+  chart = c("run", "i", "mr", "xbar", "s", "t", "p", "pp", "c", "u", "up",
+  "g"), agg.fun = c("mean", "median", "sum", "sd"), multiply = 1,
+  freeze = NULL, part = NULL, exclude = NULL, target = NA * 1, cl = NA
+  * 1, nrow = NULL, ncol = NULL, scales = "fixed", title = NULL,
+  ylab = "Value", xlab = "Subgroup", subtitle = NULL, caption = NULL,
+  part.labels = NULL, show.linelabs = is.null(facets), decimals = 1,
+  x.format = NULL, x.angle = NULL, y.expand = NULL, y.neg = TRUE,
+  y.percent = FALSE, show.grid = FALSE, flip = FALSE,
   print.summary = FALSE, ...)
 }
 \arguments{
@@ -23,6 +23,8 @@ qic(x, y = NULL, n = NULL, data = NULL, notes = NULL, chart = c("run",
 \item{n}{Vector of subgroup sizes (denominator).}
 
 \item{data}{Data frame containing variables used in the plot.}
+
+\item{facets}{One or two sided formula with factors used for facetting plots.}
 
 \item{notes}{Character vector of notes to be added to individual data points.}
 
@@ -39,9 +41,9 @@ for percents rather than proportions. See also \code{y.percent} argument.}
 
 \item{freeze}{Integer indicating the last data point to include in 
 calculation of baseline paramenters for centre and control lines. Ignored 
-if break.points argument is given.}
+if part argument is given.}
 
-\item{break.points}{Integer vector indicating break points before 
+\item{part}{Integer vector indicating data points before 
 recalculation of centre and control lines.}
 
 \item{exclude}{Integer vector indicating data points to exclude from 
@@ -50,10 +52,8 @@ calculations of centre and control lines.}
 \item{target}{Numeric value indicating a target value to be plotted as a 
 horizontal line (same for each facet).}
 
-\item{cl}{Numeric, either a value indicating the centre line if known in
+\item{cl}{Numeric, either a value indicating the centre line if known in 
 advance or a vector if centre line is variable.}
-
-\item{facets}{One or two sided formula with factors used for facetting plots.}
 
 \item{nrow, ncol}{Number indicating the preferred number of rows and columns 
 in facets.}
@@ -73,13 +73,13 @@ panels or free.}
 \item{caption}{Character string specifying the caption.}
 
 \item{part.labels}{Character vector of length two specifying  labels for 
-chart parts created with the freeze or break.points argument.}
+chart parts created with the freeze or part argument.}
 
-\item{show.linelabels}{Logical indicating whether to show labels for centre 
-and control lines on chart. Defaults to TRUE when \code{facets} is NULL.}
+\item{show.linelabs}{Logical indicating whether to show labels for centre and
+control lines on chart. Defaults to TRUE when \code{facets} is NULL.}
 
-\item{decimals}{Integer indicating the preferred number of decimals in centre and
-control line labels.}
+\item{decimals}{Integer indicating the preferred number of decimals in centre
+and control line labels.}
 
 \item{x.format}{Date format of x axis labels. See \code{?strftime()} for 
 possible date formats.}

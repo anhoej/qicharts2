@@ -76,7 +76,7 @@ test_that('Example 7.1 is equal to reference', {
           chart = 'p',
           digits = 4,
           exclude = c(15, 23),
-          break.points = 30)
+          part = 30)
     ),
     'ex_7.1_5.rds'
   )
