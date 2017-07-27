@@ -234,8 +234,7 @@ head(gtt)
 ### Run chart of adverse events per 1000 patient days
 
 ```{r}
-qic(month, harms,
-    n        = days,
+qic(month, harms, days,
     data     = gtt,
     multiply = 1000,
     title    = 'Patient harm',
@@ -248,8 +247,7 @@ Since only random variation is present in the run chart, a U control chart for h
 ### U chart of adverse events per 1000 patient days
 
 ```{r}
-qic(month, harms,
-    n        = days,
+qic(month, harms, days,
     data     = gtt,
     chart    = 'u',
     multiply = 1000,
@@ -291,8 +289,7 @@ qic(month, n.harmed,
 Again, since the run chart finds random variation, a control chart may be applied. For proportion (or percent) harmed patients we use a P chart.
 
 ```{r}
-qic(month, n.harmed,
-    n         = n,
+qic(month, n.harmed, n,
     data      = gtt_by_month,
     chart     = 'p',
     y.percent = TRUE,
@@ -347,11 +344,12 @@ We begin by plotting a run chart of the number of CDIs per month.
 
 ```{r}
 qic(month, n,
-    notes = notes,
-    data  = cdi,
-    title = 'Hospital acquired Clostridium difficile infections',
-    ylab  = 'Count',
-    xlab  = 'Month')
+    notes    = notes,
+    data     = cdi,
+    decimals = 0,
+    title    = 'Hospital acquired Clostridium difficile infections',
+    ylab     = 'Count',
+    xlab     = 'Month')
 ```
 
 A downward shift in the number of CDIs is clearly visible to the naked eye and is supported by the runs analysis resulting in the centre line being dashed red. The shift seem to begin around the time of the intervention.
@@ -361,6 +359,7 @@ Even though it is not necessary in this case, we can strengthen the analysis by 
 ```{r}
 qic(month, n,
     data        = cdi,
+    decimals    = 0,
     freeze      = 24,
     part.labels = c('Before intervention', 'After intervention'),
     title       = 'Hospital acquired Clostridium difficile infections',
@@ -375,6 +374,7 @@ When a shift in the desired direction is the result of a deliberate change to th
 ```{r}
 qic(month, n,
     data         = cdi,
+    decimals     = 0,
     break.points = 24,
     title        = 'Hospital acquired Clostridium difficile infections',
     ylab         = 'Count',
@@ -402,8 +402,7 @@ The split C chart shows that the CDI rate has dropped from an average of 19 to 7
 Until now we have assumed that the area of opportunity is constant, i.e. the number of patients or patient days have not changed significantly over time. When the area of opportunity varies, a U chart (U for *unequal* area of opportunity) is appropriate.
 
 ```{r}
-qic(month, n, 
-    n            = days,
+qic(month, n, days,
     data         = cdi,
     chart        = 'u',
     break.points = 24,
@@ -535,8 +534,7 @@ head(cabg_by_month)
 Then we use P charts for proportion defectives.
 
 ```{r}
-qic(month, readmissions, 
-    n         = n,
+qic(month, readmissions, n,
     data      = cabg_by_month,
     chart     = 'p',
     y.percent = TRUE,
@@ -550,8 +548,7 @@ On average, 22% of patients are readmitted within 30 days after surgery, and if 
 What about mortality?
 
 ```{r}
-qic(month, deaths, 
-    n         = n,
+qic(month, deaths, n,
     data      = cabg_by_month,
     chart     = 'p',
     y.percent = TRUE,
@@ -616,8 +613,7 @@ head(cabg_by_month_gender)
 Then we use the `facets` argument to make a control chart for each gender while keeping the x and y axes the same.
 
 ```{r}
-qic(month, readmissions, 
-    n         = n,
+qic(month, readmissions, n,
     data      = cabg_by_month_gender,
     facets    = ~ gender, 
     chart     = 'p',
@@ -693,8 +689,8 @@ Processes containing only common cause variation over time may be aggregated and
 
 ```{r, fig.height=7}
 bac_2016 <- hospital_infections %>% 
-  filter(month     >= '2016-07-01') %>% 
-  mutate(hospital  = reorder(hospital, days))
+  filter(month    >= '2016-07-01') %>% 
+  mutate(hospital = reorder(hospital, days))
 
 qic(hospital, n, days,
     data            = bac_2016,
@@ -703,7 +699,7 @@ qic(hospital, n, days,
     scales          = 'free_y',
     chart           = 'u',
     multiply        = 10000,
-    digits          = 2,
+    decimals        = 1,
     show.linelabels = TRUE,
     title           = 'Hospital acquired bacteremia 2016 (U funnel chart)',
     ylab            = 'Cases per 10,000 risk days',
@@ -728,12 +724,13 @@ When plotted on a P chart, the 3-sigma limits appear too narrow.
 
 ```{r}
 qic(i, r, 
-    n     = n, 
-    data  = nhs_accidents, 
-    chart = 'p',
-    title = 'Proportion of patients seen within 4 hours of attendance (P chart)',
-    ylab  = NULL,
-    xlab  = 'Week #')
+    n        = n, 
+    data     = nhs_accidents, 
+    chart    = 'p',
+    decimals = 3,
+    title    = 'Proportion of patients seen within 4 hours of attendance (P chart)',
+    ylab     = NULL,
+    xlab     = 'Week #')
 ```
 
 This is called over-dispersion and happens sometimes because data in practice rarely come from truly binomial or poisson distributions. When the sample sizes are small, this is not a problem. But as sample sizes increase (> 1000) it becomes apparent that the assumptions of constant proportions or rates between subgroups are not true.
@@ -742,12 +739,13 @@ A simple test for over-dispersion is to apply an I chart. If the I chart gives 3
 
 ```{r}
 qic(i, r, 
-    n     = n, 
-    data  = nhs_accidents, 
-    chart = 'i',
-    title = 'Proportion of patients seen within 4 hours of attendance (I chart)',
-    ylab  = NULL,
-    xlab  = 'Week #')
+    n        = n, 
+    data     = nhs_accidents, 
+    chart    = 'i',
+    decimals = 3,
+    title    = 'Proportion of patients seen within 4 hours of attendance (I chart)',
+    ylab     = NULL,
+    xlab     = 'Week #')
 ```
 
 In fact, since the I chart estimates 3-sigma limits based on the observed within subgroup variation in data rather than an assumed probability model, it is sort of like the Swiss army knife of SPC. Therefore, the I chart may be used when the true probability model of data is unknown.
@@ -756,12 +754,13 @@ However, the I charts does not account for varying sample sizes and may give fal
 
 ```{r}
 qic(i, r, 
-    n     = n, 
-    data  = nhs_accidents, 
-    chart = 'pp',
-    title = 'Proportion of patients seen within 4 hours of attendance (P\' chart)',
-    ylab  = NULL,
-    xlab  = 'Week #')
+    n        = n, 
+    data     = nhs_accidents, 
+    chart    = 'pp',
+    decimals = 3,
+    title    = 'Proportion of patients seen within 4 hours of attendance (P\' chart)',
+    ylab     = NULL,
+    xlab     = 'Week #')
 ```
 
 Laney notes that when over-dispersion is not present, prime charts will give the same results as traditional charts and recommends always to use prime charts for proportions and rates.
