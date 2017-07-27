@@ -1,6 +1,5 @@
 library(qicharts2)
 context('Control charts from Montgomery')
-skip_on_cran()
 
 # Example 6.3 ----
 test_that('Example 6.3_1 is equal to reference', {
