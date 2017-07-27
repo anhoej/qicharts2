@@ -373,12 +373,12 @@ When a shift in the desired direction is the result of a deliberate change to th
 
 ```{r}
 qic(month, n,
-    data         = cdi,
-    decimals     = 0,
-    break.points = 24,
-    title        = 'Hospital acquired Clostridium difficile infections',
-    ylab         = 'Count',
-    xlab         = 'Month')
+    data     = cdi,
+    decimals = 0,
+    part     = 24,
+    title    = 'Hospital acquired Clostridium difficile infections',
+    ylab     = 'Count',
+    xlab     = 'Month')
 ```
 
 ### C chart for number of infections
@@ -387,12 +387,12 @@ Since both periods show only random variation, a control chart may be applied to
 
 ```{r}
 qic(month, n,
-    data         = cdi,
-    chart        = 'c',
-    break.points = 24,
-    title        = 'Hospital acquired Clostridium difficile infections (C chart)',
-    ylab         = 'Count',
-    xlab         = 'Month')
+    data  = cdi,
+    chart = 'c',
+    part  = 24,
+    title = 'Hospital acquired Clostridium difficile infections (C chart)',
+    ylab  = 'Count',
+    xlab  = 'Month')
 ```
 
 The split C chart shows that the CDI rate has dropped from an average of 19 to 7 per month. Furthermore, the 3-sigma limits tell us that the current process is predictable and that we in the future should expect between 0 and 15 CDIs per month.
@@ -403,13 +403,13 @@ Until now we have assumed that the area of opportunity is constant, i.e. the num
 
 ```{r}
 qic(month, n, days,
-    data         = cdi,
-    chart        = 'u',
-    break.points = 24,
-    multiply     = 10000, 
-    title        = 'Hospital acquired Clostridium difficile infections (U chart)',
-    ylab         = 'Cases per 10,000 risk days',
-    xlab         = 'Month')
+    data     = cdi,
+    chart    = 'u',
+    part     = 24,
+    multiply = 10000, 
+    title    = 'Hospital acquired Clostridium difficile infections (U chart)',
+    ylab     = 'Cases per 10,000 risk days',
+    xlab     = 'Month')
 ```
 
 In fact, U charts can always be used instead of C charts. When the area of opportunity is constant the two charts will reach the same conclusion. But the raw numbers in a C chart may be easier to communicate than counts per something.
@@ -474,12 +474,12 @@ We should seek the cause(s) of these special causes. We may then chose to elimin
 
 ```{r}
 qic(age,
-    data  = tail(cabg, 100), 
-    chart = 'i',
+    data    = tail(cabg, 100), 
+    chart   = 'i',
     exclude = c(45, 70),
-    title = 'Age of the last 100 patients (I chart)',
-    ylab  = 'Years',
-    xlab  = 'Patient #')
+    title   = 'Age of the last 100 patients (I chart)',
+    ylab    = 'Years',
+    xlab    = 'Patient #')
 ```
 
 Thus, on average we should expect future patients to be 67 years of age, and patients younger than 43 years or older than 91 years would be unusual.
