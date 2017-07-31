@@ -73,7 +73,6 @@ test_that('Example 7.1 is equal to reference', {
       qic(sample, count, size, notes = note,
           data = tbl_07.03,
           chart = 'p',
-          digits = 4,
           exclude = c(15, 23),
           part = 30)
     ),
@@ -100,7 +99,6 @@ test_that('Example 7.3 is equal to reference', {
       qic(sample, count,
           data = tbl_07.08,
           chart = 'c',
-          digits = 4,
           exclude = c(6, 20)
       ),
       freeze = 26),
