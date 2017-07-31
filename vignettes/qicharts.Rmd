@@ -87,8 +87,6 @@ qic(y, chart = 'i')
 
 Run charts and control charts are point-and-line graphs showing measures or counts over time. A horizontal line represents the process centre expressed by either the median (run charts) or the mean (control charts). In addition, control charts visualise the limits of the natural variation inherent in the process. Because of the way these limits are computed, they are often referred to as 3-sigma limits (see Appendix 1). Other terms for 3-sigma limits are control limits and natural process limits.
 
-The interpretation and use of run and control charts should become clear from the following.
-
 ## Understanding variation
 
 SPC is the application of statistical thinking and statistical tools to continuous quality improvement. Central to SPC is the understanding of process variation over time.
@@ -181,7 +179,7 @@ Apart from being comparable in sensitivity and specificity to WE rules 2-4 with 
 
 * They adapt dynamically to the number of available data points and can be applied to charts with as few as 10 and up to indefinitely many data points without loosing sensitivity and specificity.
 
-In the previous control chart, a shift of 2 standard deviations was introduced halfway through the process. While the shift is too small to be picked up by the 3-sigma rule both Anhoej rules detect the signal. The longest run include `r summary(qic(y, chart = 'i'))$longest.run` data points (upper limit = `r summary(qic(y, chart = 'i'))$longest.run.max`), and the number of crossings is `r summary(qic(y, chart = 'i'))$n.crossings` (lower limit = `r summary(qic(y, chart = 'i'))$n.crossings.min`). Note that the shift is also picked up by WE rule 4.
+In the previous control chart, a shift of 2 standard deviations was introduced halfway through the process. While the shift is too small to be picked up by the 3-sigma rule, both Anhoej rules detect the signal. The longest run include `r summary(qic(y, chart = 'i'))$longest.run` data points (upper limit = `r summary(qic(y, chart = 'i'))$longest.run.max`), and the number of crossings is `r summary(qic(y, chart = 'i'))$n.crossings` (lower limit = `r summary(qic(y, chart = 'i'))$n.crossings.min`). Note that the shift is also picked up by WE rule 4.
 
 Non-random variation found by the Anhoej rules is visualised by `qic()` using a red and dashed centre line.
 
@@ -223,6 +221,12 @@ G       | Opportunities between rare events                       | Geometric
 
 I recommend to always begin any analysis with the "assumption free" run chart. If the Anhøj rules find non-random variation, it makes no sense to compute 3-sigma limits based on assumptions regarding the location and dispersion of data because these figures are meaningless when one or more shifts have already been identified.
 
+> Over the years, I have developed an increasing affection for the much-neglected run chart: a time plot of your process data with the median drawn in as a reference (yes, the median -- not the average). It is "filter No. 1" for any process data and answers the question: "Did this process have at least one shift during this time period?"  (This is generally signaled by a clump of eight consecutive data points either all above or below the median.)
+>
+>If it did, then it makes no sense to do a control chart at this time because the overall average of all these data doesn't exist. (Sort of like: If I put my right foot in a bucket of boiling water and my left foot in a bucket of ice water, on average, I'm pretty comfortable.)
+>
+> Davis Balestracci [Quality Digest 2014](https://www.qualitydigest.com/inside/quality-insider-column/control-charts-simple-elegance-or-legalized-torture.html)
+
 ## Case 1: Patient harm
 
 The gtt dataset contains data on patient harm during hospitalisation. Harm is defined as any unintended physical injury resulting from treatment or care during hospitalisation and not a result of the disease itself. The Global Trigger Tool is a methodology for detection of adverse events in hospital patients using a retrospective record review approach. Each month a random sample of 20 patient records is reviewed and the number of adverse events and patient days found in the sample are counted. See `?gtt` for details.
@@ -256,7 +260,7 @@ qic(month, harms, days,
     xlab     = 'Month')
 ```
 
-Because the sample sizes (number of patient days) are not the same each month, the 3-sigma limits vary. Large samples give narrow limits and vice versa. Varying limits are also seen in P and Xbar charts with variable sample size.
+Because the sample sizes (number of patient days) are not the same each month, the 3-sigma limits vary. Large samples give narrow limits and vice versa. Varying limits are also seen in P and Xbar charts.
 
 ### Run and P control charts of percent harmed patients
 
@@ -300,11 +304,24 @@ qic(month, n.harmed, n,
 
 Since both the harm rate and the proportion of harmed patients exhibit common cause variation only, we conclude that the risk of adverse events during hospitalisation is predictable and that we in the future should expect around 60 adverse events per 1000 patient days harming around 33% of patients.
 
+Actually, we often do not need to aggregate data in advance. With a little creativity we can make `qic` do the hard work. The previous plot could have been produced with this code. Note the use of the original gtt dataset and the number of harmed and total number of patients created on the fly.
+
+```{r, eval=FALSE}
+qic(month, harms > 0,      # TRUE if patient had one or more harms
+    n         = days > 0,  # Always TRUE 
+    data      = gtt,
+    chart     = 'p',
+    y.percent = TRUE,
+    title     = 'Harmed patients (P chart)',
+    ylab      = NULL,
+    xlab      = 'Month')
+```
+
 ### Pareto analysis of adverse event types and severity
 
 The Pareto chart, named after [Vilfred Pareto](https://en.wikipedia.org/wiki/Vilfredo_Pareto), was invented by [Joseph M. Juran](https://en.wikipedia.org/wiki/Joseph_M._Juran) as a tool to identify the most important causes of a problem.
 
-Types and severity of adverse events in gtt are organised in an untidy wide format. Since `paretochart()` needs a vector of categorical data we need a tidy dataset with harm severity and category in separate columns.
+Types and severity of adverse events in gtt are organised in an untidy wide format. Since `paretochart()` needs a vector of categorical data we need to rearrange harm severity and harm category into separate columns.
 
 ```{r}
 suppressPackageStartupMessages(library(tidyr))
@@ -332,7 +349,7 @@ Almost all harms are temporary (E-F).
 
 ## Case 2: Clostridium difficile infections
 
-The cdi dataset contains data on hospital acquired Clostridium difficile infections (CDI) before and after an intervention to reduce the risk of CDI.
+The cdi dataset contains data on hospital acquired Clostridium difficile infections (CDI) before and after an intervention to reduce the risk of CDI. See `?cdi` for details.
 
 ```{r}
 head(cdi)
@@ -395,7 +412,7 @@ qic(month, n,
     xlab  = 'Month')
 ```
 
-The split C chart shows that the CDI rate has dropped from an average of 19 to 7 per month. Furthermore, the 3-sigma limits tell us that the current process is predictable and that we in the future should expect between 0 and 15 CDIs per month.
+The split C chart shows that the CDI rate has dropped from an average of 19 to 7 per month. Furthermore, the 3-sigma limits tell that the current process is predictable and that we in the future should expect between 0 and 15 CDIs per month.
 
 ### U chart for infection rate
 
@@ -418,7 +435,7 @@ It is very important to recognise that while run and control charts can identify
 
 ### When should you recompute the limits?
 
-When splitting a chart as in the example above you make a deliberate decision based on your understanding of the process. Some software packages offer automated recalculation of limits whenever a shift is detected. I find this approach very wrong. Limits are the voice of the process and recomputing limits without understanding the context from which the process speaks is like telling someone to shut up, when really they are trying to tell you something important.
+When splitting a chart as in the example above you make a deliberate decision based on your understanding of the process. Some software packages offer automated recalculation of limits whenever a shift is detected. I find this approach very wrong. Limits are the voice of the process and recomputing limits without understanding the context, which computers don't,  is like telling someone to shut up, when they are really trying to tell you something important.
 
 Wheeler suggests that limits *may* be recomputed when the answers to all four of these question is "yes" (Wheeler 2010, p. 224):
 
@@ -444,12 +461,15 @@ head(cabg)
 
 ### I and MR charts for age of individual patients
 
+In this and the following cases we skip the obligatory first step of using a run chart.
+
 First, we will make a control chart of the age of the last 100 patients. Since we are plotting individual measurements, we use an I chart.
 
 ```{r}
 qic(age,
     data  = tail(cabg, 100), 
     chart = 'i',
+    show.grid = TRUE,
     title = 'Age of the last 100 patients (I chart)',
     ylab  = 'Years',
     xlab  = 'Patient #')
@@ -463,6 +483,7 @@ I charts are often displayed along moving range charts that show the ranges of n
 qic(age,
     data  = tail(cabg, 100), 
     chart = 'mr',
+    show.grid = TRUE,
     title = 'Age of the last 100 patients (MR chart)',
     ylab  = 'Years',
     xlab  = 'Patient #')
@@ -557,7 +578,7 @@ qic(month, deaths, n,
     xlab      = 'Month')
 ```
 
-Thankfully, mortality is a rare event, and the P chart suggests common cause variation meaning that the process is stable. However, we might suspect that something unusual happened during the summer of 2012 where only one patient died during a 5 month period. To investigate this further, G or T charts for rare events are useful.
+Thankfully, post-surgery mortality is a rare event, and the P chart suggests common cause variation. However, it seems curious that only one patient died during the summer of 2012. To investigate this further, G or T charts for rare events are useful.
 
 ### T and G charts for rare events
 
@@ -595,7 +616,7 @@ qic(dt,
     xlab  = 'Death #')
 ```
 
-The conclusions from the G and the T chart are the same: The distance between deaths number 24 and 25 is unusually long. We should look for an assignable cause to explain this as this may help us find ways to reduce postoperative mortality in the future.
+The conclusions from the G and the T chart are the same: Deaths number 24 and 25 are unusually far apart. We should look for an assignable cause to explain this as it may help us get ideas to reduce postoperative mortality in the future.
 
 ### Faceting readmission rates by gender
 
@@ -685,22 +706,22 @@ Note the use of individual y axes to better visualise variation over time and th
 
 ### Funnels plot of infection rates by hospital
 
-Processes containing only common cause variation over time may be aggregated and compared across other units than time. When data have no natural time order, i.e. when the x variable is categorical the data points are not connected by lines and runs analysis using the Anhoej rules is not performed. To produce a so called funnel plot of infections by hospital, we filter data from a recent stable period and reorder the x variable by size.
+Processes containing only common cause variation over time may be aggregated and compared across other units than time. When data have no natural time order, i.e. when the x variable is categorical the data points are not connected by lines and runs analysis  is not performed. To produce a so called funnel plot of infections by hospital, we filter data from a recent stable period and reorder the x variable by size.
 
 ```{r, fig.height=7}
-bac_2016 <- hospital_infections %>% 
+hai_2016 <- hospital_infections %>% 
   filter(month    >= '2016-07-01') %>% 
   mutate(hospital = reorder(hospital, days))
 
 qic(hospital, n, days,
-    data            = bac_2016,
+    data            = hai_2016,
     facets          = ~ infection,
     ncol            = 1,
     scales          = 'free_y',
     chart           = 'u',
     multiply        = 10000,
     decimals        = 1,
-    show.linelabels = TRUE,
+    show.linelabs   = TRUE,
     title           = 'Hospital acquired bacteremia 2016 (U funnel chart)',
     ylab            = 'Cases per 10,000 risk days',
     xlab            = 'Hospital')

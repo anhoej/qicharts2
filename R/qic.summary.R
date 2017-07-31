@@ -28,6 +28,7 @@
 #'
 summary.qic <- function(object, ...) {
   x <- object$data
+  x <- as.data.frame(x)
   x <- x[c('facet1', 'facet2', 'part', 'lcl', 'cl', 'ucl', 'n.obs', 'n.useful',
            'longest.run', 'longest.run.max', 'n.crossings', 'n.crossings.min',
            'runs.signal', 'sigma.signal')]

@@ -9,6 +9,8 @@
 #' @param ylab Y axis label.
 #' @param xlab X axis label.
 #' @param x.angle Number indicating the angle of x axis labels.
+#' @param useNA If TRUE, NA values will be included in the analysis.
+#' @param print.data If TRUE, prints data frame with results.
 #' 
 #' @return An object of class ggplot.
 #' 
@@ -34,16 +36,18 @@ paretochart <- function(x,
                         caption  = NULL,
                         ylab     = NULL,
                         xlab     = NULL,
-                        x.angle  = NULL) {
+                        x.angle  = NULL,
+                        useNA    = FALSE,
+                        print.data = FALSE) {
   varname  <- deparse(substitute(x))
-  x        <- factor(x)
-  x        <- table(x)
+  # x        <- factor(x)
+  x        <- table(x, useNA = ifelse(useNA, 'ifany', 'no'))
   x        <- sort(x, decreasing = TRUE, na.last = TRUE)
-  x <- as.data.frame(x)
+  x        <- as.data.frame(x)
   names(x) <- c('x', 'y')
-  x$y.cum <- cumsum(x$y)
-  x$p <- x$y / sum(x$y)
-  x$p.cum <- cumsum(x$p)
+  x$y.cum  <- cumsum(x$y)
+  x$p      <- x$y / sum(x$y)
+  x$p.cum  <- cumsum(x$p)
   
   if (is.null(title)) {
     title <- paste('Pareto Chart of', varname)
@@ -71,6 +75,8 @@ paretochart <- function(x,
       theme(axis.text.x = element_text(angle = x.angle, vjust = 1, hjust = 1))
   }
   
+  if(print.data)
+    print(p$data)
   
   return(p)
 }

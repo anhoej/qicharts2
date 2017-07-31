@@ -47,7 +47,7 @@
 #' @param part.labels Character vector of length two specifying  labels for 
 #'   chart parts created with the freeze or part argument.
 #' @param show.linelabs Logical indicating whether to show labels for centre and
-#'   control lines on chart. Defaults to TRUE when \code{facets} is NULL.
+#'   control lines on chart. Defaults to TRUE when facets argument is NULL.
 #' @param decimals Integer indicating the preferred number of decimals in centre
 #'   and control line labels.
 #' @param x.format Date format of x axis labels. See \code{?strftime()} for 
@@ -57,11 +57,11 @@
 #'   the y axis at zero.
 #' @param y.neg If TRUE (default), the y axis is allowed to be negative (only 
 #'   relevant for I and Xbar charts).
-#' @param y.percent Logical. If TRUE, formats y axis labels as percentages.
+#' @param y.percent If TRUE, formats y axis labels as percentages.
 #' @param show.grid If TRUE shows grid.
-#' @param flip If TRUE rotates the plot 90 degrees.
+#' @param flip If TRUE, rotates the plot 90 degrees.
 #' @param print.summary If TRUE, prints summary.
-#' @param ... Additional arguments to plot function.
+# @param ... Additional arguments to plot function.
 #'   
 #' @return A \code{qic} object. Inherits from 'ggplot'.
 #'   
@@ -128,8 +128,7 @@ qic <- function(x,
                 y.percent     = FALSE,
                 show.grid     = FALSE,
                 flip          = FALSE,
-                print.summary = FALSE,
-                ...) {
+                print.summary = FALSE) {
   
   # Check data
   if (missing(x))
@@ -140,10 +139,10 @@ qic <- function(x,
   
   # Build title
   y.name <- deparse(substitute(y))
-  if (y.name == 'NULL') 
-    y.name = deparse(substitute(x))
-  
   n.name <- deparse(substitute(n))
+  
+  if (y.name == 'NULL') 
+    y.name <- deparse(substitute(x))
   
   if (n.name != 'NULL')  
     y.name <- paste(y.name, '/', n.name)
@@ -215,106 +214,20 @@ qic <- function(x,
   if (inherits(x, c('Date', 'POSIXt')))
     x <- as.POSIXct(as.character(x))
   
-  # Fix missing values and get aggregate function
+  # Fix missing values
   if (got.n) {
     cases     <- stats::complete.cases(y, n)
     y[!cases] <- NA
     n[!cases] <- NA
-  } else {
-    # agg.fun   <- match.arg(agg.fun)
   }
   
   # Prepare data frame
-  d <- data.frame(x, y, n, notes, facets)
+  d <- data.frame(x, y, n, notes, facets, cl, target)
   d <- droplevels(d)
   
-  # Add centre line
-  d$cl <- cl
-  
-  # Add target line
-  d$target <- target
-  
-  # Aggregate data by subgroup
-  d <- split(d, d[c('x', 'facet1', 'facet2')])
-  d <- lapply(d,
-              function(x) {
-                data.frame(
-                  x        = x$x[1],
-                  facet1   = x$facet1[1],
-                  facet2   = x$facet2[1],
-                  y.sum    = sum(x$y, na.rm = TRUE),
-                  y.length = sum(!is.na(x$y)),
-                  y.mean   = mean(x$y, na.rm = TRUE),
-                  y.sd     = stats::sd(x$y, na.rm = TRUE),
-                  y        = ifelse(got.n,
-                                    sum(x$y, na.rm = TRUE) /
-                                      sum(x$n, na.rm = TRUE),
-                                    do.call(agg.fun, list(x$y, na.rm = TRUE))),
-                  n         = sum(x$n, na.rm = got.n),
-                  cl        = x$cl[1],
-                  target    = x$target[1],
-                  notes     = paste(x$notes, collapse = '|')
-                )
-              })
-  d <- do.call(rbind, d)
-  
-  # Add part and include variables
-  d <- split(d, d[c('facet1', 'facet2')])
-  d <- lapply(d,
-              function(x) {
-                part      <- unique(c(0, part))
-                part      <- part[part >= 0 & part < nrow(x)]
-                part      <- part[order(part)]
-                x$part    <- rep(c(seq_along(part)),
-                                 diff(c(part, nrow(x))))
-                x$xx      <- seq_along(x$part)
-                x$include <- !x$xx %in% exclude
-                return(x)
-              })
-  d <- do.call(rbind, d)
-  
-  # Fix notes variables
-  d$notes    <- gsub("\\|{2, }", "\\|", d$notes)
-  d$notes    <- gsub("^\\||\\|$", "", d$notes)
-  d$notes    <- gsub("\\|", " | ", d$notes)
-  d$notes    <- gsub("^$", NA, d$notes)
-  
-  # Add baseline variable
-  d$baseline <- d$xx <= freeze
-  
-  d <- split(d, d[c('facet1', 'facet2', 'part')])
-  d <- lapply(d, chart.fun)
-  d <- lapply(d, runs.analysis)
-  d <- lapply(d,
-              function(x) {
-                x$y       <- x$y * multiply
-                x$cl      <- x$cl * multiply
-                x$lcl     <- x$lcl * multiply
-                x$ucl     <- x$ucl * multiply
-                x$cl.lab  <- ifelse(x$xx == max(x$xx), x$cl, NA)
-                x$lcl.lab <- ifelse(x$xx == max(x$xx), x$lcl, NA)
-                x$ucl.lab <- ifelse(x$xx == max(x$xx), x$ucl, NA)
-                x$target.lab <- ifelse(x$xx == max(x$xx), x$target, NA)
-                return(x)
-              })
-  d <- do.call(rbind, d)
-  rownames(d) <- NULL
-  
-  # Remove control lines from missing subgroups
-  d$ucl[!is.finite(d$ucl)] <- NA
-  d$lcl[!is.finite(d$lcl)] <- NA
-  
-  # Add sigma signals
-  d$sigma.signal                        <- d$y > d$ucl | d$y < d$lcl
-  d$sigma.signal[is.na(d$sigma.signal)] <- FALSE
-  
-  # Ignore runs analysis if subgroups are categorical or if chart type is MR
-  if (dots.only && chart == 'mr')
-    d$runs.signal <- FALSE
-  
-  # Prevent negative y axis if negy argument is FALSE
-  if (!y.neg & min(d$y, na.rm = TRUE) >= 0)
-    d$lcl[d$lcl < 0] <- 0
+  # Aggregate data and perform analyses
+  d <- qic.agg(d, got.n, part, agg.fun, freeze, exclude, 
+               chart.fun, multiply, dots.only, chart, y.neg)
   
   # Build plot
   p <- plot.qic(d, 
@@ -327,7 +240,7 @@ qic <- function(x,
                 nrow            = nrow, 
                 ncol            = ncol, 
                 scales          = scales,
-                show.linelabs = show.linelabs,
+                show.linelabs   = show.linelabs,
                 show.grid       = show.grid,
                 decimals        = decimals,
                 flip            = flip,
@@ -335,8 +248,7 @@ qic <- function(x,
                 x.format        = x.format,
                 x.angle         = x.angle,
                 y.expand        = y.expand,
-                y.percent       = y.percent,
-                ...)
+                y.percent       = y.percent)
   
   class(p) <- c('qic', class(p))
   

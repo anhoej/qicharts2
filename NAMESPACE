@@ -3,5 +3,6 @@
 S3method(summary,qic)
 export(paretochart)
 export(qic)
+import(dplyr)
 import(ggplot2)
 importFrom(stats,median)

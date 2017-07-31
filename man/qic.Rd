@@ -13,7 +13,7 @@ qic(x, y = NULL, n = NULL, data = NULL, facets = NULL, notes = NULL,
   part.labels = NULL, show.linelabs = is.null(facets), decimals = 1,
   x.format = NULL, x.angle = NULL, y.expand = NULL, y.neg = TRUE,
   y.percent = FALSE, show.grid = FALSE, flip = FALSE,
-  print.summary = FALSE, ...)
+  print.summary = FALSE)
 }
 \arguments{
 \item{x}{Vector of subgroup values to plot along the x axis.}
@@ -76,7 +76,7 @@ panels or free.}
 chart parts created with the freeze or part argument.}
 
 \item{show.linelabs}{Logical indicating whether to show labels for centre and
-control lines on chart. Defaults to TRUE when \code{facets} is NULL.}
+control lines on chart. Defaults to TRUE when facets argument is NULL.}
 
 \item{decimals}{Integer indicating the preferred number of decimals in centre
 and control line labels.}
@@ -92,15 +92,13 @@ the y axis at zero.}
 \item{y.neg}{If TRUE (default), the y axis is allowed to be negative (only 
 relevant for I and Xbar charts).}
 
-\item{y.percent}{Logical. If TRUE, formats y axis labels as percentages.}
+\item{y.percent}{If TRUE, formats y axis labels as percentages.}
 
 \item{show.grid}{If TRUE shows grid.}
 
-\item{flip}{If TRUE rotates the plot 90 degrees.}
+\item{flip}{If TRUE, rotates the plot 90 degrees.}
 
 \item{print.summary}{If TRUE, prints summary.}
-
-\item{...}{Additional arguments to plot function.}
 }
 \value{
 A \code{qic} object. Inherits from 'ggplot'.

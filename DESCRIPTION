@@ -3,21 +3,21 @@ Title: Quality Improvement Charts
 Version: 0.0.0.9000
 Authors@R: person('Jacob', 'Anhoej', email = 'jacob@anhoej.net',
     role = c('aut', 'cre'))
-Description: Run charts and Shewhart control charts for process control and
-    improvement. Included control charts are: I, MR, Xbar, S, T, C, U, U', P, 
-    P', and G charts. Non-random variation in the form of minor to moderate
-    persistens shifts in data over time is identified by the Anhoej rules for
-    unusually long runs and unusually few crossing. Special cause variation in
-    the form of larger, possibly transient, shifts in data is identified by
-    Shewhart's 3-sigma rule.
+Description: Functions for making run charts, Shewhart control charts and
+  Pareto charts for continuous quality improvement. Included control charts are:
+  I, MR, Xbar, S, T, C, U, U', P, P', and G charts. Non-random variation in the
+  form of minor to moderate persistent shifts in data over time is identified by
+  the Anhoej rules for unusually long runs and unusually few crossing. 
+  Non-random variation in the form of larger, possibly transient, shifts  is
+  identified by Shewhart's 3-sigma rule.
 Depends:
     R (>= 3.0.0)
 Imports:
+    dplyr,
     ggplot2 (>= 2.2.0),
     scales,
     stats
-Suggests: 
-    dplyr,
+Suggests:
     knitr,
     rmarkdown,
     testthat,

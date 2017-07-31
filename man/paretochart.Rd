@@ -5,7 +5,8 @@
 \title{Paretochart}
 \usage{
 paretochart(x, title = NULL, subtitle = NULL, caption = NULL,
-  ylab = NULL, xlab = NULL, x.angle = NULL)
+  ylab = NULL, xlab = NULL, x.angle = NULL, useNA = FALSE,
+  print.data = FALSE)
 }
 \arguments{
 \item{x}{Categorical variable to plot.}
@@ -21,6 +22,10 @@ paretochart(x, title = NULL, subtitle = NULL, caption = NULL,
 \item{xlab}{X axis label.}
 
 \item{x.angle}{Number indicating the angle of x axis labels.}
+
+\item{useNA}{If TRUE, NA values will be included in the analysis.}
+
+\item{print.data}{If TRUE, prints data frame with results.}
 }
 \value{
 An object of class ggplot.

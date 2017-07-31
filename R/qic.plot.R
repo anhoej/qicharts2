@@ -53,7 +53,8 @@ plot.qic <- function(x, title, ylab, xlab, subtitle, caption, part.labels,
               colour = col4,
               linetype = 5,
               size = 0.5) +
-    geom_line(aes_(y = ~ cl, linetype = ~ runs.signal, colour = ~ linecol)) +
+    geom_line(aes_(y = ~ cl, linetype = ~ runs.signal, colour = ~ linecol),
+              na.rm = TRUE) +
     scale_linetype_manual(values = c('FALSE' = 'solid', 'TRUE' = 'dashed'))
   
   # Add notes
@@ -118,10 +119,13 @@ plot.qic <- function(x, title, ylab, xlab, subtitle, caption, part.labels,
   }
   
   # Add freeze line and part labels
+  if (is.finite(freeze)) {
+    p <- p + 
+      geom_vline(aes_(xintercept = freeze), colour = col1, linetype = 5)
+  }
+  
   if (!is.null(part.labels)) {
     if (is.finite(freeze)) {
-      p <- p + 
-        geom_vline(aes_(xintercept = freeze), colour = col1, linetype = 5)
       plabs <- split(x, x['baseline'])
       part.labels <- rev(part.labels)
     } else {
@@ -141,8 +145,9 @@ plot.qic <- function(x, title, ylab, xlab, subtitle, caption, part.labels,
       }
       
       p <- p +
-        geom_label(aes_(y = ~ y, label = ~ z, group = 1),
+        geom_label(aes_(y = ~ y, label = ~ z, group = 1), 
                    data = plabs,
+                   na.rm = T,
                    label.size = 0.1,
                    size = lab.size,
                    alpha = 0.9,
