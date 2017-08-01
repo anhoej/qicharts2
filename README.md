@@ -37,3 +37,5 @@ Non-random variation in the form of larger, possibly transient, shifts is identi
 * Read vignette: `vignette('qicharts2')`.
 
 * Report issues and suggest improvements on https://github.com/anhoej/qicharts2.
+
+* Website: https://anhoej.github.io/qicharts2/
