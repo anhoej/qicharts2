@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/anhoej/qicharts2.svg?branch=master)](https://travis-ci.org/anhoej/qicharts2)
+
 # Quality improvement charts for R
 
 Functions for making run charts, Shewhart control charts and Pareto charts for continuous quality improvement. Included control charts are: I, MR, Xbar, S, T, C, U, U', P, P', and G charts. 
