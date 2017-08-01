@@ -2,7 +2,7 @@
 % Please edit documentation in R/qic.R
 \name{qic}
 \alias{qic}
-\title{Quality improvement charts.}
+\title{Statistical process control charts.}
 \usage{
 qic(x, y = NULL, n = NULL, data = NULL, facets = NULL, notes = NULL,
   chart = c("run", "i", "mr", "xbar", "s", "t", "p", "pp", "c", "u", "up",

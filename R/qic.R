@@ -1,4 +1,4 @@
-#' Quality improvement charts.
+#' Statistical process control charts.
 #' 
 #' The \code{qic()} function creates run charts and Shewhart control charts for 
 #' process control and improvement. Included control charts are: I, MR, Xbar, S,
