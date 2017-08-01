@@ -16,7 +16,7 @@ navbar:
   type: default
   left:
   - icon: fa-home fa-lg
-    href: index.html
+    href: ./index.html
   - text: Get Started
     href: articles/qicharts2.html
   - text: Reference
