@@ -11,3 +11,16 @@ reference:
         - gtt
         - hospital_infections
         - nhs_accidents
+navbar:
+  title: qicharts2
+  type: default
+  left:
+  - icon: fa-home fa-lg
+    href: index.html
+  - text: Get Started
+    href: articles/qicharts2.html
+  - text: Reference
+    href: reference/index.html
+  right:
+  - icon: fa-github fa-lg
+    href: https://github.com/anhoej/qicharts2
