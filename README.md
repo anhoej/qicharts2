@@ -39,3 +39,5 @@ Non-random variation in the form of larger, possibly transient, shifts is identi
 * Report issues and suggest improvements on https://github.com/anhoej/qicharts2.
 
 * Website: https://anhoej.github.io/qicharts2/
+
+https://travis-ci.org/anhoej/qicharts2.svg?branch=master
