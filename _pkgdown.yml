@@ -1,0 +1,13 @@
+reference:
+  - title: "Quality Improvement Charts"
+    contents: 
+      - qic
+      - paretochart
+      - summary.qic
+  - title: "Datasets"
+    contents:
+        - cabg
+        - cdi
+        - gtt
+        - hospital_infections
+        - nhs_accidents
