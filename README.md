@@ -34,6 +34,6 @@ Non-random variation in the form of larger, possibly transient, shifts is identi
 
 * Run examples: `example('qic')`, `example('paretochart')`.
 
-* Read vignette: `vignette('qicharts')`.
+* Read vignette: `vignette('qicharts2')`.
 
 * Report issues and suggest improvements on https://github.com/anhoej/qicharts2.
