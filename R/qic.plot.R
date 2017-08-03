@@ -19,7 +19,7 @@ plot.qic <- function(x, title, ylab, xlab, subtitle, caption, part.labels,
   x$linecol <- ifelse(x$runs.signal, 'col3', 'col1')
   
   # Set label parameters
-  lab.size <- 3.5
+  lab.size <- 3
   lab.pad  <- unit(0.05, 'lines')
   lab.just <- ifelse(flip, 'center', 1)
   
@@ -91,13 +91,13 @@ plot.qic <- function(x, title, ylab, xlab, subtitle, caption, part.labels,
       geom_label(aes_(y = ~ target.lab,
                       label = ~ lab.format(target.lab, decimals, y.percent)),
                  na.rm = TRUE,
-                 label.size = 0,
+                 label.size = NA,
                  label.padding = lab.pad,
                  size = lab.size,
                  hjust = lab.just) +
       geom_label(aes_(y = ~ cl.lab,
                       label = ~ lab.format(cl.lab, decimals, y.percent)),
-                 label.size = 0,
+                 label.size = NA,
                  na.rm = TRUE,
                  label.padding = lab.pad,
                  size = lab.size,
@@ -105,14 +105,14 @@ plot.qic <- function(x, title, ylab, xlab, subtitle, caption, part.labels,
       geom_label(aes_(y = ~ lcl.lab,
                       label = ~ lab.format(lcl.lab, decimals, y.percent)),
                  na.rm = TRUE,
-                 label.size = 0,
+                 label.size = NA,
                  label.padding = lab.pad,
                  size = lab.size,
                  hjust = lab.just) +
       geom_label(aes_(y = ~ ucl.lab,
                       label = ~ lab.format(ucl.lab, decimals, y.percent)),
                  na.rm = TRUE,
-                 label.size = 0,
+                 label.size = NA,
                  label.padding = lab.pad,
                  size = lab.size,
                  hjust = lab.just)
