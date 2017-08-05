@@ -1,14 +1,14 @@
 #' @import ggplot2
 plot.qic <- function(x, title, ylab, xlab, subtitle, caption, part.labels,
-                     nrow, ncol, scales, show.linelabs, show.grid, decimals,
-                     flip, dots.only, x.format, x.angle, y.expand, y.percent,
+                     nrow, ncol, scales, show.labels, show.grid, decimals, 
+                     flip, dots.only, x.format, x.angle, x.pad, y.expand, y.percent,
                      ...) {
   # Set colours
   col1      <- '#8C8C8C' # rgb(140, 140, 140, maxColorValue = 255) # grey
   col2      <- '#5DA5DA' # rgb(093, 165, 218, maxColorValue = 255) # blue
   col3      <- '#F15854' # rgb(241, 088, 084, maxColorValue = 255) # red
   col4      <- '#059748' # rgb(005, 151, 072, maxColorValue = 255) # green
-  col5      <- '#C8C8C8' # rgb(200, 200, 200, maxColorValue = 255) # grey
+  col5      <- '#C8C8C8' # rgb(200, 200, 200, maxColorValue = 255) # light grey
   cols      <- c('col1' = col1,
                  'col2' = col2,
                  'col3' = col3,
@@ -20,8 +20,7 @@ plot.qic <- function(x, title, ylab, xlab, subtitle, caption, part.labels,
   
   # Set label parameters
   lab.size <- 3
-  lab.pad  <- unit(0.05, 'lines')
-  lab.just <- ifelse(flip, 'center', 1)
+  lab.just <- ifelse(flip, 'center', -0.2)
   
   # Get number of facet dimensions
   n.facets <- sum((length(unique(x$facet1))) > 1,
@@ -59,6 +58,7 @@ plot.qic <- function(x, title, ylab, xlab, subtitle, caption, part.labels,
   
   # Add notes
   x.notes <- x[!is.na(x$notes), ]
+  
   if (nrow(x.notes)) {
     p <- p +
       geom_segment(aes_(xend = ~ x, yend = Inf),
@@ -67,7 +67,6 @@ plot.qic <- function(x, title, ylab, xlab, subtitle, caption, part.labels,
                    colour = col1) +
       geom_label(aes_(y = Inf, label = ~ notes),
                  data = x.notes,
-                 # na.rm = TRUE,
                  label.size = 0.1,
                  size = lab.size,
                  alpha = 0.9,
@@ -85,35 +84,27 @@ plot.qic <- function(x, title, ylab, xlab, subtitle, caption, part.labels,
   }
   p <- p + scale_colour_manual(values = cols)
   
-  # Add labels for centre and control lines
-  if (show.linelabs) {
+  # Add line labels
+  if (show.labels) {
     p <- p +
-      geom_label(aes_(y = ~ target.lab,
+      geom_text(aes_(y = ~ target.lab,
                       label = ~ lab.format(target.lab, decimals, y.percent)),
                  na.rm = TRUE,
-                 label.size = NA,
-                 label.padding = lab.pad,
                  size = lab.size,
                  hjust = lab.just) +
-      geom_label(aes_(y = ~ cl.lab,
-                      label = ~ lab.format(cl.lab, decimals, y.percent)),
-                 label.size = NA,
-                 na.rm = TRUE,
-                 label.padding = lab.pad,
-                 size = lab.size,
-                 hjust = lab.just) +
-      geom_label(aes_(y = ~ lcl.lab,
+      geom_text(aes_(y = ~ lcl.lab,
                       label = ~ lab.format(lcl.lab, decimals, y.percent)),
                  na.rm = TRUE,
-                 label.size = NA,
-                 label.padding = lab.pad,
                  size = lab.size,
                  hjust = lab.just) +
-      geom_label(aes_(y = ~ ucl.lab,
+      geom_text(aes_(y = ~ ucl.lab,
                       label = ~ lab.format(ucl.lab, decimals, y.percent)),
                  na.rm = TRUE,
-                 label.size = NA,
-                 label.padding = lab.pad,
+                 size = lab.size,
+                 hjust = lab.just) +
+      geom_text(aes_(y = ~ cl.lab,
+                      label = ~ lab.format(cl.lab, decimals, y.percent)),
+                 na.rm = TRUE,
                  size = lab.size,
                  hjust = lab.just)
   }
@@ -132,7 +123,7 @@ plot.qic <- function(x, title, ylab, xlab, subtitle, caption, part.labels,
       plabs <- split(x, x['part'])
     }
     
-    plabs <- lapply(plabs, function(x) {median(x$x)})
+    plabs <- lapply(plabs, function(x) {median(as.numeric(x$x))})
     plabs <- as.data.frame(do.call(rbind, plabs))
     colnames(plabs) <- 'x'
     
@@ -143,7 +134,7 @@ plot.qic <- function(x, title, ylab, xlab, subtitle, caption, part.labels,
       if (inherits(x$x, 'POSIXct')) {
         plabs$x <- as.POSIXct(plabs$x, origin = '1970-01-01')
       }
-      
+
       p <- p +
         geom_label(aes_(y = ~ y, label = ~ z, group = 1), 
                    data = plabs,
@@ -197,13 +188,23 @@ plot.qic <- function(x, title, ylab, xlab, subtitle, caption, part.labels,
   if (y.percent) {
     p <- p + scale_y_continuous(labels = scales::percent)
   }
+
+  # Add space for line labels
+  subgroups <- unique(x$x)
+  
+  if (is.factor(subgroups))
+    subgroups <- as.numeric(subgroups)
+
+  p <- p +
+    expand_limits(x = max((subgroups)) +
+                    diff(range((subgroups))) / 50 * x.pad * show.labels)
   
   # Show grid
   if (show.grid) {
     p <- p + theme(panel.grid = element_line())
   }
   
-  # Flip
+  # Flip chart
   if (flip) {
     p <- p + coord_flip()
   }

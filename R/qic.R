@@ -46,13 +46,14 @@
 #' @param caption Character string specifying the caption.
 #' @param part.labels Character vector of length two specifying  labels for 
 #'   chart parts created with the freeze or part argument.
-#' @param show.linelabs Logical indicating whether to show labels for centre and
+#' @param show.labels Logical indicating whether to show labels for centre and
 #'   control lines on chart. Defaults to TRUE when facets argument is NULL.
 #' @param decimals Integer indicating the preferred number of decimals in centre
 #'   and control line labels.
 #' @param x.format Date format of x axis labels. See \code{?strftime()} for 
 #'   possible date formats.
 #' @param x.angle Number indicating the angle of x axis labels.
+#' @param x.pad Number indicating expansion of x axis to make room for axis labels.
 #' @param y.expand Numeric value to include in y axis. Useful e.g. for starting 
 #'   the y axis at zero.
 #' @param y.neg If TRUE (default), the y axis is allowed to be negative (only 
@@ -119,10 +120,11 @@ qic <- function(x,
                 subtitle      = NULL,
                 caption       = NULL,
                 part.labels   = NULL,
-                show.linelabs = is.null(facets),
+                show.labels   = is.null(facets),
                 decimals      = 1,
                 x.format      = NULL,
                 x.angle       = NULL,
+                x.pad         = 1,
                 y.expand      = NULL,
                 y.neg         = TRUE,
                 y.percent     = FALSE,
@@ -134,8 +136,8 @@ qic <- function(x,
   if (missing(x))
     stop('Missing mandatory argument \"x\"')
   
-  # Preserve show.linelabs value
-  show.linelabs <- show.linelabs
+  # Preserve show.labels value
+  show.labels <- show.labels
   
   # Build title
   y.name <- deparse(substitute(y))
@@ -240,13 +242,14 @@ qic <- function(x,
                 nrow            = nrow, 
                 ncol            = ncol, 
                 scales          = scales,
-                show.linelabs   = show.linelabs,
+                show.labels     = show.labels,
                 show.grid       = show.grid,
                 decimals        = decimals,
                 flip            = flip,
                 dots.only       = dots.only,
                 x.format        = x.format,
                 x.angle         = x.angle,
+                x.pad           = x.pad,
                 y.expand        = y.expand,
                 y.percent       = y.percent)
   

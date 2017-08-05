@@ -10,9 +10,9 @@ qic(x, y = NULL, n = NULL, data = NULL, facets = NULL, notes = NULL,
   freeze = NULL, part = NULL, exclude = NULL, target = NA * 1, cl = NA
   * 1, nrow = NULL, ncol = NULL, scales = "fixed", title = NULL,
   ylab = "Value", xlab = "Subgroup", subtitle = NULL, caption = NULL,
-  part.labels = NULL, show.linelabs = is.null(facets), decimals = 1,
-  x.format = NULL, x.angle = NULL, y.expand = NULL, y.neg = TRUE,
-  y.percent = FALSE, show.grid = FALSE, flip = FALSE,
+  part.labels = NULL, show.labels = is.null(facets), decimals = 1,
+  x.format = NULL, x.angle = NULL, x.pad = 1, y.expand = NULL,
+  y.neg = TRUE, y.percent = FALSE, show.grid = FALSE, flip = FALSE,
   print.summary = FALSE)
 }
 \arguments{
@@ -75,7 +75,7 @@ panels or free.}
 \item{part.labels}{Character vector of length two specifying  labels for 
 chart parts created with the freeze or part argument.}
 
-\item{show.linelabs}{Logical indicating whether to show labels for centre and
+\item{show.labels}{Logical indicating whether to show labels for centre and
 control lines on chart. Defaults to TRUE when facets argument is NULL.}
 
 \item{decimals}{Integer indicating the preferred number of decimals in centre
@@ -85,6 +85,8 @@ and control line labels.}
 possible date formats.}
 
 \item{x.angle}{Number indicating the angle of x axis labels.}
+
+\item{x.pad}{Number indicating expansion of x axis to make room for axis labels.}
 
 \item{y.expand}{Numeric value to include in y axis. Useful e.g. for starting 
 the y axis at zero.}
