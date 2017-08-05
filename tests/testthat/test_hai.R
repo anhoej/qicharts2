@@ -4,11 +4,10 @@ context('Hospital Infections')
 # Single plot of hospital infections ----
 test_that('Single plot of hospital infections', {
   expect_equal_to_reference(
-    summary(
-      qic(month, n, days,
-          data = hospital_infections,
-          chart = 'u')
-    ),
+    qic(month, n, days,
+        data = hospital_infections,
+        chart = 'u')$data
+    ,
     'hai_1.rds'
   )
 })
@@ -16,12 +15,11 @@ test_that('Single plot of hospital infections', {
 # Single facted plot of hospital infections ----
 test_that('Single facted plot of hospital infections', {
   expect_equal_to_reference(
-    summary(
-      qic(month, n, days,
-          data = hospital_infections,
-          facets = ~ infection,
-          chart = 'u')
-    ),
+    qic(month, n, days,
+        data = hospital_infections,
+        facets = ~ infection,
+        chart = 'u')$data
+    ,
     'hai_2.rds'
   )
 })
@@ -29,12 +27,11 @@ test_that('Single facted plot of hospital infections', {
 # Double faceted plot of hospital infections ----
 test_that('Double faceted plot of hospital infections', {
   expect_equal_to_reference(
-    summary(
-      qic(month, n, days,
-          data = hospital_infections,
-          facets = hospital ~ infection,
-          chart = 'u')
-    ),
+    qic(month, n, days,
+        data = hospital_infections,
+        facets = hospital ~ infection,
+        chart = 'u')$data
+    ,
     'hai_3.rds'
   )
 })
@@ -42,13 +39,12 @@ test_that('Double faceted plot of hospital infections', {
 # Funnel plot of hospital infections ----
 test_that('Funnel plot of hospital infections', {
   expect_equal_to_reference(
-    summary(
-      qic(reorder(hospital, days), n, days,
-          data = subset(hospital_infections, month >= '2016-07-01'),
-          chart = 'u',
-          facets = ~ infection,
-          multiply = 10000)
-    ),
+    qic(reorder(hospital, days), n, days,
+        data = subset(hospital_infections, month >= '2016-07-01'),
+        chart = 'u',
+        facets = ~ infection,
+        multiply = 10000)$data
+    ,
     'hai_4.rds'
   )
 })
