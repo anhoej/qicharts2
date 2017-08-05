@@ -12,7 +12,7 @@ vignette: >
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
-  
+      
 ```{r, echo = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE, 
@@ -722,7 +722,7 @@ qic(hospital, n, days,
     chart           = 'u',
     multiply        = 10000,
     decimals        = 1,
-    show.linelabs   = TRUE,
+    show.labels     = TRUE,
     title           = 'Hospital acquired bacteremia 2016 (U funnel chart)',
     ylab            = 'Cases per 10,000 risk days',
     xlab            = 'Hospital')
@@ -795,6 +795,7 @@ qic(month, readmissions,
     data      = cabg_by_month,
     chart     = 'p',
     y.percent = TRUE,
+    x.pad     = 6,
     title     = 'Readmissions (P chart)',
     ylab      = NULL,
     xlab      = 'Month')
@@ -804,6 +805,7 @@ qic(month, readmissions,
     data      = cabg_by_month,
     chart     = 'pp',
     y.percent = TRUE,
+    x.pad     = 6,
     title     = 'Readmissions (P\' chart)',
     ylab      = NULL,
     xlab      = 'Month')
@@ -819,13 +821,13 @@ Since runs analysis based on the Anhoej rules makes no assumptions about the dis
 
 ## References
 
-1. Donald J. Wheeler (2000). [Understanding Variation -- The Key to Managing Chaos](https://www.spcpress.com/book_understanding_variation.php), second edition. SPC press.
+1. Donald J. Wheeler (2000). [Understanding Variation -- The Key to Managing Chaos](https://www.spcpress.com/book_understanding_variation.php), second edition. SPC Press.
 
 1. Jacob Anhøj, Anne Vingaard Olesen (2014). [Run Charts Revisited: A Simulation Study of Run Chart Rules for Detection of Non-Random Variation in Health Care Processes](http://www.plosone.org/article/info%3Adoi%2F10.1371%2Fjournal.pone.0113825). PLoS ONE 9(11): e113825.
 
 1. Jacob Anhøj (2015). [Diagnostic Value of Run Chart Analysis: Using Likelihood Ratios to Compare Run Chart Rules on Simulated Data Series](http://www.plosone.org/article/info%3Adoi%2F10.1371%2Fjournal.pone.0121349). PLoS ONE 10(3): e0121349.
 
-1. Donald J. Wheeler (2010). [Understanding Statistical Process Control](https://www.spcpress.com/book_understanding_statistical_process_control.php), third edition. SPC press.
+1. Donald J. Wheeler (2010). [Understanding Statistical Process Control](https://www.spcpress.com/book_understanding_statistical_process_control.php), third edition. SPC Press.
 
 1. Douglas C. Montgomery (2009). [Statistical Quality Control -- A Modern Introduction](http://eu.wiley.com/WileyCDA/WileyTitle/productCd-1118322576.html), sixth edition. John Wiley & Sons.
 
