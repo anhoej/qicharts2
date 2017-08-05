@@ -8,7 +8,7 @@ test_that('Single plot of hospital infections', {
         data = hospital_infections,
         chart = 'u')$data
     ,
-    'hai_1.rds'
+    'hai_01.rds'
   )
 })
 
@@ -20,7 +20,7 @@ test_that('Single facted plot of hospital infections', {
         facets = ~ infection,
         chart = 'u')$data
     ,
-    'hai_2.rds'
+    'hai_02.rds'
   )
 })
 
@@ -32,7 +32,7 @@ test_that('Double faceted plot of hospital infections', {
         facets = hospital ~ infection,
         chart = 'u')$data
     ,
-    'hai_3.rds'
+    'hai_03.rds'
   )
 })
 
@@ -45,6 +45,6 @@ test_that('Funnel plot of hospital infections', {
         facets = ~ infection,
         multiply = 10000)$data
     ,
-    'hai_4.rds'
+    'hai_04.rds'
   )
 })
