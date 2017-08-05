@@ -98,9 +98,9 @@ T, C, U, U', P, P', and G charts.</p>
   <span class='kw'>freeze</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>part</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>exclude</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>target</span> <span class='kw'>=</span> <span class='fl'>NA</span> * <span class='fl'>1</span>, <span class='kw'>cl</span> <span class='kw'>=</span> <span class='fl'>NA</span>
   * <span class='fl'>1</span>, <span class='kw'>nrow</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>ncol</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>scales</span> <span class='kw'>=</span> <span class='st'>"fixed"</span>, <span class='kw'>title</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>ylab</span> <span class='kw'>=</span> <span class='st'>"Value"</span>, <span class='kw'>xlab</span> <span class='kw'>=</span> <span class='st'>"Subgroup"</span>, <span class='kw'>subtitle</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>caption</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>part.labels</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>show.linelabs</span> <span class='kw'>=</span> <span class='fu'>is.null</span>(<span class='no'>facets</span>), <span class='kw'>decimals</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>x.format</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>x.angle</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>y.expand</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>y.neg</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>y.percent</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>show.grid</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>flip</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>part.labels</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>show.labels</span> <span class='kw'>=</span> <span class='fu'>is.null</span>(<span class='no'>facets</span>), <span class='kw'>decimals</span> <span class='kw'>=</span> <span class='fl'>1</span>,
+  <span class='kw'>x.format</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>x.angle</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>x.pad</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>y.expand</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>y.neg</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>y.percent</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>show.grid</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>flip</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
   <span class='kw'>print.summary</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
@@ -210,7 +210,7 @@ panels or free.</p></td>
 chart parts created with the freeze or part argument.</p></td>
     </tr>
     <tr>
-      <th>show.linelabs</th>
+      <th>show.labels</th>
       <td><p>Logical indicating whether to show labels for centre and
 control lines on chart. Defaults to TRUE when facets argument is NULL.</p></td>
     </tr>
@@ -227,6 +227,10 @@ possible date formats.</p></td>
     <tr>
       <th>x.angle</th>
       <td><p>Number indicating the angle of x axis labels.</p></td>
+    </tr>
+    <tr>
+      <th>x.pad</th>
+      <td><p>Number indicating expansion of x axis to make room for axis labels.</p></td>
     </tr>
     <tr>
       <th>y.expand</th>
@@ -280,9 +284,9 @@ possibly transient, shifts in data is identified by Shewhart's 3-sigma rule.</p>
 <span class='no'>y</span> <span class='kw'>&lt;-</span> <span class='fu'>rnorm</span>(<span class='fl'>24</span>)
 
 <span class='co'># Run chart</span>
-<span class='fu'>qic</span>(<span class='no'>y</span>)</div><div class='img'><img src='qic-7.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
+<span class='fu'>qic</span>(<span class='no'>y</span>)</div><div class='img'><img src='qic-1.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
 <span class='co'># I control chart</span>
-<span class='fu'>qic</span>(<span class='no'>y</span>, <span class='kw'>chart</span> <span class='kw'>=</span> <span class='st'>'i'</span>)</div><div class='img'><img src='qic-8.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
+<span class='fu'>qic</span>(<span class='no'>y</span>, <span class='kw'>chart</span> <span class='kw'>=</span> <span class='st'>'i'</span>)</div><div class='img'><img src='qic-2.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
 <span class='co'># U control chart from build-in data set of hospital infection rates faceted</span>
 <span class='co'>#   by hospital and type of infection.</span>
 <span class='fu'>qic</span>(<span class='no'>month</span>, <span class='no'>n</span>,
@@ -293,7 +297,7 @@ possibly transient, shifts in data is identified by Shewhart's 3-sigma rule.</p>
     <span class='kw'>multiply</span> <span class='kw'>=</span> <span class='fl'>10000</span>,
     <span class='kw'>title</span>     <span class='kw'>=</span> <span class='st'>'Hospital infection rates'</span>,
     <span class='kw'>ylab</span>     <span class='kw'>=</span> <span class='st'>'Number of infections per 10.000 risk days'</span>,
-    <span class='kw'>xlab</span>     <span class='kw'>=</span> <span class='st'>'Month'</span>)</div><div class='img'><img src='qic-9.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
+    <span class='kw'>xlab</span>     <span class='kw'>=</span> <span class='st'>'Month'</span>)</div><div class='img'><img src='qic-3.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
