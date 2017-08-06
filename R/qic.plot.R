@@ -197,7 +197,7 @@ plot.qic <- function(x, title, ylab, xlab, subtitle, caption, part.labels,
 
   p <- p +
     expand_limits(x = max((subgroups)) +
-                    diff(range((subgroups))) / 50 * x.pad * show.labels)
+                    diff(range((subgroups))) / 30 * x.pad * show.labels)
   
   # Show grid
   if (show.grid) {
