@@ -16,6 +16,7 @@ plot.qic <- function(x, title, ylab, xlab, subtitle, caption, part.labels,
                  'col5' = col5)
   x$dotcol  <- ifelse(x$sigma.signal, 'col3', 'col2')
   x$dotcol  <- ifelse(x$include, x$dotcol, 'col5')
+  x$dotcol  <- ifelse(x$y == x$cl, 'col5', x$dotcol)
   x$linecol <- ifelse(x$runs.signal, 'col3', 'col1')
   
   # Set label parameters
