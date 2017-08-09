@@ -230,7 +230,7 @@ qic <- function(x,
   # Aggregate data and perform analyses
   d <- qic.agg(d, got.n, part, agg.fun, freeze, exclude, 
                chart.fun, multiply, dots.only, chart, y.neg)
-  
+
   # Build plot
   p <- plot.qic(d, 
                 title           = title, 
@@ -254,6 +254,14 @@ qic <- function(x,
                 y.percent       = y.percent)
   
   class(p) <- c('qic', class(p))
+  
+  # Tell how data was aggregated  
+  if(!got.n & 
+     match.arg(chart) %in% c('run', 'i') &
+     # match.arg(agg.fun) == 'mean' &
+     max(d$y.length > 1))
+    message(paste0('Subgroup size > 1. Data have been aggregated using ', 
+                  agg.fun, '().'))
   
   # Print summary
   if (print.summary)
