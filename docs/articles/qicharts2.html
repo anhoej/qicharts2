@@ -73,7 +73,7 @@
             <h3 class="subtitle">An implementation of statistical process control charts for R</h3>
                         <h4 class="author">Jacob Anhøj</h4>
             
-            <h4 class="date">2017-08-06</h4>
+            <h4 class="date">2017-08-20</h4>
           </div>
 
     
@@ -87,14 +87,14 @@
 <p><img src="qicharts2_files/figure-html/unnamed-chunk-3-1.svg" width="686.4"></p>
 <blockquote>
 <p>Statistical Process Control is not about statistics, it is not about “process-hyphen-control”, and it is not about conformance to specifications. […] It is about the continual improvement of processes and outcomes. And it is, first and foremost, <em>a way of thinking</em> with some tools attached.</p>
-<p>Donald J. Wheeler, Understanding Variation, 2. ed., p 152</p>
+<p>Donald J. Wheeler. Understanding Variation, 2. ed., p 152</p>
 </blockquote>
 <p>This vignette will teach you the easy part of SPC, <em>the tools</em>, as implemented by <code>qicharts2</code> for R. I strongly recommend that you also study <em>the way of thinking</em>, for example by reading Wheeler’s excellent book.</p>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Install development version from GitHub.</span>
-devtools::<span class="kw">install_github</span>(<span class="st">'anhoej/qicharts2'</span>, <span class="dt">build_vignettes =</span> <span class="ot">TRUE</span>)</code></pre></div>
+devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">'anhoej/qicharts2'</span>, <span class="dt">build_vignettes =</span> <span class="ot">TRUE</span>)</code></pre></div>
 </div>
 <div id="your-first-run-and-control-charts" class="section level2">
 <h2 class="hasAnchor">
@@ -138,7 +138,7 @@ y &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">2
 </ul>
 <blockquote>
 <p>A process will be said to be predictabe when, through the use of past experience, we can describe, at least within limits, how the process will behave in the future.</p>
-<p>Donald J. Wheeler, Understanding Variation, 2. ed., p 153</p>
+<p>Donald J. Wheeler. Understanding Variation, 2. ed., p 153</p>
 </blockquote>
 <p>The overall purpose of SPC charts is to tell the two types of variation apart.</p>
 </div>
@@ -157,7 +157,7 @@ y[<span class="dv">22</span>] &lt;-<span class="st"> </span><span class="dv">4</
 <p><img src="qicharts2_files/figure-html/unnamed-chunk-8-1.svg" width="686.4"></p>
 <p>However, minor to moderate shifts may go unnoticed by the 3-sigma rule for long periods of time.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Simulate a special cause to y in the form of a moderate, persistent shift of 2 standard deviations.</span>
-y[<span class="dv">13</span>:<span class="dv">24</span>] &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">12</span>, <span class="dt">mean =</span> <span class="dv">2</span>)
+y[<span class="dv">13</span><span class="op">:</span><span class="dv">24</span>] &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">12</span>, <span class="dt">mean =</span> <span class="dv">2</span>)
 
 <span class="kw"><a href="../reference/qic.html">qic</a></span>(y, <span class="dt">chart =</span> <span class="st">'i'</span>)</code></pre></div>
 <p><img src="qicharts2_files/figure-html/unnamed-chunk-9-1.svg" width="686.4"></p>
@@ -204,7 +204,7 @@ o &lt;-<span class="st"> </span><span class="kw"><a href="../reference/qic.html"
 <span class="co">#&gt; 1           4               8           1 -2.114884 1.057091 4.229067</span>
 <span class="co">#&gt;   sigma.signal</span>
 <span class="co">#&gt; 1            0</span></code></pre></div>
-<p>In summary, many additional test for special cause variation have been proposed since Shewhart invented the 3-sigma rule, and many tests are currently being used. The more tests that are applied to the analysis the higher the risk of false signals. <code>qicharts2</code> takes a conservative approach by applying only 3 tests, the 3-sigma rule and the two Anhoej rules. That means that a signal from <code><a href="../reference/qic.html">qic()</a></code> most likely represents a significant change in the underlying process.</p>
+<p>In summary, many additional test for special cause variation have been proposed since Shewhart invented the 3-sigma rule, and many tests are currently being used. The more tests that are applied to the analysis the higher the risk of false signals. <code>qicharts2</code> takes a conservative approach by applying only three tests, the 3-sigma rule and the two Anhoej rules. That means that a signal from <code><a href="../reference/qic.html">qic()</a></code> most likely represents a significant change in the underlying process.</p>
 </div>
 </div>
 <div id="choosing-the-right-control-chart" class="section level2">
@@ -289,7 +289,7 @@ o &lt;-<span class="st"> </span><span class="kw"><a href="../reference/qic.html"
 <blockquote>
 <p>Over the years, I have developed an increasing affection for the much-neglected run chart: a time plot of your process data with the median drawn in as a reference (yes, the median – not the average). It is “filter No. 1” for any process data and answers the question: “Did this process have at least one shift during this time period?” (This is generally signaled by a clump of eight consecutive data points either all above or below the median.)</p>
 <p>If it did, then it makes no sense to do a control chart at this time because the overall average of all these data doesn’t exist. (Sort of like: If I put my right foot in a bucket of boiling water and my left foot in a bucket of ice water, on average, I’m pretty comfortable.)</p>
-<p>Davis Balestracci <a href="https://www.qualitydigest.com/inside/quality-insider-column/control-charts-simple-elegance-or-legalized-torture.html">Quality Digest 2014</a></p>
+<p>Davis Balestracci. <a href="https://www.qualitydigest.com/inside/quality-insider-column/control-charts-simple-elegance-or-legalized-torture.html">Quality Digest 2014</a></p>
 </blockquote>
 </div>
 <div id="case-1-patient-harm" class="section level2">
@@ -339,12 +339,12 @@ o &lt;-<span class="st"> </span><span class="kw"><a href="../reference/qic.html"
 <div id="run-and-p-control-charts-of-percent-harmed-patients" class="section level3">
 <h3 class="hasAnchor">
 <a href="#run-and-p-control-charts-of-percent-harmed-patients" class="anchor"></a>Run and P control charts of percent harmed patients</h3>
-<p>To plot the percentage of harmed patients (patient with 1 or more harms) we need to add a variable and to aggregate data by month.</p>
+<p>To plot the percentage of harmed patients (patients with 1 or more harms) we need to add a variable and to aggregate data by month.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">suppressPackageStartupMessages</span>(<span class="kw">library</span>(dplyr))
 
-gtt_by_month &lt;-<span class="st"> </span>gtt %&gt;%
-<span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">harmed =</span> harms &gt;<span class="st"> </span><span class="dv">0</span>) %&gt;%<span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span>(month) %&gt;%<span class="st"> </span>
+gtt_by_month &lt;-<span class="st"> </span>gtt <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">harmed =</span> harms <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span>(month) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span>(<span class="dt">harms    =</span> <span class="kw">sum</span>(harms),
             <span class="dt">days     =</span> <span class="kw">sum</span>(days),
             <span class="dt">n.harmed =</span> <span class="kw">sum</span>(harmed),
@@ -379,8 +379,9 @@ gtt_by_month &lt;-<span class="st"> </span>gtt %&gt;%
 <p><img src="qicharts2_files/figure-html/unnamed-chunk-16-1.svg" width="686.4"></p>
 <p>Since both the harm rate and the proportion of harmed patients exhibit common cause variation only, we conclude that the risk of adverse events during hospitalisation is predictable and that we in the future should expect around 60 adverse events per 1000 patient days harming around 33% of patients.</p>
 <p>Actually, we often do not need to aggregate data in advance. With a little creativity we can make <code>qic</code> do the hard work. The previous plot could have been produced with this code. Note the use of the original gtt dataset and the number of harmed and total number of patients created on the fly.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/qic.html">qic</a></span>(month, harms &gt;<span class="st"> </span><span class="dv">0</span>,      <span class="co"># TRUE if patient had one or more harms</span>
-    <span class="dt">n         =</span> days &gt;<span class="st"> </span><span class="dv">0</span>,  <span class="co"># Always TRUE </span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/qic.html">qic</a></span>(month, 
+    harms <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>,        <span class="co"># TRUE if patient had one or more harms</span>
+    days <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>,         <span class="co"># Always TRUE </span>
     <span class="dt">data      =</span> gtt,
     <span class="dt">chart     =</span> <span class="st">'p'</span>,
     <span class="dt">y.percent =</span> <span class="ot">TRUE</span>,
@@ -395,8 +396,8 @@ gtt_by_month &lt;-<span class="st"> </span>gtt %&gt;%
 <p>Types and severity of adverse events in gtt are organised in an untidy wide format. Since <code><a href="../reference/paretochart.html">paretochart()</a></code> needs a vector of categorical data we need to rearrange harm severity and harm category into separate columns.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">suppressPackageStartupMessages</span>(<span class="kw">library</span>(tidyr))
 
-gtt_ae_types &lt;-<span class="st"> </span>gtt %&gt;%
-<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/tidyr/topics/gather">gather</a></span>(severity, category, E:I) %&gt;%<span class="st"> </span>
+gtt_ae_types &lt;-<span class="st"> </span>gtt <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/tidyr/topics/gather">gather</a></span>(severity, category, E<span class="op">:</span>I) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(<span class="kw">complete.cases</span>(.))
 
 <span class="kw">head</span>(gtt_ae_types)
@@ -414,11 +415,11 @@ gtt_ae_types &lt;-<span class="st"> </span>gtt %&gt;%
 <span class="co">#&gt; 4   Pressure ulcer</span>
 <span class="co">#&gt; 5 Gastrointestinal</span>
 <span class="co">#&gt; 6 Gastrointestinal</span></code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/paretochart.html">paretochart</a></span>(gtt_ae_types$category,
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/paretochart.html">paretochart</a></span>(gtt_ae_types<span class="op">$</span>category,
             <span class="dt">title =</span> <span class="st">'Pareto chart of harm category'</span>)</code></pre></div>
 <p><img src="qicharts2_files/figure-html/unnamed-chunk-19-1.svg" width="686.4"></p>
 <p>The bars show the number in each category, and the curve shows the cumulated percentage over categories. Almost 80% of harms come from 3 categories: gastrointestinal, infection, and procedure.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/paretochart.html">paretochart</a></span>(gtt_ae_types$severity,
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/paretochart.html">paretochart</a></span>(gtt_ae_types<span class="op">$</span>severity,
             <span class="dt">title =</span> <span class="st">'Pareto chart of harm severity'</span>)</code></pre></div>
 <p><img src="qicharts2_files/figure-html/unnamed-chunk-20-1.svg" width="686.4"></p>
 <p>Almost all harms are temporary (E-F).</p>
@@ -454,7 +455,7 @@ gtt_ae_types &lt;-<span class="st"> </span>gtt %&gt;%
     <span class="dt">data        =</span> cdi,
     <span class="dt">decimals    =</span> <span class="dv">0</span>,
     <span class="dt">freeze      =</span> <span class="dv">24</span>,
-    <span class="dt">part.labels =</span> <span class="kw">c</span>(<span class="st">'Before intervention'</span>, <span class="st">'After intervention'</span>),
+    <span class="dt">part.labels =</span> <span class="kw">c</span>(<span class="st">'Baseline'</span>, <span class="st">'Intervention'</span>),
     <span class="dt">title       =</span> <span class="st">'Hospital acquired Clostridium difficile infections'</span>,
     <span class="dt">ylab        =</span> <span class="st">'Count'</span>,
     <span class="dt">xlab        =</span> <span class="st">'Month'</span>)</code></pre></div>
@@ -533,22 +534,22 @@ gtt_ae_types &lt;-<span class="st"> </span>gtt %&gt;%
 <p>In this and the following cases we skip the obligatory first step of using a run chart.</p>
 <p>First, we will make a control chart of the age of the last 100 patients. Since we are plotting individual measurements, we use an I chart.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/qic.html">qic</a></span>(age,
-    <span class="dt">data  =</span> <span class="kw">tail</span>(cabg, <span class="dv">100</span>), 
-    <span class="dt">chart =</span> <span class="st">'i'</span>,
+    <span class="dt">data      =</span> <span class="kw">tail</span>(cabg, <span class="dv">100</span>), 
+    <span class="dt">chart     =</span> <span class="st">'i'</span>,
     <span class="dt">show.grid =</span> <span class="ot">TRUE</span>,
-    <span class="dt">title =</span> <span class="st">'Age of the last 100 patients (I chart)'</span>,
-    <span class="dt">ylab  =</span> <span class="st">'Years'</span>,
-    <span class="dt">xlab  =</span> <span class="st">'Patient #'</span>)</code></pre></div>
+    <span class="dt">title     =</span> <span class="st">'Age of the last 100 patients (I chart)'</span>,
+    <span class="dt">ylab      =</span> <span class="st">'Years'</span>,
+    <span class="dt">xlab      =</span> <span class="st">'Patient #'</span>)</code></pre></div>
 <p><img src="qicharts2_files/figure-html/unnamed-chunk-28-1.svg" width="686.4"></p>
 <p>Two data points (patients number 45 and 70) are below the lower 3-sigma limit indicating that these patients are “unusually” young, i.e. representative of phenomena that are not normally present in the process.</p>
 <p>I charts are often displayed along moving range charts that show the ranges of neighbouring data points.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/qic.html">qic</a></span>(age,
-    <span class="dt">data  =</span> <span class="kw">tail</span>(cabg, <span class="dv">100</span>), 
-    <span class="dt">chart =</span> <span class="st">'mr'</span>,
+    <span class="dt">data      =</span> <span class="kw">tail</span>(cabg, <span class="dv">100</span>), 
+    <span class="dt">chart     =</span> <span class="st">'mr'</span>,
     <span class="dt">show.grid =</span> <span class="ot">TRUE</span>,
-    <span class="dt">title =</span> <span class="st">'Age of the last 100 patients (MR chart)'</span>,
-    <span class="dt">ylab  =</span> <span class="st">'Years'</span>,
-    <span class="dt">xlab  =</span> <span class="st">'Patient #'</span>)</code></pre></div>
+    <span class="dt">title     =</span> <span class="st">'Age of the last 100 patients (MR chart)'</span>,
+    <span class="dt">ylab      =</span> <span class="st">'Years'</span>,
+    <span class="dt">xlab      =</span> <span class="st">'Patient #'</span>)</code></pre></div>
 <p><img src="qicharts2_files/figure-html/unnamed-chunk-29-1.svg" width="686.4"></p>
 <p>The MR chart identifies three unusually large ranges, which are clearly produced by the two unusually young patients also found in the I chart. Note that each data point in an I chart is contained in two moving ranges in the MR chart.</p>
 <p>We should seek the cause(s) of these special causes. We may then chose to eliminate the outliers from the computations of the process centre and 3-sigma limits in order to predict the expected age range of future patients.</p>
@@ -566,7 +567,7 @@ gtt_ae_types &lt;-<span class="st"> </span>gtt %&gt;%
 <h3 class="hasAnchor">
 <a href="#xbar-and-s-charts-for-average-and-standard-deviation-of-patient-age" class="anchor"></a>Xbar and S charts for average and standard deviation of patient age</h3>
 <p>We could also plot the mean age of patients by month. For this we choose an Xbar chart for multiple measurement per subgroup. First, we need to add month as the grouping variable.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cabg &lt;-<span class="st"> </span>cabg %&gt;%<span class="st"> </span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cabg &lt;-<span class="st"> </span>cabg <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">month =</span> <span class="kw">as.Date</span>(<span class="kw">cut</span>(date, <span class="st">'month'</span>)))</code></pre></div>
 <p>Using month as the x axis variable, <code><a href="../reference/qic.html">qic()</a></code> automatically calculates the average age per month.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/qic.html">qic</a></span>(month, age,
@@ -576,7 +577,7 @@ gtt_ae_types &lt;-<span class="st"> </span>gtt %&gt;%
     <span class="dt">ylab  =</span> <span class="st">'Years'</span>,
     <span class="dt">xlab  =</span> <span class="st">'Month'</span>)</code></pre></div>
 <p><img src="qicharts2_files/figure-html/unnamed-chunk-32-1.svg" width="686.4"></p>
-<p>Xbar charts are usually displayed along S charts displaying the within sample standard deviation.</p>
+<p>Xbar charts are usually displayed along S charts displaying the within subgroup standard deviation.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/qic.html">qic</a></span>(month, age,
     <span class="dt">data  =</span> cabg,
     <span class="dt">chart =</span> <span class="st">'s'</span>,
@@ -590,8 +591,8 @@ gtt_ae_types &lt;-<span class="st"> </span>gtt %&gt;%
 <h3 class="hasAnchor">
 <a href="#p-charts-for-proportion-of-patients-who-were-readmitted-or-died-within-30-after-surgery" class="anchor"></a>P charts for proportion of patients who were readmitted or died within 30 after surgery</h3>
 <p>To plot readmissions and mortality we first need to summarise these counts by month.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cabg_by_month &lt;-<span class="st"> </span>cabg %&gt;%<span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span>(month) %&gt;%<span class="st"> </span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cabg_by_month &lt;-<span class="st"> </span>cabg <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span>(month) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span>(<span class="dt">deaths       =</span> <span class="kw">sum</span>(death),
             <span class="dt">readmissions =</span> <span class="kw">sum</span>(readmission),
             <span class="dt">n            =</span> <span class="kw"><a href="http://dplyr.tidyverse.org/reference/n.html">n</a></span>())
@@ -631,11 +632,11 @@ gtt_ae_types &lt;-<span class="st"> </span>gtt %&gt;%
 <h3 class="hasAnchor">
 <a href="#t-and-g-charts-for-rare-events" class="anchor"></a>T and G charts for rare events</h3>
 <p>Rare events are often better analysed as time or opportunities between events. First we need to calculate the number of surgeries and days between fatalities.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fatalities &lt;-<span class="st"> </span>cabg %&gt;%<span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">x =</span> <span class="kw"><a href="http://dplyr.tidyverse.org/reference/ranking.html">row_number</a></span>()) %&gt;%<span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(death) %&gt;%<span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">dd =</span> x -<span class="st"> </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/lead-lag.html">lag</a></span>(x),
-         <span class="dt">dt =</span> date -<span class="st"> </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/lead-lag.html">lag</a></span>(date))
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fatalities &lt;-<span class="st"> </span>cabg <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">x =</span> <span class="kw"><a href="http://dplyr.tidyverse.org/reference/ranking.html">row_number</a></span>()) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(death) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">dd =</span> x <span class="op">-</span><span class="st"> </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/lead-lag.html">lag</a></span>(x),
+         <span class="dt">dt =</span> date <span class="op">-</span><span class="st"> </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/lead-lag.html">lag</a></span>(date))
 
 <span class="kw">head</span>(fatalities)
 <span class="co">#&gt;         date    age gender los death readmission      month   x dd      dt</span>
@@ -661,14 +662,14 @@ gtt_ae_types &lt;-<span class="st"> </span>gtt %&gt;%
     <span class="dt">ylab  =</span> <span class="st">'Days'</span>,
     <span class="dt">xlab  =</span> <span class="st">'Death #'</span>)</code></pre></div>
 <p><img src="qicharts2_files/figure-html/unnamed-chunk-39-1.svg" width="686.4"></p>
-<p>The conclusions from the G and the T chart are the same: Deaths number 24 and 25 are unusually far apart. We should look for an assignable cause to explain this as it may help us get ideas to reduce postoperative mortality in the future.</p>
+<p>The conclusions from the two charts are the same: Deaths number 24 and 25 are unusually far apart. We should look for an assignable cause to explain this as it may help us get ideas to reduce postoperative mortality in the future.</p>
 </div>
 <div id="faceting-readmission-rates-by-gender" class="section level3">
 <h3 class="hasAnchor">
 <a href="#faceting-readmission-rates-by-gender" class="anchor"></a>Faceting readmission rates by gender</h3>
 <p>To demonstrate the use of faceted charts, we summarise readmissions by month and gender.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cabg_by_month_gender &lt;-<span class="st"> </span>cabg %&gt;%<span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span>(month, gender) %&gt;%<span class="st"> </span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cabg_by_month_gender &lt;-<span class="st"> </span>cabg <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span>(month, gender) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span>(<span class="dt">readmissions =</span> <span class="kw">sum</span>(readmission),
             <span class="dt">n            =</span> <span class="kw"><a href="http://dplyr.tidyverse.org/reference/n.html">n</a></span>())
 
@@ -686,7 +687,7 @@ gtt_ae_types &lt;-<span class="st"> </span>gtt %&gt;%
 <p>Then we use the <code>facets</code> argument to make a control chart for each gender while keeping the x and y axes the same.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/qic.html">qic</a></span>(month, readmissions, n,
     <span class="dt">data      =</span> cabg_by_month_gender,
-    <span class="dt">facets    =</span> ~<span class="st"> </span>gender, 
+    <span class="dt">facets    =</span> <span class="op">~</span><span class="st"> </span>gender, 
     <span class="dt">chart     =</span> <span class="st">'p'</span>,
     <span class="dt">y.percent =</span> <span class="ot">TRUE</span>,
     <span class="dt">title     =</span> <span class="st">'Readmissions within 30 days (P chart)'</span>,
@@ -726,7 +727,7 @@ gtt_ae_types &lt;-<span class="st"> </span>gtt %&gt;%
 <a href="#faceted-u-chart-by-type-of-infection" class="anchor"></a>Faceted U chart by type of infection</h3>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/qic.html">qic</a></span>(month, n, days,
     <span class="dt">data     =</span> hospital_infections,
-    <span class="dt">facets   =</span> ~<span class="st"> </span>infection,
+    <span class="dt">facets   =</span> <span class="op">~</span><span class="st"> </span>infection,
     <span class="dt">chart    =</span> <span class="st">'u'</span>,
     <span class="dt">multiply =</span> <span class="dv">10000</span>,
     <span class="dt">title    =</span> <span class="st">'Hospital acquired infections in the Capital Region of Denmark'</span>,
@@ -741,7 +742,7 @@ gtt_ae_types &lt;-<span class="st"> </span>gtt %&gt;%
 <a href="#two-way-faceted-u-chart-by-infection-and-hospital" class="anchor"></a>Two-way faceted U chart by infection and hospital</h3>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/qic.html">qic</a></span>(month, n, days,
     <span class="dt">data     =</span> hospital_infections,
-    <span class="dt">facets   =</span> infection ~<span class="st"> </span>hospital,
+    <span class="dt">facets   =</span> infection <span class="op">~</span><span class="st"> </span>hospital,
     <span class="dt">chart    =</span> <span class="st">'u'</span>,
     <span class="dt">multiply =</span> <span class="dv">10000</span>,
     <span class="dt">scales   =</span> <span class="st">'free_y'</span>,
@@ -757,13 +758,13 @@ gtt_ae_types &lt;-<span class="st"> </span>gtt %&gt;%
 <h3 class="hasAnchor">
 <a href="#funnels-plot-of-infection-rates-by-hospital" class="anchor"></a>Funnels plot of infection rates by hospital</h3>
 <p>Processes containing only common cause variation over time may be aggregated and compared across other units than time. When data have no natural time order, i.e. when the x variable is categorical the data points are not connected by lines and runs analysis is not performed. To produce a so called funnel plot of infections by hospital, we filter data from a recent stable period and reorder the x variable by size.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">hai_2016 &lt;-<span class="st"> </span>hospital_infections %&gt;%<span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(month    &gt;=<span class="st"> '2016-07-01'</span>) %&gt;%<span class="st"> </span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">hai_<span class="dv">2016</span> &lt;-<span class="st"> </span>hospital_infections <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(month    <span class="op">&gt;=</span><span class="st"> '2016-07-01'</span>) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">hospital =</span> <span class="kw">reorder</span>(hospital, days))
 
 <span class="kw"><a href="../reference/qic.html">qic</a></span>(hospital, n, days,
-    <span class="dt">data            =</span> hai_2016,
-    <span class="dt">facets          =</span> ~<span class="st"> </span>infection,
+    <span class="dt">data            =</span> hai_<span class="dv">2016</span>,
+    <span class="dt">facets          =</span> <span class="op">~</span><span class="st"> </span>infection,
     <span class="dt">ncol            =</span> <span class="dv">1</span>,
     <span class="dt">scales          =</span> <span class="st">'free_y'</span>,
     <span class="dt">chart           =</span> <span class="st">'u'</span>,
@@ -856,14 +857,14 @@ gtt_ae_types &lt;-<span class="st"> </span>gtt %&gt;%
 <p><span class="math display">\[\bar{\bar{x}}\pm3SD\]</span></p>
 <p>where <span class="math inline">\(\bar{\bar{x}}\)</span> is the weighted average of the sample statistic and <span class="math inline">\(SD\)</span> is the weighted sample standard deviation.</p>
 <p>The procedure for calculating <span class="math inline">\(SD\)</span> depends on the type type of data involved:</p>
-<p><strong>I</strong>: <span class="math inline">\(\bar{x}\pm2.66\overline{MR}\)</span>, <span style="font-size:small"> <span class="math inline">\(\bar{x}=\)</span>, sample average, <span class="math inline">\(\overline{MR}=\)</span> average moving range of successive observations. </span></p>
-<p><strong>MR</strong>: <span class="math inline">\(\overline{MR}+3.267\overline{MR}\)</span>, <span style="font-size:small"> <span class="math inline">\(\overline{MR}=\)</span> average moving range (no lower 3-sigma limit). </span></p>
-<p><strong>Xbar</strong>: <span class="math inline">\(\bar{\bar{x}}\pm A_{3}\bar{s}\)</span>, <span style="font-size:small"> <span class="math inline">\(A_{3}=\)</span> constant depending on the sample size, <span class="math inline">\(\bar{s}=\)</span> weighted sample standard deviation. </span></p>
-<p><strong>S</strong>: <span class="math inline">\(CL=\bar{s}, LCL=B_{3}\bar{s}, UCL=B_{4}\bar{s}\)</span>, <span style="font-size:small"> <span class="math inline">\(\bar{s}=\)</span> weighted sample standard deviation, <span class="math inline">\(B_{3}\)</span> and <span class="math inline">\(B_{4}=\)</span> constants depending on the sample size. </span></p>
-<p><strong>C</strong>: <span class="math inline">\(\bar{c}\pm3\sqrt{\bar{c}}\)</span>, <span style="font-size:small"> <span class="math inline">\(\bar{c}=\)</span> average number of defects. </span></p>
-<p><strong>U</strong>: <span class="math inline">\(\bar{u}\pm3\sqrt{\frac{\bar{u}}{n_{i}}}\)</span>, <span style="font-size:small"> <span class="math inline">\(\bar{u}=\)</span> average number of defects per unit, <span class="math inline">\(n_{i}=\)</span> size of inspection unit. </span></p>
-<p><strong>P</strong>: <span class="math inline">\(\bar{p}\pm3\sqrt{\frac{\bar{p}(1-\bar{p})}{n_{i}}}\)</span>, <span style="font-size:small"> <span class="math inline">\(\bar{p}=\)</span> average number of defectives, <span class="math inline">\(n_{i}=\)</span> sample size. </span></p>
-<p><strong>G</strong>: <span class="math inline">\(\bar{x}\pm3\sqrt{\bar{x}(\bar{x}+1)}\)</span>, <span style="font-size:small"> <span class="math inline">\(\bar{x}=\)</span> average number of opportunities between events. </span></p>
+<p><strong>I</strong>: <span class="math inline">\(\bar{x}\pm2.66\overline{MR}\)</span>, <span class="math inline">\(\bar{x}=\)</span>, sample average, <span class="math inline">\(\overline{MR}=\)</span> average moving range of successive observations.</p>
+<p><strong>MR</strong>: <span class="math inline">\(\overline{MR}+3.267\overline{MR}\)</span>, <span class="math inline">\(\overline{MR}=\)</span> average moving range (no lower 3-sigma limit).</p>
+<p><strong>Xbar</strong>: <span class="math inline">\(\bar{\bar{x}}\pm A_{3}\bar{s}\)</span>, <span class="math inline">\(A_{3}=\)</span> constant depending on the sample size, <span class="math inline">\(\bar{s}=\)</span> weighted sample standard deviation.</p>
+<p><strong>S</strong>: <span class="math inline">\(CL=\bar{s}, LCL=B_{3}\bar{s}, UCL=B_{4}\bar{s}\)</span>, <span class="math inline">\(\bar{s}=\)</span> weighted sample standard deviation, <span class="math inline">\(B_{3}\)</span> and <span class="math inline">\(B_{4}=\)</span> constants depending on the sample size.</p>
+<p><strong>C</strong>: <span class="math inline">\(\bar{c}\pm3\sqrt{\bar{c}}\)</span>, <span class="math inline">\(\bar{c}=\)</span> average number of defects.</p>
+<p><strong>U</strong>: <span class="math inline">\(\bar{u}\pm3\sqrt{\frac{\bar{u}}{n_{i}}}\)</span>, <span class="math inline">\(\bar{u}=\)</span> average number of defects per unit, <span class="math inline">\(n_{i}=\)</span> size of inspection unit.</p>
+<p><strong>P</strong>: <span class="math inline">\(\bar{p}\pm3\sqrt{\frac{\bar{p}(1-\bar{p})}{n_{i}}}\)</span>, <span class="math inline">\(\bar{p}=\)</span> average number of defectives, <span class="math inline">\(n_{i}=\)</span> sample size.</p>
+<p><strong>G</strong>: <span class="math inline">\(\bar{x}\pm3\sqrt{\bar{x}(\bar{x}+1)}\)</span>, <span class="math inline">\(\bar{x}=\)</span> average number of opportunities between events.</p>
 <p><strong>Notes</strong></p>
 <ol style="list-style-type: decimal">
 <li><p>I charts use the correction suggested by Nelson by excluding moving ranges above the upper range limit from calculations of the 3-sigma limits (Nelson 1982).</p></li>
@@ -876,14 +877,14 @@ gtt_ae_types &lt;-<span class="st"> </span>gtt %&gt;%
 <div id="appendix-2-critical-values-for-longest-run-and-number-of-crossings" class="section level2">
 <h2 class="hasAnchor">
 <a href="#appendix-2-critical-values-for-longest-run-and-number-of-crossings" class="anchor"></a>Appendix 2: Critical values for longest run and number of crossings</h2>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">n &lt;-<span class="st"> </span><span class="dv">10</span>:<span class="dv">100</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">n &lt;-<span class="st"> </span><span class="dv">10</span><span class="op">:</span><span class="dv">100</span>
 x &lt;-<span class="st"> </span><span class="kw">data.frame</span>(
   <span class="st">`</span><span class="dt">Number of useful observations</span><span class="st">`</span>       =<span class="st"> </span>n,
-  <span class="st">`</span><span class="dt">Upper limit for longest run</span><span class="st">`</span>         =<span class="st"> </span><span class="kw">round</span>(<span class="kw">log2</span>(n) +<span class="st"> </span><span class="dv">3</span>),
-  <span class="st">`</span><span class="dt">Lower limit for number of crossings</span><span class="st">`</span> =<span class="st"> </span><span class="kw">qbinom</span>(<span class="fl">0.05</span>, n -<span class="st"> </span><span class="dv">1</span>, <span class="fl">0.5</span>),
+  <span class="st">`</span><span class="dt">Upper limit for longest run</span><span class="st">`</span>         =<span class="st"> </span><span class="kw">round</span>(<span class="kw">log2</span>(n) <span class="op">+</span><span class="st"> </span><span class="dv">3</span>),
+  <span class="st">`</span><span class="dt">Lower limit for number of crossings</span><span class="st">`</span> =<span class="st"> </span><span class="kw">qbinom</span>(<span class="fl">0.05</span>, n <span class="op">-</span><span class="st"> </span><span class="dv">1</span>, <span class="fl">0.5</span>),
   <span class="dt">check.names                           =</span> <span class="ot">FALSE</span>)
 
-knitr::<span class="kw">kable</span>(x)</code></pre></div>
+knitr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/knitr/topics/kable">kable</a></span>(x)</code></pre></div>
 <table class="table">
 <thead><tr class="header">
 <th align="right">Number of useful observations</th>
