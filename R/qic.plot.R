@@ -40,14 +40,14 @@ plot.qic <- function(x, title, ylab, xlab, subtitle, caption, part.labels,
     theme_bw() +
     theme(panel.border     = element_rect(colour = 'grey93'),
           strip.background = element_rect(colour = 'grey93', fill = 'grey93'),
-          axis.ticks       = element_line(colour = 'grey85'),
+          axis.ticks       = element_line(colour = 'grey80'),
           panel.grid       = element_blank(),
           legend.position  = 'none')
   
   # Add control limits and centre and target lines
   p <- p +
     geom_ribbon(aes_(ymin = ~ lcl, ymax = ~ ucl),
-                fill = 'grey85',
+                fill = 'grey80',
                 alpha = 0.25) +
     geom_line(aes_(y = ~ target),
               colour = col4,
