@@ -48,7 +48,7 @@ paretochart(unlist(gtt[7:11]),
 
 > Statistical Process Control is not about statistics, it is not about "process-hyphen-control", and it is not about conformance to specifications. [...] It is about the continual improvement of processes and outcomes. And it is, first and foremost, *a way of thinking* with some tools attached.
 >
-> Donald J. Wheeler, Understanding Variation, 2. ed., p 152
+> Donald J. Wheeler. Understanding Variation, 2. ed., p 152
 
 This vignette will teach you the easy part of SPC, *the tools*, as implemented by `qicharts2` for R. I strongly recommend that you also study *the way of thinking*, for example by reading Wheeler's excellent book.
 
@@ -118,7 +118,7 @@ The purpose of analysing process data is to know when a change occurs so that we
 
 > A process will be said to be predictabe when, through the use of past experience, we can describe, at least within limits, how the process will behave in the future.
 >
-> Donald J. Wheeler, Understanding Variation, 2. ed., p 153
+> Donald J. Wheeler. Understanding Variation, 2. ed., p 153
 
 The overall purpose of SPC charts is to tell the two types of variation apart.
 
@@ -194,7 +194,7 @@ o <- qic(y, chart = 'i')
 summary(o)
 ```
 
-In summary, many additional test for special cause variation have been proposed since Shewhart invented the 3-sigma rule, and many tests are currently being used. The more tests that are applied to the analysis the higher the risk of false signals. `qicharts2` takes a conservative approach by applying only 3 tests, the 3-sigma rule and the two Anhoej rules. That means that a signal from `qic()` most likely represents a significant change in the underlying process.
+In summary, many additional test for special cause variation have been proposed since Shewhart invented the 3-sigma rule, and many tests are currently being used. The more tests that are applied to the analysis the higher the risk of false signals. `qicharts2` takes a conservative approach by applying only three tests, the 3-sigma rule and the two Anhoej rules. That means that a signal from `qic()` most likely represents a significant change in the underlying process.
 
 ## Choosing the right control chart
 
@@ -226,7 +226,7 @@ I recommend to always begin any analysis with the "assumption free" run chart. I
 >
 >If it did, then it makes no sense to do a control chart at this time because the overall average of all these data doesn't exist. (Sort of like: If I put my right foot in a bucket of boiling water and my left foot in a bucket of ice water, on average, I'm pretty comfortable.)
 >
-> Davis Balestracci [Quality Digest 2014](https://www.qualitydigest.com/inside/quality-insider-column/control-charts-simple-elegance-or-legalized-torture.html)
+> Davis Balestracci. [Quality Digest 2014](https://www.qualitydigest.com/inside/quality-insider-column/control-charts-simple-elegance-or-legalized-torture.html)
 
 ## Case 1: Patient harm
 
@@ -265,7 +265,7 @@ Because the sample sizes (number of patient days) are not the same each month, t
 
 ### Run and P control charts of percent harmed patients
 
-To plot the percentage of harmed patients (patient with 1 or more harms) we need to add a variable and to aggregate data by month.
+To plot the percentage of harmed patients (patients with 1 or more harms) we need to add a variable and to aggregate data by month.
 
 ```{r}
 suppressPackageStartupMessages(library(dplyr))
@@ -308,8 +308,9 @@ Since both the harm rate and the proportion of harmed patients exhibit common ca
 Actually, we often do not need to aggregate data in advance. With a little creativity we can make `qic` do the hard work. The previous plot could have been produced with this code. Note the use of the original gtt dataset and the number of harmed and total number of patients created on the fly.
 
 ```{r, eval=FALSE}
-qic(month, harms > 0,      # TRUE if patient had one or more harms
-    n         = days > 0,  # Always TRUE 
+qic(month, 
+    harms > 0,        # TRUE if patient had one or more harms
+    days > 0,         # Always TRUE 
     data      = gtt,
     chart     = 'p',
     y.percent = TRUE,
@@ -379,7 +380,7 @@ qic(month, n,
     data        = cdi,
     decimals    = 0,
     freeze      = 24,
-    part.labels = c('Before intervention', 'After intervention'),
+    part.labels = c('Baseline', 'Intervention'),
     title       = 'Hospital acquired Clostridium difficile infections',
     ylab        = 'Count',
     xlab        = 'Month')
@@ -468,12 +469,12 @@ First, we will make a control chart of the age of the last 100 patients. Since w
 
 ```{r}
 qic(age,
-    data  = tail(cabg, 100), 
-    chart = 'i',
+    data      = tail(cabg, 100), 
+    chart     = 'i',
     show.grid = TRUE,
-    title = 'Age of the last 100 patients (I chart)',
-    ylab  = 'Years',
-    xlab  = 'Patient #')
+    title     = 'Age of the last 100 patients (I chart)',
+    ylab      = 'Years',
+    xlab      = 'Patient #')
 ```
 
 Two data points (patients number 45 and 70) are below the lower 3-sigma limit indicating that these patients are "unusually" young, i.e. representative of phenomena that are not normally present in the process. 
@@ -482,12 +483,12 @@ I charts are often displayed along moving range charts that show the ranges of n
 
 ```{r}
 qic(age,
-    data  = tail(cabg, 100), 
-    chart = 'mr',
+    data      = tail(cabg, 100), 
+    chart     = 'mr',
     show.grid = TRUE,
-    title = 'Age of the last 100 patients (MR chart)',
-    ylab  = 'Years',
-    xlab  = 'Patient #')
+    title     = 'Age of the last 100 patients (MR chart)',
+    ylab      = 'Years',
+    xlab      = 'Patient #')
 ```
 
 The MR chart identifies three unusually large ranges, which are clearly produced by the two unusually young patients also found in the I chart. Note that each data point in an I chart is contained in two moving ranges in the MR chart.
@@ -526,7 +527,7 @@ qic(month, age,
     xlab  = 'Month')
 ```
 
-Xbar charts are usually displayed along S charts displaying the within sample standard deviation.
+Xbar charts are usually displayed along S charts displaying the within subgroup standard deviation.
 
 ```{r}
 qic(month, age,
@@ -617,7 +618,7 @@ qic(dt,
     xlab  = 'Death #')
 ```
 
-The conclusions from the G and the T chart are the same: Deaths number 24 and 25 are unusually far apart. We should look for an assignable cause to explain this as it may help us get ideas to reduce postoperative mortality in the future.
+The conclusions from the two charts are the same: Deaths number 24 and 25 are unusually far apart. We should look for an assignable cause to explain this as it may help us get ideas to reduce postoperative mortality in the future.
 
 ### Faceting readmission rates by gender
 
@@ -849,49 +850,25 @@ where $\bar{\bar{x}}$ is the weighted average of the sample statistic and $SD$ i
 
 The procedure for calculating $SD$ depends on the type type of data involved:
 
-**I**: $\bar{x}\pm2.66\overline{MR}$,
-<span style='font-size:small'>
-$\bar{x}=$, sample average, $\overline{MR}=$ average moving range of successive observations.
-</span>
+**I**: $\bar{x}\pm2.66\overline{MR}$, $\bar{x}=$, sample average, $\overline{MR}=$ average moving range of successive observations.
 
-**MR**: $\overline{MR}+3.267\overline{MR}$,
-<span style='font-size:small'>
-$\overline{MR}=$ average moving range (no lower 3-sigma limit).
-</span>
+**MR**: $\overline{MR}+3.267\overline{MR}$, $\overline{MR}=$ average moving range (no lower 3-sigma limit).
 
-**Xbar**: $\bar{\bar{x}}\pm A_{3}\bar{s}$,
-<span style='font-size:small'>
-$A_{3}=$ constant depending on the sample size,
+**Xbar**: $\bar{\bar{x}}\pm A_{3}\bar{s}$, $A_{3}=$ constant depending on the sample size,
 $\bar{s}=$ weighted sample standard deviation.
-</span>
 
-**S**: $CL=\bar{s}, LCL=B_{3}\bar{s}, UCL=B_{4}\bar{s}$,
-<span style='font-size:small'>
-$\bar{s}=$ weighted sample standard deviation,
+**S**: $CL=\bar{s}, LCL=B_{3}\bar{s}, UCL=B_{4}\bar{s}$, $\bar{s}=$ weighted sample standard deviation,
 $B_{3}$ and $B_{4}=$ constants depending on the sample size.
-</span>
 
-**C**: $\bar{c}\pm3\sqrt{\bar{c}}$,
-<span style='font-size:small'>
-$\bar{c}=$ average number of defects.
-</span>
+**C**: $\bar{c}\pm3\sqrt{\bar{c}}$, $\bar{c}=$ average number of defects.
 
-**U**: $\bar{u}\pm3\sqrt{\frac{\bar{u}}{n_{i}}}$,
-<span style='font-size:small'>
-$\bar{u}=$ average number of defects per unit,
+**U**: $\bar{u}\pm3\sqrt{\frac{\bar{u}}{n_{i}}}$, $\bar{u}=$ average number of defects per unit,
 $n_{i}=$ size of inspection unit.
-</span>
 
-**P**: $\bar{p}\pm3\sqrt{\frac{\bar{p}(1-\bar{p})}{n_{i}}}$,
-<span style='font-size:small'>
-$\bar{p}=$ average number of defectives,
+**P**: $\bar{p}\pm3\sqrt{\frac{\bar{p}(1-\bar{p})}{n_{i}}}$, $\bar{p}=$ average number of defectives,
 $n_{i}=$ sample size.
-</span>
 
-**G**: $\bar{x}\pm3\sqrt{\bar{x}(\bar{x}+1)}$,
-<span style='font-size:small'>
-$\bar{x}=$ average number of opportunities between events.
-</span>
+**G**: $\bar{x}\pm3\sqrt{\bar{x}(\bar{x}+1)}$, $\bar{x}=$ average number of opportunities between events.
 
 **Notes**
 
