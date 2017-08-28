@@ -30,8 +30,12 @@ Non-random variation in the form of larger, possibly transient, shifts is identi
 * **gtt** Adverse events during hospitalisation found by the Global Trigger Tool.
 
 ## Instructions
-    
-* Install from github: `devtools::install_github('anhoej/qicharts2', build_vignettes = TRUE)`.
+
+* Install stable version from CRAN: `install.packages('qicharts2')`.
+  
+  OR
+
+* Install development version from github: `devtools::install_github('anhoej/qicharts2', build_vignettes = TRUE)`.
 
 * Read documentation: `?qic`.
 
