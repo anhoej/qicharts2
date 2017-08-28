@@ -55,7 +55,10 @@ This vignette will teach you the easy part of SPC, *the tools*, as implemented b
 ## Installation
 
 ```{r, eval=FALSE}
-# Install development version from GitHub.
+# Install stable version from CRAN: 
+install.packages('qicharts2')
+# OR
+# Install development version from GitHub:
 devtools::install_github('anhoej/qicharts2', build_vignettes = TRUE)
 ```
 
