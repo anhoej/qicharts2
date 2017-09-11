@@ -429,7 +429,7 @@ qic.agg <- function(d, got.n, part, agg.fun, freeze, exclude,
   d$sigma.signal[is.na(d$sigma.signal)] <- FALSE
   
   # Ignore runs analysis if subgroups are categorical or if chart type is MR
-  if (dots.only && chart == 'mr')
+  if (dots.only || chart == 'mr')
     d$runs.signal <- FALSE
   
   # Prevent negative y axis if y.neg argument is FALSE
