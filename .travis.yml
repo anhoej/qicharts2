@@ -2,7 +2,7 @@
 
 language: r
 r: 
-#  - release
-  - devel
+  - release
+#  - devel
 sudo: false
 cache: packages
