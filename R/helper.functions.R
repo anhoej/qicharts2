@@ -101,7 +101,7 @@ qic.xbar <- function(x){
     stdev <- sqrt(sum((x$y.length[base] - 1) * x$y.sd[base]^2, na.rm = TRUE) /
                     sum(x$y.length[base] - 1, na.rm = TRUE))
   } else {
-    stdev <- mean(x$y.sd, na.rm = TRUE)
+    stdev <- mean(x$y.sd[base], na.rm = TRUE)
   }
   A3    <- a3(x$y.length)
   x$ucl <- x$cl + A3 * stdev
@@ -431,7 +431,7 @@ qic.agg <- function(d, got.n, part, agg.fun, freeze, exclude,
   # Ignore runs analysis if subgroups are categorical or if chart type is MR
   if (dots.only || chart == 'mr')
     d$runs.signal <- FALSE
-  
+
   # Prevent negative y axis if y.neg argument is FALSE
   if (!y.neg & min(d$y, na.rm = TRUE) >= 0) {
     d$lcl[d$lcl < 0]         <- 0

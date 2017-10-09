@@ -18,7 +18,7 @@ plot.qic <- function(x, title, ylab, xlab, subtitle, caption, part.labels,
   x$dotcol  <- ifelse(x$include, x$dotcol, 'col5')
   x$dotcol  <- ifelse(x$y == x$cl, 'col5', x$dotcol)
   x$linecol <- ifelse(x$runs.signal, 'col3', 'col1')
-  
+
   # Set label parameters
   lab.size <- 3
   lab.just <- ifelse(flip, 'center', -0.2)
