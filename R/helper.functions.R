@@ -200,6 +200,7 @@ qic.pp <- function(x) {
 
 qic.c <- function(x){
   base <- x$baseline & x$include
+  x$y <- x$y.sum
   
   if (anyNA(x$cl)) {
     x$cl <- mean(x$y[base], na.rm = TRUE)
