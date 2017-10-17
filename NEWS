@@ -1,4 +1,10 @@
+qicharts2 0.1.1.9000
+===============
+* Import dplyr >= 0.7.0
+* Fix calculation of control limits for xbar chart in qic() with freeze or 
+  exclude argument.
+* C chart ignores agg.fun argument.
+
 qicharts2 0.1.1
 ===============
-
 * First release.
