@@ -72,7 +72,7 @@ panels or free.}
 
 \item{caption}{Character string specifying the caption.}
 
-\item{part.labels}{Character vector of length two specifying  labels for 
+\item{part.labels}{Character vector specifying  labels for 
 chart parts created with the freeze or part argument.}
 
 \item{show.labels}{Logical indicating whether to show labels for centre and

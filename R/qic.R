@@ -44,7 +44,7 @@
 #' @param ylab Character string specifying the y axis label.
 #' @param subtitle Character string specifying the subtitle.
 #' @param caption Character string specifying the caption.
-#' @param part.labels Character vector of length two specifying  labels for 
+#' @param part.labels Character vector specifying  labels for 
 #'   chart parts created with the freeze or part argument.
 #' @param show.labels Logical indicating whether to show labels for centre and
 #'   control lines on chart. Defaults to TRUE when facets argument is NULL.
