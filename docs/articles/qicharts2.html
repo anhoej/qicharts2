@@ -73,7 +73,7 @@
             <h3 class="subtitle">An implementation of statistical process control charts for R</h3>
                         <h4 class="author">Jacob Anhøj</h4>
             
-            <h4 class="date">2017-09-11</h4>
+            <h4 class="date">2017-10-21</h4>
           </div>
 
     
@@ -93,11 +93,10 @@
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Install stable version from CRAN: </span>
-<span class="kw">install.packages</span>(<span class="st">'qicharts2'</span>)
-<span class="co"># OR</span>
-<span class="co"># Install development version from GitHub:</span>
-devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">'anhoej/qicharts2'</span>, <span class="dt">build_vignettes =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<p>Install stable version from CRAN:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">'qicharts2'</span>)</code></pre></div>
+<p>Or install development version from GitHub:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">'anhoej/qicharts2'</span>, <span class="dt">build_vignettes =</span> <span class="ot">TRUE</span>)</code></pre></div>
 </div>
 <div id="your-first-run-and-control-charts" class="section level2">
 <h2 class="hasAnchor">
@@ -113,10 +112,10 @@ devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocument
 y &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">24</span>)</code></pre></div>
 <p>Make a run chart:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/qic.html">qic</a></span>(y)</code></pre></div>
-<p><img src="qicharts2_files/figure-html/unnamed-chunk-6-1.svg" width="686.4"></p>
+<p><img src="qicharts2_files/figure-html/unnamed-chunk-7-1.svg" width="686.4"></p>
 <p>Make an I control chart:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/qic.html">qic</a></span>(y, <span class="dt">chart =</span> <span class="st">'i'</span>)</code></pre></div>
-<p><img src="qicharts2_files/figure-html/unnamed-chunk-7-1.svg" width="686.4"></p>
+<p><img src="qicharts2_files/figure-html/unnamed-chunk-8-1.svg" width="686.4"></p>
 <p>Run charts and control charts are point-and-line graphs showing measures or counts over time. A horizontal line represents the process centre expressed by either the median (run charts) or the mean (control charts). In addition, control charts visualise the limits of the natural variation inherent in the process. Because of the way these limits are computed, they are often referred to as 3-sigma limits (see Appendix 1). Other terms for 3-sigma limits are control limits and natural process limits.</p>
 </div>
 <div id="understanding-variation" class="section level2">
@@ -157,13 +156,13 @@ y &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">2
 y[<span class="dv">22</span>] &lt;-<span class="st"> </span><span class="dv">4</span>
 
 <span class="kw"><a href="../reference/qic.html">qic</a></span>(y, <span class="dt">chart =</span> <span class="st">'i'</span>)</code></pre></div>
-<p><img src="qicharts2_files/figure-html/unnamed-chunk-8-1.svg" width="686.4"></p>
+<p><img src="qicharts2_files/figure-html/unnamed-chunk-9-1.svg" width="686.4"></p>
 <p>However, minor to moderate shifts may go unnoticed by the 3-sigma rule for long periods of time.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Simulate a special cause to y in the form of a moderate, persistent shift of 2 standard deviations.</span>
 y[<span class="dv">13</span><span class="op">:</span><span class="dv">24</span>] &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">12</span>, <span class="dt">mean =</span> <span class="dv">2</span>)
 
 <span class="kw"><a href="../reference/qic.html">qic</a></span>(y, <span class="dt">chart =</span> <span class="st">'i'</span>)</code></pre></div>
-<p><img src="qicharts2_files/figure-html/unnamed-chunk-9-1.svg" width="686.4"></p>
+<p><img src="qicharts2_files/figure-html/unnamed-chunk-10-1.svg" width="686.4"></p>
 <p>Therefore, many additional tests have been proposed to increase the sensitivity to non-random variation.</p>
 <p>It is important to realise that while it may be tempting to apply more tests in order to increase the sensitivity of the chart, more test will increase the risk of false signals thereby reducing the specificity of the chart. The choice of which and how many tests to apply is therefore critical.</p>
 </div>
@@ -323,7 +322,7 @@ o &lt;-<span class="st"> </span><span class="kw"><a href="../reference/qic.html"
     <span class="dt">title    =</span> <span class="st">'Patient harm'</span>,
     <span class="dt">ylab     =</span> <span class="st">'Adverse events per 1000 patient days'</span>,
     <span class="dt">xlab     =</span> <span class="st">'Month'</span>)</code></pre></div>
-<p><img src="qicharts2_files/figure-html/unnamed-chunk-12-1.svg" width="686.4"></p>
+<p><img src="qicharts2_files/figure-html/unnamed-chunk-13-1.svg" width="686.4"></p>
 <p>Since only random variation is present in the run chart, a U control chart for harm rate is appropriate for computing the limits of the common cause variation.</p>
 </div>
 <div id="u-chart-of-adverse-events-per-1000-patient-days" class="section level3">
@@ -336,7 +335,7 @@ o &lt;-<span class="st"> </span><span class="kw"><a href="../reference/qic.html"
     <span class="dt">title    =</span> <span class="st">'Patient harm (U chart)'</span>,
     <span class="dt">ylab     =</span> <span class="st">'Adverse events per 1000 patient days'</span>,
     <span class="dt">xlab     =</span> <span class="st">'Month'</span>)</code></pre></div>
-<p><img src="qicharts2_files/figure-html/unnamed-chunk-13-1.svg" width="686.4"></p>
+<p><img src="qicharts2_files/figure-html/unnamed-chunk-14-1.svg" width="686.4"></p>
 <p>Because the sample sizes (number of patient days) are not the same each month, the 3-sigma limits vary. Large samples give narrow limits and vice versa. Varying limits are also seen in P and Xbar charts.</p>
 </div>
 <div id="run-and-p-control-charts-of-percent-harmed-patients" class="section level3">
@@ -370,7 +369,7 @@ gtt_by_month &lt;-<span class="st"> </span>gtt <span class="op">%&gt;%</span>
     <span class="dt">title     =</span> <span class="st">'Harmed patients'</span>,
     <span class="dt">ylab      =</span> <span class="ot">NULL</span>,
     <span class="dt">xlab      =</span> <span class="st">'Month'</span>)</code></pre></div>
-<p><img src="qicharts2_files/figure-html/unnamed-chunk-15-1.svg" width="686.4"></p>
+<p><img src="qicharts2_files/figure-html/unnamed-chunk-16-1.svg" width="686.4"></p>
 <p>Again, since the run chart finds random variation, a control chart may be applied. For proportion (or percent) harmed patients we use a P chart.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/qic.html">qic</a></span>(month, n.harmed, n,
     <span class="dt">data      =</span> gtt_by_month,
@@ -379,7 +378,7 @@ gtt_by_month &lt;-<span class="st"> </span>gtt <span class="op">%&gt;%</span>
     <span class="dt">title     =</span> <span class="st">'Harmed patients (P chart)'</span>,
     <span class="dt">ylab      =</span> <span class="ot">NULL</span>,
     <span class="dt">xlab      =</span> <span class="st">'Month'</span>)</code></pre></div>
-<p><img src="qicharts2_files/figure-html/unnamed-chunk-16-1.svg" width="686.4"></p>
+<p><img src="qicharts2_files/figure-html/unnamed-chunk-17-1.svg" width="686.4"></p>
 <p>Since both the harm rate and the proportion of harmed patients exhibit common cause variation only, we conclude that the risk of adverse events during hospitalisation is predictable and that we in the future should expect around 60 adverse events per 1000 patient days harming around 33% of patients.</p>
 <p>Actually, we often do not need to aggregate data in advance. With a little creativity we can make <code>qic</code> do the hard work. The previous plot could have been produced with this code. Note the use of the original gtt dataset and the number of harmed and total number of patients created on the fly.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/qic.html">qic</a></span>(month, 
@@ -420,11 +419,11 @@ gtt_ae_types &lt;-<span class="st"> </span>gtt <span class="op">%&gt;%</span>
 <span class="co">#&gt; 6 Gastrointestinal</span></code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/paretochart.html">paretochart</a></span>(gtt_ae_types<span class="op">$</span>category,
             <span class="dt">title =</span> <span class="st">'Pareto chart of harm category'</span>)</code></pre></div>
-<p><img src="qicharts2_files/figure-html/unnamed-chunk-19-1.svg" width="686.4"></p>
+<p><img src="qicharts2_files/figure-html/unnamed-chunk-20-1.svg" width="686.4"></p>
 <p>The bars show the number in each category, and the curve shows the cumulated percentage over categories. Almost 80% of harms come from 3 categories: gastrointestinal, infection, and procedure.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/paretochart.html">paretochart</a></span>(gtt_ae_types<span class="op">$</span>severity,
             <span class="dt">title =</span> <span class="st">'Pareto chart of harm severity'</span>)</code></pre></div>
-<p><img src="qicharts2_files/figure-html/unnamed-chunk-20-1.svg" width="686.4"></p>
+<p><img src="qicharts2_files/figure-html/unnamed-chunk-21-1.svg" width="686.4"></p>
 <p>Almost all harms are temporary (E-F).</p>
 </div>
 </div>
@@ -451,7 +450,7 @@ gtt_ae_types &lt;-<span class="st"> </span>gtt <span class="op">%&gt;%</span>
     <span class="dt">title    =</span> <span class="st">'Hospital acquired Clostridium difficile infections'</span>,
     <span class="dt">ylab     =</span> <span class="st">'Count'</span>,
     <span class="dt">xlab     =</span> <span class="st">'Month'</span>)</code></pre></div>
-<p><img src="qicharts2_files/figure-html/unnamed-chunk-22-1.svg" width="686.4"></p>
+<p><img src="qicharts2_files/figure-html/unnamed-chunk-23-1.svg" width="686.4"></p>
 <p>A downward shift in the number of CDIs is clearly visible to the naked eye and is supported by the runs analysis resulting in the centre line being dashed red. The shift seem to begin around the time of the intervention.</p>
 <p>Even though it is not necessary in this case, we can strengthen the analysis by using the median of the before-intervention period to test for non-random variation in the after period.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/qic.html">qic</a></span>(month, n,
@@ -462,7 +461,7 @@ gtt_ae_types &lt;-<span class="st"> </span>gtt <span class="op">%&gt;%</span>
     <span class="dt">title       =</span> <span class="st">'Hospital acquired Clostridium difficile infections'</span>,
     <span class="dt">ylab        =</span> <span class="st">'Count'</span>,
     <span class="dt">xlab        =</span> <span class="st">'Month'</span>)</code></pre></div>
-<p><img src="qicharts2_files/figure-html/unnamed-chunk-23-1.svg" width="686.4"></p>
+<p><img src="qicharts2_files/figure-html/unnamed-chunk-24-1.svg" width="686.4"></p>
 <p>The median number of CDIs per month in the before period is 19. An unusually long run of 15 data points below the median proves that the CDI rate is reduced.</p>
 <p>When a shift in the desired direction is the result of a deliberate change to the process, we may split the chart to compare the numbers before and after the intervention.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/qic.html">qic</a></span>(month, n,
@@ -472,7 +471,7 @@ gtt_ae_types &lt;-<span class="st"> </span>gtt <span class="op">%&gt;%</span>
     <span class="dt">title    =</span> <span class="st">'Hospital acquired Clostridium difficile infections'</span>,
     <span class="dt">ylab     =</span> <span class="st">'Count'</span>,
     <span class="dt">xlab     =</span> <span class="st">'Month'</span>)</code></pre></div>
-<p><img src="qicharts2_files/figure-html/unnamed-chunk-24-1.svg" width="686.4"></p>
+<p><img src="qicharts2_files/figure-html/unnamed-chunk-25-1.svg" width="686.4"></p>
 </div>
 <div id="c-chart-for-number-of-infections" class="section level3">
 <h3 class="hasAnchor">
@@ -485,7 +484,7 @@ gtt_ae_types &lt;-<span class="st"> </span>gtt <span class="op">%&gt;%</span>
     <span class="dt">title =</span> <span class="st">'Hospital acquired Clostridium difficile infections (C chart)'</span>,
     <span class="dt">ylab  =</span> <span class="st">'Count'</span>,
     <span class="dt">xlab  =</span> <span class="st">'Month'</span>)</code></pre></div>
-<p><img src="qicharts2_files/figure-html/unnamed-chunk-25-1.svg" width="686.4"></p>
+<p><img src="qicharts2_files/figure-html/unnamed-chunk-26-1.svg" width="686.4"></p>
 <p>The split C chart shows that the CDI rate has dropped from an average of 19 to 7 per month. Furthermore, the 3-sigma limits tell that the current process is predictable and that we in the future should expect between 0 and 15 CDIs per month.</p>
 </div>
 <div id="u-chart-for-infection-rate" class="section level3">
@@ -500,7 +499,7 @@ gtt_ae_types &lt;-<span class="st"> </span>gtt <span class="op">%&gt;%</span>
     <span class="dt">title    =</span> <span class="st">'Hospital acquired Clostridium difficile infections (U chart)'</span>,
     <span class="dt">ylab     =</span> <span class="st">'Cases per 10,000 risk days'</span>,
     <span class="dt">xlab     =</span> <span class="st">'Month'</span>)</code></pre></div>
-<p><img src="qicharts2_files/figure-html/unnamed-chunk-26-1.svg" width="686.4"></p>
+<p><img src="qicharts2_files/figure-html/unnamed-chunk-27-1.svg" width="686.4"></p>
 <p>In fact, U charts can always be used instead of C charts. When the area of opportunity is constant the two charts will reach the same conclusion. But the raw numbers in a C chart may be easier to communicate than counts per something.</p>
 <p>It is very important to recognise that while run and control charts can identify non-random variation, they cannot identify its causes. The analysis only tells that the CDI rate was reduced after an intervention. The causal relationship between the intervention and the shift must be established using other methods.</p>
 </div>
@@ -543,7 +542,7 @@ gtt_ae_types &lt;-<span class="st"> </span>gtt <span class="op">%&gt;%</span>
     <span class="dt">title     =</span> <span class="st">'Age of the last 100 patients (I chart)'</span>,
     <span class="dt">ylab      =</span> <span class="st">'Years'</span>,
     <span class="dt">xlab      =</span> <span class="st">'Patient #'</span>)</code></pre></div>
-<p><img src="qicharts2_files/figure-html/unnamed-chunk-28-1.svg" width="686.4"></p>
+<p><img src="qicharts2_files/figure-html/unnamed-chunk-29-1.svg" width="686.4"></p>
 <p>Two data points (patients number 45 and 70) are below the lower 3-sigma limit indicating that these patients are “unusually” young, i.e. representative of phenomena that are not normally present in the process.</p>
 <p>I charts are often displayed along moving range charts that show the ranges of neighbouring data points.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/qic.html">qic</a></span>(age,
@@ -553,7 +552,7 @@ gtt_ae_types &lt;-<span class="st"> </span>gtt <span class="op">%&gt;%</span>
     <span class="dt">title     =</span> <span class="st">'Age of the last 100 patients (MR chart)'</span>,
     <span class="dt">ylab      =</span> <span class="st">'Years'</span>,
     <span class="dt">xlab      =</span> <span class="st">'Patient #'</span>)</code></pre></div>
-<p><img src="qicharts2_files/figure-html/unnamed-chunk-29-1.svg" width="686.4"></p>
+<p><img src="qicharts2_files/figure-html/unnamed-chunk-30-1.svg" width="686.4"></p>
 <p>The MR chart identifies three unusually large ranges, which are clearly produced by the two unusually young patients also found in the I chart. Note that each data point in an I chart is contained in two moving ranges in the MR chart.</p>
 <p>We should seek the cause(s) of these special causes. We may then chose to eliminate the outliers from the computations of the process centre and 3-sigma limits in order to predict the expected age range of future patients.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/qic.html">qic</a></span>(age,
@@ -563,7 +562,7 @@ gtt_ae_types &lt;-<span class="st"> </span>gtt <span class="op">%&gt;%</span>
     <span class="dt">title   =</span> <span class="st">'Age of the last 100 patients (I chart)'</span>,
     <span class="dt">ylab    =</span> <span class="st">'Years'</span>,
     <span class="dt">xlab    =</span> <span class="st">'Patient #'</span>)</code></pre></div>
-<p><img src="qicharts2_files/figure-html/unnamed-chunk-30-1.svg" width="686.4"></p>
+<p><img src="qicharts2_files/figure-html/unnamed-chunk-31-1.svg" width="686.4"></p>
 <p>Thus, on average we should expect future patients to be 67 years of age, and patients younger than 43 years or older than 91 years would be unusual.</p>
 </div>
 <div id="xbar-and-s-charts-for-average-and-standard-deviation-of-patient-age" class="section level3">
@@ -579,7 +578,7 @@ gtt_ae_types &lt;-<span class="st"> </span>gtt <span class="op">%&gt;%</span>
     <span class="dt">title =</span> <span class="st">'Average age (Xbar chart)'</span>,
     <span class="dt">ylab  =</span> <span class="st">'Years'</span>,
     <span class="dt">xlab  =</span> <span class="st">'Month'</span>)</code></pre></div>
-<p><img src="qicharts2_files/figure-html/unnamed-chunk-32-1.svg" width="686.4"></p>
+<p><img src="qicharts2_files/figure-html/unnamed-chunk-33-1.svg" width="686.4"></p>
 <p>Xbar charts are usually displayed along S charts displaying the within subgroup standard deviation.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/qic.html">qic</a></span>(month, age,
     <span class="dt">data  =</span> cabg,
@@ -587,7 +586,7 @@ gtt_ae_types &lt;-<span class="st"> </span>gtt <span class="op">%&gt;%</span>
     <span class="dt">title =</span> <span class="st">'Age standard deviation (S chart)'</span>,
     <span class="dt">ylab  =</span> <span class="st">'Years'</span>,
     <span class="dt">xlab  =</span> <span class="st">'Month'</span>)</code></pre></div>
-<p><img src="qicharts2_files/figure-html/unnamed-chunk-33-1.svg" width="686.4"></p>
+<p><img src="qicharts2_files/figure-html/unnamed-chunk-34-1.svg" width="686.4"></p>
 <p>Since both the Xbar and the S chart displays common cause variation, we may conclude that the monthly average and standard deviation of patient age is predictable. Note that the mean of the Xbar chart is close to the mean of the individuals chart but that the 3-sigma limits are narrower.</p>
 </div>
 <div id="p-charts-for-proportion-of-patients-who-were-readmitted-or-died-within-30-after-surgery" class="section level3">
@@ -618,7 +617,7 @@ gtt_ae_types &lt;-<span class="st"> </span>gtt <span class="op">%&gt;%</span>
     <span class="dt">title     =</span> <span class="st">'Readmissions within 30 days (P chart)'</span>,
     <span class="dt">ylab      =</span> <span class="ot">NULL</span>,
     <span class="dt">xlab      =</span> <span class="st">'Month'</span>)</code></pre></div>
-<p><img src="qicharts2_files/figure-html/unnamed-chunk-35-1.svg" width="686.4"></p>
+<p><img src="qicharts2_files/figure-html/unnamed-chunk-36-1.svg" width="686.4"></p>
 <p>On average, 22% of patients are readmitted within 30 days after surgery, and if nothing changes we would expect this to continue.</p>
 <p>What about mortality?</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/qic.html">qic</a></span>(month, deaths, n,
@@ -628,7 +627,7 @@ gtt_ae_types &lt;-<span class="st"> </span>gtt <span class="op">%&gt;%</span>
     <span class="dt">title     =</span> <span class="st">'30 days mortality (P chart)'</span>,
     <span class="dt">ylab      =</span> <span class="ot">NULL</span>,
     <span class="dt">xlab      =</span> <span class="st">'Month'</span>)</code></pre></div>
-<p><img src="qicharts2_files/figure-html/unnamed-chunk-36-1.svg" width="686.4"></p>
+<p><img src="qicharts2_files/figure-html/unnamed-chunk-37-1.svg" width="686.4"></p>
 <p>Thankfully, post-surgery mortality is a rare event, and the P chart suggests common cause variation. However, it seems curious that only one patient died during the summer of 2012. To investigate this further, G or T charts for rare events are useful.</p>
 </div>
 <div id="t-and-g-charts-for-rare-events" class="section level3">
@@ -656,7 +655,7 @@ gtt_ae_types &lt;-<span class="st"> </span>gtt <span class="op">%&gt;%</span>
     <span class="dt">title =</span> <span class="st">'Surgeries between deaths (G chart)'</span>,
     <span class="dt">ylab  =</span> <span class="st">'Count'</span>,
     <span class="dt">xlab  =</span> <span class="st">'Death #'</span>)</code></pre></div>
-<p><img src="qicharts2_files/figure-html/unnamed-chunk-38-1.svg" width="686.4"></p>
+<p><img src="qicharts2_files/figure-html/unnamed-chunk-39-1.svg" width="686.4"></p>
 <p>If we do not have information on the opportunities (surgeries with survival), we may instead use a T chart for time between events.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/qic.html">qic</a></span>(dt,
     <span class="dt">data  =</span> fatalities,
@@ -664,7 +663,7 @@ gtt_ae_types &lt;-<span class="st"> </span>gtt <span class="op">%&gt;%</span>
     <span class="dt">title =</span> <span class="st">'Days between deaths (T chart)'</span>,
     <span class="dt">ylab  =</span> <span class="st">'Days'</span>,
     <span class="dt">xlab  =</span> <span class="st">'Death #'</span>)</code></pre></div>
-<p><img src="qicharts2_files/figure-html/unnamed-chunk-39-1.svg" width="686.4"></p>
+<p><img src="qicharts2_files/figure-html/unnamed-chunk-40-1.svg" width="686.4"></p>
 <p>The conclusions from the two charts are the same: Deaths number 24 and 25 are unusually far apart. We should look for an assignable cause to explain this as it may help us get ideas to reduce postoperative mortality in the future.</p>
 </div>
 <div id="faceting-readmission-rates-by-gender" class="section level3">
@@ -696,7 +695,7 @@ gtt_ae_types &lt;-<span class="st"> </span>gtt <span class="op">%&gt;%</span>
     <span class="dt">title     =</span> <span class="st">'Readmissions within 30 days (P chart)'</span>,
     <span class="dt">ylab      =</span> <span class="st">''</span>,
     <span class="dt">xlab      =</span> <span class="st">'Month'</span>)</code></pre></div>
-<p><img src="qicharts2_files/figure-html/unnamed-chunk-41-1.svg" width="686.4"></p>
+<p><img src="qicharts2_files/figure-html/unnamed-chunk-42-1.svg" width="686.4"></p>
 <p>This chart suggests that the readmission rate for females is increasing. This is clearly undesirable and we should investigate this to find and eliminate the special cause.</p>
 </div>
 </div>
@@ -722,7 +721,7 @@ gtt_ae_types &lt;-<span class="st"> </span>gtt <span class="op">%&gt;%</span>
     <span class="dt">title    =</span> <span class="st">'Hospital acquired infections in the Capital Region of Denmark'</span>,
     <span class="dt">ylab     =</span> <span class="st">'Cases per 10,000 risk days'</span>,
     <span class="dt">xlab     =</span> <span class="st">'Month'</span>)</code></pre></div>
-<p><img src="qicharts2_files/figure-html/unnamed-chunk-43-1.svg" width="686.4"></p>
+<p><img src="qicharts2_files/figure-html/unnamed-chunk-44-1.svg" width="686.4"></p>
 <p>The infection rate appears predictable. However, plotting three types of infection together is like mixing apples and oranges.</p>
 </div>
 <div id="faceted-u-chart-by-type-of-infection" class="section level3">
@@ -736,7 +735,7 @@ gtt_ae_types &lt;-<span class="st"> </span>gtt <span class="op">%&gt;%</span>
     <span class="dt">title    =</span> <span class="st">'Hospital acquired infections in the Capital Region of Denmark'</span>,
     <span class="dt">ylab     =</span> <span class="st">'Cases per 10,000 risk days'</span>,
     <span class="dt">xlab     =</span> <span class="st">'Month'</span>)</code></pre></div>
-<p><img src="qicharts2_files/figure-html/unnamed-chunk-44-1.svg" width="686.4"></p>
+<p><img src="qicharts2_files/figure-html/unnamed-chunk-45-1.svg" width="686.4"></p>
 <p>Now each infection has its own facet We see that all three infections appear to be predictable and that UTI is the most common infection.</p>
 <p>But since these data come from six very different hospitals, we should also facet by hospital.</p>
 </div>
@@ -753,7 +752,7 @@ gtt_ae_types &lt;-<span class="st"> </span>gtt <span class="op">%&gt;%</span>
     <span class="dt">title    =</span> <span class="st">'Hospital acquired infections in the Capital Region of Denmark'</span>,
     <span class="dt">ylab     =</span> <span class="st">'Cases per 10,000 risk days'</span>,
     <span class="dt">xlab     =</span> <span class="st">'Month'</span>)</code></pre></div>
-<p><img src="qicharts2_files/figure-html/unnamed-chunk-45-1.svg" width="686.4"></p>
+<p><img src="qicharts2_files/figure-html/unnamed-chunk-46-1.svg" width="686.4"></p>
 <p>This plot makes it easy to display the differences between both hospitals and types of infection. Non-random variation is present in UTI rates of two hospitals (BOH, NOH).</p>
 <p>Note the use of individual y axes to better visualise variation over time and the rotated x axis labels to avoid overlapping labels.</p>
 </div>
@@ -777,7 +776,7 @@ gtt_ae_types &lt;-<span class="st"> </span>gtt <span class="op">%&gt;%</span>
     <span class="dt">title           =</span> <span class="st">'Hospital acquired bacteremia 2016 (U funnel chart)'</span>,
     <span class="dt">ylab            =</span> <span class="st">'Cases per 10,000 risk days'</span>,
     <span class="dt">xlab            =</span> <span class="st">'Hospital'</span>)</code></pre></div>
-<p><img src="qicharts2_files/figure-html/unnamed-chunk-46-1.svg" width="686.4"></p>
+<p><img src="qicharts2_files/figure-html/unnamed-chunk-47-1.svg" width="686.4"></p>
 <p>One hospital, NOH, have unusually few bacteremias and urinary tract infections compared to the other hospitals. Another hospital, BFH, have unusually many Clostridium difficile infections. The other hospitals are indistinguishable from each other with respect to the hospital infection rates.</p>
 <p>What can we learn from NOH and BFH? It is important to stress that data presented in funnel plots should be used for learning rather than for judgement. While it may be interesting for some in need of a “case” to point fingers at the good, the bad and the ugly, the full power of SPC will only be released when data are used for learning and improvement.</p>
 </div>
@@ -804,7 +803,7 @@ gtt_ae_types &lt;-<span class="st"> </span>gtt <span class="op">%&gt;%</span>
     <span class="dt">title    =</span> <span class="st">'Proportion of patients seen within 4 hours of attendance (P chart)'</span>,
     <span class="dt">ylab     =</span> <span class="ot">NULL</span>,
     <span class="dt">xlab     =</span> <span class="st">'Week #'</span>)</code></pre></div>
-<p><img src="qicharts2_files/figure-html/unnamed-chunk-48-1.svg" width="686.4"></p>
+<p><img src="qicharts2_files/figure-html/unnamed-chunk-49-1.svg" width="686.4"></p>
 <p>This is called over-dispersion and happens sometimes because data in practice rarely come from truly binomial or poisson distributions. When the sample sizes are small, this is not a problem. But as sample sizes increase (&gt; 1000) it becomes apparent that the assumptions of constant proportions or rates between subgroups are not true.</p>
 <p>A simple test for over-dispersion is to apply an I chart. If the I chart gives 3-sigma limits that are very different from the U or P chart it is a signal that the underlying probability model of the U or P chart may not be correct.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/qic.html">qic</a></span>(i, r, 
@@ -815,7 +814,7 @@ gtt_ae_types &lt;-<span class="st"> </span>gtt <span class="op">%&gt;%</span>
     <span class="dt">title    =</span> <span class="st">'Proportion of patients seen within 4 hours of attendance (I chart)'</span>,
     <span class="dt">ylab     =</span> <span class="ot">NULL</span>,
     <span class="dt">xlab     =</span> <span class="st">'Week #'</span>)</code></pre></div>
-<p><img src="qicharts2_files/figure-html/unnamed-chunk-49-1.svg" width="686.4"></p>
+<p><img src="qicharts2_files/figure-html/unnamed-chunk-50-1.svg" width="686.4"></p>
 <p>In fact, since the I chart estimates 3-sigma limits based on the observed within subgroup variation in data rather than an assumed probability model, it is sort of like the Swiss army knife of SPC. Therefore, the I chart may be used when the true probability model of data is unknown.</p>
 <p>However, the I charts does not account for varying sample sizes and may give false signals when sample sizes vary significantly. Laney proposed an elegant solution that incorporates both the within and the between subgroup variation in the calculation of 3-sigma limits. This is what P’ (P prime) and U’ (U prime) charts are for. See Laney 2002 for details.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/qic.html">qic</a></span>(i, r, 
@@ -826,10 +825,10 @@ gtt_ae_types &lt;-<span class="st"> </span>gtt <span class="op">%&gt;%</span>
     <span class="dt">title    =</span> <span class="st">'Proportion of patients seen within 4 hours of attendance (P</span><span class="ch">\'</span><span class="st"> chart)'</span>,
     <span class="dt">ylab     =</span> <span class="ot">NULL</span>,
     <span class="dt">xlab     =</span> <span class="st">'Week #'</span>)</code></pre></div>
-<p><img src="qicharts2_files/figure-html/unnamed-chunk-50-1.svg" width="686.4"></p>
+<p><img src="qicharts2_files/figure-html/unnamed-chunk-51-1.svg" width="686.4"></p>
 <p>Laney notes that when over-dispersion is not present, prime charts will give the same results as traditional charts and recommends always to use prime charts for proportions and rates.</p>
 <p>Comparing P and P’ charts on readmission rates from the cabg dataset we find that while the 3-sigma limits in the P’ chart are a little wider, the two charts reach similar conclusions.</p>
-<p><img src="qicharts2_files/figure-html/unnamed-chunk-51-1.svg" width="331.2"><img src="qicharts2_files/figure-html/unnamed-chunk-51-2.svg" width="331.2"></p>
+<p><img src="qicharts2_files/figure-html/unnamed-chunk-52-1.svg" width="331.2"><img src="qicharts2_files/figure-html/unnamed-chunk-52-2.svg" width="331.2"></p>
 </div>
 <div id="conclusion" class="section level2">
 <h2 class="hasAnchor">
