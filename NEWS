@@ -1,6 +1,6 @@
-qicharts2 0.2.0.9000
+qicharts2 0.2.1
 ===============
-* Fix x axis error when dates crosses summer/winther time.
+* Fix x axis error when dates crosses summer/winter time.
 
 qicharts2 0.2.0
 ===============
