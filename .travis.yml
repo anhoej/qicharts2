@@ -4,5 +4,6 @@ language: r
 r: 
   - release
   - devel
+  - windows
 sudo: false
 cache: packages
