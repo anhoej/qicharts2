@@ -214,7 +214,7 @@ qic <- function(x,
   
   # Convert dates and datetimes to POSIXct
   if (inherits(x, c('Date', 'POSIXt')))
-    x <- as.POSIXct(as.character(x), tz = 'UTZ')
+    x <- as.POSIXct(as.character(x), tz = 'UTC')
   
   # Fix missing values
   if (got.n) {
