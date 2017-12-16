@@ -1,4 +1,8 @@
-qicharts2 0.2.1.9000
+qicharts2 0.2.3
+===============
+* Skip tests that generate noLD issues on CRAN.
+
+qicharts2 0.2.2
 ===============
 * Fix time zone warnings on Windows environment.
 
