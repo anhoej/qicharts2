@@ -3,6 +3,7 @@ context('Control charts from Montgomery')
 
 # Example 6.3 ----
 test_that('Example 6.3_1 is equal to reference', {
+  skip_on_cran()
   expect_equal_to_reference(
     qic(sample, obs,
         data = tbl_06.03,
@@ -22,6 +23,7 @@ test_that('Example 6.3_1 is equal to reference', {
 
 # Example 6.4 ----
 test_that('Example 6.4 is equal to reference', {
+  skip_on_cran()
   expect_equal_to_reference(
     qic(sample, obs,
         data = tbl_06.04,
@@ -41,6 +43,7 @@ test_that('Example 6.4 is equal to reference', {
 
 # Example 6.5 ----
 test_that('Example 6.5 is equal to reference', {
+  skip_on_cran()
   expect_equal_to_reference(
     qic(weeks, cost,
         data = tbl_06.07,
