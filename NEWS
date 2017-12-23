@@ -1,3 +1,6 @@
+qicharts2 0.2.3.9000
+===============
+
 qicharts2 0.2.3
 ===============
 * Skip tests that generate noLD issues on CRAN.
