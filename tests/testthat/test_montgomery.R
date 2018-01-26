@@ -125,6 +125,7 @@ test_that('Example 7.5 is equal to reference', {
 
 # Example 7.6 ----
 test_that('Example 7.6 is equal to reference', {
+  skip_on_cran()
   expect_equal_to_reference(
     qic(failure, hours,
         data = tbl_07.14,
@@ -136,6 +137,7 @@ test_that('Example 7.6 is equal to reference', {
 
 # NA test ----
 test_that('NA test is equal to reference', {
+  skip_on_cran()
   expect_equal_to_reference(
     qic(sample, obs,
         data = NA_test,
