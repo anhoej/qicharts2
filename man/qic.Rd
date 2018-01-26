@@ -8,7 +8,7 @@ qic(x, y = NULL, n = NULL, data = NULL, facets = NULL, notes = NULL,
   chart = c("run", "i", "mr", "xbar", "s", "t", "p", "pp", "c", "u", "up",
   "g"), agg.fun = c("mean", "median", "sum", "sd"), multiply = 1,
   freeze = NULL, part = NULL, exclude = NULL, target = NA * 1, cl = NA
-  * 1, nrow = NULL, ncol = NULL, scales = "fixed", title = NULL,
+  * 1, nrow = NULL, ncol = NULL, scales = "fixed", title = "",
   ylab = "Value", xlab = "Subgroup", subtitle = NULL, caption = NULL,
   part.labels = NULL, show.labels = is.null(facets), decimals = 1,
   x.format = NULL, x.angle = NULL, x.pad = 1, y.expand = NULL,

@@ -114,7 +114,7 @@ qic <- function(x,
                 nrow          = NULL,
                 ncol          = NULL,
                 scales        = 'fixed',
-                title         = NULL,
+                title         = '',
                 ylab          = 'Value',
                 xlab          = 'Subgroup',
                 subtitle      = NULL,
@@ -152,9 +152,9 @@ qic <- function(x,
   if (multiply != 1)  
     y.name <- paste(y.name, 'x', multiply)
   
-  if (is.null(title)) 
+  if (!is.null(title) && title == '') 
     title <- paste(toupper(match.arg(chart)), 'Chart', 'of', y.name)
-  
+ 
   # Get chart type
   chart.fun <- get(paste0('qic.', match.arg(chart)))
   
