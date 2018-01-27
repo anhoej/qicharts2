@@ -59,7 +59,8 @@
 #' @param y.neg If TRUE (default), the y axis is allowed to be negative (only 
 #'   relevant for I and Xbar charts).
 #' @param y.percent If TRUE, formats y axis labels as percentages.
-#' @param show.grid If TRUE shows grid.
+#' @param show.grid If TRUE, shows grid.
+#' @param show.sigma.lines If TRUE, shows 1 and 2 sigma lines.
 #' @param flip If TRUE, rotates the plot 90 degrees.
 #' @param strip.horizontal If TRUE, makes y strip horizontal.
 #' @param print.summary If TRUE, prints summary.
@@ -130,6 +131,7 @@ qic <- function(x,
                 y.neg            = TRUE,
                 y.percent        = FALSE,
                 show.grid        = FALSE,
+                show.sigma.lines = FALSE,
                 flip             = FALSE,
                 strip.horizontal = FALSE,
                 print.summary    = FALSE) {
@@ -246,6 +248,7 @@ qic <- function(x,
                 scales           = scales,
                 show.labels      = show.labels,
                 show.grid        = show.grid,
+                show.sigma.lines = show.sigma.lines,
                 decimals         = decimals,
                 flip             = flip,
                 dots.only        = dots.only,

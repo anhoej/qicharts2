@@ -12,8 +12,9 @@ qic(x, y = NULL, n = NULL, data = NULL, facets = NULL, notes = NULL,
   ylab = "Value", xlab = "Subgroup", subtitle = NULL, caption = NULL,
   part.labels = NULL, show.labels = is.null(facets), decimals = 1,
   x.format = NULL, x.angle = NULL, x.pad = 1, y.expand = NULL,
-  y.neg = TRUE, y.percent = FALSE, show.grid = FALSE, flip = FALSE,
-  strip.horizontal = FALSE, print.summary = FALSE)
+  y.neg = TRUE, y.percent = FALSE, show.grid = FALSE,
+  show.sigma.lines = FALSE, flip = FALSE, strip.horizontal = FALSE,
+  print.summary = FALSE)
 }
 \arguments{
 \item{x}{Vector of subgroup values to plot along the x axis.}
@@ -96,7 +97,9 @@ relevant for I and Xbar charts).}
 
 \item{y.percent}{If TRUE, formats y axis labels as percentages.}
 
-\item{show.grid}{If TRUE shows grid.}
+\item{show.grid}{If TRUE, shows grid.}
+
+\item{show.sigma.lines}{If TRUE, shows 1 and 2 sigma lines.}
 
 \item{flip}{If TRUE, rotates the plot 90 degrees.}
 
