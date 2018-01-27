@@ -61,6 +61,7 @@
 #' @param y.percent If TRUE, formats y axis labels as percentages.
 #' @param show.grid If TRUE shows grid.
 #' @param flip If TRUE, rotates the plot 90 degrees.
+#' @param strip.horizontal If TRUE, makes y strip horizontal.
 #' @param print.summary If TRUE, prints summary.
 # @param ... Additional arguments to plot function.
 #'   
@@ -130,6 +131,7 @@ qic <- function(x,
                 y.percent     = FALSE,
                 show.grid     = FALSE,
                 flip          = FALSE,
+                strip.horizontal = FALSE,
                 print.summary = FALSE) {
   
   # Check data
@@ -251,7 +253,8 @@ qic <- function(x,
                 x.angle         = x.angle,
                 x.pad           = x.pad,
                 y.expand        = y.expand,
-                y.percent       = y.percent)
+                y.percent       = y.percent,
+                strip.horizontal = strip.horizontal)
   
   class(p) <- c('qic', class(p))
   

@@ -1,7 +1,8 @@
 #' @import ggplot2
 plot.qic <- function(x, title, ylab, xlab, subtitle, caption, part.labels,
                      nrow, ncol, scales, show.labels, show.grid, decimals, 
-                     flip, dots.only, x.format, x.angle, x.pad, y.expand, y.percent,
+                     flip, dots.only, x.format, x.angle, x.pad, y.expand,
+                     y.percent, strip.horizontal,
                      ...) {
   # Set colours
   col1      <- '#8C8C8C' # rgb(140, 140, 140, maxColorValue = 255) # grey
@@ -210,5 +211,11 @@ plot.qic <- function(x, title, ylab, xlab, subtitle, caption, part.labels,
     p <- p + coord_flip()
   }
   
+  # Horizontal y strip
+  if (strip.horizontal)
+    p <- p + theme(strip.text.y = element_text(angle = 0,
+                                               hjust = 0),
+                   strip.background = element_blank())
+
   return(p)
 }

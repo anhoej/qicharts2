@@ -13,7 +13,7 @@ qic(x, y = NULL, n = NULL, data = NULL, facets = NULL, notes = NULL,
   part.labels = NULL, show.labels = is.null(facets), decimals = 1,
   x.format = NULL, x.angle = NULL, x.pad = 1, y.expand = NULL,
   y.neg = TRUE, y.percent = FALSE, show.grid = FALSE, flip = FALSE,
-  print.summary = FALSE)
+  strip.horizontal = FALSE, print.summary = FALSE)
 }
 \arguments{
 \item{x}{Vector of subgroup values to plot along the x axis.}
@@ -99,6 +99,8 @@ relevant for I and Xbar charts).}
 \item{show.grid}{If TRUE shows grid.}
 
 \item{flip}{If TRUE, rotates the plot 90 degrees.}
+
+\item{strip.horizontal}{If TRUE, makes y strip horizontal.}
 
 \item{print.summary}{If TRUE, prints summary.}
 }
