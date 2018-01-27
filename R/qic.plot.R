@@ -49,7 +49,11 @@ plot.qic <- function(x, title, ylab, xlab, subtitle, caption, part.labels,
   p <- p +
     geom_ribbon(aes_(ymin = ~ lcl, ymax = ~ ucl),
                 fill = 'grey80',
-                alpha = 0.25) +
+                alpha = 0.4) +
+    geom_line(aes_(y = ~ cl + (ucl - cl) / 3), colour = 'white') +
+    geom_line(aes_(y = ~ cl + (ucl - cl) / 3 * 2), colour = 'white') +
+    geom_line(aes_(y = ~ cl - (ucl - cl) / 3), colour = 'white') +
+    geom_line(aes_(y = ~ cl - (ucl - cl) / 3 * 2), colour = 'white') +
     geom_line(aes_(y = ~ target),
               colour = col4,
               linetype = 5,
