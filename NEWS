@@ -1,5 +1,9 @@
 qicharts2 0.2.3.9000
 ===============
+* Skip more tests that generate noLD issues on CRAN.
+* Allow NULL as title argument to suppress chart title.
+* Add strip.horizontal argument to qic().
+* Add show.sigma.lines argument to qic().
 
 qicharts2 0.2.3
 ===============
