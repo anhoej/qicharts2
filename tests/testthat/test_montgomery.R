@@ -65,6 +65,7 @@ test_that('Example 6.5 is equal to reference', {
 
 # Example 7.1 ----
 test_that('Example 7.1 is equal to reference', {
+  skip_on_cran()
   expect_equal_to_reference(
     qic(sample, count, size, notes = note,
         data = tbl_07.03,
@@ -78,6 +79,7 @@ test_that('Example 7.1 is equal to reference', {
 
 # Table 7.4 ----
 test_that('Table 7.4 is equal to reference', {
+  skip_on_cran()
   expect_equal_to_reference(
     qic(sample, count, size,
         data = tbl_07.04,
@@ -89,6 +91,7 @@ test_that('Table 7.4 is equal to reference', {
 
 # Example 7.3 ----
 test_that('Example 7.3 is equal to reference', {
+  skip_on_cran()
   expect_equal_to_reference(
     qic(sample, count,
         data = tbl_07.08,
@@ -102,6 +105,7 @@ test_that('Example 7.3 is equal to reference', {
 
 # Example 7.4 ----
 test_that('Example 7.4 is equal to reference', {
+  skip_on_cran()
   expect_equal_to_reference(
     qic(sample, count, size,
         data = tbl_07.10,
@@ -113,6 +117,7 @@ test_that('Example 7.4 is equal to reference', {
 
 # Example 7.5 ----
 test_that('Example 7.5 is equal to reference', {
+  skip_on_cran()
   expect_equal_to_reference(
     qic(roll, count, meters,
         data = tbl_07.11,
