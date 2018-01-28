@@ -1,7 +1,8 @@
 #' @import ggplot2
 plot.qic <- function(x, title, ylab, xlab, subtitle, caption, part.labels,
                      nrow, ncol, scales, show.labels, show.grid, 
-                     show.sigma.lines, decimals, flip, dots.only, x.format,
+                     # show.sigma.lines, 
+                     decimals, flip, dots.only, x.format,
                      x.angle, x.pad, y.expand, y.percent, strip.horizontal,
                      ...) {
   # Set colours
@@ -50,17 +51,18 @@ plot.qic <- function(x, title, ylab, xlab, subtitle, caption, part.labels,
     geom_ribbon(aes_(ymin = ~ lcl, ymax = ~ ucl),
                 fill = 'grey80',
                 alpha = 0.4)
-  if(show.sigma.lines) {
-    p <- p +
-    geom_line(aes_(y = ~ cl + (ucl - cl) / 3), colour = 'white') +
-    geom_line(aes_(y = ~ cl + (ucl - cl) / 3 * 2), colour = 'white') +
-    geom_line(aes_(y = ~ cl - (ucl - cl) / 3), colour = 'white') +
-    geom_line(aes_(y = ~ cl - (ucl - cl) / 3 * 2), colour = 'white') +
-    geom_line(aes_(y = ~ target),
-              colour = col4,
-              linetype = 5,
-              size = 0.5)
-  }
+  
+  # if(show.sigma.lines) {
+  #   p <- p +
+  #   geom_line(aes_(y = ~ cl + (ucl - cl) / 3), colour = 'white') +
+  #   geom_line(aes_(y = ~ cl + (ucl - cl) / 3 * 2), colour = 'white') +
+  #   geom_line(aes_(y = ~ cl - (ucl - cl) / 3), colour = 'white') +
+  #   geom_line(aes_(y = ~ cl - (ucl - cl) / 3 * 2), colour = 'white') +
+  #   geom_line(aes_(y = ~ target),
+  #             colour = col4,
+  #             linetype = 5,
+  #             size = 0.5)
+  # }
   
   p <- p +
     geom_line(aes_(y = ~ cl, linetype = ~ runs.signal, colour = ~ linecol),
