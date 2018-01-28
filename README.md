@@ -5,9 +5,9 @@
 
 `qicharts2` is an R package with functions for making run charts, Shewhart control charts and Pareto charts for continuous quality improvement. Included control charts are: I, MR, Xbar, S, T, C, U, U', P, P', and G charts. 
 
-Non-random variation in the form of minor to moderate persistent shifts in data over time is identified by the Anhoej rules for unusually long runs and unusually few crossing.
+Non-random variation in the form of minor to moderate persistent shifts in data over time is identified by the Anhoej rules for unusually long runs and unusually few crossing [Anhoej, Olesen (2014) <doi:10.1371/journal.pone.0113825>].
 
-Non-random variation in the form of larger, possibly transient, shifts is identified by Shewhart's 3-sigma rule.
+Non-random variation in the form of larger, possibly transient, shifts is identified by Shewhart's 3-sigma rule [Mohammed, Worthington, Woodall (2008) <doi:10.1136/qshc.2004.012047>].
 
 ## Exported functions
 
@@ -33,9 +33,11 @@ Non-random variation in the form of larger, possibly transient, shifts is identi
 
 * Install stable version from CRAN: `install.packages('qicharts2')`.
   
-  OR
+or
 
 * Install development version from github: `devtools::install_github('anhoej/qicharts2', build_vignettes = TRUE)`.
+
+then
 
 * Read documentation: `?qic`.
 
