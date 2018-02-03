@@ -74,8 +74,8 @@
 <div class="page-header"><h1 class="hasAnchor">
 <a href="#quality-improvement-charts-for-r" class="anchor"></a>Quality improvement charts for R</h1></div>
 <p><code>qicharts2</code> is an R package with functions for making run charts, Shewhart control charts and Pareto charts for continuous quality improvement. Included control charts are: I, MR, Xbar, S, T, C, U, U’, P, P’, and G charts.</p>
-<p>Non-random variation in the form of minor to moderate persistent shifts in data over time is identified by the Anhoej rules for unusually long runs and unusually few crossing.</p>
-<p>Non-random variation in the form of larger, possibly transient, shifts is identified by Shewhart’s 3-sigma rule.</p>
+<p>Non-random variation in the form of minor to moderate persistent shifts in data over time is identified by the Anhoej rules for unusually long runs and unusually few crossing [Anhoej, Olesen (2014) <a href="https://doi.org/10.1371/journal.pone.0113825" class="uri">https://doi.org/10.1371/journal.pone.0113825</a>].</p>
+<p>Non-random variation in the form of larger, possibly transient, shifts is identified by Shewhart’s 3-sigma rule [Mohammed, Worthington, Woodall (2008) <a href="http://dx.doi.org/10.1136/qshc.2004.012047" class="uri">http://dx.doi.org/10.1136/qshc.2004.012047</a>].</p>
 <div id="exported-functions" class="section level2">
 <h2 class="hasAnchor">
 <a href="#exported-functions" class="anchor"></a>Exported functions</h2>
@@ -102,9 +102,12 @@
 <ul>
 <li>Install stable version from CRAN: <code>install.packages('qicharts2')</code>.</li>
 </ul>
-<p>OR</p>
+<p>or</p>
 <ul>
-<li><p>Install development version from github: <code><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">devtools::install_github('anhoej/qicharts2', build_vignettes = TRUE)</a></code>.</p></li>
+<li>Install development version from github: <code><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">devtools::install_github('anhoej/qicharts2', build_vignettes = TRUE)</a></code>.</li>
+</ul>
+<p>then</p>
+<ul>
 <li><p>Read documentation: <code><a href="reference/qic.html">?qic</a></code>.</p></li>
 <li><p>Run examples: <code>example('qic')</code>, <code>example('paretochart')</code>.</p></li>
 <li><p>Read vignette: <code><a href="articles/qicharts2.html">vignette('qicharts2')</a></code>.</p></li>
