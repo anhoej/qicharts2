@@ -1,9 +1,9 @@
 #' @import ggplot2
 plot.qic <- function(x, title, ylab, xlab, subtitle, caption, part.labels,
                      nrow, ncol, scales, show.labels, show.grid, 
-                     # show.sigma.lines, 
-                     decimals, flip, dots.only, x.format,
-                     x.angle, x.pad, y.expand, y.percent, strip.horizontal,
+                     decimals, flip, dots.only, point.size,
+                     x.format, x.angle, x.pad,
+                     y.expand, y.percent, strip.horizontal,
                      ...) {
   # Set colours
   col1      <- '#8C8C8C' # rgb(140, 140, 140, maxColorValue = 255) # grey
@@ -59,11 +59,12 @@ plot.qic <- function(x, title, ylab, xlab, subtitle, caption, part.labels,
   
   # Add data points and line
   if (dots.only) {
-    p <- p + geom_point(aes_(colour = ~ dotcol), size = 3, na.rm = TRUE)
+    p <- p + 
+      geom_point(aes_(colour = ~ dotcol), size = 3 * point.size, na.rm = TRUE)
   } else {
     p <- p +
       geom_line(colour = col2, size = 1.1, na.rm = TRUE) +
-      geom_point(aes_(colour = ~ dotcol), na.rm = TRUE)
+      geom_point(aes_(colour = ~ dotcol), size = point.size, na.rm = TRUE)
   }
   p <- p + scale_colour_manual(values = cols)
   

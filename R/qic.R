@@ -50,6 +50,7 @@
 #'   control lines on chart. Defaults to TRUE when facets argument is NULL.
 #' @param decimals Integer indicating the preferred number of decimals in centre
 #'   and control line labels.
+#' @param point.size Number specifying the size of data points.
 #' @param x.format Date format of x axis labels. See \code{?strftime()} for 
 #'   possible date formats.
 #' @param x.angle Number indicating the angle of x axis labels.
@@ -123,6 +124,7 @@ qic <- function(x,
                 part.labels      = NULL,
                 show.labels      = is.null(facets),
                 decimals         = 1,
+                point.size       = 1,
                 x.format         = NULL,
                 x.angle          = NULL,
                 x.pad            = 1,
@@ -130,7 +132,6 @@ qic <- function(x,
                 y.neg            = TRUE,
                 y.percent        = FALSE,
                 show.grid        = FALSE,
-                # show.sigma.lines = FALSE,
                 flip             = FALSE,
                 strip.horizontal = FALSE,
                 print.summary    = FALSE) {
@@ -251,6 +252,7 @@ qic <- function(x,
                 decimals         = decimals,
                 flip             = flip,
                 dots.only        = dots.only,
+                point.size       = point.size,
                 x.format         = x.format,
                 x.angle          = x.angle,
                 x.pad            = x.pad,
