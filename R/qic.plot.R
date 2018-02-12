@@ -69,24 +69,6 @@ plot.qic <- function(x, title, ylab, xlab, subtitle, caption, part.labels,
               na.rm = TRUE) +
     scale_linetype_manual(values = c('FALSE' = 'solid', 'TRUE' = 'dashed'))
   
-  # Add notes
-  x.notes <- x[!is.na(x$notes), ]
-  
-  if (nrow(x.notes)) {
-    p <- p +
-      geom_segment(aes_(xend = ~ x, yend = Inf),
-                   data = x.notes,
-                   linetype = 3,
-                   colour = col1) +
-      geom_label(aes_(y = Inf, label = ~ notes),
-                 data = x.notes,
-                 label.size = 0.1,
-                 size = lab.size,
-                 alpha = 0.9,
-                 vjust = ifelse(flip, 'center', 'inward'),
-                 hjust = ifelse(flip, 'inward', 'center'))
-  }
-  
   # Add data points and line
   if (dots.only) {
     p <- p + geom_point(aes_(colour = ~ dotcol), size = 3, na.rm = TRUE)
@@ -160,6 +142,25 @@ plot.qic <- function(x, title, ylab, xlab, subtitle, caption, part.labels,
     } else {
       warning('Length of part.labels argument must match the number of parts to label.')
     }
+  }
+  
+  # Add notes
+  x.notes <- x[!is.na(x$notes), ]
+  
+  if (nrow(x.notes)) {
+    p <- p +
+      geom_segment(aes_(xend = ~ x, yend = Inf),
+                   data = x.notes,
+                   linetype = 3,
+                   colour = col1) +
+      geom_label(aes_(y = Inf, label = ~ notes),
+                 data = x.notes,
+                 label.size = 0,
+                 label.padding = unit(0.5, 'lines'),
+                 size = lab.size,
+                 alpha = 0.5,
+                 vjust = ifelse(flip, 'center', 'inward'),
+                 hjust = ifelse(flip, 'inward', 'center'))
   }
   
   # Facets
