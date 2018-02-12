@@ -382,17 +382,17 @@ qic.agg <- function(d, got.n, part, agg.fun, freeze, exclude,
   d <- d %>% 
     filter(!is.na(!!x)) %>% 
     group_by(!!x, !!facet1, !!facet2) %>% 
-    summarise(y.sum    = sum(y, na.rm = TRUE),
+    summarise(y.sum    = sum(!!y, na.rm = TRUE),
               y.length = sum(!is.na(!!y)),
-              y.mean   = mean(y, na.rm = TRUE),
+              y.mean   = mean(!!y, na.rm = TRUE),
               y.sd     = stats::sd(!!y, na.rm = TRUE),
-              n        = sum(n, na.rm = got.n),
+              n        = sum(!!n, na.rm = got.n),
               y        = ifelse(got.n,
                                 y.sum / n,
                                 do.call(agg.fun, list(y, na.rm = TRUE))),
-              cl       = first(cl),
-              target   = first(target),
-              notes    = paste(notes, collapse = '|')
+              cl       = first(!!cl),
+              target   = first(!!target),
+              notes    = paste(!!notes, collapse = '|')
     ) %>% 
     group_by(facet1, facet2) %>%
     mutate(part = makeparts(part, n()),
