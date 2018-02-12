@@ -51,19 +51,7 @@ plot.qic <- function(x, title, ylab, xlab, subtitle, caption, part.labels,
     geom_ribbon(aes_(ymin = ~ lcl, ymax = ~ ucl),
                 fill = 'grey80',
                 alpha = 0.4)
-  
-  # if(show.sigma.lines) {
-  #   p <- p +
-  #   geom_line(aes_(y = ~ cl + (ucl - cl) / 3), colour = 'white') +
-  #   geom_line(aes_(y = ~ cl + (ucl - cl) / 3 * 2), colour = 'white') +
-  #   geom_line(aes_(y = ~ cl - (ucl - cl) / 3), colour = 'white') +
-  #   geom_line(aes_(y = ~ cl - (ucl - cl) / 3 * 2), colour = 'white') +
-  #   geom_line(aes_(y = ~ target),
-  #             colour = col4,
-  #             linetype = 5,
-  #             size = 0.5)
-  # }
-  
+
   p <- p +
     geom_line(aes_(y = ~ cl, linetype = ~ runs.signal, colour = ~ linecol),
               na.rm = TRUE) +
@@ -134,9 +122,10 @@ plot.qic <- function(x, title, ylab, xlab, subtitle, caption, part.labels,
         geom_label(aes_(y = ~ y, label = ~ z, group = 1), 
                    data = plabs,
                    na.rm = T,
-                   label.size = 0.1,
+                   label.size = 0,
+                   label.padding = unit(0.5, 'lines'),
                    size = lab.size,
-                   alpha = 0.9,
+                   alpha = 0.5,
                    vjust = ifelse(flip, 'center', 'inward'),
                    hjust = ifelse(flip, 'inward', 'center'))
     } else {
