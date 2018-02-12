@@ -1,3 +1,7 @@
+qicharts2 0.3.0.9000
+===============
+* Fix quoted variables.
+
 qicharts2 0.3.0
 ===============
 * Skip more tests that generate noLD issues on CRAN.
