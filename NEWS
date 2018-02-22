@@ -2,6 +2,8 @@ qicharts2 0.3.0.9000
 ===============
 * Fix quoted variables.
 * Darker CL background.
+* Add point.size argument.
+* Improved notes and parts labels.
 
 qicharts2 0.3.0
 ===============
