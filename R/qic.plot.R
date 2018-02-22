@@ -49,7 +49,7 @@ plot.qic <- function(x, title, ylab, xlab, subtitle, caption, part.labels,
   # Add control limits and centre and target lines
   p <- p +
     geom_ribbon(aes_(ymin = ~ lcl, ymax = ~ ucl),
-                fill = 'grey80',
+                fill = 'grey87',
                 alpha = 0.4)
 
   p <- p +
@@ -145,10 +145,10 @@ plot.qic <- function(x, title, ylab, xlab, subtitle, caption, part.labels,
                    colour = col1) +
       geom_label(aes_(y = Inf, label = ~ notes),
                  data = x.notes,
-                 label.size = 0,
-                 label.padding = unit(0.5, 'lines'),
+                 label.size = NA,
+                 # label.padding = unit(0.25, 'lines'),
                  size = lab.size,
-                 alpha = 0.5,
+                 # alpha = 1,
                  vjust = ifelse(flip, 'center', 'inward'),
                  hjust = ifelse(flip, 'inward', 'center'))
   }
