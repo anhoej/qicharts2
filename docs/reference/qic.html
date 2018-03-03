@@ -111,9 +111,9 @@ T, C, U, U', P, P', and G charts.</p>
   * <span class='fl'>1</span>, <span class='kw'>nrow</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>ncol</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>scales</span> <span class='kw'>=</span> <span class='st'>"fixed"</span>, <span class='kw'>title</span> <span class='kw'>=</span> <span class='st'>""</span>,
   <span class='kw'>ylab</span> <span class='kw'>=</span> <span class='st'>"Value"</span>, <span class='kw'>xlab</span> <span class='kw'>=</span> <span class='st'>"Subgroup"</span>, <span class='kw'>subtitle</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>caption</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>part.labels</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>show.labels</span> <span class='kw'>=</span> <span class='fu'>is.null</span>(<span class='no'>facets</span>), <span class='kw'>decimals</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>x.format</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>x.angle</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>x.pad</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>y.expand</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>y.neg</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>y.percent</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>show.grid</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>flip</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>strip.horizontal</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>print.summary</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+  <span class='kw'>point.size</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>x.format</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>x.angle</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>x.pad</span> <span class='kw'>=</span> <span class='fl'>1</span>,
+  <span class='kw'>y.expand</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>y.neg</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>y.percent</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>show.grid</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>flip</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>strip.horizontal</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>print.summary</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -230,6 +230,10 @@ control lines on chart. Defaults to TRUE when facets argument is NULL.</p></td>
       <th>decimals</th>
       <td><p>Integer indicating the preferred number of decimals in centre
 and control line labels.</p></td>
+    </tr>
+    <tr>
+      <th>point.size</th>
+      <td><p>Number specifying the size of data points.</p></td>
     </tr>
     <tr>
       <th>x.format</th>
