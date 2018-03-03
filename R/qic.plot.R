@@ -146,9 +146,9 @@ plot.qic <- function(x, title, ylab, xlab, subtitle, caption, part.labels,
       geom_label(aes_(y = Inf, label = ~ notes),
                  data = x.notes,
                  label.size = NA,
-                 # label.padding = unit(0.25, 'lines'),
+                 label.padding = unit(0.3, 'lines'),
                  size = lab.size,
-                 # alpha = 1,
+                 alpha = 0.5,
                  vjust = ifelse(flip, 'center', 'inward'),
                  hjust = ifelse(flip, 'inward', 'center'))
   }
