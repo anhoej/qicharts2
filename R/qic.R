@@ -160,7 +160,8 @@ qic <- function(x,
     title <- paste(toupper(match.arg(chart)), 'Chart', 'of', y.name)
  
   # Get chart type
-  chart.fun <- get(paste0('qic.', match.arg(chart)))
+  chart     <- match.arg(chart)
+  chart.fun <- get(paste0('qic.', chart))
   
   # Get aggregate function
   agg.fun <- match.arg(agg.fun)

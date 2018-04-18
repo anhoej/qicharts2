@@ -1,5 +1,7 @@
 qicharts2 0.4.0.9000
-
+===============
+* Use exact values for control chart constants A3, B3, and B4 (thanks to Tore Wenzel-Larsen).
+* P charts default to percentage on Y axis (thanks to Paul Wildehain).
 
 qicharts2 0.4.0
 ===============
