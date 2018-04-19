@@ -7,7 +7,7 @@ runs.analysis <- function(x) {
   n.useful           <- length(runs)
   n.obs <- length(y)
   
-  if(n.useful) {
+  if (n.useful) {
     run.lengths      <- rle(runs)$lengths
     n.runs           <- length(run.lengths)
     longest.run      <- max(run.lengths)
@@ -88,8 +88,9 @@ qic.mr <- function(x) {
 }
 
 qic.xbar <- function(x){
-  base <- x$baseline & x$include
+  base  <- x$baseline & x$include
   var.n <- as.logical(length(unique(x$y.length)) - 1)
+
   # Calculate centre line, Montgomery 6.30
   if (anyNA(x$cl)) {
     x$cl <- sum(x$y.length[base] * x$y.mean[base], na.rm = TRUE) /
@@ -111,10 +112,9 @@ qic.xbar <- function(x){
 }
 
 qic.s <- function(x){
-  base <- x$baseline & x$include
+  base  <- x$baseline & x$include
   var.n <- as.logical(length(unique(x$y.length)) - 1)
-  
-  x$y <- x$y.sd
+  x$y   <- x$y.sd
   
   # Calculate centre line and control limits
   if (anyNA(x$cl)) {
@@ -135,16 +135,16 @@ qic.s <- function(x){
 }
 
 qic.t <- function(x) {
-  if(min(x$y, na.rm = TRUE) <= 0) {
+  if (min(x$y, na.rm = TRUE) <= 0) {
     stop('Time between events must be greater than zero')
   }
   
   # Transform y variable and run I chart calculations
   x$y <- x$y^(1 / 3.6)
-  x <- qic.i(x)
+  x   <- qic.i(x)
   
   # Back transform centre line and control limits
-  x$y <- x$y^3.6
+  x$y   <- x$y^3.6
   x$cl  <- x$cl^3.6
   x$ucl <- x$ucl^3.6
   x$lcl <- x$lcl^3.6

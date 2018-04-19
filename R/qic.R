@@ -237,8 +237,12 @@ qic <- function(x,
                chart.fun, multiply, dots.only, chart, y.neg)
   
   # Format y for p charts
-  if(missing(y.percent) & chart %in% c('p', 'pp')) {
+  if (missing(y.percent) & chart %in% c('p', 'pp')) {
     y.percent <- TRUE
+  }
+  
+  if (y.percent & missing(ylab)) {
+    ylab <- NULL
   }
 
   # Build plot
