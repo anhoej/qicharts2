@@ -3,6 +3,7 @@ qicharts2 0.4.0.9000
 * Use exact values for control chart constants A3, B3, and B4 (thanks to Tore Wenzel-Larsen).
 * P charts default to percentage on Y axis (thanks to Paul Wildehain).
 * Add qic.linecol, qic.signalcol, and qic.targetcol to options to allow for custom colours.
+* Add qic.clshade to options to allow for choosing between lines and shaded area for control limits.
 
 qicharts2 0.4.0
 ===============
