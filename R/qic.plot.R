@@ -23,7 +23,7 @@ plot.qic <- function(x, title, ylab, xlab, subtitle, caption, part.labels,
   x$dotcol  <- ifelse(x$include, x$dotcol, 'col5')
   x$dotcol  <- ifelse(x$y == x$cl, 'col5', x$dotcol)
   x$linecol <- ifelse(x$runs.signal, 'col3', 'col1')
-
+  
   # Set label parameters
   lab.size <- 3
   lab.just <- ifelse(flip, 'center', -0.2)
@@ -50,11 +50,21 @@ plot.qic <- function(x, title, ylab, xlab, subtitle, caption, part.labels,
           legend.position  = 'none')
   
   # Add control limits and centre and target lines
-  p <- p +
-    geom_ribbon(aes_(ymin = ~ lcl, ymax = ~ ucl),
-                fill = 'grey87',
-                alpha = 0.4)
-
+  
+  if (getOption('qic.clshade')) {
+    
+    p <- p +
+      geom_ribbon(aes_(ymin = ~ lcl, ymax = ~ ucl),
+                  fill = 'grey87',
+                  alpha = 0.4)
+  } else {
+    p <- p +
+      geom_line(aes_(y = ~ lcl), colour = col1)
+    
+    p <- p +
+      geom_line(aes_(y = ~ ucl), colour = col1)
+  }
+  
   p <- p +
     geom_line(aes_(y = ~ cl, linetype = ~ runs.signal, colour = ~ linecol),
               na.rm = TRUE) +
@@ -75,25 +85,25 @@ plot.qic <- function(x, title, ylab, xlab, subtitle, caption, part.labels,
   if (show.labels) {
     p <- p +
       geom_text(aes_(y = ~ target.lab,
-                      label = ~ lab.format(target.lab, decimals, y.percent)),
-                 na.rm = TRUE,
-                 size = lab.size,
-                 hjust = lab.just) +
+                     label = ~ lab.format(target.lab, decimals, y.percent)),
+                na.rm = TRUE,
+                size = lab.size,
+                hjust = lab.just) +
       geom_text(aes_(y = ~ lcl.lab,
-                      label = ~ lab.format(lcl.lab, decimals, y.percent)),
-                 na.rm = TRUE,
-                 size = lab.size,
-                 hjust = lab.just) +
+                     label = ~ lab.format(lcl.lab, decimals, y.percent)),
+                na.rm = TRUE,
+                size = lab.size,
+                hjust = lab.just) +
       geom_text(aes_(y = ~ ucl.lab,
-                      label = ~ lab.format(ucl.lab, decimals, y.percent)),
-                 na.rm = TRUE,
-                 size = lab.size,
-                 hjust = lab.just) +
+                     label = ~ lab.format(ucl.lab, decimals, y.percent)),
+                na.rm = TRUE,
+                size = lab.size,
+                hjust = lab.just) +
       geom_text(aes_(y = ~ cl.lab,
-                      label = ~ lab.format(cl.lab, decimals, y.percent)),
-                 na.rm = TRUE,
-                 size = lab.size,
-                 hjust = lab.just)
+                     label = ~ lab.format(cl.lab, decimals, y.percent)),
+                na.rm = TRUE,
+                size = lab.size,
+                hjust = lab.just)
   }
   
   # Add freeze line and part labels
@@ -121,7 +131,7 @@ plot.qic <- function(x, title, ylab, xlab, subtitle, caption, part.labels,
       if (inherits(x$x, 'POSIXct')) {
         plabs$x <- as.POSIXct(plabs$x, origin = '1970-01-01')
       }
-
+      
       p <- p +
         geom_label(aes_(y = ~ y, label = ~ z, group = 1), 
                    data = plabs,
@@ -195,13 +205,13 @@ plot.qic <- function(x, title, ylab, xlab, subtitle, caption, part.labels,
   if (y.percent) {
     p <- p + scale_y_continuous(labels = scales::percent)
   }
-
+  
   # Add space for line labels
   subgroups <- unique(x$x)
   
   if (is.factor(subgroups))
     subgroups <- as.numeric(subgroups)
-
+  
   p <- p +
     expand_limits(x = max((subgroups)) +
                     diff(range((subgroups))) / 30 * x.pad * show.labels)
@@ -221,6 +231,6 @@ plot.qic <- function(x, title, ylab, xlab, subtitle, caption, part.labels,
     p <- p + theme(strip.text.y = element_text(angle = 0,
                                                hjust = 0),
                    strip.background = element_blank())
-
+  
   return(p)
 }
