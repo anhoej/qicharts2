@@ -4,12 +4,15 @@ plot.qic <- function(x, title, ylab, xlab, subtitle, caption, part.labels,
                      decimals, flip, dots.only, point.size,
                      x.format, x.angle, x.pad,
                      y.expand, y.percent, strip.horizontal,
+                     col.line = '#5DA5DA', 
+                     col.signal = '#F15854', 
+                     col.target = '#059748',
                      ...) {
   # Set colours
   col1      <- '#8C8C8C' # rgb(140, 140, 140, maxColorValue = 255) # grey
-  col2      <- '#5DA5DA' # rgb(093, 165, 218, maxColorValue = 255) # blue
-  col3      <- '#F15854' # rgb(241, 088, 084, maxColorValue = 255) # red
-  col4      <- '#059748' # rgb(005, 151, 072, maxColorValue = 255) # green
+  col2      <- getOption('qic.linecol') #'#5DA5DA' # rgb(093, 165, 218, maxColorValue = 255) # blue
+  col3      <- getOption('qic.signalcol') #'#F15854' # rgb(241, 088, 084, maxColorValue = 255) # red
+  col4      <- getOption('qic.targetcol') #'#059748' # rgb(005, 151, 072, maxColorValue = 255) # green
   col5      <- '#C8C8C8' # rgb(200, 200, 200, maxColorValue = 255) # light grey
   cols      <- c('col1' = col1,
                  'col2' = col2,

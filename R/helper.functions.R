@@ -404,7 +404,7 @@ qic.agg <- function(d, got.n, part, agg.fun, freeze, exclude,
   notes  <- quo(notes)
   facet1 <- quo(facet1)
   facet2 <- quo(facet2)
-
+  
   d <- d %>% 
     filter(!is.na(!!x)) %>% 
     group_by(!!x, !!facet1, !!facet2) %>% 
@@ -432,17 +432,17 @@ qic.agg <- function(d, got.n, part, agg.fun, freeze, exclude,
     lapply(chart.fun) %>% 
     lapply(runs.analysis) %>% 
     lapply(function(x) {
-                within(x, {
-                  y          <- y * multiply
-                  cl         <- cl * multiply
-                  lcl        <- lcl * multiply
-                  ucl        <- ucl * multiply
-                  cl.lab     <- ifelse(xx == max(xx), cl, NA)
-                  lcl.lab    <- ifelse(xx == max(xx), lcl, NA)
-                  ucl.lab    <- ifelse(xx == max(xx), ucl, NA)
-                  target.lab <- ifelse(xx == max(xx), target, NA)
-                })
-              })
+      within(x, {
+        y          <- y * multiply
+        cl         <- cl * multiply
+        lcl        <- lcl * multiply
+        ucl        <- ucl * multiply
+        cl.lab     <- ifelse(xx == max(xx), cl, NA)
+        lcl.lab    <- ifelse(xx == max(xx), lcl, NA)
+        ucl.lab    <- ifelse(xx == max(xx), ucl, NA)
+        target.lab <- ifelse(xx == max(xx), target, NA)
+      })
+    })
   
   d <- do.call(rbind, d) %>% 
     arrange(!!facet1, !!facet2, !!x)
@@ -458,7 +458,7 @@ qic.agg <- function(d, got.n, part, agg.fun, freeze, exclude,
   # Ignore runs analysis if subgroups are categorical or if chart type is MR
   if (dots.only || chart == 'mr')
     d$runs.signal <- FALSE
-
+  
   # Prevent negative y axis if y.neg argument is FALSE
   if (!y.neg & min(d$y, na.rm = TRUE) >= 0) {
     d$lcl[d$lcl < 0]         <- 0
@@ -466,4 +466,16 @@ qic.agg <- function(d, got.n, part, agg.fun, freeze, exclude,
   }
   
   return(d)
+}
+
+.onAttach <- function(libname, pkgname) {
+  options(qic.linecol   = '#5DA5DA',
+          qic.signalcol = '#F15854',
+          qic.targetcol = '#059748')
+}
+
+.onDetach <- function(libpath) {
+  options(qic.linecol = NULL,
+          qic.signalcol = NULL,
+          qic.targetcol = NULL)
 }
