@@ -18,7 +18,7 @@ bibliography: paper.bib
 
 `qicharts2` is an R package for making statistical process control (SPC) charts for continuous quality improvement.
 
-![Figure 1: Control chart of hospital infections showing random variation](paper.svg)
+![Figure 1: Control chart of hospital infections showing random variation](paper.png)
 
 SPC charts are point-and-line graphs showing a measure over time and employing statistical tests for identification of non-random variation, e.g. quality improvement or degradation. Central to SPC is the understanding of process variation over time.
 
