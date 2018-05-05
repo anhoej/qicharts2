@@ -135,7 +135,7 @@ As expected from random numbers, the previous run and control charts exhibit com
 
 ### Shewhart's 3-sigma rule
 
-Shewhart devised one test to identify special cause variation, the 3-sigma rule, which signals if one or more data points fall outside the 3-sigma limits. The 3-sigma rule is effective in detecting larger (> 3SD) shifts in data.
+Shewhart devised one test to identify special cause variation, the 3-sigma rule, which signals if one or more data points fall outside the 3-sigma limits. The 3-sigma rule is effective in detecting larger (> 2SD) shifts in data.
 
 ```{r}
 # Simulate a special cause to y in the form of a large, transient shift of 4 standard deviations.
