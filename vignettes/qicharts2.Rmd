@@ -105,7 +105,7 @@ The purpose of analysing process data is to know when a change occurs so that we
 
 **Common cause variation**
 
-* is also called random variation or noise,
+* is also called natural/random variation or noise,
 
 * is present in all processes,
 
@@ -123,7 +123,7 @@ The purpose of analysing process data is to know when a change occurs so that we
 
 * makes the process unpredictable.
 
-> A process will be said to be predictabe when, through the use of past experience, we can describe, at least within limits, how the process will behave in the future.
+> A process will be said to be predictable when, through the use of past experience, we can describe, at least within limits, how the process will behave in the future.
 >
 > Donald J. Wheeler. Understanding Variation, 2. ed., p 153
 
@@ -135,7 +135,7 @@ As expected from random numbers, the previous run and control charts exhibit com
 
 ### Shewhart's 3-sigma rule
 
-Shewhart devised one test to identify special cause variation, the 3-sigma rule, which signals if one or more data points fall outside the 3-sigma limits. The 3-sigma rule is effective in detecting larger (> 2SD) shifts in data.
+Shewhart devised one test to identify special cause variation, the 3-sigma rule, which signals if one or more data points fall outside the 3-sigma limits. The 3-sigma rule is effective in detecting larger (> 3SD) shifts in data.
 
 ```{r}
 # Simulate a special cause to y in the form of a large, transient shift of 4 standard deviations.
@@ -155,11 +155,11 @@ qic(y, chart = 'i')
 
 Therefore, many additional tests have been proposed to increase the sensitivity to non-random variation.
 
-It is important to realise that while it may be tempting to apply more tests in order to increase the sensitivity of the chart, more test will increase the risk of false signals thereby reducing the specificity of the chart. The choice of which and how many tests to apply is therefore critical.
+It is important to realise that while it may be tempting to apply more tests in order to increase the sensitivity of the chart, more test will increase the risk of false signals, thereby reducing the specificity of the chart. The choice of which and how many tests to apply is therefore critical.
 
 ### The Western Electric rules
 
-The Best known tests for non-random variation are probably the [Western Electric Rules](https://en.wikipedia.org/wiki/Western_Electric_rules) described in the Statistical Quality Control Handbook (Western Electric Company 1956). The WE rules consist of four simple tests that can be applied to control charts by visual inspection and are based on the identification of unusual patterns in the distribution of data points relative to the control and centre lines.
+The best known tests for non-random variation are probably the [Western Electric Rules](https://en.wikipedia.org/wiki/Western_Electric_rules) described in the Statistical Quality Control Handbook (Western Electric Company 1956). The WE rules consist of four simple tests that can be applied to control charts by visual inspection and are based on the identification of unusual patterns in the distribution of data points relative to the control and centre lines.
 
 1. One or more points outside of the 3-sigma limits (Shewhart's original 3-sigma rule).
 
@@ -169,13 +169,13 @@ The Best known tests for non-random variation are probably the [Western Electric
 
 4. A run of eight successive points on one side of the centre line.
 
-The WE rules have proven their worth during half a century. One thing to notice is that the WE rules are most effective with control charts that have between 20 and 30 data points. With fewer data points, they loose sensitivity (more false negatives), and with more data points they loose specificity (more false positives).
+The WE rules have proven their worth during half a century. One thing to notice is that the WE rules are most effective with control charts that have between 20 and 30 data points. With fewer data points, they lose sensitivity (more false negatives), and with more data points they lose specificity (more false positives).
 
-### The Anhoej rules
+### The Anhøj rules
 
-The least known tests for non-random variation are probably the Anhoej rules proposed and validated by me in two recent publications ([Anhøj 2014](https://doi.org/10.1371/journal.pone.0113825), [Anhøj 2015](https://doi.org/10.1371/journal.pone.0121349)). The Anhoej rules are the core of `qicharts2` and consist of two tests that are based solely on the distribution of data points in relation to the centre line:
+The least known tests for non-random variation are probably the Anhøj rules, proposed and validated by me in two recent publications ([Anhøj 2014](https://doi.org/10.1371/journal.pone.0113825), [Anhøj 2015](https://doi.org/10.1371/journal.pone.0121349)). The Anhøj rules are the core of `qicharts2`, and consist of two tests that are based solely on the distribution of data points in relation to the centre line:
 
-* **Unusually long runs**: A run is one or more consecutive data points on the same side of the centre line. Data points that fall on the centre line do neither break nor contribute to the run. The upper 95% prediction limit for longest run is approximately $log_2(n)+3$ (rounded to the nearest integer), where $n$ is the number of useful data points. For example, in a run chart with 24 data points a run of *more* than `round(log2(24) + 3)` = `r round(log2(24) + 3)` would suggest a shift in the process.
+* **Unusually long runs**: A run is one or more consecutive data points on the same side of the centre line. Data points that fall on the centre line neither break nor contribute to the run. The upper 95% prediction limit for longest run is approximately $log_2(n)+3$ (rounded to the nearest integer), where $n$ is the number of useful data points. For example, in a run chart with 24 data points a run of *more* than `round(log2(24) + 3)` = `r round(log2(24) + 3)` would suggest a shift in the process.
 
 * **Unusually few crossings**: A crossing is when two consecutive data points are on opposite sides of the centre line. In a random process, the number of crossings has a binomial distribution, $b(n-1,0.5)$. The lower 5% prediction limit for number of crossings is found using `qbinom(p = 0.05, size = n - 1, prob = 0.5)`. Thus, in a run chart with 24 useful data points, *fewer* than `qbinom(0.05, 24 - 1, 0.5)` = `r qbinom(0.05, 24 - 1, 0.5)` crossings would suggest that the process is shifting.
 
@@ -183,13 +183,13 @@ Critical values for longest runs and number of crossings for 10 -- 100 data poin
 
 Apart from being comparable in sensitivity and specificity to WE rules 2-4 with 20-30 data points, the Anhøj rules have some advantages:
 
-* They do not depend on sigma limits and are useful as stand-alone rules with run charts.
+* They do not depend on sigma limits and thus are useful as stand-alone rules with run charts.
 
-* They adapt dynamically to the number of available data points and can be applied to charts with as few as 10 and up to indefinitely many data points without loosing sensitivity and specificity.
+* They adapt dynamically to the number of available data points, and can be applied to charts with as few as 10 and up to indefinitely many data points without losing sensitivity and specificity.
 
-In the previous control chart, a shift of 2 standard deviations was introduced halfway through the process. While the shift is too small to be picked up by the 3-sigma rule, both Anhoej rules detect the signal. The longest run include `r summary(qic(y, chart = 'i'))$longest.run` data points (upper limit = `r summary(qic(y, chart = 'i'))$longest.run.max`), and the number of crossings is `r summary(qic(y, chart = 'i'))$n.crossings` (lower limit = `r summary(qic(y, chart = 'i'))$n.crossings.min`). Note that the shift is also picked up by WE rule 4.
+In the previous control chart, a shift of 2 standard deviations was introduced halfway through the process. While the shift is too small to be picked up by the 3-sigma rule, both Anhøj rules detect the signal. The longest run includes `r summary(qic(y, chart = 'i'))$longest.run` data points (upper limit = `r summary(qic(y, chart = 'i'))$longest.run.max`), and the number of crossings is `r summary(qic(y, chart = 'i'))$n.crossings` (lower limit = `r summary(qic(y, chart = 'i'))$n.crossings.min`). Note that the shift is also picked up by WE rule 4.
 
-Non-random variation found by the Anhoej rules is visualised by `qic()` using a red and dashed centre line.
+Non-random variation found by the Anhøj rules is visualised by `qic()` using a red and dashed centre line.
 
 The parameters of the analysis are available using the `summary()` function on a qic object. See `?summary.qic` for details.
 
@@ -201,13 +201,13 @@ o <- qic(y, chart = 'i')
 summary(o)
 ```
 
-In summary, many additional test for special cause variation have been proposed since Shewhart invented the 3-sigma rule, and many tests are currently being used. The more tests that are applied to the analysis the higher the risk of false signals. `qicharts2` takes a conservative approach by applying only three tests, the 3-sigma rule and the two Anhoej rules. That means that a signal from `qic()` most likely represents a significant change in the underlying process.
+Many additional tests for special cause variation have been proposed since Shewhart invented the 3-sigma rule, and many tests are currently being used. However, the more tests that are applied to the analysis, the higher the risk of false signals. `qicharts2` takes a conservative approach by applying only three tests, the 3-sigma rule and the two Anhøj rules. That means that a signal from `qic()` most likely represents a significant change in the underlying process.
 
 ## Choosing the right control chart
 
 By default, `qic()` produces run charts. To make a control chart, the `chart` argument must be specified.
 
-While there is only one type of run charts, there are many types of control charts. Each type use an assumed probability model to compute the 3-sigma limits.
+While there is only one type of run chart, there are many types of control charts. Each type uses an assumed probability model to compute the 3-sigma limits.
 
 `qic()` includes eleven control charts.
 
@@ -227,7 +227,7 @@ P       | Proportion of defectives                                | Binomial
 P'      | P chart using Laney's correction for large sample sizes | Mixed
 G       | Opportunities between rare events                       | Geometric
 
-I recommend to always begin any analysis with the "assumption free" run chart. If the Anhøj rules find non-random variation, it makes no sense to compute 3-sigma limits based on assumptions regarding the location and dispersion of data because these figures are meaningless when one or more shifts have already been identified.
+I recommend to always begin any analysis with the "assumption free" run chart. If the Anhøj rules find non-random variation, it makes no sense to compute 3-sigma limits based on assumptions regarding the location and dispersion of data, because these figures are meaningless when one or more shifts have already been identified.
 
 > Over the years, I have developed an increasing affection for the much-neglected run chart: a time plot of your process data with the median drawn in as a reference (yes, the median -- not the average). It is "filter No. 1" for any process data and answers the question: "Did this process have at least one shift during this time period?"  (This is generally signaled by a clump of eight consecutive data points either all above or below the median.)
 >
@@ -237,7 +237,7 @@ I recommend to always begin any analysis with the "assumption free" run chart. I
 
 ## Case 1: Patient harm
 
-The gtt dataset contains data on patient harm during hospitalisation. Harm is defined as any unintended physical injury resulting from treatment or care during hospitalisation and not a result of the disease itself. The Global Trigger Tool is a methodology for detection of adverse events in hospital patients using a retrospective record review approach. Each month a random sample of 20 patient records is reviewed and the number of adverse events and patient days found in the sample are counted. See `?gtt` for details.
+The `gtt` dataset contains data on patient harm during hospitalisation. Harm is defined as any unintended physical injury resulting from treatment or care during hospitalisation and not a result of the disease itself. The Global Trigger Tool is a methodology for detection of adverse events in hospital patients using a retrospective record review approach. Each month a random sample of 20 patient records is reviewed and the number of adverse events and patient days found in the sample are counted. See `?gtt` for details.
 
 ```{r}
 head(gtt)
@@ -310,9 +310,9 @@ qic(month, n.harmed, n,
     xlab      = 'Month')
 ```
 
-Since both the harm rate and the proportion of harmed patients exhibit common cause variation only, we conclude that the risk of adverse events during hospitalisation is predictable and that we in the future should expect around 60 adverse events per 1000 patient days harming around 33% of patients.
+Since both the harm rate and the proportion of harmed patients exhibit common cause variation only, we conclude that the risk of adverse events during hospitalisation is predictable: we in the future should expect around 60 adverse events per 1000 patient days, harming around 33% of patients (regardless of their length of stay), although harm rates anywhere between ~0 -- 60% would be considered within common cause variation.
 
-Actually, we often do not need to aggregate data in advance. With a little creativity we can make `qic` do the hard work. The previous plot could have been produced with this code. Note the use of the original gtt dataset and the number of harmed and total number of patients created on the fly.
+Actually, we often do not need to aggregate data in advance. With a little creativity we can make `qic` do the hard work. The previous plot could have been produced with this code. Note the use of the original `gtt` dataset and the number of harmed and total number of patients created on the fly.
 
 ```{r, eval=FALSE}
 qic(month, 
@@ -330,7 +330,7 @@ qic(month,
 
 The Pareto chart, named after [Vilfred Pareto](https://en.wikipedia.org/wiki/Vilfredo_Pareto), was invented by [Joseph M. Juran](https://en.wikipedia.org/wiki/Joseph_M._Juran) as a tool to identify the most important causes of a problem.
 
-Types and severity of adverse events in gtt are organised in an untidy wide format. Since `paretochart()` needs a vector of categorical data we need to rearrange harm severity and harm category into separate columns.
+Types and severity of adverse events in `gtt` are organised in an untidy wide format. Since `paretochart()` needs a vector of categorical data, we need to rearrange harm severity and harm category into separate columns.
 
 ```{r}
 suppressPackageStartupMessages(library(tidyr))
@@ -356,9 +356,9 @@ paretochart(gtt_ae_types$severity,
 
 Almost all harms are temporary (E-F).
 
-## Case 2: Clostridium difficile infections
+## Case 2: *Clostridium difficile* infections
 
-The cdi dataset contains data on hospital acquired Clostridium difficile infections (CDI) before and after an intervention to reduce the risk of CDI. See `?cdi` for details.
+The `cdi` dataset contains data on hospital acquired *Clostridium difficile* infections (CDI) before and after an intervention to reduce the risk of CDI. See `?cdi` for details.
 
 ```{r}
 head(cdi)
@@ -425,7 +425,7 @@ The split C chart shows that the CDI rate has dropped from an average of 19 to 7
 
 ### U chart for infection rate
 
-Until now we have assumed that the area of opportunity is constant, i.e. the number of patients or patient days have not changed significantly over time. When the area of opportunity varies, a U chart (U for *unequal* area of opportunity) is appropriate.
+Until now we have assumed that the area of opportunity, or exposure, is constant, i.e., the number of patients or patient days have not changed significantly over time. When the area of opportunity varies, a U chart (U for *unequal* area of opportunity) is more appropriate.
 
 ```{r}
 qic(month, n, days,
@@ -444,7 +444,7 @@ It is very important to recognise that while run and control charts can identify
 
 ### When should you recompute the limits?
 
-When splitting a chart as in the example above you make a deliberate decision based on your understanding of the process. Some software packages offer automated recalculation of limits whenever a shift is detected. I find this approach very wrong. Limits are the voice of the process and recomputing limits without understanding the context, which computers don't,  is like telling someone to shut up, when they are really trying to tell you something important.
+When splitting a chart as in the example above you make a deliberate decision based on your understanding of the process. Some software packages offer automated recalculation of limits whenever a shift is detected. I find this approach very wrong. Limits are the voice of the process and recomputing limits without understanding the context, which computers don't, is like telling someone to shut up, when they are really trying to tell you something important.
 
 Wheeler suggests that limits *may* be recomputed when the answers to all four of these question is "yes" (Wheeler 2010, p. 224):
 
@@ -456,13 +456,13 @@ Wheeler suggests that limits *may* be recomputed when the answers to all four of
 
 * Is it intended and expected that the new behaviour will continue?
 
-If the answer to any of these question is "no" you should rather seek to find the assignable cause of the shift and, if need be, eliminate it.
+If the answer to any of these question is "no", you should rather seek to find the assignable cause of the shift and, if need be, eliminate it.
 
 Thus, when a deliberate change has been made to the process and the chart finds a shift attributable to this change, it may be time to recompute the limits.
 
 ## Case 3: Coronary artery bypass graft
 
-The cabg dataset contains data on individual coronary artery bypass operations. See `?cabg` for details.
+The `cabg` dataset contains data on individual coronary artery bypass operations. See `?cabg` for details.
 
 ```{r}
 head(cabg)
@@ -545,7 +545,7 @@ qic(month, age,
     xlab  = 'Month')
 ```
 
-Since both the Xbar and the S chart displays common cause variation, we may conclude that the monthly average and standard deviation of patient age is predictable. Note that the mean of the Xbar chart is close to the mean of the individuals chart but that the 3-sigma limits are narrower.
+Since both the Xbar and the S chart display common cause variation, we may conclude that the monthly average and standard deviation of patient age is predictable. Note that the mean of the Xbar chart is close to the mean of the individuals chart but that the 3-sigma limits are narrower.
 
 ### P charts for proportion of patients who were readmitted or died within 30 after surgery
 
@@ -561,7 +561,7 @@ cabg_by_month <- cabg %>%
 head(cabg_by_month)
 ```
 
-Then we use P charts for proportion defectives.
+Then we use P charts for proportion of readmissions.
 
 ```{r}
 qic(month, readmissions, n,
@@ -591,7 +591,7 @@ Thankfully, post-surgery mortality is a rare event, and the P chart suggests com
 
 ### T and G charts for rare events
 
-Rare events are often better analysed as time or opportunities between events. First we need to calculate the number of surgeries and days between fatalities.
+Rare events are often better analysed as time or opportunities between events. First, we need to calculate the number of surgeries and days between fatalities.
 
 ```{r}
 fatalities <- cabg %>% 
@@ -657,7 +657,7 @@ This chart suggests that the readmission rate for females is increasing. This is
 
 ## Case 4: Faceting hospital infections by hospital and infection
 
-The hospital_infection dataset contains data on hospital acquired bacteremias (BAC), Clostridium difficile infections (CDI), and urinary tract infections (UTI) from six hospitals in the Capital Region of Denmark. See `?hospital_infections` for details.
+The `hospital_infection` dataset contains data on hospital acquired bacteremias (BAC), *Clostridium difficile* infections (CDI), and urinary tract infections (UTI) from six hospitals in the Capital Region of Denmark. See `?hospital_infections` for details.
 
 ```{r}
 head(hospital_infections)
@@ -690,7 +690,7 @@ qic(month, n, days,
     xlab     = 'Month')
 ```
 
-Now each infection has its own facet We see that all three infections appear to be predictable and that UTI is the most common infection.
+Now each infection has its own facet. We see that all three infections appear to be predictable and that UTI is the most common infection.
 
 But since these data come from six very different hospitals, we should also facet by hospital.
 
@@ -715,7 +715,7 @@ Note the use of individual y axes to better visualise variation over time and th
 
 ### Funnels plot of infection rates by hospital
 
-Processes containing only common cause variation over time may be aggregated and compared across other units than time. When data have no natural time order, i.e. when the x variable is categorical the data points are not connected by lines and runs analysis  is not performed. To produce a so called funnel plot of infections by hospital, we filter data from a recent stable period and reorder the x variable by size.
+Processes containing only common cause variation over time may be aggregated and compared across other units than time. When data have no natural time order, i.e., when the x variable is categorical, the data points are not connected by lines and runs analysis is not performed. To produce a funnel plot of infections by hospital, we filter data from a recent stable period and reorder the x variable by size.
 
 ```{r, fig.height=7}
 hai_2016 <- hospital_infections %>% 
@@ -736,15 +736,15 @@ qic(hospital, n, days,
     xlab            = 'Hospital')
 ```
 
-One hospital, NOH, have unusually few bacteremias and urinary tract infections compared to the other hospitals. Another hospital, BFH, have unusually many Clostridium difficile infections. The other hospitals are indistinguishable from each other with respect to the hospital infection rates.
+One hospital, NOH, has unusually few bacteremias and urinary tract infections compared to the other hospitals. Another hospital, BFH, has unusually many *Clostridium difficile* infections. The other hospitals are indistinguishable from each other with respect to the hospital infection rates.
 
-What can we learn from NOH and BFH? It is important to stress that data presented in funnel plots should be used for learning rather than for judgement. While it may be interesting for some in need of a "case" to point fingers at the good, the bad and the ugly, the full power of SPC will only be released when data are used for learning and improvement.
+What can we learn from NOH and BFH? It is important to stress that data presented in funnel plots should be used for learning rather than for judgement. While it may be interesting for some in need of a "case" to point fingers at the good, the bad, and the ugly, the full power of SPC will only be released when data are used for learning and improvement.
 
 ## Case 5: Prime charts for count data with very large sample sizes
 
 P and U charts with very large sample sizes sometimes produce narrow 3-sigma limits with most of the data points outside the limits even when the process is stable.
 
-The NHS accidents dataset contains the number of emergency patients seen within 4 hours of attendance. The sample sizes are very large (> 250,000). See `?nhs_accidents` for details.
+The `nhs_accidents` dataset contains the number of emergency patients seen within 4 hours of attendance. The sample sizes are very large (> 250,000). See `?nhs_accidents` for details.
 
 ```{r}
 head(nhs_accidents)
@@ -763,9 +763,9 @@ qic(i, r,
     xlab     = 'Week #')
 ```
 
-This is called over-dispersion and happens sometimes because data in practice rarely come from truly binomial or poisson distributions. When the sample sizes are small, this is not a problem. But as sample sizes increase (> 1000) it becomes apparent that the assumptions of constant proportions or rates between subgroups are not true.
+This is called over-dispersion, and happens sometimes because data in practice rarely come from truly binomial or poisson distributions. When the sample sizes are small, this is not a problem. But as sample sizes increase (> 1000) it becomes apparent that the assumptions of constant proportions or rates between subgroups are not true.
 
-A simple test for over-dispersion is to apply an I chart. If the I chart gives 3-sigma limits that are very different from the U or P chart it is a signal that the underlying probability model of the U or P chart may not be correct.
+A simple test for over-dispersion is to apply an I chart. If the I chart gives 3-sigma limits that are very different from the U or P chart, it is a signal that the underlying probability model of the U or P chart may not be correct.
 
 ```{r}
 qic(i, r, 
@@ -780,7 +780,7 @@ qic(i, r,
 
 In fact, since the I chart estimates 3-sigma limits based on the observed within subgroup variation in data rather than an assumed probability model, it is sort of like the Swiss army knife of SPC. Therefore, the I chart may be used when the true probability model of data is unknown.
 
-However, the I charts does not account for varying sample sizes and may give false signals when sample sizes vary significantly. Laney proposed an elegant solution that incorporates both the within and the between subgroup variation in the calculation of 3-sigma limits. This is what P' (P prime) and U' (U prime) charts are for. See Laney 2002 for details.
+However, the I chart does not account for varying sample sizes and may give false signals when sample sizes vary significantly. Laney proposed an elegant solution that incorporates both within and between subgroup variation in the calculation of 3-sigma limits. This is what P' (P prime) and U' (U prime) charts are for. See Laney 2002 for details.
 
 ```{r}
 qic(i, r, 
@@ -793,9 +793,9 @@ qic(i, r,
     xlab     = 'Week #')
 ```
 
-Laney notes that when over-dispersion is not present, prime charts will give the same results as traditional charts and recommends always to use prime charts for proportions and rates.
+Laney notes that when over-dispersion is not present, prime charts will give the same results as traditional charts, and recommends always to use prime charts for proportions and rates.
 
-Comparing P and P' charts on readmission rates from the cabg dataset we find that while the 3-sigma limits in the P' chart are a little wider, the two charts reach similar conclusions.
+Comparing P and P' charts on readmission rates from the `cabg` dataset we find that while the 3-sigma limits in the P' chart are a little wider, the two charts reach similar conclusions.
 
 ```{r, fig.width=3.45, fig.height=2.3, results='hold', echo=FALSE}
 qic(month, readmissions, 
@@ -823,9 +823,9 @@ qic(month, readmissions,
 
 `qic()` from `qicharts2` provides a simple interface for constructing statistical process control charts for time series data. 
 
-The default chart is a run chart, which tests for non-random variation in data over time using the Anhoej rules for unusually long runs and unusually few crossings. The Anhoej rules are most useful for detection of moderate, persistent shifts. To detect larger, possibly transient, shifts, control charts are useful. `qic()` employs 11 types of control charts for different types of data.
+The default chart is a run chart, which tests for non-random variation in data over time using the Anhøj rules for unusually long runs and unusually few crossings. The Anhøj rules are most useful for detection of moderate, persistent shifts. To detect larger, possibly transient, shifts, control charts are useful. `qic()` employs 11 types of control charts for different types of data.
 
-Since runs analysis based on the Anhoej rules makes no assumptions about the distribution of data, a run chart is the recommended starting point of any analysis of time series data. If the run chart finds random variation only, a control chart may then be used to identify transient shifts in data or to establish the natural process limits to be expected in the future.
+Since runs analysis based on the Anhøj rules makes no assumptions about the distribution of data, a run chart is the recommended starting point of any analysis of time series data. If the run chart finds random variation only, a control chart may then be used to identify transient shifts in data or to establish the natural process limits to be expected in the future.
 
 ## References
 
@@ -885,9 +885,9 @@ $n_{i}=$ sample size.
 
 1. 3-sigma limits for the T chart for time between rare events are calculated by applying an I chart to transformed data ($y=y^{1/3.6}$) and back transforming the 3-sigma limits ($cl=cl^{3.6}$).
 
-1. In prime charts the calculated standard deviation is multiplied by Laney's correction factor, which is the average moving range of standardised y values divided by the constant 1.128 (Laney 2002).
+1. In prime charts, the calculated standard deviation is multiplied by Laney's correction factor, which is the average moving range of standardised y values divided by the constant 1.128 (Laney 2002).
 
-1. Since the count data on a G chart are usually highly skewed, the centre line of the G chart is the median rather than the mean. This way the application of the Anhoej rules is still valid.
+1. Since the count data on a G chart are usually highly skewed, the centre line of the G chart is the median rather than the mean. This way the application of the Anhøj rules is still valid.
 
 ## Appendix 2: Critical values for longest run and number of crossings
 
