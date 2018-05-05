@@ -73,7 +73,7 @@
             <h3 class="subtitle">An implementation of statistical process control charts for R</h3>
                         <h4 class="author">Jacob Anhøj</h4>
             
-            <h4 class="date">2018-03-03</h4>
+            <h4 class="date">2018-05-05</h4>
           </div>
 
     
@@ -126,7 +126,7 @@ y &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">2
 <p><a href="http://en.wikipedia.org/wiki/Walter_A._Shewhart">Walther A. Shewhart</a>, who founded SPC, described two types of variation, <em>chance cause variation</em> and <em>assignable cause variation</em>. Today, the terms <em>common cause</em> and <em>special cause</em> variation are commonly used.</p>
 <p><strong>Common cause variation</strong></p>
 <ul>
-<li><p>is also called random variation or noise,</p></li>
+<li><p>is also called natural/random variation or noise,</p></li>
 <li><p>is present in all processes,</p></li>
 <li><p>is caused by phenomena that are always present within the system,</p></li>
 <li><p>makes the process predictable within limits.</p></li>
@@ -139,7 +139,7 @@ y &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">2
 <li><p>makes the process unpredictable.</p></li>
 </ul>
 <blockquote>
-<p>A process will be said to be predictabe when, through the use of past experience, we can describe, at least within limits, how the process will behave in the future.</p>
+<p>A process will be said to be predictable when, through the use of past experience, we can describe, at least within limits, how the process will behave in the future.</p>
 <p>Donald J. Wheeler. Understanding Variation, 2. ed., p 153</p>
 </blockquote>
 <p>The overall purpose of SPC charts is to tell the two types of variation apart.</p>
@@ -164,36 +164,36 @@ y[<span class="dv">13</span><span class="op">:</span><span class="dv">24</span>]
 <span class="kw"><a href="../reference/qic.html">qic</a></span>(y, <span class="dt">chart =</span> <span class="st">'i'</span>)</code></pre></div>
 <p><img src="qicharts2_files/figure-html/unnamed-chunk-10-1.svg" width="686.4"></p>
 <p>Therefore, many additional tests have been proposed to increase the sensitivity to non-random variation.</p>
-<p>It is important to realise that while it may be tempting to apply more tests in order to increase the sensitivity of the chart, more test will increase the risk of false signals thereby reducing the specificity of the chart. The choice of which and how many tests to apply is therefore critical.</p>
+<p>It is important to realise that while it may be tempting to apply more tests in order to increase the sensitivity of the chart, more test will increase the risk of false signals, thereby reducing the specificity of the chart. The choice of which and how many tests to apply is therefore critical.</p>
 </div>
 <div id="the-western-electric-rules" class="section level3">
 <h3 class="hasAnchor">
 <a href="#the-western-electric-rules" class="anchor"></a>The Western Electric rules</h3>
-<p>The Best known tests for non-random variation are probably the <a href="https://en.wikipedia.org/wiki/Western_Electric_rules">Western Electric Rules</a> described in the Statistical Quality Control Handbook (Western Electric Company 1956). The WE rules consist of four simple tests that can be applied to control charts by visual inspection and are based on the identification of unusual patterns in the distribution of data points relative to the control and centre lines.</p>
+<p>The best known tests for non-random variation are probably the <a href="https://en.wikipedia.org/wiki/Western_Electric_rules">Western Electric Rules</a> described in the Statistical Quality Control Handbook (Western Electric Company 1956). The WE rules consist of four simple tests that can be applied to control charts by visual inspection and are based on the identification of unusual patterns in the distribution of data points relative to the control and centre lines.</p>
 <ol style="list-style-type: decimal">
 <li><p>One or more points outside of the 3-sigma limits (Shewhart’s original 3-sigma rule).</p></li>
 <li><p>Two out of three successive points beyond a 2-sigma limit (two thirds of the distance between the centre line and the control line).</p></li>
 <li><p>Four out of five successive points beyond a 1-sigma limit.</p></li>
 <li><p>A run of eight successive points on one side of the centre line.</p></li>
 </ol>
-<p>The WE rules have proven their worth during half a century. One thing to notice is that the WE rules are most effective with control charts that have between 20 and 30 data points. With fewer data points, they loose sensitivity (more false negatives), and with more data points they loose specificity (more false positives).</p>
+<p>The WE rules have proven their worth during half a century. One thing to notice is that the WE rules are most effective with control charts that have between 20 and 30 data points. With fewer data points, they lose sensitivity (more false negatives), and with more data points they lose specificity (more false positives).</p>
 </div>
-<div id="the-anhoej-rules" class="section level3">
+<div id="the-anhj-rules" class="section level3">
 <h3 class="hasAnchor">
-<a href="#the-anhoej-rules" class="anchor"></a>The Anhoej rules</h3>
-<p>The least known tests for non-random variation are probably the Anhoej rules proposed and validated by me in two recent publications (<a href="https://doi.org/10.1371/journal.pone.0113825">Anhøj 2014</a>, <a href="https://doi.org/10.1371/journal.pone.0121349">Anhøj 2015</a>). The Anhoej rules are the core of <code>qicharts2</code> and consist of two tests that are based solely on the distribution of data points in relation to the centre line:</p>
+<a href="#the-anhj-rules" class="anchor"></a>The Anhøj rules</h3>
+<p>The least known tests for non-random variation are probably the Anhøj rules, proposed and validated by me in two recent publications (<a href="https://doi.org/10.1371/journal.pone.0113825">Anhøj 2014</a>, <a href="https://doi.org/10.1371/journal.pone.0121349">Anhøj 2015</a>). The Anhøj rules are the core of <code>qicharts2</code>, and consist of two tests that are based solely on the distribution of data points in relation to the centre line:</p>
 <ul>
-<li><p><strong>Unusually long runs</strong>: A run is one or more consecutive data points on the same side of the centre line. Data points that fall on the centre line do neither break nor contribute to the run. The upper 95% prediction limit for longest run is approximately <span class="math inline">\(log_2(n)+3\)</span> (rounded to the nearest integer), where <span class="math inline">\(n\)</span> is the number of useful data points. For example, in a run chart with 24 data points a run of <em>more</em> than <code>round(log2(24) + 3)</code> = 8 would suggest a shift in the process.</p></li>
+<li><p><strong>Unusually long runs</strong>: A run is one or more consecutive data points on the same side of the centre line. Data points that fall on the centre line neither break nor contribute to the run. The upper 95% prediction limit for longest run is approximately <span class="math inline">\(log_2(n)+3\)</span> (rounded to the nearest integer), where <span class="math inline">\(n\)</span> is the number of useful data points. For example, in a run chart with 24 data points a run of <em>more</em> than <code>round(log2(24) + 3)</code> = 8 would suggest a shift in the process.</p></li>
 <li><p><strong>Unusually few crossings</strong>: A crossing is when two consecutive data points are on opposite sides of the centre line. In a random process, the number of crossings has a binomial distribution, <span class="math inline">\(b(n-1,0.5)\)</span>. The lower 5% prediction limit for number of crossings is found using <code>qbinom(p = 0.05, size = n - 1, prob = 0.5)</code>. Thus, in a run chart with 24 useful data points, <em>fewer</em> than <code>qbinom(0.05, 24 - 1, 0.5)</code> = 8 crossings would suggest that the process is shifting.</p></li>
 </ul>
 <p>Critical values for longest runs and number of crossings for 10 – 100 data points are tabulated in Appendix 2.</p>
 <p>Apart from being comparable in sensitivity and specificity to WE rules 2-4 with 20-30 data points, the Anhøj rules have some advantages:</p>
 <ul>
-<li><p>They do not depend on sigma limits and are useful as stand-alone rules with run charts.</p></li>
-<li><p>They adapt dynamically to the number of available data points and can be applied to charts with as few as 10 and up to indefinitely many data points without loosing sensitivity and specificity.</p></li>
+<li><p>They do not depend on sigma limits and thus are useful as stand-alone rules with run charts.</p></li>
+<li><p>They adapt dynamically to the number of available data points, and can be applied to charts with as few as 10 and up to indefinitely many data points without losing sensitivity and specificity.</p></li>
 </ul>
-<p>In the previous control chart, a shift of 2 standard deviations was introduced halfway through the process. While the shift is too small to be picked up by the 3-sigma rule, both Anhoej rules detect the signal. The longest run include 13 data points (upper limit = 8), and the number of crossings is 4 (lower limit = 8). Note that the shift is also picked up by WE rule 4.</p>
-<p>Non-random variation found by the Anhoej rules is visualised by <code><a href="../reference/qic.html">qic()</a></code> using a red and dashed centre line.</p>
+<p>In the previous control chart, a shift of 2 standard deviations was introduced halfway through the process. While the shift is too small to be picked up by the 3-sigma rule, both Anhøj rules detect the signal. The longest run includes 13 data points (upper limit = 8), and the number of crossings is 4 (lower limit = 8). Note that the shift is also picked up by WE rule 4.</p>
+<p>Non-random variation found by the Anhøj rules is visualised by <code><a href="../reference/qic.html">qic()</a></code> using a red and dashed centre line.</p>
 <p>The parameters of the analysis are available using the <code>summary()</code> function on a qic object. See <code><a href="../reference/summary.qic.html">?summary.qic</a></code> for details.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Save qic object to o</span>
 o &lt;-<span class="st"> </span><span class="kw"><a href="../reference/qic.html">qic</a></span>(y, <span class="dt">chart =</span> <span class="st">'i'</span>)
@@ -206,14 +206,14 @@ o &lt;-<span class="st"> </span><span class="kw"><a href="../reference/qic.html"
 <span class="co">#&gt; 1           4               8           1 -2.114884 1.057091 4.229067</span>
 <span class="co">#&gt;   sigma.signal</span>
 <span class="co">#&gt; 1            0</span></code></pre></div>
-<p>In summary, many additional test for special cause variation have been proposed since Shewhart invented the 3-sigma rule, and many tests are currently being used. The more tests that are applied to the analysis the higher the risk of false signals. <code>qicharts2</code> takes a conservative approach by applying only three tests, the 3-sigma rule and the two Anhoej rules. That means that a signal from <code><a href="../reference/qic.html">qic()</a></code> most likely represents a significant change in the underlying process.</p>
+<p>Many additional tests for special cause variation have been proposed since Shewhart invented the 3-sigma rule, and many tests are currently being used. However, the more tests that are applied to the analysis, the higher the risk of false signals. <code>qicharts2</code> takes a conservative approach by applying only three tests, the 3-sigma rule and the two Anhøj rules. That means that a signal from <code><a href="../reference/qic.html">qic()</a></code> most likely represents a significant change in the underlying process.</p>
 </div>
 </div>
 <div id="choosing-the-right-control-chart" class="section level2">
 <h2 class="hasAnchor">
 <a href="#choosing-the-right-control-chart" class="anchor"></a>Choosing the right control chart</h2>
 <p>By default, <code><a href="../reference/qic.html">qic()</a></code> produces run charts. To make a control chart, the <code>chart</code> argument must be specified.</p>
-<p>While there is only one type of run charts, there are many types of control charts. Each type use an assumed probability model to compute the 3-sigma limits.</p>
+<p>While there is only one type of run chart, there are many types of control charts. Each type uses an assumed probability model to compute the 3-sigma limits.</p>
 <p><code><a href="../reference/qic.html">qic()</a></code> includes eleven control charts.</p>
 <table class="table">
 <thead><tr class="header">
@@ -287,7 +287,7 @@ o &lt;-<span class="st"> </span><span class="kw"><a href="../reference/qic.html"
 </tr>
 </tbody>
 </table>
-<p>I recommend to always begin any analysis with the “assumption free” run chart. If the Anhøj rules find non-random variation, it makes no sense to compute 3-sigma limits based on assumptions regarding the location and dispersion of data because these figures are meaningless when one or more shifts have already been identified.</p>
+<p>I recommend to always begin any analysis with the “assumption free” run chart. If the Anhøj rules find non-random variation, it makes no sense to compute 3-sigma limits based on assumptions regarding the location and dispersion of data, because these figures are meaningless when one or more shifts have already been identified.</p>
 <blockquote>
 <p>Over the years, I have developed an increasing affection for the much-neglected run chart: a time plot of your process data with the median drawn in as a reference (yes, the median – not the average). It is “filter No. 1” for any process data and answers the question: “Did this process have at least one shift during this time period?” (This is generally signaled by a clump of eight consecutive data points either all above or below the median.)</p>
 <p>If it did, then it makes no sense to do a control chart at this time because the overall average of all these data doesn’t exist. (Sort of like: If I put my right foot in a bucket of boiling water and my left foot in a bucket of ice water, on average, I’m pretty comfortable.)</p>
@@ -297,7 +297,7 @@ o &lt;-<span class="st"> </span><span class="kw"><a href="../reference/qic.html"
 <div id="case-1-patient-harm" class="section level2">
 <h2 class="hasAnchor">
 <a href="#case-1-patient-harm" class="anchor"></a>Case 1: Patient harm</h2>
-<p>The gtt dataset contains data on patient harm during hospitalisation. Harm is defined as any unintended physical injury resulting from treatment or care during hospitalisation and not a result of the disease itself. The Global Trigger Tool is a methodology for detection of adverse events in hospital patients using a retrospective record review approach. Each month a random sample of 20 patient records is reviewed and the number of adverse events and patient days found in the sample are counted. See <code><a href="../reference/gtt.html">?gtt</a></code> for details.</p>
+<p>The <code>gtt</code> dataset contains data on patient harm during hospitalisation. Harm is defined as any unintended physical injury resulting from treatment or care during hospitalisation and not a result of the disease itself. The Global Trigger Tool is a methodology for detection of adverse events in hospital patients using a retrospective record review approach. Each month a random sample of 20 patient records is reviewed and the number of adverse events and patient days found in the sample are counted. See <code><a href="../reference/gtt.html">?gtt</a></code> for details.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(gtt)
 <span class="co">#&gt;   admission_id admission_dte discharge_dte      month days harms</span>
 <span class="co">#&gt; 1            1    2010-01-02    2010-01-03 2010-01-01    2     0</span>
@@ -356,12 +356,12 @@ gtt_by_month &lt;-<span class="st"> </span>gtt <span class="op">%&gt;%</span>
 <span class="co">#&gt; # A tibble: 6 x 5</span>
 <span class="co">#&gt;   month      harms  days n.harmed     n</span>
 <span class="co">#&gt;   &lt;date&gt;     &lt;dbl&gt; &lt;dbl&gt;    &lt;int&gt; &lt;int&gt;</span>
-<span class="co">#&gt; 1 2010-01-01    5.  113.        3    20</span>
-<span class="co">#&gt; 2 2010-02-01    7.  132.        6    20</span>
-<span class="co">#&gt; 3 2010-03-01    5.  121.        4    20</span>
-<span class="co">#&gt; 4 2010-04-01    7.  134.        5    20</span>
-<span class="co">#&gt; 5 2010-05-01    7.  116.        7    20</span>
-<span class="co">#&gt; 6 2010-06-01    5.  131.        5    20</span></code></pre></div>
+<span class="co">#&gt; 1 2010-01-01     5   113        3    20</span>
+<span class="co">#&gt; 2 2010-02-01     7   132        6    20</span>
+<span class="co">#&gt; 3 2010-03-01     5   121        4    20</span>
+<span class="co">#&gt; 4 2010-04-01     7   134        5    20</span>
+<span class="co">#&gt; 5 2010-05-01     7   116        7    20</span>
+<span class="co">#&gt; 6 2010-06-01     5   131        5    20</span></code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/qic.html">qic</a></span>(month, n.harmed,
     <span class="dt">n         =</span> n,
     <span class="dt">data      =</span> gtt_by_month,
@@ -379,8 +379,8 @@ gtt_by_month &lt;-<span class="st"> </span>gtt <span class="op">%&gt;%</span>
     <span class="dt">ylab      =</span> <span class="ot">NULL</span>,
     <span class="dt">xlab      =</span> <span class="st">'Month'</span>)</code></pre></div>
 <p><img src="qicharts2_files/figure-html/unnamed-chunk-17-1.svg" width="686.4"></p>
-<p>Since both the harm rate and the proportion of harmed patients exhibit common cause variation only, we conclude that the risk of adverse events during hospitalisation is predictable and that we in the future should expect around 60 adverse events per 1000 patient days harming around 33% of patients.</p>
-<p>Actually, we often do not need to aggregate data in advance. With a little creativity we can make <code>qic</code> do the hard work. The previous plot could have been produced with this code. Note the use of the original gtt dataset and the number of harmed and total number of patients created on the fly.</p>
+<p>Since both the harm rate and the proportion of harmed patients exhibit common cause variation only, we conclude that the risk of adverse events during hospitalisation is predictable: we in the future should expect around 60 adverse events per 1000 patient days, harming around 33% of patients (regardless of their length of stay), although harm rates anywhere between ~0 – 60% would be considered within common cause variation.</p>
+<p>Actually, we often do not need to aggregate data in advance. With a little creativity we can make <code>qic</code> do the hard work. The previous plot could have been produced with this code. Note the use of the original <code>gtt</code> dataset and the number of harmed and total number of patients created on the fly.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/qic.html">qic</a></span>(month, 
     harms <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>,        <span class="co"># TRUE if patient had one or more harms</span>
     days <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>,         <span class="co"># Always TRUE </span>
@@ -395,7 +395,7 @@ gtt_by_month &lt;-<span class="st"> </span>gtt <span class="op">%&gt;%</span>
 <h3 class="hasAnchor">
 <a href="#pareto-analysis-of-adverse-event-types-and-severity" class="anchor"></a>Pareto analysis of adverse event types and severity</h3>
 <p>The Pareto chart, named after <a href="https://en.wikipedia.org/wiki/Vilfredo_Pareto">Vilfred Pareto</a>, was invented by <a href="https://en.wikipedia.org/wiki/Joseph_M._Juran">Joseph M. Juran</a> as a tool to identify the most important causes of a problem.</p>
-<p>Types and severity of adverse events in gtt are organised in an untidy wide format. Since <code><a href="../reference/paretochart.html">paretochart()</a></code> needs a vector of categorical data we need to rearrange harm severity and harm category into separate columns.</p>
+<p>Types and severity of adverse events in <code>gtt</code> are organised in an untidy wide format. Since <code><a href="../reference/paretochart.html">paretochart()</a></code> needs a vector of categorical data, we need to rearrange harm severity and harm category into separate columns.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">suppressPackageStartupMessages</span>(<span class="kw">library</span>(tidyr))
 
 gtt_ae_types &lt;-<span class="st"> </span>gtt <span class="op">%&gt;%</span>
@@ -429,8 +429,8 @@ gtt_ae_types &lt;-<span class="st"> </span>gtt <span class="op">%&gt;%</span>
 </div>
 <div id="case-2-clostridium-difficile-infections" class="section level2">
 <h2 class="hasAnchor">
-<a href="#case-2-clostridium-difficile-infections" class="anchor"></a>Case 2: Clostridium difficile infections</h2>
-<p>The cdi dataset contains data on hospital acquired Clostridium difficile infections (CDI) before and after an intervention to reduce the risk of CDI. See <code><a href="../reference/cdi.html">?cdi</a></code> for details.</p>
+<a href="#case-2-clostridium-difficile-infections" class="anchor"></a>Case 2: <em>Clostridium difficile</em> infections</h2>
+<p>The <code>cdi</code> dataset contains data on hospital acquired <em>Clostridium difficile</em> infections (CDI) before and after an intervention to reduce the risk of CDI. See <code><a href="../reference/cdi.html">?cdi</a></code> for details.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(cdi)
 <span class="co">#&gt;        month  n     days period notes</span>
 <span class="co">#&gt; 1 2012-11-01 17 14768.42    pre  &lt;NA&gt;</span>
@@ -490,7 +490,7 @@ gtt_ae_types &lt;-<span class="st"> </span>gtt <span class="op">%&gt;%</span>
 <div id="u-chart-for-infection-rate" class="section level3">
 <h3 class="hasAnchor">
 <a href="#u-chart-for-infection-rate" class="anchor"></a>U chart for infection rate</h3>
-<p>Until now we have assumed that the area of opportunity is constant, i.e. the number of patients or patient days have not changed significantly over time. When the area of opportunity varies, a U chart (U for <em>unequal</em> area of opportunity) is appropriate.</p>
+<p>Until now we have assumed that the area of opportunity, or exposure, is constant, i.e., the number of patients or patient days have not changed significantly over time. When the area of opportunity varies, a U chart (U for <em>unequal</em> area of opportunity) is more appropriate.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/qic.html">qic</a></span>(month, n, days,
     <span class="dt">data     =</span> cdi,
     <span class="dt">chart    =</span> <span class="st">'u'</span>,
@@ -514,14 +514,14 @@ gtt_ae_types &lt;-<span class="st"> </span>gtt <span class="op">%&gt;%</span>
 <li><p>Is the new process behaviour desirable?</p></li>
 <li><p>Is it intended and expected that the new behaviour will continue?</p></li>
 </ul>
-<p>If the answer to any of these question is “no” you should rather seek to find the assignable cause of the shift and, if need be, eliminate it.</p>
+<p>If the answer to any of these question is “no”, you should rather seek to find the assignable cause of the shift and, if need be, eliminate it.</p>
 <p>Thus, when a deliberate change has been made to the process and the chart finds a shift attributable to this change, it may be time to recompute the limits.</p>
 </div>
 </div>
 <div id="case-3-coronary-artery-bypass-graft" class="section level2">
 <h2 class="hasAnchor">
 <a href="#case-3-coronary-artery-bypass-graft" class="anchor"></a>Case 3: Coronary artery bypass graft</h2>
-<p>The cabg dataset contains data on individual coronary artery bypass operations. See <code><a href="../reference/cabg.html">?cabg</a></code> for details.</p>
+<p>The <code>cabg</code> dataset contains data on individual coronary artery bypass operations. See <code><a href="../reference/cabg.html">?cabg</a></code> for details.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(cabg)
 <span class="co">#&gt;         date    age gender los death readmission</span>
 <span class="co">#&gt; 1 2011-07-01 72.534   Male   8 FALSE        TRUE</span>
@@ -587,7 +587,7 @@ gtt_ae_types &lt;-<span class="st"> </span>gtt <span class="op">%&gt;%</span>
     <span class="dt">ylab  =</span> <span class="st">'Years'</span>,
     <span class="dt">xlab  =</span> <span class="st">'Month'</span>)</code></pre></div>
 <p><img src="qicharts2_files/figure-html/unnamed-chunk-34-1.svg" width="686.4"></p>
-<p>Since both the Xbar and the S chart displays common cause variation, we may conclude that the monthly average and standard deviation of patient age is predictable. Note that the mean of the Xbar chart is close to the mean of the individuals chart but that the 3-sigma limits are narrower.</p>
+<p>Since both the Xbar and the S chart display common cause variation, we may conclude that the monthly average and standard deviation of patient age is predictable. Note that the mean of the Xbar chart is close to the mean of the individuals chart but that the 3-sigma limits are narrower.</p>
 </div>
 <div id="p-charts-for-proportion-of-patients-who-were-readmitted-or-died-within-30-after-surgery" class="section level3">
 <h3 class="hasAnchor">
@@ -609,7 +609,7 @@ gtt_ae_types &lt;-<span class="st"> </span>gtt <span class="op">%&gt;%</span>
 <span class="co">#&gt; 4 2011-10-01      1            8    60</span>
 <span class="co">#&gt; 5 2011-11-01      1           16    67</span>
 <span class="co">#&gt; 6 2011-12-01      3           11    69</span></code></pre></div>
-<p>Then we use P charts for proportion defectives.</p>
+<p>Then we use P charts for proportion of readmissions.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/qic.html">qic</a></span>(month, readmissions, n,
     <span class="dt">data      =</span> cabg_by_month,
     <span class="dt">chart     =</span> <span class="st">'p'</span>,
@@ -633,7 +633,7 @@ gtt_ae_types &lt;-<span class="st"> </span>gtt <span class="op">%&gt;%</span>
 <div id="t-and-g-charts-for-rare-events" class="section level3">
 <h3 class="hasAnchor">
 <a href="#t-and-g-charts-for-rare-events" class="anchor"></a>T and G charts for rare events</h3>
-<p>Rare events are often better analysed as time or opportunities between events. First we need to calculate the number of surgeries and days between fatalities.</p>
+<p>Rare events are often better analysed as time or opportunities between events. First, we need to calculate the number of surgeries and days between fatalities.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fatalities &lt;-<span class="st"> </span>cabg <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">x =</span> <span class="kw"><a href="http://dplyr.tidyverse.org/reference/ranking.html">row_number</a></span>()) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(death) <span class="op">%&gt;%</span><span class="st"> </span>
@@ -702,7 +702,7 @@ gtt_ae_types &lt;-<span class="st"> </span>gtt <span class="op">%&gt;%</span>
 <div id="case-4-faceting-hospital-infections-by-hospital-and-infection" class="section level2">
 <h2 class="hasAnchor">
 <a href="#case-4-faceting-hospital-infections-by-hospital-and-infection" class="anchor"></a>Case 4: Faceting hospital infections by hospital and infection</h2>
-<p>The hospital_infection dataset contains data on hospital acquired bacteremias (BAC), Clostridium difficile infections (CDI), and urinary tract infections (UTI) from six hospitals in the Capital Region of Denmark. See <code><a href="../reference/hospital_infections.html">?hospital_infections</a></code> for details.</p>
+<p>The <code>hospital_infection</code> dataset contains data on hospital acquired bacteremias (BAC), <em>Clostridium difficile</em> infections (CDI), and urinary tract infections (UTI) from six hospitals in the Capital Region of Denmark. See <code><a href="../reference/hospital_infections.html">?hospital_infections</a></code> for details.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(hospital_infections)
 <span class="co">#&gt;   hospital infection      month  n     days</span>
 <span class="co">#&gt; 1      AHH       BAC 2015-01-01 17 17233.67</span>
@@ -736,7 +736,7 @@ gtt_ae_types &lt;-<span class="st"> </span>gtt <span class="op">%&gt;%</span>
     <span class="dt">ylab     =</span> <span class="st">'Cases per 10,000 risk days'</span>,
     <span class="dt">xlab     =</span> <span class="st">'Month'</span>)</code></pre></div>
 <p><img src="qicharts2_files/figure-html/unnamed-chunk-45-1.svg" width="686.4"></p>
-<p>Now each infection has its own facet We see that all three infections appear to be predictable and that UTI is the most common infection.</p>
+<p>Now each infection has its own facet. We see that all three infections appear to be predictable and that UTI is the most common infection.</p>
 <p>But since these data come from six very different hospitals, we should also facet by hospital.</p>
 </div>
 <div id="two-way-faceted-u-chart-by-infection-and-hospital" class="section level3">
@@ -759,7 +759,7 @@ gtt_ae_types &lt;-<span class="st"> </span>gtt <span class="op">%&gt;%</span>
 <div id="funnels-plot-of-infection-rates-by-hospital" class="section level3">
 <h3 class="hasAnchor">
 <a href="#funnels-plot-of-infection-rates-by-hospital" class="anchor"></a>Funnels plot of infection rates by hospital</h3>
-<p>Processes containing only common cause variation over time may be aggregated and compared across other units than time. When data have no natural time order, i.e. when the x variable is categorical the data points are not connected by lines and runs analysis is not performed. To produce a so called funnel plot of infections by hospital, we filter data from a recent stable period and reorder the x variable by size.</p>
+<p>Processes containing only common cause variation over time may be aggregated and compared across other units than time. When data have no natural time order, i.e., when the x variable is categorical, the data points are not connected by lines and runs analysis is not performed. To produce a funnel plot of infections by hospital, we filter data from a recent stable period and reorder the x variable by size.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">hai_<span class="dv">2016</span> &lt;-<span class="st"> </span>hospital_infections <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(month    <span class="op">&gt;=</span><span class="st"> '2016-07-01'</span>) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">hospital =</span> <span class="kw">reorder</span>(hospital, days))
@@ -777,15 +777,15 @@ gtt_ae_types &lt;-<span class="st"> </span>gtt <span class="op">%&gt;%</span>
     <span class="dt">ylab            =</span> <span class="st">'Cases per 10,000 risk days'</span>,
     <span class="dt">xlab            =</span> <span class="st">'Hospital'</span>)</code></pre></div>
 <p><img src="qicharts2_files/figure-html/unnamed-chunk-47-1.svg" width="686.4"></p>
-<p>One hospital, NOH, have unusually few bacteremias and urinary tract infections compared to the other hospitals. Another hospital, BFH, have unusually many Clostridium difficile infections. The other hospitals are indistinguishable from each other with respect to the hospital infection rates.</p>
-<p>What can we learn from NOH and BFH? It is important to stress that data presented in funnel plots should be used for learning rather than for judgement. While it may be interesting for some in need of a “case” to point fingers at the good, the bad and the ugly, the full power of SPC will only be released when data are used for learning and improvement.</p>
+<p>One hospital, NOH, has unusually few bacteremias and urinary tract infections compared to the other hospitals. Another hospital, BFH, has unusually many <em>Clostridium difficile</em> infections. The other hospitals are indistinguishable from each other with respect to the hospital infection rates.</p>
+<p>What can we learn from NOH and BFH? It is important to stress that data presented in funnel plots should be used for learning rather than for judgement. While it may be interesting for some in need of a “case” to point fingers at the good, the bad, and the ugly, the full power of SPC will only be released when data are used for learning and improvement.</p>
 </div>
 </div>
 <div id="case-5-prime-charts-for-count-data-with-very-large-sample-sizes" class="section level2">
 <h2 class="hasAnchor">
 <a href="#case-5-prime-charts-for-count-data-with-very-large-sample-sizes" class="anchor"></a>Case 5: Prime charts for count data with very large sample sizes</h2>
 <p>P and U charts with very large sample sizes sometimes produce narrow 3-sigma limits with most of the data points outside the limits even when the process is stable.</p>
-<p>The NHS accidents dataset contains the number of emergency patients seen within 4 hours of attendance. The sample sizes are very large (&gt; 250,000). See <code><a href="../reference/nhs_accidents.html">?nhs_accidents</a></code> for details.</p>
+<p>The <code>nhs_accidents</code> dataset contains the number of emergency patients seen within 4 hours of attendance. The sample sizes are very large (&gt; 250,000). See <code><a href="../reference/nhs_accidents.html">?nhs_accidents</a></code> for details.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(nhs_accidents)
 <span class="co">#&gt;   i      r      n</span>
 <span class="co">#&gt; 1 1 266501 280443</span>
@@ -804,8 +804,8 @@ gtt_ae_types &lt;-<span class="st"> </span>gtt <span class="op">%&gt;%</span>
     <span class="dt">ylab     =</span> <span class="ot">NULL</span>,
     <span class="dt">xlab     =</span> <span class="st">'Week #'</span>)</code></pre></div>
 <p><img src="qicharts2_files/figure-html/unnamed-chunk-49-1.svg" width="686.4"></p>
-<p>This is called over-dispersion and happens sometimes because data in practice rarely come from truly binomial or poisson distributions. When the sample sizes are small, this is not a problem. But as sample sizes increase (&gt; 1000) it becomes apparent that the assumptions of constant proportions or rates between subgroups are not true.</p>
-<p>A simple test for over-dispersion is to apply an I chart. If the I chart gives 3-sigma limits that are very different from the U or P chart it is a signal that the underlying probability model of the U or P chart may not be correct.</p>
+<p>This is called over-dispersion, and happens sometimes because data in practice rarely come from truly binomial or poisson distributions. When the sample sizes are small, this is not a problem. But as sample sizes increase (&gt; 1000) it becomes apparent that the assumptions of constant proportions or rates between subgroups are not true.</p>
+<p>A simple test for over-dispersion is to apply an I chart. If the I chart gives 3-sigma limits that are very different from the U or P chart, it is a signal that the underlying probability model of the U or P chart may not be correct.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/qic.html">qic</a></span>(i, r, 
     <span class="dt">n        =</span> n, 
     <span class="dt">data     =</span> nhs_accidents, 
@@ -816,7 +816,7 @@ gtt_ae_types &lt;-<span class="st"> </span>gtt <span class="op">%&gt;%</span>
     <span class="dt">xlab     =</span> <span class="st">'Week #'</span>)</code></pre></div>
 <p><img src="qicharts2_files/figure-html/unnamed-chunk-50-1.svg" width="686.4"></p>
 <p>In fact, since the I chart estimates 3-sigma limits based on the observed within subgroup variation in data rather than an assumed probability model, it is sort of like the Swiss army knife of SPC. Therefore, the I chart may be used when the true probability model of data is unknown.</p>
-<p>However, the I charts does not account for varying sample sizes and may give false signals when sample sizes vary significantly. Laney proposed an elegant solution that incorporates both the within and the between subgroup variation in the calculation of 3-sigma limits. This is what P’ (P prime) and U’ (U prime) charts are for. See Laney 2002 for details.</p>
+<p>However, the I chart does not account for varying sample sizes and may give false signals when sample sizes vary significantly. Laney proposed an elegant solution that incorporates both within and between subgroup variation in the calculation of 3-sigma limits. This is what P’ (P prime) and U’ (U prime) charts are for. See Laney 2002 for details.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/qic.html">qic</a></span>(i, r, 
     <span class="dt">n        =</span> n, 
     <span class="dt">data     =</span> nhs_accidents, 
@@ -826,16 +826,16 @@ gtt_ae_types &lt;-<span class="st"> </span>gtt <span class="op">%&gt;%</span>
     <span class="dt">ylab     =</span> <span class="ot">NULL</span>,
     <span class="dt">xlab     =</span> <span class="st">'Week #'</span>)</code></pre></div>
 <p><img src="qicharts2_files/figure-html/unnamed-chunk-51-1.svg" width="686.4"></p>
-<p>Laney notes that when over-dispersion is not present, prime charts will give the same results as traditional charts and recommends always to use prime charts for proportions and rates.</p>
-<p>Comparing P and P’ charts on readmission rates from the cabg dataset we find that while the 3-sigma limits in the P’ chart are a little wider, the two charts reach similar conclusions.</p>
+<p>Laney notes that when over-dispersion is not present, prime charts will give the same results as traditional charts, and recommends always to use prime charts for proportions and rates.</p>
+<p>Comparing P and P’ charts on readmission rates from the <code>cabg</code> dataset we find that while the 3-sigma limits in the P’ chart are a little wider, the two charts reach similar conclusions.</p>
 <p><img src="qicharts2_files/figure-html/unnamed-chunk-52-1.svg" width="331.2"><img src="qicharts2_files/figure-html/unnamed-chunk-52-2.svg" width="331.2"></p>
 </div>
 <div id="conclusion" class="section level2">
 <h2 class="hasAnchor">
 <a href="#conclusion" class="anchor"></a>Conclusion</h2>
 <p><code><a href="../reference/qic.html">qic()</a></code> from <code>qicharts2</code> provides a simple interface for constructing statistical process control charts for time series data.</p>
-<p>The default chart is a run chart, which tests for non-random variation in data over time using the Anhoej rules for unusually long runs and unusually few crossings. The Anhoej rules are most useful for detection of moderate, persistent shifts. To detect larger, possibly transient, shifts, control charts are useful. <code><a href="../reference/qic.html">qic()</a></code> employs 11 types of control charts for different types of data.</p>
-<p>Since runs analysis based on the Anhoej rules makes no assumptions about the distribution of data, a run chart is the recommended starting point of any analysis of time series data. If the run chart finds random variation only, a control chart may then be used to identify transient shifts in data or to establish the natural process limits to be expected in the future.</p>
+<p>The default chart is a run chart, which tests for non-random variation in data over time using the Anhøj rules for unusually long runs and unusually few crossings. The Anhøj rules are most useful for detection of moderate, persistent shifts. To detect larger, possibly transient, shifts, control charts are useful. <code><a href="../reference/qic.html">qic()</a></code> employs 11 types of control charts for different types of data.</p>
+<p>Since runs analysis based on the Anhøj rules makes no assumptions about the distribution of data, a run chart is the recommended starting point of any analysis of time series data. If the run chart finds random variation only, a control chart may then be used to identify transient shifts in data or to establish the natural process limits to be expected in the future.</p>
 </div>
 <div id="references" class="section level2">
 <h2 class="hasAnchor">
@@ -872,8 +872,8 @@ gtt_ae_types &lt;-<span class="st"> </span>gtt <span class="op">%&gt;%</span>
 <li><p>I charts use the correction suggested by Nelson by excluding moving ranges above the upper range limit from calculations of the 3-sigma limits (Nelson 1982).</p></li>
 <li><p>Runs analysis are not performed on MR charts since individual data points are correlated.</p></li>
 <li><p>3-sigma limits for the T chart for time between rare events are calculated by applying an I chart to transformed data (<span class="math inline">\(y=y^{1/3.6}\)</span>) and back transforming the 3-sigma limits (<span class="math inline">\(cl=cl^{3.6}\)</span>).</p></li>
-<li><p>In prime charts the calculated standard deviation is multiplied by Laney’s correction factor, which is the average moving range of standardised y values divided by the constant 1.128 (Laney 2002).</p></li>
-<li><p>Since the count data on a G chart are usually highly skewed, the centre line of the G chart is the median rather than the mean. This way the application of the Anhoej rules is still valid.</p></li>
+<li><p>In prime charts, the calculated standard deviation is multiplied by Laney’s correction factor, which is the average moving range of standardised y values divided by the constant 1.128 (Laney 2002).</p></li>
+<li><p>Since the count data on a G chart are usually highly skewed, the centre line of the G chart is the median rather than the mean. This way the application of the Anhøj rules is still valid.</p></li>
 </ol>
 </div>
 <div id="appendix-2-critical-values-for-longest-run-and-number-of-crossings" class="section level2">
@@ -1366,7 +1366,7 @@ knitr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentati
       <li><a href="#testing-for-special-cause-variation">Testing for special cause variation</a></li>
       <li><a href="#choosing-the-right-control-chart">Choosing the right control chart</a></li>
       <li><a href="#case-1-patient-harm">Case 1: Patient harm</a></li>
-      <li><a href="#case-2-clostridium-difficile-infections">Case 2: Clostridium difficile infections</a></li>
+      <li><a href="#case-2-clostridium-difficile-infections">Case 2: <em>Clostridium difficile</em> infections</a></li>
       <li><a href="#case-3-coronary-artery-bypass-graft">Case 3: Coronary artery bypass graft</a></li>
       <li><a href="#case-4-faceting-hospital-infections-by-hospital-and-infection">Case 4: Faceting hospital infections by hospital and infection</a></li>
       <li><a href="#case-5-prime-charts-for-count-data-with-very-large-sample-sizes">Case 5: Prime charts for count data with very large sample sizes</a></li>
