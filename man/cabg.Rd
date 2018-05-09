@@ -10,6 +10,9 @@
   days. \item{death} TRUE if patient died within 30 days after
   surgery. \item{readmission} TRUE if patient were readmitted for any
   reason within 30 days after surgery. }}
+\source{
+Omitted for privacy concerns
+}
 \usage{
 cabg
 }
