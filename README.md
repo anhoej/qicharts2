@@ -1,5 +1,7 @@
 [![Build Status](https://travis-ci.org/anhoej/qicharts2.svg?branch=master)](https://travis-ci.org/anhoej/qicharts2)
 [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/qicharts2)](https://cran.r-project.org/package=qicharts2)
+[![DOI](https://zenodo.org/badge/96605963.svg)](https://zenodo.org/badge/latestdoi/96605963)
+
 
 # Quality improvement charts for R
 
