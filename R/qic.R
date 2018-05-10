@@ -51,6 +51,9 @@
 #' @param decimals Integer indicating the preferred number of decimals in centre
 #'   and control line labels.
 #' @param point.size Number specifying the size of data points.
+#' @param x.period Character string specifying the interval cut points of 
+#'   datetime x values used for aggregating y values by week, month, etc.
+#'   See the breaks argument of \code{?cut.POSIXt()} for possible values.
 #' @param x.format Date format of x axis labels. See \code{?strftime()} for 
 #'   possible date formats.
 #' @param x.angle Number indicating the angle of x axis labels.
@@ -125,6 +128,7 @@ qic <- function(x,
                 show.labels      = is.null(facets),
                 decimals         = 1,
                 point.size       = 1,
+                x.period         = NULL,
                 x.format         = NULL,
                 x.angle          = NULL,
                 x.pad            = 1,
@@ -218,8 +222,12 @@ qic <- function(x,
   dots.only <- is.factor(x) || mode(x) != 'numeric'
   
   # Convert dates and datetimes to POSIXct
-  if (inherits(x, c('Date', 'POSIXt')))
+  if (inherits(x, c('Date', 'POSIXt'))) {
     x <- as.POSIXct(as.character(x), tz = 'UTC')
+    if (!missing(x.period)) {
+      x <- as.POSIXct(cut(x, breaks = x.period))
+    }
+  }
   
   # Fix missing values
   if (got.n) {
