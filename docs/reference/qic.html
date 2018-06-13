@@ -18,13 +18,27 @@
 <!-- Font Awesome icons -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 
+<!-- clipboard.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
+
+<!-- sticky kit -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
-<script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-  
-  
+
+
+
+<meta property="og:title" content="Statistical process control charts. — qic" />
+
+<meta property="og:description" content="The qic() function creates run charts and Shewhart control charts for 
+process control and improvement. Included control charts are: I, MR, Xbar, S,
+T, C, U, U', P, P', and G charts." />
+<meta name="twitter:card" content="summary" />
+
+
+
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -34,16 +48,14 @@
 <![endif]-->
 
 
-<!-- Google analytics -->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-104156888-1"></script>
 <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
-  ga('create', 'UA-104156888-1', 'auto');
-  ga('send', 'pageview');
-
+  gtag('config', 'UA-104156888-1');
 </script>
 
   </head>
@@ -59,8 +71,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">qicharts2</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">qicharts2</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.4.0.9000</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
@@ -85,6 +101,7 @@
   </a>
 </li>
       </ul>
+      
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -92,17 +109,21 @@
       
       </header>
 
-      <div class="row">
+<div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Statistical process control charts.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/anhoej/qicharts2/blob/master/R/qic.R'><code>R/qic.R</code></a></small>
+    <div class="hidden name"><code>qic.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
     <p>The <code>qic()</code> function creates run charts and Shewhart control charts for 
 process control and improvement. Included control charts are: I, MR, Xbar, S,
 T, C, U, U', P, P', and G charts.</p>
     
+    </div>
 
     <pre class="usage"><span class='fu'>qic</span>(<span class='no'>x</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>facets</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>notes</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>chart</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"run"</span>, <span class='st'>"i"</span>, <span class='st'>"mr"</span>, <span class='st'>"xbar"</span>, <span class='st'>"s"</span>, <span class='st'>"t"</span>, <span class='st'>"p"</span>, <span class='st'>"pp"</span>, <span class='st'>"c"</span>, <span class='st'>"u"</span>, <span class='st'>"up"</span>,
@@ -111,11 +132,12 @@ T, C, U, U', P, P', and G charts.</p>
   * <span class='fl'>1</span>, <span class='kw'>nrow</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>ncol</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>scales</span> <span class='kw'>=</span> <span class='st'>"fixed"</span>, <span class='kw'>title</span> <span class='kw'>=</span> <span class='st'>""</span>,
   <span class='kw'>ylab</span> <span class='kw'>=</span> <span class='st'>"Value"</span>, <span class='kw'>xlab</span> <span class='kw'>=</span> <span class='st'>"Subgroup"</span>, <span class='kw'>subtitle</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>caption</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>part.labels</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>show.labels</span> <span class='kw'>=</span> <span class='fu'>is.null</span>(<span class='no'>facets</span>), <span class='kw'>decimals</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>point.size</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>x.format</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>x.angle</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>x.pad</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>y.expand</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>y.neg</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>y.percent</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>show.grid</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>flip</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>strip.horizontal</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>print.summary</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+  <span class='kw'>point.size</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>x.period</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>x.format</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>x.angle</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>x.pad</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>y.expand</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>y.neg</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>y.percent</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>show.grid</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>flip</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>strip.horizontal</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>print.summary</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
     
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
@@ -236,6 +258,12 @@ and control line labels.</p></td>
       <td><p>Number specifying the size of data points.</p></td>
     </tr>
     <tr>
+      <th>x.period</th>
+      <td><p>Character string specifying the interval cut points of 
+datetime x values. See the breaks argument of <code>?cut.POSIXt()</code> for
+possible values.</p></td>
+    </tr>
+    <tr>
       <th>x.format</th>
       <td><p>Date format of x axis labels. See <code>?strftime()</code> for 
 possible date formats.</p></td>
@@ -293,7 +321,7 @@ possibly transient, shifts in data is identified by Shewhart's 3-sigma rule.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p><code>vignette('qic')</code></p>
+    <div class='dont-index'><p><code>vignette('qic')</code></p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -304,9 +332,9 @@ possibly transient, shifts in data is identified by Shewhart's 3-sigma rule.</p>
 <span class='no'>y</span> <span class='kw'>&lt;-</span> <span class='fu'>rnorm</span>(<span class='fl'>24</span>)
 
 <span class='co'># Run chart</span>
-<span class='fu'>qic</span>(<span class='no'>y</span>)</div><div class='img'><img src='qic-1.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
+<span class='fu'>qic</span>(<span class='no'>y</span>)</div><div class='img'><img src='qic-1.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># I control chart</span>
-<span class='fu'>qic</span>(<span class='no'>y</span>, <span class='kw'>chart</span> <span class='kw'>=</span> <span class='st'>'i'</span>)</div><div class='img'><img src='qic-2.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
+<span class='fu'>qic</span>(<span class='no'>y</span>, <span class='kw'>chart</span> <span class='kw'>=</span> <span class='st'>'i'</span>)</div><div class='img'><img src='qic-2.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># U control chart from build-in data set of hospital infection rates faceted</span>
 <span class='co'>#   by hospital and type of infection.</span>
 <span class='fu'>qic</span>(<span class='no'>month</span>, <span class='no'>n</span>,
@@ -317,7 +345,7 @@ possibly transient, shifts in data is identified by Shewhart's 3-sigma rule.</p>
     <span class='kw'>multiply</span> <span class='kw'>=</span> <span class='fl'>10000</span>,
     <span class='kw'>title</span>     <span class='kw'>=</span> <span class='st'>'Hospital infection rates'</span>,
     <span class='kw'>ylab</span>     <span class='kw'>=</span> <span class='st'>'Number of infections per 10.000 risk days'</span>,
-    <span class='kw'>xlab</span>     <span class='kw'>=</span> <span class='st'>'Month'</span>)</div><div class='img'><img src='qic-3.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
+    <span class='kw'>xlab</span>     <span class='kw'>=</span> <span class='st'>'Month'</span>)</div><div class='img'><img src='qic-3.png' alt='' width='700' height='433' /></div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -343,11 +371,14 @@ possibly transient, shifts in data is identified by Shewhart's 3-sigma rule.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built with <a href="http://pkgdown.r-lib.org/">pkgdown</a>.</p>
 </div>
 
       </footer>
    </div>
 
+  
+
   </body>
 </html>
+

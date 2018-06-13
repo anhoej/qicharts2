@@ -85,8 +85,8 @@ and control line labels.}
 \item{point.size}{Number specifying the size of data points.}
 
 \item{x.period}{Character string specifying the interval cut points of 
-datetime x values. See the breaks argument of \code{?cut.POSIXt()} for
-possible values.}
+datetime x values used for aggregating y values by week, month, etc.
+See the breaks argument of \code{?cut.POSIXt()} for possible values.}
 
 \item{x.format}{Date format of x axis labels. See \code{?strftime()} for 
 possible date formats.}

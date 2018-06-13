@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Authors • qicharts2</title>
+<title>Summary • qicharts2</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -30,7 +30,7 @@
 
 
 
-<meta property="og:title" content="Authors" />
+<meta property="og:title" content="Summary" />
 
 
 
@@ -56,7 +56,7 @@
   </head>
 
   <body>
-    <div class="container template-authors">
+    <div class="container template-title-body">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -107,15 +107,51 @@
 <div class="row">
   <div class="contents col-md-9">
     <div class="page-header">
-      <h1>Authors</h1>
+      <h1>Summary</h1>
     </div>
 
-    <ul class="list-unstyled">
-      <li>
-        <p><strong>Jacob Anhoej</strong>. Author, maintainer. 
-        </p>
-      </li>
-    </ul>
+
+<hr>
+<p>title: ‘qicharts2: Quality Improvement Charts for R’ tags:</p>
+<ul>
+<li>Statistical process control</li>
+<li>Continuous quality improvement authors:</li>
+<li>name: Jacob Anhøj orcid: 0000-0002-7701-1774 affiliation: “1” affiliations:</li>
+<li>name: Rigshospitalet, University of Copenhagen, Denmark index: 1 date: 18 April 2018 bibliography: paper.bib —</li>
+</ul>
+<div id="summary" class="section level1">
+
+<p><code>qicharts2</code> is an R package for making statistical process control (SPC) charts for continuous quality improvement.</p>
+<p><img src="paper.png" alt="Figure 1: Control chart of hospital infections showing random variation"></p>
+<p>SPC charts are point-and-line graphs showing a measure over time and employing statistical tests for identification of non-random variation, e.g. quality improvement or degradation. Central to SPC is the understanding of process variation over time.</p>
+<p>The purpose of analysing process data is to know when a change occurs so that we can take appropriate action. However, numbers may change even if the process stays the same (and vice versa). So how do we distinguish changes in numbers that represent change of the underlying process from those that are essentially noise?</p>
+<p><a href="http://en.wikipedia.org/wiki/Walter_A._Shewhart">Walther A. Shewhart</a>, who founded SPC, described two types of variation, <em>common cause variation</em> and <em>special cause variation</em>:</p>
+<p><strong>Common cause variation</strong></p>
+<ul>
+<li>is also called natural/random variation or noise,</li>
+<li>is present in all processes,</li>
+<li>is caused by phenomena that are always present within the system,</li>
+<li>makes the process predictable within limits.</li>
+</ul>
+<p><strong>Special cause variation</strong></p>
+<ul>
+<li>is also called non-random variation or signal,</li>
+<li>is present in some processes,</li>
+<li>is caused by phenomena that are not normally present in the system,</li>
+<li>makes the process unpredictable.</li>
+</ul>
+<p>The overall purpose of SPC charts is to tell the two types of variation apart.</p>
+<p>Special cause variation in the form of minor to moderate persistent shifts in data over time is identified by the Anhoej rules for unusually long runs and unusually few crossings [@anhøj2014; @anhøj2015].</p>
+<p>Special cause variation in the form of larger, possibly transient, shifts is identified by Shewhart’s 3-sigma rule [@mohammed2008] as coloured data points outside the control limits.</p>
+<p>The control chart shown in Figure 1 displays common cause variation. This means that the process is stable and predictable, and that in the future – if nothing changes – we should expect on average 19 infections per month, and that as few as 6 and as many as 32 would be within the expected range.</p>
+<p>The main function of <code>qicharts2</code>, <code><a href="reference/qic.html">qic()</a></code>, has a simple interface with only one mandatory argument (the numbers to plot). Many more optional arguments allow for customisation of the plot, including selection of control chart type, one and two dimensional facetting, and splitting of charts into pre and post intervention periods.</p>
+<p>With <code>qicharts2</code> comes a vignette, Get started [@vignette], that explains the theory behind SPC and typical uses of <code><a href="reference/qic.html">qic()</a></code>.</p>
+</div>
+<div id="references" class="section level1">
+<h1 class="hasAnchor">
+<a href="#references" class="anchor"></a>References</h1>
+</div>
+
 
   </div>
 
