@@ -50,11 +50,11 @@ recalculation of centre and control lines.}
 \item{exclude}{Integer vector indicating data points to exclude from 
 calculations of centre and control lines.}
 
-\item{target}{Numeric value indicating a target value to be plotted as a 
-horizontal line (same for each facet).}
+\item{target}{Numeric, either a single value indicating a target value to be plotted as a 
+horizontal line or a vector for variable target line.}
 
-\item{cl}{Numeric, either a value indicating the centre line if known in 
-advance or a vector if centre line is variable.}
+\item{cl}{Numeric, either a single value indicating the centre line if known in 
+advance or a vector for variable centre line.}
 
 \item{nrow, ncol}{Number indicating the preferred number of rows and columns 
 in facets.}

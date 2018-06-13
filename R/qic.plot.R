@@ -66,6 +66,9 @@ plot.qic <- function(x, title, ylab, xlab, subtitle, caption, part.labels,
   }
   
   p <- p +
+    geom_line(aes_(y = ~ target), colour = col4)
+  
+  p <- p +
     geom_line(aes_(y = ~ cl, linetype = ~ runs.signal, colour = ~ linecol),
               na.rm = TRUE) +
     scale_linetype_manual(values = c('FALSE' = 'solid', 'TRUE' = 'dashed'))

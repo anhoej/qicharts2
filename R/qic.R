@@ -30,10 +30,10 @@
 #'   recalculation of centre and control lines.
 #' @param exclude Integer vector indicating data points to exclude from 
 #'   calculations of centre and control lines.
-#' @param target Numeric value indicating a target value to be plotted as a 
-#'   horizontal line (same for each facet).
-#' @param cl Numeric, either a value indicating the centre line if known in 
-#'   advance or a vector if centre line is variable.
+#' @param target Numeric, either a single value indicating a target value to be plotted as a 
+#'   horizontal line or a vector for variable target line.
+#' @param cl Numeric, either a single value indicating the centre line if known in 
+#'   advance or a vector for variable centre line.
 #' @param nrow,ncol Number indicating the preferred number of rows and columns 
 #'   in facets.
 #' @param scales Character string, one of 'fixed' (default), 'free_y', 'free_x',
