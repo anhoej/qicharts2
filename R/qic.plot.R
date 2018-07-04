@@ -59,14 +59,14 @@ plot.qic <- function(x, title, ylab, xlab, subtitle, caption, part.labels,
                   alpha = 0.4)
   } else {
     p <- p +
-      geom_line(aes_(y = ~ lcl), colour = col1)
+      geom_line(aes_(y = ~ lcl), colour = col1, na.rm = T)
     
     p <- p +
-      geom_line(aes_(y = ~ ucl), colour = col1)
+      geom_line(aes_(y = ~ ucl), colour = col1, na.rm = T)
   }
   
   p <- p +
-    geom_line(aes_(y = ~ target), colour = col4)
+    geom_line(aes_(y = ~ target), colour = col4, na.rm = T)
   
   p <- p +
     geom_line(aes_(y = ~ cl, linetype = ~ runs.signal, colour = ~ linecol),
