@@ -1,5 +1,6 @@
 qicharts2 0.4.0.9000
 ===============
+* Fix missing target line.
 * Use exact values for control chart constants A3, B3, and B4 (thanks to Tore Wenzel-Larsen).
 * Add x.period argument specifying interval cut points for aggregating y values by week, month, etc. (thanks to pwildenhain)
 * P charts default to percentage on Y axis (thanks to pwildehain).
