@@ -199,13 +199,13 @@ calculations of centre and control lines.</p></td>
     </tr>
     <tr>
       <th>target</th>
-      <td><p>Numeric value indicating a target value to be plotted as a 
-horizontal line (same for each facet).</p></td>
+      <td><p>Numeric, either a single value indicating a target value to be plotted as a 
+horizontal line or a vector for variable target line.</p></td>
     </tr>
     <tr>
       <th>cl</th>
-      <td><p>Numeric, either a value indicating the centre line if known in 
-advance or a vector if centre line is variable.</p></td>
+      <td><p>Numeric, either a single value indicating the centre line if known in 
+advance or a vector for variable centre line.</p></td>
     </tr>
     <tr>
       <th>nrow, ncol</th>
@@ -260,8 +260,8 @@ and control line labels.</p></td>
     <tr>
       <th>x.period</th>
       <td><p>Character string specifying the interval cut points of 
-datetime x values. See the breaks argument of <code>?cut.POSIXt()</code> for
-possible values.</p></td>
+datetime x values used for aggregating y values by week, month, etc.
+See the breaks argument of <code>?cut.POSIXt()</code> for possible values.</p></td>
     </tr>
     <tr>
       <th>x.format</th>
