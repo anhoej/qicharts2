@@ -9,9 +9,9 @@
   of infection. BAC: Bacteremia, CDI: Clostridium difficile infection. UTI:
   Urinary tract infection. \item{month} First day of month. \item
  {n} Number of cases. \item{days} Number of risk days. A risk
-  day is a patient day without infection }}
+  day is a patient day without infection. }}
 \source{
-\url{http://www.haiba.dk/} (Capital Region of Denmark)
+\url{http://www.haiba.dk/} (Capital Region of Denmark).
 }
 \usage{
 hospital_infections

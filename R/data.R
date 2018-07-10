@@ -9,8 +9,8 @@
 #'   of infection. BAC: Bacteremia, CDI: Clostridium difficile infection. UTI:
 #'   Urinary tract infection. \item{month} First day of month. \item
 #'  {n} Number of cases. \item{days} Number of risk days. A risk
-#'   day is a patient day without infection }
-#' @source \url{http://www.haiba.dk/} (Capital Region of Denmark)
+#'   day is a patient day without infection. }
+#' @source \url{http://www.haiba.dk/} (Capital Region of Denmark).
 "hospital_infections"
 
 #' Coronary artery bypass graft operations
@@ -23,7 +23,7 @@
 #'   days. \item{death} TRUE if patient died within 30 days after
 #'   surgery. \item{readmission} TRUE if patient were readmitted for any
 #'   reason within 30 days after surgery. }
-#' @source Omitted for privacy concerns
+#' @source Omitted for privacy concerns.
 "cabg"
 
 #' Clostridium difficile infections
@@ -36,7 +36,7 @@
 #'   acquired CDI. \item{days} Number of risk days. A risk day is a 
 #'   patient day without CDI. \item{period} Factor indicating the period
 #'   'pre' or 'post' intervention. \item{notes} Annotations. }
-#' @source \url{http://www.haiba.dk/} (Amager Hvidovre Hospital)
+#' @source \url{http://www.haiba.dk/} (Amager Hvidovre Hospital).
 "cdi"
 
 #' NHS accidents
@@ -49,7 +49,7 @@
 #'   number. \item r Attendances seen within 4 hours. \item n Total number of 
 #'   attendances. }
 #' @source Mohammed MA, et al. Quality and Safety in Health Care
-#'   2013;22:362–368. \url{https://doi.org/10.1136/bmjqs-2012-001373}
+#'   2013;22:362–368. \url{https://doi.org/10.1136/bmjqs-2012-001373}.
 "nhs_accidents"
 
 #' Patient harm indentified using the Global Trigger Tool
@@ -60,8 +60,9 @@
 #' @format A data frame with 340 rows and 11 variables: \itemize{ \item 
 #'   admission_id Admission ID. \item admission_dte Date of admission. \item 
 #'   discharge_dte Date of discharge. \item month Month of discharge. \item days
-#'   Duration of hospital stay in days. \item harms Number of adverse events
+#'   Duration of hospital stay in days. \item harms Number of adverse events.
 #'   \item {E-I} Type of adverse event by severity category. E-F: Temporary
 #'   harm; G-H: Permanent harm; I: Fatal harm. }
+#' @source Omitted for privacy concerns.
 #' @references \url{http://www.ihi.org/resources/Pages/Tools/IHIGlobalTriggerToolforMeasuringAEs.aspx}
 "gtt"

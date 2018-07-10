@@ -3,7 +3,6 @@
 [![DOI](https://zenodo.org/badge/96605963.svg)](https://zenodo.org/badge/latestdoi/96605963)
 [![DOI](http://joss.theoj.org/papers/10.21105/joss.00699/status.svg)](https://doi.org/10.21105/joss.00699)
 
-
 # Quality improvement charts for R
 
 `qicharts2` is an R package with functions for making run charts, Shewhart control charts and Pareto charts for continuous quality improvement. Included control charts are: I, MR, Xbar, S, T, C, U, U', P, P', and G charts. 

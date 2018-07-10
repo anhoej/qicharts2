@@ -11,7 +11,7 @@
   surgery. \item{readmission} TRUE if patient were readmitted for any
   reason within 30 days after surgery. }}
 \source{
-Omitted for privacy concerns
+Omitted for privacy concerns.
 }
 \usage{
 cabg

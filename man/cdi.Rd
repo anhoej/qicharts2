@@ -10,7 +10,7 @@
   patient day without CDI. \item{period} Factor indicating the period
   'pre' or 'post' intervention. \item{notes} Annotations. }}
 \source{
-\url{http://www.haiba.dk/} (Amager Hvidovre Hospital)
+\url{http://www.haiba.dk/} (Amager Hvidovre Hospital).
 }
 \usage{
 cdi

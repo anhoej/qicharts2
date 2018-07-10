@@ -7,7 +7,7 @@ qicharts2 0.4.0.9000
 * Add qic.linecol, qic.signalcol, and qic.targetcol to options to allow for custom colours.
 * Add qic.clshade to options to allow for choosing between lines and shaded area for control limits.
 * Fix typos in vignette (thanks to rmadillo).
-* Add source to cabg dataset.
+* Add source to cabg and gtt datasets.
 
 qicharts2 0.4.0
 ===============

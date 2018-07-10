@@ -9,7 +9,7 @@
   attendances. }}
 \source{
 Mohammed MA, et al. Quality and Safety in Health Care
-  2013;22:362–368. \url{https://doi.org/10.1136/bmjqs-2012-001373}
+  2013;22:362–368. \url{https://doi.org/10.1136/bmjqs-2012-001373}.
 }
 \usage{
 nhs_accidents
