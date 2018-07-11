@@ -1,7 +1,7 @@
 Package: qicharts2
 Title: Quality Improvement Charts
-Version: 0.4.0.9000
-Date: 2018-04-18
+Version: 0.5.1
+Date: 2018-07-10
 Authors@R: person('Jacob', 'Anhoej', email = 'jacob@anhoej.net',
     role = c('aut', 'cre'))
 Description: Functions for making run charts, Shewhart control charts and
@@ -25,7 +25,7 @@ Suggests:
     rmarkdown,
     testthat,
     tidyr
-License: file LICENSE
+License: GPL-3
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.0.1
