@@ -1,3 +1,7 @@
+qicharts2 0.5.9999
+===============
+* Allow NULL as title argument in paretochart (thanks to Andrew Hill).
+
 qicharts2 0.5.1
 ===============
 * Fix missing target line.

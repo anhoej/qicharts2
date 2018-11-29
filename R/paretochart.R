@@ -31,7 +31,8 @@
 #' @export
 
 paretochart <- function(x,
-                        title    = NULL,
+                        # title    = NULL,
+                        title    = '',
                         subtitle = NULL,
                         caption  = NULL,
                         ylab     = NULL,
@@ -49,9 +50,11 @@ paretochart <- function(x,
   x$p      <- x$y / sum(x$y)
   x$p.cum  <- cumsum(x$p)
   
-  if (is.null(title)) {
-    title <- paste('Pareto Chart of', varname)
-  }
+  # if (is.null(title)) {
+  #   title <- paste('Pareto Chart of', varname)
+  # }
+  if (!is.null(title) && title == '') 
+    title <- paste('Pareto Chart', 'of', varname)
   
   p <- ggplot(x, aes_(x = ~ x, y = ~ p.cum)) +
     geom_col(aes_(y = ~ p), fill = '#88BDE6') +
