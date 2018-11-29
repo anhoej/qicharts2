@@ -4,7 +4,7 @@
 \alias{paretochart}
 \title{Paretochart}
 \usage{
-paretochart(x, title = NULL, subtitle = NULL, caption = NULL,
+paretochart(x, title = "", subtitle = NULL, caption = NULL,
   ylab = NULL, xlab = NULL, x.angle = NULL, useNA = FALSE,
   print.data = FALSE)
 }

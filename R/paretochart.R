@@ -31,7 +31,6 @@
 #' @export
 
 paretochart <- function(x,
-                        # title    = NULL,
                         title    = '',
                         subtitle = NULL,
                         caption  = NULL,
@@ -41,7 +40,6 @@ paretochart <- function(x,
                         useNA    = FALSE,
                         print.data = FALSE) {
   varname  <- deparse(substitute(x))
-  # x        <- factor(x)
   x        <- table(x, useNA = ifelse(useNA, 'ifany', 'no'))
   x        <- sort(x, decreasing = TRUE, na.last = TRUE)
   x        <- as.data.frame(x)
@@ -50,9 +48,6 @@ paretochart <- function(x,
   x$p      <- x$y / sum(x$y)
   x$p.cum  <- cumsum(x$p)
   
-  # if (is.null(title)) {
-  #   title <- paste('Pareto Chart of', varname)
-  # }
   if (!is.null(title) && title == '') 
     title <- paste('Pareto Chart', 'of', varname)
   
@@ -66,11 +61,11 @@ paretochart <- function(x,
     theme_minimal() +
     theme(panel.grid.minor = element_blank(),
           panel.grid.major.x = element_blank()) +
-    labs(title = title,
+    labs(title    = title,
          subtitle = subtitle,
-         caption = caption,
-         y = ylab,
-         x = xlab)
+         caption  = caption,
+         y        = ylab,
+         x        = xlab)
   
   # Rotate x axis labels
   if (!is.null(x.angle)) {
