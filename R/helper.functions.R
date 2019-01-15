@@ -287,7 +287,8 @@ qic.g <- function(x){
 
 c4 <- function(n) {
   n[n <= 1] <- NA
-  sqrt(2 / (n - 1)) * gamma(n / 2) / gamma((n - 1) / 2)
+  # sqrt(2 / (n - 1)) * gamma(n / 2) / gamma((n - 1) / 2)
+  sqrt(2 / (n - 1)) * exp(lgamma(n / 2) - lgamma((n - 1) / 2))
 }
 
 c5 <- function(n) {
