@@ -444,13 +444,14 @@ qic.agg <- function(d, got.n, part, agg.fun, freeze, exclude,
         target.lab <- ifelse(xx == max(xx), target, NA)
       })
     })
-  
   d <- do.call(rbind, d) %>% 
     arrange(!!facet1, !!facet2, !!x)
   
   # Remove control lines from missing subgroups
   d$ucl[!is.finite(d$ucl)] <- NA
   d$lcl[!is.finite(d$lcl)] <- NA
+  d$lcl.lab[!is.finite(d$lcl.lab)] <- NA
+  d$ucl.lab[!is.finite(d$ucl.lab)] <- NA
   
   # Add sigma signals
   d$sigma.signal                        <- d$y > d$ucl | d$y < d$lcl
