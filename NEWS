@@ -3,6 +3,7 @@ qicharts2 0.5.9999
 * Allow NULL as title argument in paretochart (thanks to Andrew Hill).
 * Fix c4() for large n (thanks to pwildenhain for the bug report and Tore Wenzel-Larsen for the fix).
 * Hide line labels for Inf values.
+* Fix baseline centre line in G charts (when using freeze argument).
 
 qicharts2 0.5.1
 ===============

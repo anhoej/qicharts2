@@ -280,7 +280,7 @@ qic.g <- function(x){
   # x$cl <- 0.693 * x$cl
   
   # Set centre line to median
-  x$cl <- stats::median(x$y, na.rm = TRUE)
+  x$cl <- stats::median(x$y[base], na.rm = TRUE)
   
   return(x)
 }
