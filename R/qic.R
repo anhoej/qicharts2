@@ -224,8 +224,9 @@ qic <- function(x,
   # Convert dates and datetimes to POSIXct
   if (inherits(x, c('Date', 'POSIXt'))) {
     x <- as.POSIXct(as.character(x), tz = 'UTC')
-    if (!missing(x.period)) {
-      x <- as.POSIXct(cut(x, breaks = x.period))
+    # if (!missing(x.period)) {
+    if (!is.null(x.period)) {
+        x <- as.POSIXct(cut(x, breaks = x.period))
     }
   }
   
