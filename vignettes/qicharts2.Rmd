@@ -858,7 +858,7 @@ The procedure for calculating $SD$ depends on the type type of data involved:
 
 **I**: $\bar{x}\pm2.66\overline{MR}$, $\bar{x}=$, sample average, $\overline{MR}=$ average moving range of successive observations.
 
-**MR**: $\overline{MR}+3.267\overline{MR}$, $\overline{MR}=$ average moving range (no lower 3-sigma limit).
+**MR**: $3.267\overline{MR}$, $\overline{MR}=$ average moving range (no lower 3-sigma limit).
 
 **Xbar**: $\bar{\bar{x}}\pm A_{3}\bar{s}$, $A_{3}=$ constant depending on the sample size,
 $\bar{s}=$ weighted sample standard deviation.
