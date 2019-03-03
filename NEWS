@@ -4,7 +4,7 @@ qicharts2 0.5.9999
 * Fix c4() for large n (thanks to pwildenhain for the bug report and Tore Wenzel-Larsen for the fix).
 * Hide line labels for Inf values.
 * Fix baseline centre line in G charts (when using freeze argument).
-* Fix error when x.period argument is NULL (thanks to lenakba).
+* Fix error when x.period argument is NULL (thanks to lenakba). 
 
 qicharts2 0.5.1
 ===============

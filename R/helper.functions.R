@@ -263,6 +263,7 @@ qic.g <- function(x){
   base <- x$baseline & x$include
   
   # Calculate centre line
+  calccl <- anyNA(x$cl)
   if (anyNA(x$cl)) {
     x$cl <- mean(x$y[base], na.rm = TRUE)
   }
@@ -280,7 +281,11 @@ qic.g <- function(x){
   # x$cl <- 0.693 * x$cl
   
   # Set centre line to median
-  x$cl <- stats::median(x$y[base], na.rm = TRUE)
+  if(calccl) {
+    x$cl <- stats::median(x$y[base], na.rm = TRUE)
+  } else {
+    x$cl <- 0.693 * x$cl
+  }
   
   return(x)
 }
