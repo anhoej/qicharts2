@@ -1,4 +1,4 @@
-qicharts2 0.5.9999
+qicharts2 0.6.0
 ===============
 * Allow NULL as title argument in paretochart (thanks to Andrew Hill).
 * Fix c4() for large n (thanks to pwildenhain for the bug report and Tore Wenzel-Larsen for the fix).
