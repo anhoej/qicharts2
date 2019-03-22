@@ -10,9 +10,9 @@ plot.qic <- function(x, title, ylab, xlab, subtitle, caption, part.labels,
                      ...) {
   # Set colours
   col1      <- '#8C8C8C' # rgb(140, 140, 140, maxColorValue = 255) # grey
-  col2      <- getOption('qic.linecol') #'#5DA5DA' # rgb(093, 165, 218, maxColorValue = 255) # blue
-  col3      <- getOption('qic.signalcol') #'#F15854' # rgb(241, 088, 084, maxColorValue = 255) # red
-  col4      <- getOption('qic.targetcol') #'#059748' # rgb(005, 151, 072, maxColorValue = 255) # green
+  col2      <- getOption('qic.linecol', default = '#5DA5DA') #'#5DA5DA' # rgb(093, 165, 218, maxColorValue = 255) # blue
+  col3      <- getOption('qic.signalcol', default = '#F15854') #'#F15854' # rgb(241, 088, 084, maxColorValue = 255) # red
+  col4      <- getOption('qic.targetcol', default = '#059748') #'#059748' # rgb(005, 151, 072, maxColorValue = 255) # green
   col5      <- '#C8C8C8' # rgb(200, 200, 200, maxColorValue = 255) # light grey
   cols      <- c('col1' = col1,
                  'col2' = col2,
@@ -51,7 +51,7 @@ plot.qic <- function(x, title, ylab, xlab, subtitle, caption, part.labels,
   
   # Add control limits and centre and target lines
   
-  if (getOption('qic.clshade')) {
+  if (getOption('qic.clshade', default = TRUE)) {
     
     p <- p +
       geom_ribbon(aes_(ymin = ~ lcl, ymax = ~ ucl),
