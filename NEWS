@@ -1,3 +1,7 @@
+qicharts2 0.6.9000
+===============
+* Fixed missing options when package not loaded.
+
 qicharts2 0.6.0
 ===============
 * Allow NULL as title argument in paretochart (thanks to Andrew Hill).

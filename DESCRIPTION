@@ -1,6 +1,6 @@
 Package: qicharts2
 Title: Quality Improvement Charts
-Version: 0.6.0
+Version: 0.6.9000
 Date: 2019-03-16
 Authors@R: person('Jacob', 'Anhoej', email = 'jacob@anhoej.net',
     role = c('aut', 'cre'))
