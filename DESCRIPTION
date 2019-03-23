@@ -1,6 +1,6 @@
 Package: qicharts2
 Title: Quality Improvement Charts
-Version: 0.6.9000
+Version: 0.6.9001
 Date: 2019-03-16
 Authors@R: person('Jacob', 'Anhoej', email = 'jacob@anhoej.net',
     role = c('aut', 'cre'))
@@ -19,7 +19,8 @@ Imports:
     dplyr (>= 0.7.0),
     ggplot2 (>= 2.2.0),
     scales,
-    stats
+    stats, 
+    ggiraph (>= 0.6.0)
 Suggests:
     knitr,
     rmarkdown,
