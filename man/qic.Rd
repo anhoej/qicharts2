@@ -45,8 +45,8 @@ for percents rather than proportions. See also \code{y.percent} argument.}
 calculation of baseline paramenters for centre and control lines. Ignored 
 if part argument is given.}
 
-\item{part}{Integer vector indicating data points before 
-recalculation of centre and control lines.}
+\item{part}{Either integer vector indicating data points before recalculation
+of centre and control lines or character vector indicating chart parts.}
 
 \item{exclude}{Integer vector indicating data points to exclude from 
 calculations of centre and control lines.}

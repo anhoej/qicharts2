@@ -26,8 +26,8 @@
 #' @param freeze Integer indicating the last data point to include in 
 #'   calculation of baseline paramenters for centre and control lines. Ignored 
 #'   if part argument is given.
-#' @param part Integer vector indicating data points before 
-#'   recalculation of centre and control lines.
+#' @param part Either integer vector indicating data points before recalculation
+#'   of centre and control lines or character vector indicating chart parts.
 #' @param exclude Integer vector indicating data points to exclude from 
 #'   calculations of centre and control lines.
 #' @param target Numeric, either a single value indicating a target value to be plotted as a 
@@ -179,6 +179,8 @@ qic <- function(x,
   target <- eval(substitute(target), data, parent.frame())
   facets <- all.vars(facets)
   
+  part <- eval(substitute(part), data, parent.frame())
+  
   if (is.null(data)) {
     facets <- mget(facets, parent.frame())
   } else {
@@ -206,8 +208,15 @@ qic <- function(x,
     got.n <- TRUE
   }
   
-  if (is.null(freeze) || !is.null(part)) 
+  if (is.null(freeze) || !is.null(part)) {
     freeze <- Inf
+    if(is.character(part) || is.factor(part)) {
+      part.labels <- unique(part)
+      part <- match(part.labels, part)[-1] - 1
+    } else {
+      part <- as.integer(part)
+    }
+  }
   
   if (is.null(exclude)) 
     exclude <- Inf

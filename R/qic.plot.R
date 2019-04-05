@@ -112,7 +112,7 @@ plot.qic <- function(x, title, ylab, xlab, subtitle, caption, part.labels,
   # Add freeze line and part labels
   if (is.finite(freeze)) {
     p <- p + 
-      geom_vline(aes_(xintercept = freeze), colour = col1, linetype = 5)
+      geom_vline(aes_(xintercept = freeze), colour = col1, linetype = 3)
   }
   
   if (!is.null(part.labels)) {

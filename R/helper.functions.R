@@ -90,7 +90,7 @@ qic.mr <- function(x) {
 qic.xbar <- function(x){
   base  <- x$baseline & x$include
   var.n <- as.logical(length(unique(x$y.length)) - 1)
-
+  
   # Calculate centre line, Montgomery 6.30
   if (anyNA(x$cl)) {
     x$cl <- sum(x$y.length[base] * x$y.mean[base], na.rm = TRUE) /
