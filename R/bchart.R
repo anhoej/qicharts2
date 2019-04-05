@@ -144,6 +144,17 @@ plot.bchart <- function(data, title, ylab, xlab, freeze) {
               na.rm = T, 
               colour = 'grey40',
               size = 3.1) +
+    geom_text(aes_(~max(x), limit, label = limit), 
+              check_overlap = T, 
+              size = 3.1, 
+              colour = 'grey40', 
+              hjust = -0.2) +
+    geom_text(aes_(~max(x), -limit, label = -limit), 
+              check_overlap = T, 
+              size = 3.1, 
+              colour = 'grey40', 
+              hjust = -0.2) +
+    scale_y_continuous(expand = expand_scale(0.1)) +
     theme_bw() +
     theme(panel.border     = element_rect(colour = 'grey93'),
           strip.background = element_rect(colour = 'grey93', fill = 'grey93'),
