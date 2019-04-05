@@ -136,6 +136,14 @@ plot.bchart <- function(data, title, ylab, xlab, freeze) {
     geom_point(aes_(y = ~signal2),  na.rm = T, colour = col3, size = 2) +
     geom_line(colour = col2, size = 1.1) +
     geom_line(aes_(y = ~cusum2), colour = col2, size = 1.1) +
+    geom_text(aes_(y = ~signal1, label = ~x, vjust = -0.7),
+              na.rm = T, 
+              colour = 'grey40',
+              size = 3.1) +
+    geom_text(aes_(y = ~signal2, label = ~x, vjust = 1.7),
+              na.rm = T, 
+              colour = 'grey40',
+              size = 3.1) +
     theme_bw() +
     theme(panel.border     = element_rect(colour = 'grey93'),
           strip.background = element_rect(colour = 'grey93', fill = 'grey93'),
