@@ -19,6 +19,8 @@ Non-random variation in the form of larger, possibly transient, shifts is identi
 
 * `paretochart()` Pareto charts.
 
+* `bchart()` Bernoulli CUSUM chart (EXPERIMENTAL).
+
 ## Included datasets
 
 * **hospital_infections** Number of hospital acquired bacteremia, Clostridium difficile infections, and urinary tract infections in six hospitals.

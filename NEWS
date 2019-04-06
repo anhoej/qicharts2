@@ -2,6 +2,7 @@ qicharts2 0.6.9000
 ===============
 * Fixed missing options when package not loaded.
 * New EXPERIMENTAL function, bchart() for Bernoulli CUSUM charts for rare events.
+* The part argument now accepts a character vector identifying and labelling chart parts.
 
 qicharts2 0.6.0
 ===============

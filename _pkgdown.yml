@@ -4,6 +4,7 @@ reference:
       - qic
       - paretochart
       - summary.qic
+      - bchart
   - title: "Datasets"
     contents:
         - cabg

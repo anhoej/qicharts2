@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Paretochart — paretochart • qicharts2</title>
+<title>Bernoulli CUSUM chart for binary data (EXPERIMENTAL) — bchart • qicharts2</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,9 +30,11 @@
 
 
 
-<meta property="og:title" content="Paretochart — paretochart" />
+<meta property="og:title" content="Bernoulli CUSUM chart for binary data (EXPERIMENTAL) — bchart" />
 
-<meta property="og:description" content="Creates a pareto chart from a categorical variable" />
+<meta property="og:description" content="The Bernoulli CUSUM chart is useful for monitoring rare events data, e.g.
+surgical site infections and other types of complications. Based on Neuburger
+et al. (2017) https://dx.doi.org/10.1136/bmjqs-2016-005526." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -112,39 +114,46 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Paretochart</h1>
-    <small class="dont-index">Source: <a href='https://github.com/anhoej/qicharts2/blob/master/R/paretochart.R'><code>R/paretochart.R</code></a></small>
-    <div class="hidden name"><code>paretochart.Rd</code></div>
+    <h1>Bernoulli CUSUM chart for binary data (EXPERIMENTAL)</h1>
+    <small class="dont-index">Source: <a href='https://github.com/anhoej/qicharts2/blob/master/R/bchart.R'><code>R/bchart.R</code></a></small>
+    <div class="hidden name"><code>bchart.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Creates a pareto chart from a categorical variable</p>
+    <p>The Bernoulli CUSUM chart is useful for monitoring rare events data, e.g.
+surgical site infections and other types of complications. Based on Neuburger
+et al. (2017) <a href='https://dx.doi.org/10.1136/bmjqs-2016-005526'>https://dx.doi.org/10.1136/bmjqs-2016-005526</a>.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>paretochart</span>(<span class='no'>x</span>, <span class='kw'>title</span> <span class='kw'>=</span> <span class='st'>""</span>, <span class='kw'>subtitle</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>caption</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>ylab</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>xlab</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>x.angle</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>useNA</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>print.data</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='fu'>bchart</span>(<span class='no'>x</span>, <span class='no'>target</span>, <span class='kw'>or</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>limit</span> <span class='kw'>=</span> <span class='fl'>3.5</span>, <span class='kw'>title</span> <span class='kw'>=</span> <span class='st'>""</span>, <span class='kw'>ylab</span> <span class='kw'>=</span> <span class='st'>"CUSUM"</span>,
+  <span class='kw'>xlab</span> <span class='kw'>=</span> <span class='st'>"Case #"</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>Categorical variable to plot.</p></td>
+      <td><p>Logical, vector of succeses and failures.</p></td>
+    </tr>
+    <tr>
+      <th>target</th>
+      <td><p>Baseline risk (0-1) or number (&gt;1) of last observation to end
+baseline period.</p></td>
+    </tr>
+    <tr>
+      <th>or</th>
+      <td><p>Positive odds ratio of minimal detectable change relative to
+baseline risk.</p></td>
+    </tr>
+    <tr>
+      <th>limit</th>
+      <td><p>Control limit.</p></td>
     </tr>
     <tr>
       <th>title</th>
       <td><p>Chart title.</p></td>
-    </tr>
-    <tr>
-      <th>subtitle</th>
-      <td><p>Chart subtitle.</p></td>
-    </tr>
-    <tr>
-      <th>caption</th>
-      <td><p>Chart caption.</p></td>
     </tr>
     <tr>
       <th>ylab</th>
@@ -154,45 +163,34 @@
       <th>xlab</th>
       <td><p>X axis label.</p></td>
     </tr>
-    <tr>
-      <th>x.angle</th>
-      <td><p>Number indicating the angle of x axis labels.</p></td>
-    </tr>
-    <tr>
-      <th>useNA</th>
-      <td><p>If TRUE, NA values will be included in the analysis.</p></td>
-    </tr>
-    <tr>
-      <th>print.data</th>
-      <td><p>If TRUE, prints data frame with results.</p></td>
-    </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>An object of class ggplot.</p>
     
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>Note that the diagnostic properties of the Bernoulli CUSUM chart is highly
+dependent on the choise of parameters, target, or and limit, and that these
+parameters should be decided by people with a solid understanding of the
+process at hand. The default parameters, or = 2 and limit = 3.5, should,
+however, work for most processes where the baseline (target) level is about
+1<!-- %-10%, and one wants to detect changes in the order of a doubling or a -->
+halving of the event rate relative to the target.</p>
+    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># Generate categorical vector</span>
-<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/rep'>rep</a></span>(<span class='no'>LETTERS</span>[<span class='fl'>1</span>:<span class='fl'>9</span>], <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>256</span>, <span class='fl'>128</span>, <span class='fl'>64</span>, <span class='fl'>32</span>, <span class='fl'>16</span>, <span class='fl'>8</span>, <span class='fl'>4</span>, <span class='fl'>2</span>, <span class='fl'>1</span>))
+    <pre class="examples"><div class='input'><span class='co'># Generate 1000 random succeses and failures with succes rate = 0.02</span>
+<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/Random'>set.seed</a></span>(<span class='fl'>1</span>)
+<span class='no'>y</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/Binomial'>rbinom</a></span>(<span class='fl'>1000</span>, <span class='fl'>1</span>, <span class='fl'>0.02</span>)
 
-<span class='co'># Make paretochart</span>
-<span class='fu'>paretochart</span>(<span class='no'>x</span>)</div><div class='img'><img src='paretochart-1.png' alt='' width='700' height='433' /></div><div class='input'>
-<span class='co'># Save paretochart object to variable</span>
-<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'>paretochart</span>(<span class='no'>x</span>)
-
-<span class='co'># Print data frame</span>
-<span class='no'>p</span>$<span class='no'>data</span></div><div class='output co'>#&gt;   x   y y.cum           p     p.cum
-#&gt; 1 A 256   256 0.500978474 0.5009785
-#&gt; 2 B 128   384 0.250489237 0.7514677
-#&gt; 3 C  64   448 0.125244618 0.8767123
-#&gt; 4 D  32   480 0.062622309 0.9393346
-#&gt; 5 E  16   496 0.031311155 0.9706458
-#&gt; 6 F   8   504 0.015655577 0.9863014
-#&gt; 7 G   4   508 0.007827789 0.9941292
-#&gt; 8 H   2   510 0.003913894 0.9980431
-#&gt; 9 I   1   511 0.001956947 1.0000000</div><div class='input'>
+<span class='co'># Plot bchart assuming succes rate = 0.01, OR = 2, control limits = +/- 3.5.</span>
+<span class='fu'>bchart</span>(<span class='no'>y</span>, <span class='kw'>target</span> <span class='kw'>=</span> <span class='fl'>0.01</span>)</div><div class='img'><img src='bchart-1.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='co'># Plot bchart of CABG mortality using the first 200 surgeries to estimate target.</span>
+<span class='fu'>bchart</span>(<span class='no'>cabg</span>$<span class='no'>death</span>, <span class='kw'>target</span> <span class='kw'>=</span> <span class='fl'>200</span>)</div><div class='img'><img src='bchart-2.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='co'># Plot bchart of CABG readmissions setting the control limits = +/-5.</span>
+<span class='fu'>bchart</span>(<span class='no'>cabg</span>$<span class='no'>readmission</span>, <span class='kw'>target</span> <span class='kw'>=</span> <span class='fl'>200</span>, <span class='kw'>limit</span> <span class='kw'>=</span> <span class='fl'>5</span>)</div><div class='img'><img src='bchart-3.png' alt='' width='700' height='433' /></div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -201,6 +199,8 @@
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
+
+      <li><a href="#details">Details</a></li>
       
       <li><a href="#examples">Examples</a></li>
     </ul>

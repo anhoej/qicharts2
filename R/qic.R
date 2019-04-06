@@ -253,7 +253,7 @@ qic <- function(x,
   # Aggregate data and perform analyses
   d <- qic.agg(d, got.n, part, agg.fun, freeze, exclude, 
                chart.fun, multiply, dots.only, chart, y.neg)
-  
+# return(d)  
   # Format y for p charts
   if (missing(y.percent) & chart %in% c('p', 'pp')) {
     y.percent <- TRUE

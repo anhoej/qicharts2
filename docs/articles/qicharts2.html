@@ -36,7 +36,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">qicharts2</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.9000</span>
       </span>
     </div>
 
@@ -78,7 +78,7 @@
             <h3 class="subtitle">An implementation of statistical process control charts for R</h3>
                         <h4 class="author">Jacob Anhøj</h4>
             
-            <h4 class="date">2019-02-22</h4>
+            <h4 class="date">2019-04-06</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/anhoej/qicharts2/blob/master/vignettes/qicharts2.Rmd"><code>vignettes/qicharts2.Rmd</code></a></small>
       <div class="hidden name"><code>qicharts2.Rmd</code></div>
@@ -102,27 +102,27 @@
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
 <p>Install stable version from CRAN:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/install.packages">install.packages</a></span>(<span class="st">'qicharts2'</span>)</code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/install.packages">install.packages</a></span>(<span class="st">'qicharts2'</span>)</a></code></pre></div>
 <p>Or install development version from GitHub:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">devtools<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/devtools/topics/reexports">install_github</a></span>(<span class="st">'anhoej/qicharts2'</span>, <span class="dt">build_vignettes =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">devtools<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/devtools/topics/reexports">install_github</a></span>(<span class="st">'anhoej/qicharts2'</span>, <span class="dt">build_vignettes =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
 </div>
 <div id="your-first-run-and-control-charts" class="section level2">
 <h2 class="hasAnchor">
 <a href="#your-first-run-and-control-charts" class="anchor"></a>Your first run and control charts</h2>
 <p>Load <code>qicharts2</code> and generate some random numbers to play with:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Load qicharts2</span>
-<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(qicharts2)
-
-<span class="co"># Lock random number generator to make examples reproducible.</span>
-<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/Random">set.seed</a></span>(<span class="dv">19</span>)
-
-<span class="co"># Generate 24 random numbers from a normal distribution.</span>
-y &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/Normal">rnorm</a></span>(<span class="dv">24</span>)</code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="co"># Load qicharts2</span></a>
+<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(qicharts2)</a>
+<a class="sourceLine" id="cb3-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb3-4" data-line-number="4"><span class="co"># Lock random number generator to make examples reproducible.</span></a>
+<a class="sourceLine" id="cb3-5" data-line-number="5"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/Random">set.seed</a></span>(<span class="dv">19</span>)</a>
+<a class="sourceLine" id="cb3-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb3-7" data-line-number="7"><span class="co"># Generate 24 random numbers from a normal distribution.</span></a>
+<a class="sourceLine" id="cb3-8" data-line-number="8">y &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/Normal">rnorm</a></span>(<span class="dv">24</span>)</a></code></pre></div>
 <p>Make a run chart:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/qic.html">qic</a></span>(y)</code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw"><a href="../reference/qic.html">qic</a></span>(y)</a></code></pre></div>
 <p><img src="qicharts2_files/figure-html/unnamed-chunk-7-1.png" width="686.4"></p>
 <p>Make an I control chart:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/qic.html">qic</a></span>(y, <span class="dt">chart =</span> <span class="st">'i'</span>)</code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw"><a href="../reference/qic.html">qic</a></span>(y, <span class="dt">chart =</span> <span class="st">'i'</span>)</a></code></pre></div>
 <p><img src="qicharts2_files/figure-html/unnamed-chunk-8-1.png" width="686.4"></p>
 <p>Run charts and control charts are point-and-line graphs showing measures or counts over time. A horizontal line represents the process centre expressed by either the median (run charts) or the mean (control charts). In addition, control charts visualise the limits of the natural variation inherent in the process. Because of the way these limits are computed, they are often referred to as 3-sigma limits (see Appendix 1). Other terms for 3-sigma limits are control limits and natural process limits.</p>
 </div>
@@ -160,16 +160,16 @@ y &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumenta
 <h3 class="hasAnchor">
 <a href="#shewharts-3-sigma-rule" class="anchor"></a>Shewhart’s 3-sigma rule</h3>
 <p>Shewhart devised one test to identify special cause variation, the 3-sigma rule, which signals if one or more data points fall outside the 3-sigma limits. The 3-sigma rule is effective in detecting larger (&gt; 2SD) shifts in data.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Simulate a special cause to y in the form of a large, transient shift of 4 standard deviations.</span>
-y[<span class="dv">22</span>] &lt;-<span class="st"> </span><span class="dv">4</span>
-
-<span class="kw"><a href="../reference/qic.html">qic</a></span>(y, <span class="dt">chart =</span> <span class="st">'i'</span>)</code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="co"># Simulate a special cause to y in the form of a large, transient shift of 4 standard deviations.</span></a>
+<a class="sourceLine" id="cb6-2" data-line-number="2">y[<span class="dv">22</span>] &lt;-<span class="st"> </span><span class="dv">4</span></a>
+<a class="sourceLine" id="cb6-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb6-4" data-line-number="4"><span class="kw"><a href="../reference/qic.html">qic</a></span>(y, <span class="dt">chart =</span> <span class="st">'i'</span>)</a></code></pre></div>
 <p><img src="qicharts2_files/figure-html/unnamed-chunk-9-1.png" width="686.4"></p>
 <p>However, minor to moderate shifts may go unnoticed by the 3-sigma rule for long periods of time.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Simulate a special cause to y in the form of a moderate, persistent shift of 2 standard deviations.</span>
-y[<span class="dv">13</span><span class="op">:</span><span class="dv">24</span>] &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/Normal">rnorm</a></span>(<span class="dv">12</span>, <span class="dt">mean =</span> <span class="dv">2</span>)
-
-<span class="kw"><a href="../reference/qic.html">qic</a></span>(y, <span class="dt">chart =</span> <span class="st">'i'</span>)</code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="co"># Simulate a special cause to y in the form of a moderate, persistent shift of 2 standard deviations.</span></a>
+<a class="sourceLine" id="cb7-2" data-line-number="2">y[<span class="dv">13</span><span class="op">:</span><span class="dv">24</span>] &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/Normal">rnorm</a></span>(<span class="dv">12</span>, <span class="dt">mean =</span> <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb7-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb7-4" data-line-number="4"><span class="kw"><a href="../reference/qic.html">qic</a></span>(y, <span class="dt">chart =</span> <span class="st">'i'</span>)</a></code></pre></div>
 <p><img src="qicharts2_files/figure-html/unnamed-chunk-10-1.png" width="686.4"></p>
 <p>Therefore, many additional tests have been proposed to increase the sensitivity to non-random variation.</p>
 <p>It is important to realise that while it may be tempting to apply more tests in order to increase the sensitivity of the chart, more test will increase the risk of false signals, thereby reducing the specificity of the chart. The choice of which and how many tests to apply is therefore critical.</p>
@@ -203,17 +203,17 @@ y[<span class="dv">13</span><span class="op">:</span><span class="dv">24</span>]
 <p>In the previous control chart, a shift of 2 standard deviations was introduced halfway through the process. While the shift is too small to be picked up by the 3-sigma rule, both Anhøj rules detect the signal. The longest run includes 13 data points (upper limit = 8), and the number of crossings is 4 (lower limit = 8). Note that the shift is also picked up by WE rule 4.</p>
 <p>Non-random variation found by the Anhøj rules is visualised by <code><a href="../reference/qic.html">qic()</a></code> using a red and dashed centre line.</p>
 <p>The parameters of the analysis are available using the <code><a href="https://www.rdocumentation.org/packages/base/topics/summary">summary()</a></code> function on a qic object. See <code><a href="../reference/summary.qic.html">?summary.qic</a></code> for details.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Save qic object to o</span>
-o &lt;-<span class="st"> </span><span class="kw"><a href="../reference/qic.html">qic</a></span>(y, <span class="dt">chart =</span> <span class="st">'i'</span>)
-
-<span class="co"># Print summary data frame</span>
-<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/summary">summary</a></span>(o)
-<span class="co">#&gt;   facet1 facet2 part n.obs n.useful longest.run longest.run.max</span>
-<span class="co">#&gt; 1      1      1    1    24       24          13               8</span>
-<span class="co">#&gt;   n.crossings n.crossings.min runs.signal      aLCL       CL     aUCL</span>
-<span class="co">#&gt; 1           4               8           1 -2.114884 1.057091 4.229067</span>
-<span class="co">#&gt;   sigma.signal</span>
-<span class="co">#&gt; 1            0</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="co"># Save qic object to o</span></a>
+<a class="sourceLine" id="cb8-2" data-line-number="2">o &lt;-<span class="st"> </span><span class="kw"><a href="../reference/qic.html">qic</a></span>(y, <span class="dt">chart =</span> <span class="st">'i'</span>)</a>
+<a class="sourceLine" id="cb8-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb8-4" data-line-number="4"><span class="co"># Print summary data frame</span></a>
+<a class="sourceLine" id="cb8-5" data-line-number="5"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/summary">summary</a></span>(o)</a>
+<a class="sourceLine" id="cb8-6" data-line-number="6"><span class="co">#&gt;   facet1 facet2 part n.obs n.useful longest.run longest.run.max</span></a>
+<a class="sourceLine" id="cb8-7" data-line-number="7"><span class="co">#&gt; 1      1      1    1    24       24          13               8</span></a>
+<a class="sourceLine" id="cb8-8" data-line-number="8"><span class="co">#&gt;   n.crossings n.crossings.min runs.signal      aLCL       CL     aUCL</span></a>
+<a class="sourceLine" id="cb8-9" data-line-number="9"><span class="co">#&gt; 1           4               8           1 -2.114884 1.057091 4.229067</span></a>
+<a class="sourceLine" id="cb8-10" data-line-number="10"><span class="co">#&gt;   sigma.signal</span></a>
+<a class="sourceLine" id="cb8-11" data-line-number="11"><span class="co">#&gt; 1            0</span></a></code></pre></div>
 <p>Many additional tests for special cause variation have been proposed since Shewhart invented the 3-sigma rule, and many tests are currently being used. However, the more tests that are applied to the analysis, the higher the risk of false signals. <code>qicharts2</code> takes a conservative approach by applying only three tests, the 3-sigma rule and the two Anhøj rules. That means that a signal from <code><a href="../reference/qic.html">qic()</a></code> most likely represents a significant change in the underlying process.</p>
 </div>
 </div>
@@ -232,6 +232,7 @@ o &lt;-<span class="st"> </span><span class="kw"><a href="../reference/qic.html"
 <tbody>
 <tr class="odd">
 <td><em>Charts for measures</em></td>
+<td></td>
 <td></td>
 </tr>
 <tr class="even">
@@ -261,6 +262,7 @@ o &lt;-<span class="st"> </span><span class="kw"><a href="../reference/qic.html"
 </tr>
 <tr class="odd">
 <td><em>Charts for counts</em></td>
+<td></td>
 <td></td>
 </tr>
 <tr class="even">
@@ -297,7 +299,7 @@ o &lt;-<span class="st"> </span><span class="kw"><a href="../reference/qic.html"
 </table>
 <p>I recommend to always begin any analysis with the “assumption free” run chart. If the Anhøj rules find non-random variation, it makes no sense to compute 3-sigma limits based on assumptions regarding the location and dispersion of data, because these figures are meaningless when one or more shifts have already been identified.</p>
 <blockquote>
-<p>Over the years, I have developed an increasing affection for the much-neglected run chart: a time plot of your process data with the median drawn in as a reference (yes, the median – not the average). It is “filter No. 1” for any process data and answers the question: “Did this process have at least one shift during this time period?” (This is generally signaled by a clump of eight consecutive data points either all above or below the median.)</p>
+<p>Over the years, I have developed an increasing affection for the much-neglected run chart: a time plot of your process data with the median drawn in as a reference (yes, the median – not the average). It is “filter No. 1” for any process data and answers the question: “Did this process have at least one shift during this time period?” (This is generally signaled by a clump of eight consecutive data points either all above or below the median.)</p>
 <p>If it did, then it makes no sense to do a control chart at this time because the overall average of all these data doesn’t exist. (Sort of like: If I put my right foot in a bucket of boiling water and my left foot in a bucket of ice water, on average, I’m pretty comfortable.)</p>
 <p>Davis Balestracci. <a href="https://www.qualitydigest.com/inside/quality-insider-column/control-charts-simple-elegance-or-legalized-torture.html">Quality Digest 2014</a></p>
 </blockquote>
@@ -306,43 +308,43 @@ o &lt;-<span class="st"> </span><span class="kw"><a href="../reference/qic.html"
 <h2 class="hasAnchor">
 <a href="#case-1-patient-harm" class="anchor"></a>Case 1: Patient harm</h2>
 <p>The <code>gtt</code> dataset contains data on patient harm during hospitalisation. Harm is defined as any unintended physical injury resulting from treatment or care during hospitalisation and not a result of the disease itself. The Global Trigger Tool is a methodology for detection of adverse events in hospital patients using a retrospective record review approach. Each month a random sample of 20 patient records is reviewed and the number of adverse events and patient days found in the sample are counted. See <code><a href="../reference/gtt.html">?gtt</a></code> for details.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">head</a></span>(gtt)
-<span class="co">#&gt;   admission_id admission_dte discharge_dte      month days harms</span>
-<span class="co">#&gt; 1            1    2010-01-02    2010-01-03 2010-01-01    2     0</span>
-<span class="co">#&gt; 2            2    2009-12-24    2010-01-06 2010-01-01   14     2</span>
-<span class="co">#&gt; 3            3    2009-12-28    2010-01-07 2010-01-01   11     0</span>
-<span class="co">#&gt; 4            4    2010-01-05    2010-01-08 2010-01-01    4     0</span>
-<span class="co">#&gt; 5            5    2010-01-05    2010-01-08 2010-01-01    4     0</span>
-<span class="co">#&gt; 6            6    2010-01-05    2010-01-11 2010-01-01    7     0</span>
-<span class="co">#&gt;                E                F    G    H    I</span>
-<span class="co">#&gt; 1           &lt;NA&gt;             &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt;</span>
-<span class="co">#&gt; 2 Pressure ulcer Gastrointestinal &lt;NA&gt; &lt;NA&gt; &lt;NA&gt;</span>
-<span class="co">#&gt; 3           &lt;NA&gt;             &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt;</span>
-<span class="co">#&gt; 4           &lt;NA&gt;             &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt;</span>
-<span class="co">#&gt; 5           &lt;NA&gt;             &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt;</span>
-<span class="co">#&gt; 6           &lt;NA&gt;             &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt;</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">head</a></span>(gtt)</a>
+<a class="sourceLine" id="cb9-2" data-line-number="2"><span class="co">#&gt;   admission_id admission_dte discharge_dte      month days harms</span></a>
+<a class="sourceLine" id="cb9-3" data-line-number="3"><span class="co">#&gt; 1            1    2010-01-02    2010-01-03 2010-01-01    2     0</span></a>
+<a class="sourceLine" id="cb9-4" data-line-number="4"><span class="co">#&gt; 2            2    2009-12-24    2010-01-06 2010-01-01   14     2</span></a>
+<a class="sourceLine" id="cb9-5" data-line-number="5"><span class="co">#&gt; 3            3    2009-12-28    2010-01-07 2010-01-01   11     0</span></a>
+<a class="sourceLine" id="cb9-6" data-line-number="6"><span class="co">#&gt; 4            4    2010-01-05    2010-01-08 2010-01-01    4     0</span></a>
+<a class="sourceLine" id="cb9-7" data-line-number="7"><span class="co">#&gt; 5            5    2010-01-05    2010-01-08 2010-01-01    4     0</span></a>
+<a class="sourceLine" id="cb9-8" data-line-number="8"><span class="co">#&gt; 6            6    2010-01-05    2010-01-11 2010-01-01    7     0</span></a>
+<a class="sourceLine" id="cb9-9" data-line-number="9"><span class="co">#&gt;                E                F    G    H    I</span></a>
+<a class="sourceLine" id="cb9-10" data-line-number="10"><span class="co">#&gt; 1           &lt;NA&gt;             &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt;</span></a>
+<a class="sourceLine" id="cb9-11" data-line-number="11"><span class="co">#&gt; 2 Pressure ulcer Gastrointestinal &lt;NA&gt; &lt;NA&gt; &lt;NA&gt;</span></a>
+<a class="sourceLine" id="cb9-12" data-line-number="12"><span class="co">#&gt; 3           &lt;NA&gt;             &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt;</span></a>
+<a class="sourceLine" id="cb9-13" data-line-number="13"><span class="co">#&gt; 4           &lt;NA&gt;             &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt;</span></a>
+<a class="sourceLine" id="cb9-14" data-line-number="14"><span class="co">#&gt; 5           &lt;NA&gt;             &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt;</span></a>
+<a class="sourceLine" id="cb9-15" data-line-number="15"><span class="co">#&gt; 6           &lt;NA&gt;             &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt;</span></a></code></pre></div>
 <div id="run-chart-of-adverse-events-per-1000-patient-days" class="section level3">
 <h3 class="hasAnchor">
 <a href="#run-chart-of-adverse-events-per-1000-patient-days" class="anchor"></a>Run chart of adverse events per 1000 patient days</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/qic.html">qic</a></span>(month, harms, days,
-    <span class="dt">data     =</span> gtt,
-    <span class="dt">multiply =</span> <span class="dv">1000</span>,
-    <span class="dt">title    =</span> <span class="st">'Patient harm'</span>,
-    <span class="dt">ylab     =</span> <span class="st">'Adverse events per 1000 patient days'</span>,
-    <span class="dt">xlab     =</span> <span class="st">'Month'</span>)</code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="kw"><a href="../reference/qic.html">qic</a></span>(month, harms, days,</a>
+<a class="sourceLine" id="cb10-2" data-line-number="2">    <span class="dt">data     =</span> gtt,</a>
+<a class="sourceLine" id="cb10-3" data-line-number="3">    <span class="dt">multiply =</span> <span class="dv">1000</span>,</a>
+<a class="sourceLine" id="cb10-4" data-line-number="4">    <span class="dt">title    =</span> <span class="st">'Patient harm'</span>,</a>
+<a class="sourceLine" id="cb10-5" data-line-number="5">    <span class="dt">ylab     =</span> <span class="st">'Adverse events per 1000 patient days'</span>,</a>
+<a class="sourceLine" id="cb10-6" data-line-number="6">    <span class="dt">xlab     =</span> <span class="st">'Month'</span>)</a></code></pre></div>
 <p><img src="qicharts2_files/figure-html/unnamed-chunk-13-1.png" width="686.4"></p>
 <p>Since only random variation is present in the run chart, a U control chart for harm rate is appropriate for computing the limits of the common cause variation.</p>
 </div>
 <div id="u-chart-of-adverse-events-per-1000-patient-days" class="section level3">
 <h3 class="hasAnchor">
 <a href="#u-chart-of-adverse-events-per-1000-patient-days" class="anchor"></a>U chart of adverse events per 1000 patient days</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/qic.html">qic</a></span>(month, harms, days,
-    <span class="dt">data     =</span> gtt,
-    <span class="dt">chart    =</span> <span class="st">'u'</span>,
-    <span class="dt">multiply =</span> <span class="dv">1000</span>,
-    <span class="dt">title    =</span> <span class="st">'Patient harm (U chart)'</span>,
-    <span class="dt">ylab     =</span> <span class="st">'Adverse events per 1000 patient days'</span>,
-    <span class="dt">xlab     =</span> <span class="st">'Month'</span>)</code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="kw"><a href="../reference/qic.html">qic</a></span>(month, harms, days,</a>
+<a class="sourceLine" id="cb11-2" data-line-number="2">    <span class="dt">data     =</span> gtt,</a>
+<a class="sourceLine" id="cb11-3" data-line-number="3">    <span class="dt">chart    =</span> <span class="st">'u'</span>,</a>
+<a class="sourceLine" id="cb11-4" data-line-number="4">    <span class="dt">multiply =</span> <span class="dv">1000</span>,</a>
+<a class="sourceLine" id="cb11-5" data-line-number="5">    <span class="dt">title    =</span> <span class="st">'Patient harm (U chart)'</span>,</a>
+<a class="sourceLine" id="cb11-6" data-line-number="6">    <span class="dt">ylab     =</span> <span class="st">'Adverse events per 1000 patient days'</span>,</a>
+<a class="sourceLine" id="cb11-7" data-line-number="7">    <span class="dt">xlab     =</span> <span class="st">'Month'</span>)</a></code></pre></div>
 <p><img src="qicharts2_files/figure-html/unnamed-chunk-14-1.png" width="686.4"></p>
 <p>Because the sample sizes (number of patient days) are not the same each month, the 3-sigma limits vary. Large samples give narrow limits and vice versa. Varying limits are also seen in P and Xbar charts.</p>
 </div>
@@ -350,87 +352,87 @@ o &lt;-<span class="st"> </span><span class="kw"><a href="../reference/qic.html"
 <h3 class="hasAnchor">
 <a href="#run-and-p-control-charts-of-percent-harmed-patients" class="anchor"></a>Run and P control charts of percent harmed patients</h3>
 <p>To plot the percentage of harmed patients (patients with 1 or more harms) we need to add a variable and to aggregate data by month.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/message">suppressPackageStartupMessages</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(dplyr))
-
-gtt_by_month &lt;-<span class="st"> </span>gtt <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">harmed =</span> harms <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span>(month) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span>(<span class="dt">harms    =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/sum">sum</a></span>(harms),
-            <span class="dt">days     =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/sum">sum</a></span>(days),
-            <span class="dt">n.harmed =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/sum">sum</a></span>(harmed),
-            <span class="dt">n        =</span> <span class="kw"><a href="https://dplyr.tidyverse.org/reference/n.html">n</a></span>())
-
-<span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">head</a></span>(gtt_by_month)
-<span class="co">#&gt; # A tibble: 6 x 5</span>
-<span class="co">#&gt;   month      harms  days n.harmed     n</span>
-<span class="co">#&gt;   &lt;date&gt;     &lt;dbl&gt; &lt;dbl&gt;    &lt;int&gt; &lt;int&gt;</span>
-<span class="co">#&gt; 1 2010-01-01     5   113        3    20</span>
-<span class="co">#&gt; 2 2010-02-01     7   132        6    20</span>
-<span class="co">#&gt; 3 2010-03-01     5   121        4    20</span>
-<span class="co">#&gt; 4 2010-04-01     7   134        5    20</span>
-<span class="co">#&gt; 5 2010-05-01     7   116        7    20</span>
-<span class="co">#&gt; 6 2010-06-01     5   131        5    20</span></code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/qic.html">qic</a></span>(month, n.harmed,
-    <span class="dt">n         =</span> n,
-    <span class="dt">data      =</span> gtt_by_month,
-    <span class="dt">y.percent =</span> <span class="ot">TRUE</span>,
-    <span class="dt">title     =</span> <span class="st">'Harmed patients'</span>,
-    <span class="dt">ylab      =</span> <span class="ot">NULL</span>,
-    <span class="dt">xlab      =</span> <span class="st">'Month'</span>)</code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/message">suppressPackageStartupMessages</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(dplyr))</a>
+<a class="sourceLine" id="cb12-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb12-3" data-line-number="3">gtt_by_month &lt;-<span class="st"> </span>gtt <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb12-4" data-line-number="4"><span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">harmed =</span> harms <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb12-5" data-line-number="5"><span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span>(month) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb12-6" data-line-number="6"><span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span>(<span class="dt">harms    =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/sum">sum</a></span>(harms),</a>
+<a class="sourceLine" id="cb12-7" data-line-number="7">            <span class="dt">days     =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/sum">sum</a></span>(days),</a>
+<a class="sourceLine" id="cb12-8" data-line-number="8">            <span class="dt">n.harmed =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/sum">sum</a></span>(harmed),</a>
+<a class="sourceLine" id="cb12-9" data-line-number="9">            <span class="dt">n        =</span> <span class="kw"><a href="https://dplyr.tidyverse.org/reference/n.html">n</a></span>())</a>
+<a class="sourceLine" id="cb12-10" data-line-number="10"></a>
+<a class="sourceLine" id="cb12-11" data-line-number="11"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">head</a></span>(gtt_by_month)</a>
+<a class="sourceLine" id="cb12-12" data-line-number="12"><span class="co">#&gt; # A tibble: 6 x 5</span></a>
+<a class="sourceLine" id="cb12-13" data-line-number="13"><span class="co">#&gt;   month      harms  days n.harmed     n</span></a>
+<a class="sourceLine" id="cb12-14" data-line-number="14"><span class="co">#&gt;   &lt;date&gt;     &lt;dbl&gt; &lt;dbl&gt;    &lt;int&gt; &lt;int&gt;</span></a>
+<a class="sourceLine" id="cb12-15" data-line-number="15"><span class="co">#&gt; 1 2010-01-01     5   113        3    20</span></a>
+<a class="sourceLine" id="cb12-16" data-line-number="16"><span class="co">#&gt; 2 2010-02-01     7   132        6    20</span></a>
+<a class="sourceLine" id="cb12-17" data-line-number="17"><span class="co">#&gt; 3 2010-03-01     5   121        4    20</span></a>
+<a class="sourceLine" id="cb12-18" data-line-number="18"><span class="co">#&gt; 4 2010-04-01     7   134        5    20</span></a>
+<a class="sourceLine" id="cb12-19" data-line-number="19"><span class="co">#&gt; 5 2010-05-01     7   116        7    20</span></a>
+<a class="sourceLine" id="cb12-20" data-line-number="20"><span class="co">#&gt; 6 2010-06-01     5   131        5    20</span></a></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="kw"><a href="../reference/qic.html">qic</a></span>(month, n.harmed,</a>
+<a class="sourceLine" id="cb13-2" data-line-number="2">    <span class="dt">n         =</span> n,</a>
+<a class="sourceLine" id="cb13-3" data-line-number="3">    <span class="dt">data      =</span> gtt_by_month,</a>
+<a class="sourceLine" id="cb13-4" data-line-number="4">    <span class="dt">y.percent =</span> <span class="ot">TRUE</span>,</a>
+<a class="sourceLine" id="cb13-5" data-line-number="5">    <span class="dt">title     =</span> <span class="st">'Harmed patients'</span>,</a>
+<a class="sourceLine" id="cb13-6" data-line-number="6">    <span class="dt">ylab      =</span> <span class="ot">NULL</span>,</a>
+<a class="sourceLine" id="cb13-7" data-line-number="7">    <span class="dt">xlab      =</span> <span class="st">'Month'</span>)</a></code></pre></div>
 <p><img src="qicharts2_files/figure-html/unnamed-chunk-16-1.png" width="686.4"></p>
 <p>Again, since the run chart finds random variation, a control chart may be applied. For proportion (or percent) harmed patients we use a P chart.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/qic.html">qic</a></span>(month, n.harmed, n,
-    <span class="dt">data      =</span> gtt_by_month,
-    <span class="dt">chart     =</span> <span class="st">'p'</span>,
-    <span class="dt">y.percent =</span> <span class="ot">TRUE</span>,
-    <span class="dt">title     =</span> <span class="st">'Harmed patients (P chart)'</span>,
-    <span class="dt">ylab      =</span> <span class="ot">NULL</span>,
-    <span class="dt">xlab      =</span> <span class="st">'Month'</span>)</code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1"><span class="kw"><a href="../reference/qic.html">qic</a></span>(month, n.harmed, n,</a>
+<a class="sourceLine" id="cb14-2" data-line-number="2">    <span class="dt">data      =</span> gtt_by_month,</a>
+<a class="sourceLine" id="cb14-3" data-line-number="3">    <span class="dt">chart     =</span> <span class="st">'p'</span>,</a>
+<a class="sourceLine" id="cb14-4" data-line-number="4">    <span class="dt">y.percent =</span> <span class="ot">TRUE</span>,</a>
+<a class="sourceLine" id="cb14-5" data-line-number="5">    <span class="dt">title     =</span> <span class="st">'Harmed patients (P chart)'</span>,</a>
+<a class="sourceLine" id="cb14-6" data-line-number="6">    <span class="dt">ylab      =</span> <span class="ot">NULL</span>,</a>
+<a class="sourceLine" id="cb14-7" data-line-number="7">    <span class="dt">xlab      =</span> <span class="st">'Month'</span>)</a></code></pre></div>
 <p><img src="qicharts2_files/figure-html/unnamed-chunk-17-1.png" width="686.4"></p>
 <p>Since both the harm rate and the proportion of harmed patients exhibit common cause variation only, we conclude that the risk of adverse events during hospitalisation is predictable: we in the future should expect around 60 adverse events per 1000 patient days, harming around 33% of patients (regardless of their length of stay), although harm rates anywhere between ~0 – 60% would be considered within common cause variation.</p>
 <p>Actually, we often do not need to aggregate data in advance. With a little creativity we can make <code>qic</code> do the hard work. The previous plot could have been produced with this code. Note the use of the original <code>gtt</code> dataset and the number of harmed and total number of patients created on the fly.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/qic.html">qic</a></span>(month, 
-    harms <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>,        <span class="co"># TRUE if patient had one or more harms</span>
-    days <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>,         <span class="co"># Always TRUE </span>
-    <span class="dt">data      =</span> gtt,
-    <span class="dt">chart     =</span> <span class="st">'p'</span>,
-    <span class="dt">y.percent =</span> <span class="ot">TRUE</span>,
-    <span class="dt">title     =</span> <span class="st">'Harmed patients (P chart)'</span>,
-    <span class="dt">ylab      =</span> <span class="ot">NULL</span>,
-    <span class="dt">xlab      =</span> <span class="st">'Month'</span>)</code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="kw"><a href="../reference/qic.html">qic</a></span>(month, </a>
+<a class="sourceLine" id="cb15-2" data-line-number="2">    harms <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>,        <span class="co"># TRUE if patient had one or more harms</span></a>
+<a class="sourceLine" id="cb15-3" data-line-number="3">    days <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>,         <span class="co"># Always TRUE </span></a>
+<a class="sourceLine" id="cb15-4" data-line-number="4">    <span class="dt">data      =</span> gtt,</a>
+<a class="sourceLine" id="cb15-5" data-line-number="5">    <span class="dt">chart     =</span> <span class="st">'p'</span>,</a>
+<a class="sourceLine" id="cb15-6" data-line-number="6">    <span class="dt">y.percent =</span> <span class="ot">TRUE</span>,</a>
+<a class="sourceLine" id="cb15-7" data-line-number="7">    <span class="dt">title     =</span> <span class="st">'Harmed patients (P chart)'</span>,</a>
+<a class="sourceLine" id="cb15-8" data-line-number="8">    <span class="dt">ylab      =</span> <span class="ot">NULL</span>,</a>
+<a class="sourceLine" id="cb15-9" data-line-number="9">    <span class="dt">xlab      =</span> <span class="st">'Month'</span>)</a></code></pre></div>
 </div>
 <div id="pareto-analysis-of-adverse-event-types-and-severity" class="section level3">
 <h3 class="hasAnchor">
 <a href="#pareto-analysis-of-adverse-event-types-and-severity" class="anchor"></a>Pareto analysis of adverse event types and severity</h3>
 <p>The Pareto chart, named after <a href="https://en.wikipedia.org/wiki/Vilfredo_Pareto">Vilfred Pareto</a>, was invented by <a href="https://en.wikipedia.org/wiki/Joseph_M._Juran">Joseph M. Juran</a> as a tool to identify the most important causes of a problem.</p>
 <p>Types and severity of adverse events in <code>gtt</code> are organised in an untidy wide format. Since <code><a href="../reference/paretochart.html">paretochart()</a></code> needs a vector of categorical data, we need to rearrange harm severity and harm category into separate columns.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/message">suppressPackageStartupMessages</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(tidyr))
-
-gtt_ae_types &lt;-<span class="st"> </span>gtt <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw"><a href="https://tidyr.tidyverse.org/reference/gather.html">gather</a></span>(severity, category, E<span class="op">:</span>I) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/complete.cases">complete.cases</a></span>(.))
-
-<span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">head</a></span>(gtt_ae_types)
-<span class="co">#&gt;   admission_id admission_dte discharge_dte      month days harms severity</span>
-<span class="co">#&gt; 1            2    2009-12-24    2010-01-06 2010-01-01   14     2        E</span>
-<span class="co">#&gt; 2           11    2010-01-08    2010-01-18 2010-01-01   11     2        E</span>
-<span class="co">#&gt; 3           12    2010-01-11    2010-01-19 2010-01-01    9     1        E</span>
-<span class="co">#&gt; 4           29    2010-01-27    2010-02-10 2010-02-01   15     1        E</span>
-<span class="co">#&gt; 5           41    2010-02-24    2010-03-01 2010-03-01    6     1        E</span>
-<span class="co">#&gt; 6           45    2010-02-22    2010-03-06 2010-03-01   13     1        E</span>
-<span class="co">#&gt;           category</span>
-<span class="co">#&gt; 1   Pressure ulcer</span>
-<span class="co">#&gt; 2        Infection</span>
-<span class="co">#&gt; 3   Pressure ulcer</span>
-<span class="co">#&gt; 4   Pressure ulcer</span>
-<span class="co">#&gt; 5 Gastrointestinal</span>
-<span class="co">#&gt; 6 Gastrointestinal</span></code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/paretochart.html">paretochart</a></span>(gtt_ae_types<span class="op">$</span>category,
-            <span class="dt">title =</span> <span class="st">'Pareto chart of harm category'</span>)</code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/message">suppressPackageStartupMessages</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(tidyr))</a>
+<a class="sourceLine" id="cb16-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb16-3" data-line-number="3">gtt_ae_types &lt;-<span class="st"> </span>gtt <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb16-4" data-line-number="4"><span class="st">  </span><span class="kw"><a href="https://tidyr.tidyverse.org/reference/gather.html">gather</a></span>(severity, category, E<span class="op">:</span>I) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb16-5" data-line-number="5"><span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/complete.cases">complete.cases</a></span>(.))</a>
+<a class="sourceLine" id="cb16-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb16-7" data-line-number="7"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">head</a></span>(gtt_ae_types)</a>
+<a class="sourceLine" id="cb16-8" data-line-number="8"><span class="co">#&gt;   admission_id admission_dte discharge_dte      month days harms severity</span></a>
+<a class="sourceLine" id="cb16-9" data-line-number="9"><span class="co">#&gt; 1            2    2009-12-24    2010-01-06 2010-01-01   14     2        E</span></a>
+<a class="sourceLine" id="cb16-10" data-line-number="10"><span class="co">#&gt; 2           11    2010-01-08    2010-01-18 2010-01-01   11     2        E</span></a>
+<a class="sourceLine" id="cb16-11" data-line-number="11"><span class="co">#&gt; 3           12    2010-01-11    2010-01-19 2010-01-01    9     1        E</span></a>
+<a class="sourceLine" id="cb16-12" data-line-number="12"><span class="co">#&gt; 4           29    2010-01-27    2010-02-10 2010-02-01   15     1        E</span></a>
+<a class="sourceLine" id="cb16-13" data-line-number="13"><span class="co">#&gt; 5           41    2010-02-24    2010-03-01 2010-03-01    6     1        E</span></a>
+<a class="sourceLine" id="cb16-14" data-line-number="14"><span class="co">#&gt; 6           45    2010-02-22    2010-03-06 2010-03-01   13     1        E</span></a>
+<a class="sourceLine" id="cb16-15" data-line-number="15"><span class="co">#&gt;           category</span></a>
+<a class="sourceLine" id="cb16-16" data-line-number="16"><span class="co">#&gt; 1   Pressure ulcer</span></a>
+<a class="sourceLine" id="cb16-17" data-line-number="17"><span class="co">#&gt; 2        Infection</span></a>
+<a class="sourceLine" id="cb16-18" data-line-number="18"><span class="co">#&gt; 3   Pressure ulcer</span></a>
+<a class="sourceLine" id="cb16-19" data-line-number="19"><span class="co">#&gt; 4   Pressure ulcer</span></a>
+<a class="sourceLine" id="cb16-20" data-line-number="20"><span class="co">#&gt; 5 Gastrointestinal</span></a>
+<a class="sourceLine" id="cb16-21" data-line-number="21"><span class="co">#&gt; 6 Gastrointestinal</span></a></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="kw"><a href="../reference/paretochart.html">paretochart</a></span>(gtt_ae_types<span class="op">$</span>category,</a>
+<a class="sourceLine" id="cb17-2" data-line-number="2">            <span class="dt">title =</span> <span class="st">'Pareto chart of harm category'</span>)</a></code></pre></div>
 <p><img src="qicharts2_files/figure-html/unnamed-chunk-20-1.png" width="686.4"></p>
 <p>The bars show the number in each category, and the curve shows the cumulated percentage over categories. Almost 80% of harms come from 3 categories: gastrointestinal, infection, and procedure.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/paretochart.html">paretochart</a></span>(gtt_ae_types<span class="op">$</span>severity,
-            <span class="dt">title =</span> <span class="st">'Pareto chart of harm severity'</span>)</code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1"><span class="kw"><a href="../reference/paretochart.html">paretochart</a></span>(gtt_ae_types<span class="op">$</span>severity,</a>
+<a class="sourceLine" id="cb18-2" data-line-number="2">            <span class="dt">title =</span> <span class="st">'Pareto chart of harm severity'</span>)</a></code></pre></div>
 <p><img src="qicharts2_files/figure-html/unnamed-chunk-21-1.png" width="686.4"></p>
 <p>Almost all harms are temporary (E-F).</p>
 </div>
@@ -439,59 +441,59 @@ gtt_ae_types &lt;-<span class="st"> </span>gtt <span class="op">%&gt;%</span>
 <h2 class="hasAnchor">
 <a href="#case-2-clostridium-difficile-infections" class="anchor"></a>Case 2: <em>Clostridium difficile</em> infections</h2>
 <p>The <code>cdi</code> dataset contains data on hospital acquired <em>Clostridium difficile</em> infections (CDI) before and after an intervention to reduce the risk of CDI. See <code><a href="../reference/cdi.html">?cdi</a></code> for details.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">head</a></span>(cdi)
-<span class="co">#&gt;        month  n     days period notes</span>
-<span class="co">#&gt; 1 2012-11-01 17 14768.42    pre  &lt;NA&gt;</span>
-<span class="co">#&gt; 2 2012-12-01 12 14460.33    pre  &lt;NA&gt;</span>
-<span class="co">#&gt; 3 2013-01-01 27 16176.92    pre  &lt;NA&gt;</span>
-<span class="co">#&gt; 4 2013-02-01 20 14226.50    pre  &lt;NA&gt;</span>
-<span class="co">#&gt; 5 2013-03-01 20 14816.25    pre  &lt;NA&gt;</span>
-<span class="co">#&gt; 6 2013-04-01 18 14335.29    pre  &lt;NA&gt;</span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">head</a></span>(cdi)</a>
+<a class="sourceLine" id="cb19-2" data-line-number="2"><span class="co">#&gt;        month  n     days period notes</span></a>
+<a class="sourceLine" id="cb19-3" data-line-number="3"><span class="co">#&gt; 1 2012-11-01 17 14768.42    pre  &lt;NA&gt;</span></a>
+<a class="sourceLine" id="cb19-4" data-line-number="4"><span class="co">#&gt; 2 2012-12-01 12 14460.33    pre  &lt;NA&gt;</span></a>
+<a class="sourceLine" id="cb19-5" data-line-number="5"><span class="co">#&gt; 3 2013-01-01 27 16176.92    pre  &lt;NA&gt;</span></a>
+<a class="sourceLine" id="cb19-6" data-line-number="6"><span class="co">#&gt; 4 2013-02-01 20 14226.50    pre  &lt;NA&gt;</span></a>
+<a class="sourceLine" id="cb19-7" data-line-number="7"><span class="co">#&gt; 5 2013-03-01 20 14816.25    pre  &lt;NA&gt;</span></a>
+<a class="sourceLine" id="cb19-8" data-line-number="8"><span class="co">#&gt; 6 2013-04-01 18 14335.29    pre  &lt;NA&gt;</span></a></code></pre></div>
 <div id="run-charts-for-number-of-infections" class="section level3">
 <h3 class="hasAnchor">
 <a href="#run-charts-for-number-of-infections" class="anchor"></a>Run charts for number of infections</h3>
 <p>We begin by plotting a run chart of the number of CDIs per month.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/qic.html">qic</a></span>(month, n,
-    <span class="dt">notes    =</span> notes,
-    <span class="dt">data     =</span> cdi,
-    <span class="dt">decimals =</span> <span class="dv">0</span>,
-    <span class="dt">title    =</span> <span class="st">'Hospital acquired Clostridium difficile infections'</span>,
-    <span class="dt">ylab     =</span> <span class="st">'Count'</span>,
-    <span class="dt">xlab     =</span> <span class="st">'Month'</span>)</code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" data-line-number="1"><span class="kw"><a href="../reference/qic.html">qic</a></span>(month, n,</a>
+<a class="sourceLine" id="cb20-2" data-line-number="2">    <span class="dt">notes    =</span> notes,</a>
+<a class="sourceLine" id="cb20-3" data-line-number="3">    <span class="dt">data     =</span> cdi,</a>
+<a class="sourceLine" id="cb20-4" data-line-number="4">    <span class="dt">decimals =</span> <span class="dv">0</span>,</a>
+<a class="sourceLine" id="cb20-5" data-line-number="5">    <span class="dt">title    =</span> <span class="st">'Hospital acquired Clostridium difficile infections'</span>,</a>
+<a class="sourceLine" id="cb20-6" data-line-number="6">    <span class="dt">ylab     =</span> <span class="st">'Count'</span>,</a>
+<a class="sourceLine" id="cb20-7" data-line-number="7">    <span class="dt">xlab     =</span> <span class="st">'Month'</span>)</a></code></pre></div>
 <p><img src="qicharts2_files/figure-html/unnamed-chunk-23-1.png" width="686.4"></p>
 <p>A downward shift in the number of CDIs is clearly visible to the naked eye and is supported by the runs analysis resulting in the centre line being dashed red. The shift seem to begin around the time of the intervention.</p>
 <p>Even though it is not necessary in this case, we can strengthen the analysis by using the median of the before-intervention period to test for non-random variation in the after period.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/qic.html">qic</a></span>(month, n,
-    <span class="dt">data        =</span> cdi,
-    <span class="dt">decimals    =</span> <span class="dv">0</span>,
-    <span class="dt">freeze      =</span> <span class="dv">24</span>,
-    <span class="dt">part.labels =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">'Baseline'</span>, <span class="st">'Intervention'</span>),
-    <span class="dt">title       =</span> <span class="st">'Hospital acquired Clostridium difficile infections'</span>,
-    <span class="dt">ylab        =</span> <span class="st">'Count'</span>,
-    <span class="dt">xlab        =</span> <span class="st">'Month'</span>)</code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" data-line-number="1"><span class="kw"><a href="../reference/qic.html">qic</a></span>(month, n,</a>
+<a class="sourceLine" id="cb21-2" data-line-number="2">    <span class="dt">data        =</span> cdi,</a>
+<a class="sourceLine" id="cb21-3" data-line-number="3">    <span class="dt">decimals    =</span> <span class="dv">0</span>,</a>
+<a class="sourceLine" id="cb21-4" data-line-number="4">    <span class="dt">freeze      =</span> <span class="dv">24</span>,</a>
+<a class="sourceLine" id="cb21-5" data-line-number="5">    <span class="dt">part.labels =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">'Baseline'</span>, <span class="st">'Intervention'</span>),</a>
+<a class="sourceLine" id="cb21-6" data-line-number="6">    <span class="dt">title       =</span> <span class="st">'Hospital acquired Clostridium difficile infections'</span>,</a>
+<a class="sourceLine" id="cb21-7" data-line-number="7">    <span class="dt">ylab        =</span> <span class="st">'Count'</span>,</a>
+<a class="sourceLine" id="cb21-8" data-line-number="8">    <span class="dt">xlab        =</span> <span class="st">'Month'</span>)</a></code></pre></div>
 <p><img src="qicharts2_files/figure-html/unnamed-chunk-24-1.png" width="686.4"></p>
 <p>The median number of CDIs per month in the before period is 19. An unusually long run of 15 data points below the median proves that the CDI rate is reduced.</p>
 <p>When a shift in the desired direction is the result of a deliberate change to the process, we may split the chart to compare the numbers before and after the intervention.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/qic.html">qic</a></span>(month, n,
-    <span class="dt">data     =</span> cdi,
-    <span class="dt">decimals =</span> <span class="dv">0</span>,
-    <span class="dt">part     =</span> <span class="dv">24</span>,
-    <span class="dt">title    =</span> <span class="st">'Hospital acquired Clostridium difficile infections'</span>,
-    <span class="dt">ylab     =</span> <span class="st">'Count'</span>,
-    <span class="dt">xlab     =</span> <span class="st">'Month'</span>)</code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" data-line-number="1"><span class="kw"><a href="../reference/qic.html">qic</a></span>(month, n,</a>
+<a class="sourceLine" id="cb22-2" data-line-number="2">    <span class="dt">data     =</span> cdi,</a>
+<a class="sourceLine" id="cb22-3" data-line-number="3">    <span class="dt">decimals =</span> <span class="dv">0</span>,</a>
+<a class="sourceLine" id="cb22-4" data-line-number="4">    <span class="dt">part     =</span> <span class="dv">24</span>,</a>
+<a class="sourceLine" id="cb22-5" data-line-number="5">    <span class="dt">title    =</span> <span class="st">'Hospital acquired Clostridium difficile infections'</span>,</a>
+<a class="sourceLine" id="cb22-6" data-line-number="6">    <span class="dt">ylab     =</span> <span class="st">'Count'</span>,</a>
+<a class="sourceLine" id="cb22-7" data-line-number="7">    <span class="dt">xlab     =</span> <span class="st">'Month'</span>)</a></code></pre></div>
 <p><img src="qicharts2_files/figure-html/unnamed-chunk-25-1.png" width="686.4"></p>
 </div>
 <div id="c-chart-for-number-of-infections" class="section level3">
 <h3 class="hasAnchor">
 <a href="#c-chart-for-number-of-infections" class="anchor"></a>C chart for number of infections</h3>
 <p>Since both periods show only random variation, a control chart may be applied to test for larger transient shifts in data and to establish the natural limits of the current process. The correct chart in this case is the C chart for number of infections.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/qic.html">qic</a></span>(month, n,
-    <span class="dt">data  =</span> cdi,
-    <span class="dt">chart =</span> <span class="st">'c'</span>,
-    <span class="dt">part  =</span> <span class="dv">24</span>,
-    <span class="dt">title =</span> <span class="st">'Hospital acquired Clostridium difficile infections (C chart)'</span>,
-    <span class="dt">ylab  =</span> <span class="st">'Count'</span>,
-    <span class="dt">xlab  =</span> <span class="st">'Month'</span>)</code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" data-line-number="1"><span class="kw"><a href="../reference/qic.html">qic</a></span>(month, n,</a>
+<a class="sourceLine" id="cb23-2" data-line-number="2">    <span class="dt">data  =</span> cdi,</a>
+<a class="sourceLine" id="cb23-3" data-line-number="3">    <span class="dt">chart =</span> <span class="st">'c'</span>,</a>
+<a class="sourceLine" id="cb23-4" data-line-number="4">    <span class="dt">part  =</span> <span class="dv">24</span>,</a>
+<a class="sourceLine" id="cb23-5" data-line-number="5">    <span class="dt">title =</span> <span class="st">'Hospital acquired Clostridium difficile infections (C chart)'</span>,</a>
+<a class="sourceLine" id="cb23-6" data-line-number="6">    <span class="dt">ylab  =</span> <span class="st">'Count'</span>,</a>
+<a class="sourceLine" id="cb23-7" data-line-number="7">    <span class="dt">xlab  =</span> <span class="st">'Month'</span>)</a></code></pre></div>
 <p><img src="qicharts2_files/figure-html/unnamed-chunk-26-1.png" width="686.4"></p>
 <p>The split C chart shows that the CDI rate has dropped from an average of 19 to 7 per month. Furthermore, the 3-sigma limits tell that the current process is predictable and that we in the future should expect between 0 and 15 CDIs per month.</p>
 </div>
@@ -499,14 +501,14 @@ gtt_ae_types &lt;-<span class="st"> </span>gtt <span class="op">%&gt;%</span>
 <h3 class="hasAnchor">
 <a href="#u-chart-for-infection-rate" class="anchor"></a>U chart for infection rate</h3>
 <p>Until now we have assumed that the area of opportunity, or exposure, is constant, i.e., the number of patients or patient days have not changed significantly over time. When the area of opportunity varies, a U chart (U for <em>unequal</em> area of opportunity) is more appropriate.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/qic.html">qic</a></span>(month, n, days,
-    <span class="dt">data     =</span> cdi,
-    <span class="dt">chart    =</span> <span class="st">'u'</span>,
-    <span class="dt">part     =</span> <span class="dv">24</span>,
-    <span class="dt">multiply =</span> <span class="dv">10000</span>, 
-    <span class="dt">title    =</span> <span class="st">'Hospital acquired Clostridium difficile infections (U chart)'</span>,
-    <span class="dt">ylab     =</span> <span class="st">'Cases per 10,000 risk days'</span>,
-    <span class="dt">xlab     =</span> <span class="st">'Month'</span>)</code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" data-line-number="1"><span class="kw"><a href="../reference/qic.html">qic</a></span>(month, n, days,</a>
+<a class="sourceLine" id="cb24-2" data-line-number="2">    <span class="dt">data     =</span> cdi,</a>
+<a class="sourceLine" id="cb24-3" data-line-number="3">    <span class="dt">chart    =</span> <span class="st">'u'</span>,</a>
+<a class="sourceLine" id="cb24-4" data-line-number="4">    <span class="dt">part     =</span> <span class="dv">24</span>,</a>
+<a class="sourceLine" id="cb24-5" data-line-number="5">    <span class="dt">multiply =</span> <span class="dv">10000</span>, </a>
+<a class="sourceLine" id="cb24-6" data-line-number="6">    <span class="dt">title    =</span> <span class="st">'Hospital acquired Clostridium difficile infections (U chart)'</span>,</a>
+<a class="sourceLine" id="cb24-7" data-line-number="7">    <span class="dt">ylab     =</span> <span class="st">'Cases per 10,000 risk days'</span>,</a>
+<a class="sourceLine" id="cb24-8" data-line-number="8">    <span class="dt">xlab     =</span> <span class="st">'Month'</span>)</a></code></pre></div>
 <p><img src="qicharts2_files/figure-html/unnamed-chunk-27-1.png" width="686.4"></p>
 <p>In fact, U charts can always be used instead of C charts. When the area of opportunity is constant the two charts will reach the same conclusion. But the raw numbers in a C chart may be easier to communicate than counts per something.</p>
 <p>It is very important to recognise that while run and control charts can identify non-random variation, they cannot identify its causes. The analysis only tells that the CDI rate was reduced after an intervention. The causal relationship between the intervention and the shift must be established using other methods.</p>
@@ -530,46 +532,46 @@ gtt_ae_types &lt;-<span class="st"> </span>gtt <span class="op">%&gt;%</span>
 <h2 class="hasAnchor">
 <a href="#case-3-coronary-artery-bypass-graft" class="anchor"></a>Case 3: Coronary artery bypass graft</h2>
 <p>The <code>cabg</code> dataset contains data on individual coronary artery bypass operations. See <code><a href="../reference/cabg.html">?cabg</a></code> for details.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">head</a></span>(cabg)
-<span class="co">#&gt;         date    age gender los death readmission</span>
-<span class="co">#&gt; 1 2011-07-01 72.534   Male   8 FALSE        TRUE</span>
-<span class="co">#&gt; 2 2011-07-01 59.225   Male   9 FALSE       FALSE</span>
-<span class="co">#&gt; 3 2011-07-04 66.841   Male  15 FALSE       FALSE</span>
-<span class="co">#&gt; 4 2011-07-04 70.337   Male   9 FALSE       FALSE</span>
-<span class="co">#&gt; 5 2011-07-04 60.816   Male   6 FALSE        TRUE</span>
-<span class="co">#&gt; 6 2011-07-05 57.027   Male   9 FALSE       FALSE</span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">head</a></span>(cabg)</a>
+<a class="sourceLine" id="cb25-2" data-line-number="2"><span class="co">#&gt;         date    age gender los death readmission</span></a>
+<a class="sourceLine" id="cb25-3" data-line-number="3"><span class="co">#&gt; 1 2011-07-01 72.534   Male   8 FALSE        TRUE</span></a>
+<a class="sourceLine" id="cb25-4" data-line-number="4"><span class="co">#&gt; 2 2011-07-01 59.225   Male   9 FALSE       FALSE</span></a>
+<a class="sourceLine" id="cb25-5" data-line-number="5"><span class="co">#&gt; 3 2011-07-04 66.841   Male  15 FALSE       FALSE</span></a>
+<a class="sourceLine" id="cb25-6" data-line-number="6"><span class="co">#&gt; 4 2011-07-04 70.337   Male   9 FALSE       FALSE</span></a>
+<a class="sourceLine" id="cb25-7" data-line-number="7"><span class="co">#&gt; 5 2011-07-04 60.816   Male   6 FALSE        TRUE</span></a>
+<a class="sourceLine" id="cb25-8" data-line-number="8"><span class="co">#&gt; 6 2011-07-05 57.027   Male   9 FALSE       FALSE</span></a></code></pre></div>
 <div id="i-and-mr-charts-for-age-of-individual-patients" class="section level3">
 <h3 class="hasAnchor">
 <a href="#i-and-mr-charts-for-age-of-individual-patients" class="anchor"></a>I and MR charts for age of individual patients</h3>
 <p>In this and the following cases we skip the obligatory first step of using a run chart.</p>
 <p>First, we will make a control chart of the age of the last 100 patients. Since we are plotting individual measurements, we use an I chart.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/qic.html">qic</a></span>(age,
-    <span class="dt">data      =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">tail</a></span>(cabg, <span class="dv">100</span>), 
-    <span class="dt">chart     =</span> <span class="st">'i'</span>,
-    <span class="dt">show.grid =</span> <span class="ot">TRUE</span>,
-    <span class="dt">title     =</span> <span class="st">'Age of the last 100 patients (I chart)'</span>,
-    <span class="dt">ylab      =</span> <span class="st">'Years'</span>,
-    <span class="dt">xlab      =</span> <span class="st">'Patient #'</span>)</code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" data-line-number="1"><span class="kw"><a href="../reference/qic.html">qic</a></span>(age,</a>
+<a class="sourceLine" id="cb26-2" data-line-number="2">    <span class="dt">data      =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">tail</a></span>(cabg, <span class="dv">100</span>), </a>
+<a class="sourceLine" id="cb26-3" data-line-number="3">    <span class="dt">chart     =</span> <span class="st">'i'</span>,</a>
+<a class="sourceLine" id="cb26-4" data-line-number="4">    <span class="dt">show.grid =</span> <span class="ot">TRUE</span>,</a>
+<a class="sourceLine" id="cb26-5" data-line-number="5">    <span class="dt">title     =</span> <span class="st">'Age of the last 100 patients (I chart)'</span>,</a>
+<a class="sourceLine" id="cb26-6" data-line-number="6">    <span class="dt">ylab      =</span> <span class="st">'Years'</span>,</a>
+<a class="sourceLine" id="cb26-7" data-line-number="7">    <span class="dt">xlab      =</span> <span class="st">'Patient #'</span>)</a></code></pre></div>
 <p><img src="qicharts2_files/figure-html/unnamed-chunk-29-1.png" width="686.4"></p>
 <p>Two data points (patients number 45 and 70) are below the lower 3-sigma limit indicating that these patients are “unusually” young, i.e. representative of phenomena that are not normally present in the process.</p>
 <p>I charts are often displayed along moving range charts that show the ranges of neighbouring data points.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/qic.html">qic</a></span>(age,
-    <span class="dt">data      =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">tail</a></span>(cabg, <span class="dv">100</span>), 
-    <span class="dt">chart     =</span> <span class="st">'mr'</span>,
-    <span class="dt">show.grid =</span> <span class="ot">TRUE</span>,
-    <span class="dt">title     =</span> <span class="st">'Age of the last 100 patients (MR chart)'</span>,
-    <span class="dt">ylab      =</span> <span class="st">'Years'</span>,
-    <span class="dt">xlab      =</span> <span class="st">'Patient #'</span>)</code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" data-line-number="1"><span class="kw"><a href="../reference/qic.html">qic</a></span>(age,</a>
+<a class="sourceLine" id="cb27-2" data-line-number="2">    <span class="dt">data      =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">tail</a></span>(cabg, <span class="dv">100</span>), </a>
+<a class="sourceLine" id="cb27-3" data-line-number="3">    <span class="dt">chart     =</span> <span class="st">'mr'</span>,</a>
+<a class="sourceLine" id="cb27-4" data-line-number="4">    <span class="dt">show.grid =</span> <span class="ot">TRUE</span>,</a>
+<a class="sourceLine" id="cb27-5" data-line-number="5">    <span class="dt">title     =</span> <span class="st">'Age of the last 100 patients (MR chart)'</span>,</a>
+<a class="sourceLine" id="cb27-6" data-line-number="6">    <span class="dt">ylab      =</span> <span class="st">'Years'</span>,</a>
+<a class="sourceLine" id="cb27-7" data-line-number="7">    <span class="dt">xlab      =</span> <span class="st">'Patient #'</span>)</a></code></pre></div>
 <p><img src="qicharts2_files/figure-html/unnamed-chunk-30-1.png" width="686.4"></p>
 <p>The MR chart identifies three unusually large ranges, which are clearly produced by the two unusually young patients also found in the I chart. Note that each data point in an I chart is contained in two moving ranges in the MR chart.</p>
 <p>We should seek the cause(s) of these special causes. We may then chose to eliminate the outliers from the computations of the process centre and 3-sigma limits in order to predict the expected age range of future patients.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/qic.html">qic</a></span>(age,
-    <span class="dt">data    =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">tail</a></span>(cabg, <span class="dv">100</span>), 
-    <span class="dt">chart   =</span> <span class="st">'i'</span>,
-    <span class="dt">exclude =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">45</span>, <span class="dv">70</span>),
-    <span class="dt">title   =</span> <span class="st">'Age of the last 100 patients (I chart)'</span>,
-    <span class="dt">ylab    =</span> <span class="st">'Years'</span>,
-    <span class="dt">xlab    =</span> <span class="st">'Patient #'</span>)</code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" data-line-number="1"><span class="kw"><a href="../reference/qic.html">qic</a></span>(age,</a>
+<a class="sourceLine" id="cb28-2" data-line-number="2">    <span class="dt">data    =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">tail</a></span>(cabg, <span class="dv">100</span>), </a>
+<a class="sourceLine" id="cb28-3" data-line-number="3">    <span class="dt">chart   =</span> <span class="st">'i'</span>,</a>
+<a class="sourceLine" id="cb28-4" data-line-number="4">    <span class="dt">exclude =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">45</span>, <span class="dv">70</span>),</a>
+<a class="sourceLine" id="cb28-5" data-line-number="5">    <span class="dt">title   =</span> <span class="st">'Age of the last 100 patients (I chart)'</span>,</a>
+<a class="sourceLine" id="cb28-6" data-line-number="6">    <span class="dt">ylab    =</span> <span class="st">'Years'</span>,</a>
+<a class="sourceLine" id="cb28-7" data-line-number="7">    <span class="dt">xlab    =</span> <span class="st">'Patient #'</span>)</a></code></pre></div>
 <p><img src="qicharts2_files/figure-html/unnamed-chunk-31-1.png" width="686.4"></p>
 <p>Thus, on average we should expect future patients to be 67 years of age, and patients younger than 43 years or older than 91 years would be unusual.</p>
 </div>
@@ -577,23 +579,23 @@ gtt_ae_types &lt;-<span class="st"> </span>gtt <span class="op">%&gt;%</span>
 <h3 class="hasAnchor">
 <a href="#xbar-and-s-charts-for-average-and-standard-deviation-of-patient-age" class="anchor"></a>Xbar and S charts for average and standard deviation of patient age</h3>
 <p>We could also plot the mean age of patients by month. For this we choose an Xbar chart for multiple measurement per subgroup. First, we need to add month as the grouping variable.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cabg &lt;-<span class="st"> </span>cabg <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">month =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/as.Date">as.Date</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/cut">cut</a></span>(date, <span class="st">'month'</span>)))</code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" data-line-number="1">cabg &lt;-<span class="st"> </span>cabg <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb29-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">month =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/as.Date">as.Date</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/cut">cut</a></span>(date, <span class="st">'month'</span>)))</a></code></pre></div>
 <p>Using month as the x axis variable, <code><a href="../reference/qic.html">qic()</a></code> automatically calculates the average age per month.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/qic.html">qic</a></span>(month, age,
-    <span class="dt">data  =</span> cabg,
-    <span class="dt">chart =</span> <span class="st">'xbar'</span>,
-    <span class="dt">title =</span> <span class="st">'Average age (Xbar chart)'</span>,
-    <span class="dt">ylab  =</span> <span class="st">'Years'</span>,
-    <span class="dt">xlab  =</span> <span class="st">'Month'</span>)</code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" data-line-number="1"><span class="kw"><a href="../reference/qic.html">qic</a></span>(month, age,</a>
+<a class="sourceLine" id="cb30-2" data-line-number="2">    <span class="dt">data  =</span> cabg,</a>
+<a class="sourceLine" id="cb30-3" data-line-number="3">    <span class="dt">chart =</span> <span class="st">'xbar'</span>,</a>
+<a class="sourceLine" id="cb30-4" data-line-number="4">    <span class="dt">title =</span> <span class="st">'Average age (Xbar chart)'</span>,</a>
+<a class="sourceLine" id="cb30-5" data-line-number="5">    <span class="dt">ylab  =</span> <span class="st">'Years'</span>,</a>
+<a class="sourceLine" id="cb30-6" data-line-number="6">    <span class="dt">xlab  =</span> <span class="st">'Month'</span>)</a></code></pre></div>
 <p><img src="qicharts2_files/figure-html/unnamed-chunk-33-1.png" width="686.4"></p>
 <p>Xbar charts are usually displayed along S charts displaying the within subgroup standard deviation.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/qic.html">qic</a></span>(month, age,
-    <span class="dt">data  =</span> cabg,
-    <span class="dt">chart =</span> <span class="st">'s'</span>,
-    <span class="dt">title =</span> <span class="st">'Age standard deviation (S chart)'</span>,
-    <span class="dt">ylab  =</span> <span class="st">'Years'</span>,
-    <span class="dt">xlab  =</span> <span class="st">'Month'</span>)</code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" data-line-number="1"><span class="kw"><a href="../reference/qic.html">qic</a></span>(month, age,</a>
+<a class="sourceLine" id="cb31-2" data-line-number="2">    <span class="dt">data  =</span> cabg,</a>
+<a class="sourceLine" id="cb31-3" data-line-number="3">    <span class="dt">chart =</span> <span class="st">'s'</span>,</a>
+<a class="sourceLine" id="cb31-4" data-line-number="4">    <span class="dt">title =</span> <span class="st">'Age standard deviation (S chart)'</span>,</a>
+<a class="sourceLine" id="cb31-5" data-line-number="5">    <span class="dt">ylab  =</span> <span class="st">'Years'</span>,</a>
+<a class="sourceLine" id="cb31-6" data-line-number="6">    <span class="dt">xlab  =</span> <span class="st">'Month'</span>)</a></code></pre></div>
 <p><img src="qicharts2_files/figure-html/unnamed-chunk-34-1.png" width="686.4"></p>
 <p>Since both the Xbar and the S chart display common cause variation, we may conclude that the monthly average and standard deviation of patient age is predictable. Note that the mean of the Xbar chart is close to the mean of the individuals chart but that the 3-sigma limits are narrower.</p>
 </div>
@@ -601,40 +603,40 @@ gtt_ae_types &lt;-<span class="st"> </span>gtt <span class="op">%&gt;%</span>
 <h3 class="hasAnchor">
 <a href="#p-charts-for-proportion-of-patients-who-were-readmitted-or-died-within-30-after-surgery" class="anchor"></a>P charts for proportion of patients who were readmitted or died within 30 after surgery</h3>
 <p>To plot readmissions and mortality we first need to summarise these counts by month.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cabg_by_month &lt;-<span class="st"> </span>cabg <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span>(month) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span>(<span class="dt">deaths       =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/sum">sum</a></span>(death),
-            <span class="dt">readmissions =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/sum">sum</a></span>(readmission),
-            <span class="dt">n            =</span> <span class="kw"><a href="https://dplyr.tidyverse.org/reference/n.html">n</a></span>())
-
-<span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">head</a></span>(cabg_by_month)
-<span class="co">#&gt; # A tibble: 6 x 4</span>
-<span class="co">#&gt;   month      deaths readmissions     n</span>
-<span class="co">#&gt;   &lt;date&gt;      &lt;int&gt;        &lt;int&gt; &lt;int&gt;</span>
-<span class="co">#&gt; 1 2011-07-01      1           14    52</span>
-<span class="co">#&gt; 2 2011-08-01      3           12    64</span>
-<span class="co">#&gt; 3 2011-09-01      2           15    70</span>
-<span class="co">#&gt; 4 2011-10-01      1            8    60</span>
-<span class="co">#&gt; 5 2011-11-01      1           16    67</span>
-<span class="co">#&gt; 6 2011-12-01      3           11    69</span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" data-line-number="1">cabg_by_month &lt;-<span class="st"> </span>cabg <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb32-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span>(month) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb32-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span>(<span class="dt">deaths       =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/sum">sum</a></span>(death),</a>
+<a class="sourceLine" id="cb32-4" data-line-number="4">            <span class="dt">readmissions =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/sum">sum</a></span>(readmission),</a>
+<a class="sourceLine" id="cb32-5" data-line-number="5">            <span class="dt">n            =</span> <span class="kw"><a href="https://dplyr.tidyverse.org/reference/n.html">n</a></span>())</a>
+<a class="sourceLine" id="cb32-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb32-7" data-line-number="7"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">head</a></span>(cabg_by_month)</a>
+<a class="sourceLine" id="cb32-8" data-line-number="8"><span class="co">#&gt; # A tibble: 6 x 4</span></a>
+<a class="sourceLine" id="cb32-9" data-line-number="9"><span class="co">#&gt;   month      deaths readmissions     n</span></a>
+<a class="sourceLine" id="cb32-10" data-line-number="10"><span class="co">#&gt;   &lt;date&gt;      &lt;int&gt;        &lt;int&gt; &lt;int&gt;</span></a>
+<a class="sourceLine" id="cb32-11" data-line-number="11"><span class="co">#&gt; 1 2011-07-01      1           14    52</span></a>
+<a class="sourceLine" id="cb32-12" data-line-number="12"><span class="co">#&gt; 2 2011-08-01      3           12    64</span></a>
+<a class="sourceLine" id="cb32-13" data-line-number="13"><span class="co">#&gt; 3 2011-09-01      2           15    70</span></a>
+<a class="sourceLine" id="cb32-14" data-line-number="14"><span class="co">#&gt; 4 2011-10-01      1            8    60</span></a>
+<a class="sourceLine" id="cb32-15" data-line-number="15"><span class="co">#&gt; 5 2011-11-01      1           16    67</span></a>
+<a class="sourceLine" id="cb32-16" data-line-number="16"><span class="co">#&gt; 6 2011-12-01      3           11    69</span></a></code></pre></div>
 <p>Then we use P charts for proportion of readmissions.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/qic.html">qic</a></span>(month, readmissions, n,
-    <span class="dt">data      =</span> cabg_by_month,
-    <span class="dt">chart     =</span> <span class="st">'p'</span>,
-    <span class="dt">y.percent =</span> <span class="ot">TRUE</span>,
-    <span class="dt">title     =</span> <span class="st">'Readmissions within 30 days (P chart)'</span>,
-    <span class="dt">ylab      =</span> <span class="ot">NULL</span>,
-    <span class="dt">xlab      =</span> <span class="st">'Month'</span>)</code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb33-1" data-line-number="1"><span class="kw"><a href="../reference/qic.html">qic</a></span>(month, readmissions, n,</a>
+<a class="sourceLine" id="cb33-2" data-line-number="2">    <span class="dt">data      =</span> cabg_by_month,</a>
+<a class="sourceLine" id="cb33-3" data-line-number="3">    <span class="dt">chart     =</span> <span class="st">'p'</span>,</a>
+<a class="sourceLine" id="cb33-4" data-line-number="4">    <span class="dt">y.percent =</span> <span class="ot">TRUE</span>,</a>
+<a class="sourceLine" id="cb33-5" data-line-number="5">    <span class="dt">title     =</span> <span class="st">'Readmissions within 30 days (P chart)'</span>,</a>
+<a class="sourceLine" id="cb33-6" data-line-number="6">    <span class="dt">ylab      =</span> <span class="ot">NULL</span>,</a>
+<a class="sourceLine" id="cb33-7" data-line-number="7">    <span class="dt">xlab      =</span> <span class="st">'Month'</span>)</a></code></pre></div>
 <p><img src="qicharts2_files/figure-html/unnamed-chunk-36-1.png" width="686.4"></p>
 <p>On average, 22% of patients are readmitted within 30 days after surgery, and if nothing changes we would expect this to continue.</p>
 <p>What about mortality?</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/qic.html">qic</a></span>(month, deaths, n,
-    <span class="dt">data      =</span> cabg_by_month,
-    <span class="dt">chart     =</span> <span class="st">'p'</span>,
-    <span class="dt">y.percent =</span> <span class="ot">TRUE</span>,
-    <span class="dt">title     =</span> <span class="st">'30 days mortality (P chart)'</span>,
-    <span class="dt">ylab      =</span> <span class="ot">NULL</span>,
-    <span class="dt">xlab      =</span> <span class="st">'Month'</span>)</code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" data-line-number="1"><span class="kw"><a href="../reference/qic.html">qic</a></span>(month, deaths, n,</a>
+<a class="sourceLine" id="cb34-2" data-line-number="2">    <span class="dt">data      =</span> cabg_by_month,</a>
+<a class="sourceLine" id="cb34-3" data-line-number="3">    <span class="dt">chart     =</span> <span class="st">'p'</span>,</a>
+<a class="sourceLine" id="cb34-4" data-line-number="4">    <span class="dt">y.percent =</span> <span class="ot">TRUE</span>,</a>
+<a class="sourceLine" id="cb34-5" data-line-number="5">    <span class="dt">title     =</span> <span class="st">'30 days mortality (P chart)'</span>,</a>
+<a class="sourceLine" id="cb34-6" data-line-number="6">    <span class="dt">ylab      =</span> <span class="ot">NULL</span>,</a>
+<a class="sourceLine" id="cb34-7" data-line-number="7">    <span class="dt">xlab      =</span> <span class="st">'Month'</span>)</a></code></pre></div>
 <p><img src="qicharts2_files/figure-html/unnamed-chunk-37-1.png" width="686.4"></p>
 <p>Thankfully, post-surgery mortality is a rare event, and the P chart suggests common cause variation. However, it seems curious that only one patient died during the summer of 2012. To investigate this further, G or T charts for rare events are useful.</p>
 </div>
@@ -642,35 +644,35 @@ gtt_ae_types &lt;-<span class="st"> </span>gtt <span class="op">%&gt;%</span>
 <h3 class="hasAnchor">
 <a href="#t-and-g-charts-for-rare-events" class="anchor"></a>T and G charts for rare events</h3>
 <p>Rare events are often better analysed as time or opportunities between events. First, we need to calculate the number of surgeries and days between fatalities.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fatalities &lt;-<span class="st"> </span>cabg <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">x =</span> <span class="kw"><a href="https://dplyr.tidyverse.org/reference/ranking.html">row_number</a></span>()) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(death) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">dd =</span> x <span class="op">-</span><span class="st"> </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/lead-lag.html">lag</a></span>(x),
-         <span class="dt">dt =</span> date <span class="op">-</span><span class="st"> </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/lead-lag.html">lag</a></span>(date))
-
-<span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">head</a></span>(fatalities)
-<span class="co">#&gt;         date    age gender los death readmission      month   x dd      dt</span>
-<span class="co">#&gt; 1 2011-07-21 91.227 Female   5  TRUE       FALSE 2011-07-01  37 NA NA days</span>
-<span class="co">#&gt; 2 2011-08-06 71.773   Male   2  TRUE       FALSE 2011-08-01  60 23 16 days</span>
-<span class="co">#&gt; 3 2011-08-26 73.942   Male   1  TRUE       FALSE 2011-08-01  99 39 20 days</span>
-<span class="co">#&gt; 4 2011-08-31 80.293   Male   3  TRUE       FALSE 2011-08-01 114 15  5 days</span>
-<span class="co">#&gt; 5 2011-09-13 75.359   Male  12  TRUE       FALSE 2011-09-01 148 34 13 days</span>
-<span class="co">#&gt; 6 2011-09-14 72.019 Female  19  TRUE       FALSE 2011-09-01 149  1  1 days</span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb35-1" data-line-number="1">fatalities &lt;-<span class="st"> </span>cabg <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb35-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">x =</span> <span class="kw"><a href="https://dplyr.tidyverse.org/reference/ranking.html">row_number</a></span>()) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb35-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(death) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb35-4" data-line-number="4"><span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">dd =</span> x <span class="op">-</span><span class="st"> </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/lead-lag.html">lag</a></span>(x),</a>
+<a class="sourceLine" id="cb35-5" data-line-number="5">         <span class="dt">dt =</span> date <span class="op">-</span><span class="st"> </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/lead-lag.html">lag</a></span>(date))</a>
+<a class="sourceLine" id="cb35-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb35-7" data-line-number="7"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">head</a></span>(fatalities)</a>
+<a class="sourceLine" id="cb35-8" data-line-number="8"><span class="co">#&gt;         date    age gender los death readmission      month   x dd      dt</span></a>
+<a class="sourceLine" id="cb35-9" data-line-number="9"><span class="co">#&gt; 1 2011-07-21 91.227 Female   5  TRUE       FALSE 2011-07-01  37 NA NA days</span></a>
+<a class="sourceLine" id="cb35-10" data-line-number="10"><span class="co">#&gt; 2 2011-08-06 71.773   Male   2  TRUE       FALSE 2011-08-01  60 23 16 days</span></a>
+<a class="sourceLine" id="cb35-11" data-line-number="11"><span class="co">#&gt; 3 2011-08-26 73.942   Male   1  TRUE       FALSE 2011-08-01  99 39 20 days</span></a>
+<a class="sourceLine" id="cb35-12" data-line-number="12"><span class="co">#&gt; 4 2011-08-31 80.293   Male   3  TRUE       FALSE 2011-08-01 114 15  5 days</span></a>
+<a class="sourceLine" id="cb35-13" data-line-number="13"><span class="co">#&gt; 5 2011-09-13 75.359   Male  12  TRUE       FALSE 2011-09-01 148 34 13 days</span></a>
+<a class="sourceLine" id="cb35-14" data-line-number="14"><span class="co">#&gt; 6 2011-09-14 72.019 Female  19  TRUE       FALSE 2011-09-01 149  1  1 days</span></a></code></pre></div>
 <p>Then we use a G chart for opportunities (surgeries) between events (deaths).</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/qic.html">qic</a></span>(dd,
-    <span class="dt">data  =</span> fatalities,
-    <span class="dt">chart =</span> <span class="st">'g'</span>,
-    <span class="dt">title =</span> <span class="st">'Surgeries between deaths (G chart)'</span>,
-    <span class="dt">ylab  =</span> <span class="st">'Count'</span>,
-    <span class="dt">xlab  =</span> <span class="st">'Death #'</span>)</code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb36-1" data-line-number="1"><span class="kw"><a href="../reference/qic.html">qic</a></span>(dd,</a>
+<a class="sourceLine" id="cb36-2" data-line-number="2">    <span class="dt">data  =</span> fatalities,</a>
+<a class="sourceLine" id="cb36-3" data-line-number="3">    <span class="dt">chart =</span> <span class="st">'g'</span>,</a>
+<a class="sourceLine" id="cb36-4" data-line-number="4">    <span class="dt">title =</span> <span class="st">'Surgeries between deaths (G chart)'</span>,</a>
+<a class="sourceLine" id="cb36-5" data-line-number="5">    <span class="dt">ylab  =</span> <span class="st">'Count'</span>,</a>
+<a class="sourceLine" id="cb36-6" data-line-number="6">    <span class="dt">xlab  =</span> <span class="st">'Death #'</span>)</a></code></pre></div>
 <p><img src="qicharts2_files/figure-html/unnamed-chunk-39-1.png" width="686.4"></p>
 <p>If we do not have information on the opportunities (surgeries with survival), we may instead use a T chart for time between events.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/qic.html">qic</a></span>(dt,
-    <span class="dt">data  =</span> fatalities,
-    <span class="dt">chart =</span> <span class="st">'t'</span>,
-    <span class="dt">title =</span> <span class="st">'Days between deaths (T chart)'</span>,
-    <span class="dt">ylab  =</span> <span class="st">'Days'</span>,
-    <span class="dt">xlab  =</span> <span class="st">'Death #'</span>)</code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" data-line-number="1"><span class="kw"><a href="../reference/qic.html">qic</a></span>(dt,</a>
+<a class="sourceLine" id="cb37-2" data-line-number="2">    <span class="dt">data  =</span> fatalities,</a>
+<a class="sourceLine" id="cb37-3" data-line-number="3">    <span class="dt">chart =</span> <span class="st">'t'</span>,</a>
+<a class="sourceLine" id="cb37-4" data-line-number="4">    <span class="dt">title =</span> <span class="st">'Days between deaths (T chart)'</span>,</a>
+<a class="sourceLine" id="cb37-5" data-line-number="5">    <span class="dt">ylab  =</span> <span class="st">'Days'</span>,</a>
+<a class="sourceLine" id="cb37-6" data-line-number="6">    <span class="dt">xlab  =</span> <span class="st">'Death #'</span>)</a></code></pre></div>
 <p><img src="qicharts2_files/figure-html/unnamed-chunk-40-1.png" width="686.4"></p>
 <p>The conclusions from the two charts are the same: Deaths number 24 and 25 are unusually far apart. We should look for an assignable cause to explain this as it may help us get ideas to reduce postoperative mortality in the future.</p>
 </div>
@@ -678,31 +680,31 @@ gtt_ae_types &lt;-<span class="st"> </span>gtt <span class="op">%&gt;%</span>
 <h3 class="hasAnchor">
 <a href="#faceting-readmission-rates-by-gender" class="anchor"></a>Faceting readmission rates by gender</h3>
 <p>To demonstrate the use of faceted charts, we summarise readmissions by month and gender.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cabg_by_month_gender &lt;-<span class="st"> </span>cabg <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span>(month, gender) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span>(<span class="dt">readmissions =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/sum">sum</a></span>(readmission),
-            <span class="dt">n            =</span> <span class="kw"><a href="https://dplyr.tidyverse.org/reference/n.html">n</a></span>())
-
-<span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">head</a></span>(cabg_by_month_gender)
-<span class="co">#&gt; # A tibble: 6 x 4</span>
-<span class="co">#&gt; # Groups:   month [3]</span>
-<span class="co">#&gt;   month      gender readmissions     n</span>
-<span class="co">#&gt;   &lt;date&gt;     &lt;fct&gt;         &lt;int&gt; &lt;int&gt;</span>
-<span class="co">#&gt; 1 2011-07-01 Female            2     9</span>
-<span class="co">#&gt; 2 2011-07-01 Male             12    43</span>
-<span class="co">#&gt; 3 2011-08-01 Female            0     9</span>
-<span class="co">#&gt; 4 2011-08-01 Male             12    55</span>
-<span class="co">#&gt; 5 2011-09-01 Female            3    18</span>
-<span class="co">#&gt; 6 2011-09-01 Male             12    52</span></code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb38-1" data-line-number="1">cabg_by_month_gender &lt;-<span class="st"> </span>cabg <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb38-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span>(month, gender) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb38-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span>(<span class="dt">readmissions =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/sum">sum</a></span>(readmission),</a>
+<a class="sourceLine" id="cb38-4" data-line-number="4">            <span class="dt">n            =</span> <span class="kw"><a href="https://dplyr.tidyverse.org/reference/n.html">n</a></span>())</a>
+<a class="sourceLine" id="cb38-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb38-6" data-line-number="6"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">head</a></span>(cabg_by_month_gender)</a>
+<a class="sourceLine" id="cb38-7" data-line-number="7"><span class="co">#&gt; # A tibble: 6 x 4</span></a>
+<a class="sourceLine" id="cb38-8" data-line-number="8"><span class="co">#&gt; # Groups:   month [3]</span></a>
+<a class="sourceLine" id="cb38-9" data-line-number="9"><span class="co">#&gt;   month      gender readmissions     n</span></a>
+<a class="sourceLine" id="cb38-10" data-line-number="10"><span class="co">#&gt;   &lt;date&gt;     &lt;fct&gt;         &lt;int&gt; &lt;int&gt;</span></a>
+<a class="sourceLine" id="cb38-11" data-line-number="11"><span class="co">#&gt; 1 2011-07-01 Female            2     9</span></a>
+<a class="sourceLine" id="cb38-12" data-line-number="12"><span class="co">#&gt; 2 2011-07-01 Male             12    43</span></a>
+<a class="sourceLine" id="cb38-13" data-line-number="13"><span class="co">#&gt; 3 2011-08-01 Female            0     9</span></a>
+<a class="sourceLine" id="cb38-14" data-line-number="14"><span class="co">#&gt; 4 2011-08-01 Male             12    55</span></a>
+<a class="sourceLine" id="cb38-15" data-line-number="15"><span class="co">#&gt; 5 2011-09-01 Female            3    18</span></a>
+<a class="sourceLine" id="cb38-16" data-line-number="16"><span class="co">#&gt; 6 2011-09-01 Male             12    52</span></a></code></pre></div>
 <p>Then we use the <code>facets</code> argument to make a control chart for each gender while keeping the x and y axes the same.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/qic.html">qic</a></span>(month, readmissions, n,
-    <span class="dt">data      =</span> cabg_by_month_gender,
-    <span class="dt">facets    =</span> <span class="op">~</span><span class="st"> </span>gender, 
-    <span class="dt">chart     =</span> <span class="st">'p'</span>,
-    <span class="dt">y.percent =</span> <span class="ot">TRUE</span>,
-    <span class="dt">title     =</span> <span class="st">'Readmissions within 30 days (P chart)'</span>,
-    <span class="dt">ylab      =</span> <span class="st">''</span>,
-    <span class="dt">xlab      =</span> <span class="st">'Month'</span>)</code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb39-1" data-line-number="1"><span class="kw"><a href="../reference/qic.html">qic</a></span>(month, readmissions, n,</a>
+<a class="sourceLine" id="cb39-2" data-line-number="2">    <span class="dt">data      =</span> cabg_by_month_gender,</a>
+<a class="sourceLine" id="cb39-3" data-line-number="3">    <span class="dt">facets    =</span> <span class="op">~</span><span class="st"> </span>gender, </a>
+<a class="sourceLine" id="cb39-4" data-line-number="4">    <span class="dt">chart     =</span> <span class="st">'p'</span>,</a>
+<a class="sourceLine" id="cb39-5" data-line-number="5">    <span class="dt">y.percent =</span> <span class="ot">TRUE</span>,</a>
+<a class="sourceLine" id="cb39-6" data-line-number="6">    <span class="dt">title     =</span> <span class="st">'Readmissions within 30 days (P chart)'</span>,</a>
+<a class="sourceLine" id="cb39-7" data-line-number="7">    <span class="dt">ylab      =</span> <span class="st">''</span>,</a>
+<a class="sourceLine" id="cb39-8" data-line-number="8">    <span class="dt">xlab      =</span> <span class="st">'Month'</span>)</a></code></pre></div>
 <p><img src="qicharts2_files/figure-html/unnamed-chunk-42-1.png" width="686.4"></p>
 <p>This chart suggests that the readmission rate for females is increasing. This is clearly undesirable and we should investigate this to find and eliminate the special cause.</p>
 </div>
@@ -711,38 +713,38 @@ gtt_ae_types &lt;-<span class="st"> </span>gtt <span class="op">%&gt;%</span>
 <h2 class="hasAnchor">
 <a href="#case-4-faceting-hospital-infections-by-hospital-and-infection" class="anchor"></a>Case 4: Faceting hospital infections by hospital and infection</h2>
 <p>The <code>hospital_infection</code> dataset contains data on hospital acquired bacteremias (BAC), <em>Clostridium difficile</em> infections (CDI), and urinary tract infections (UTI) from six hospitals in the Capital Region of Denmark. See <code><a href="../reference/hospital_infections.html">?hospital_infections</a></code> for details.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">head</a></span>(hospital_infections)
-<span class="co">#&gt;   hospital infection      month  n     days</span>
-<span class="co">#&gt; 1      AHH       BAC 2015-01-01 17 17233.67</span>
-<span class="co">#&gt; 2      AHH       BAC 2015-02-01 18 15308.25</span>
-<span class="co">#&gt; 3      AHH       BAC 2015-03-01 17 16883.67</span>
-<span class="co">#&gt; 4      AHH       BAC 2015-04-01 10 15463.83</span>
-<span class="co">#&gt; 5      AHH       BAC 2015-05-01 13 15788.96</span>
-<span class="co">#&gt; 6      AHH       BAC 2015-06-01 14 15660.04</span></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb40-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">head</a></span>(hospital_infections)</a>
+<a class="sourceLine" id="cb40-2" data-line-number="2"><span class="co">#&gt;   hospital infection      month  n     days</span></a>
+<a class="sourceLine" id="cb40-3" data-line-number="3"><span class="co">#&gt; 1      AHH       BAC 2015-01-01 17 17233.67</span></a>
+<a class="sourceLine" id="cb40-4" data-line-number="4"><span class="co">#&gt; 2      AHH       BAC 2015-02-01 18 15308.25</span></a>
+<a class="sourceLine" id="cb40-5" data-line-number="5"><span class="co">#&gt; 3      AHH       BAC 2015-03-01 17 16883.67</span></a>
+<a class="sourceLine" id="cb40-6" data-line-number="6"><span class="co">#&gt; 4      AHH       BAC 2015-04-01 10 15463.83</span></a>
+<a class="sourceLine" id="cb40-7" data-line-number="7"><span class="co">#&gt; 5      AHH       BAC 2015-05-01 13 15788.96</span></a>
+<a class="sourceLine" id="cb40-8" data-line-number="8"><span class="co">#&gt; 6      AHH       BAC 2015-06-01 14 15660.04</span></a></code></pre></div>
 <div id="u-chart-of-the-total-number-of-infections-per-10000-risk-days" class="section level3">
 <h3 class="hasAnchor">
 <a href="#u-chart-of-the-total-number-of-infections-per-10000-risk-days" class="anchor"></a>U chart of the total number of infections per 10,000 risk days</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/qic.html">qic</a></span>(month, n, days,
-    <span class="dt">data     =</span> hospital_infections,
-    <span class="dt">chart    =</span> <span class="st">'u'</span>,
-    <span class="dt">multiply =</span> <span class="dv">10000</span>,
-    <span class="dt">title    =</span> <span class="st">'Hospital acquired infections in the Capital Region of Denmark'</span>,
-    <span class="dt">ylab     =</span> <span class="st">'Cases per 10,000 risk days'</span>,
-    <span class="dt">xlab     =</span> <span class="st">'Month'</span>)</code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb41-1" data-line-number="1"><span class="kw"><a href="../reference/qic.html">qic</a></span>(month, n, days,</a>
+<a class="sourceLine" id="cb41-2" data-line-number="2">    <span class="dt">data     =</span> hospital_infections,</a>
+<a class="sourceLine" id="cb41-3" data-line-number="3">    <span class="dt">chart    =</span> <span class="st">'u'</span>,</a>
+<a class="sourceLine" id="cb41-4" data-line-number="4">    <span class="dt">multiply =</span> <span class="dv">10000</span>,</a>
+<a class="sourceLine" id="cb41-5" data-line-number="5">    <span class="dt">title    =</span> <span class="st">'Hospital acquired infections in the Capital Region of Denmark'</span>,</a>
+<a class="sourceLine" id="cb41-6" data-line-number="6">    <span class="dt">ylab     =</span> <span class="st">'Cases per 10,000 risk days'</span>,</a>
+<a class="sourceLine" id="cb41-7" data-line-number="7">    <span class="dt">xlab     =</span> <span class="st">'Month'</span>)</a></code></pre></div>
 <p><img src="qicharts2_files/figure-html/unnamed-chunk-44-1.png" width="686.4"></p>
 <p>The infection rate appears predictable. However, plotting three types of infection together is like mixing apples and oranges.</p>
 </div>
 <div id="faceted-u-chart-by-type-of-infection" class="section level3">
 <h3 class="hasAnchor">
 <a href="#faceted-u-chart-by-type-of-infection" class="anchor"></a>Faceted U chart by type of infection</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/qic.html">qic</a></span>(month, n, days,
-    <span class="dt">data     =</span> hospital_infections,
-    <span class="dt">facets   =</span> <span class="op">~</span><span class="st"> </span>infection,
-    <span class="dt">chart    =</span> <span class="st">'u'</span>,
-    <span class="dt">multiply =</span> <span class="dv">10000</span>,
-    <span class="dt">title    =</span> <span class="st">'Hospital acquired infections in the Capital Region of Denmark'</span>,
-    <span class="dt">ylab     =</span> <span class="st">'Cases per 10,000 risk days'</span>,
-    <span class="dt">xlab     =</span> <span class="st">'Month'</span>)</code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb42-1" data-line-number="1"><span class="kw"><a href="../reference/qic.html">qic</a></span>(month, n, days,</a>
+<a class="sourceLine" id="cb42-2" data-line-number="2">    <span class="dt">data     =</span> hospital_infections,</a>
+<a class="sourceLine" id="cb42-3" data-line-number="3">    <span class="dt">facets   =</span> <span class="op">~</span><span class="st"> </span>infection,</a>
+<a class="sourceLine" id="cb42-4" data-line-number="4">    <span class="dt">chart    =</span> <span class="st">'u'</span>,</a>
+<a class="sourceLine" id="cb42-5" data-line-number="5">    <span class="dt">multiply =</span> <span class="dv">10000</span>,</a>
+<a class="sourceLine" id="cb42-6" data-line-number="6">    <span class="dt">title    =</span> <span class="st">'Hospital acquired infections in the Capital Region of Denmark'</span>,</a>
+<a class="sourceLine" id="cb42-7" data-line-number="7">    <span class="dt">ylab     =</span> <span class="st">'Cases per 10,000 risk days'</span>,</a>
+<a class="sourceLine" id="cb42-8" data-line-number="8">    <span class="dt">xlab     =</span> <span class="st">'Month'</span>)</a></code></pre></div>
 <p><img src="qicharts2_files/figure-html/unnamed-chunk-45-1.png" width="686.4"></p>
 <p>Now each infection has its own facet. We see that all three infections appear to be predictable and that UTI is the most common infection.</p>
 <p>But since these data come from six very different hospitals, we should also facet by hospital.</p>
@@ -750,16 +752,16 @@ gtt_ae_types &lt;-<span class="st"> </span>gtt <span class="op">%&gt;%</span>
 <div id="two-way-faceted-u-chart-by-infection-and-hospital" class="section level3">
 <h3 class="hasAnchor">
 <a href="#two-way-faceted-u-chart-by-infection-and-hospital" class="anchor"></a>Two-way faceted U chart by infection and hospital</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/qic.html">qic</a></span>(month, n, days,
-    <span class="dt">data     =</span> hospital_infections,
-    <span class="dt">facets   =</span> infection <span class="op">~</span><span class="st"> </span>hospital,
-    <span class="dt">chart    =</span> <span class="st">'u'</span>,
-    <span class="dt">multiply =</span> <span class="dv">10000</span>,
-    <span class="dt">scales   =</span> <span class="st">'free_y'</span>,
-    <span class="dt">x.angle  =</span> <span class="dv">45</span>,
-    <span class="dt">title    =</span> <span class="st">'Hospital acquired infections in the Capital Region of Denmark'</span>,
-    <span class="dt">ylab     =</span> <span class="st">'Cases per 10,000 risk days'</span>,
-    <span class="dt">xlab     =</span> <span class="st">'Month'</span>)</code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb43-1" data-line-number="1"><span class="kw"><a href="../reference/qic.html">qic</a></span>(month, n, days,</a>
+<a class="sourceLine" id="cb43-2" data-line-number="2">    <span class="dt">data     =</span> hospital_infections,</a>
+<a class="sourceLine" id="cb43-3" data-line-number="3">    <span class="dt">facets   =</span> infection <span class="op">~</span><span class="st"> </span>hospital,</a>
+<a class="sourceLine" id="cb43-4" data-line-number="4">    <span class="dt">chart    =</span> <span class="st">'u'</span>,</a>
+<a class="sourceLine" id="cb43-5" data-line-number="5">    <span class="dt">multiply =</span> <span class="dv">10000</span>,</a>
+<a class="sourceLine" id="cb43-6" data-line-number="6">    <span class="dt">scales   =</span> <span class="st">'free_y'</span>,</a>
+<a class="sourceLine" id="cb43-7" data-line-number="7">    <span class="dt">x.angle  =</span> <span class="dv">45</span>,</a>
+<a class="sourceLine" id="cb43-8" data-line-number="8">    <span class="dt">title    =</span> <span class="st">'Hospital acquired infections in the Capital Region of Denmark'</span>,</a>
+<a class="sourceLine" id="cb43-9" data-line-number="9">    <span class="dt">ylab     =</span> <span class="st">'Cases per 10,000 risk days'</span>,</a>
+<a class="sourceLine" id="cb43-10" data-line-number="10">    <span class="dt">xlab     =</span> <span class="st">'Month'</span>)</a></code></pre></div>
 <p><img src="qicharts2_files/figure-html/unnamed-chunk-46-1.png" width="686.4"></p>
 <p>This plot makes it easy to display the differences between both hospitals and types of infection. Non-random variation is present in UTI rates of two hospitals (BOH, NOH).</p>
 <p>Note the use of individual y axes to better visualise variation over time and the rotated x axis labels to avoid overlapping labels.</p>
@@ -768,22 +770,22 @@ gtt_ae_types &lt;-<span class="st"> </span>gtt <span class="op">%&gt;%</span>
 <h3 class="hasAnchor">
 <a href="#funnels-plot-of-infection-rates-by-hospital" class="anchor"></a>Funnels plot of infection rates by hospital</h3>
 <p>Processes containing only common cause variation over time may be aggregated and compared across other units than time. When data have no natural time order, i.e., when the x variable is categorical, the data points are not connected by lines and runs analysis is not performed. To produce a funnel plot of infections by hospital, we filter data from a recent stable period and reorder the x variable by size.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">hai_<span class="dv">2016</span> &lt;-<span class="st"> </span>hospital_infections <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(month    <span class="op">&gt;=</span><span class="st"> '2016-07-01'</span>) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">hospital =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/reorder.factor">reorder</a></span>(hospital, days))
-
-<span class="kw"><a href="../reference/qic.html">qic</a></span>(hospital, n, days,
-    <span class="dt">data            =</span> hai_<span class="dv">2016</span>,
-    <span class="dt">facets          =</span> <span class="op">~</span><span class="st"> </span>infection,
-    <span class="dt">ncol            =</span> <span class="dv">1</span>,
-    <span class="dt">scales          =</span> <span class="st">'free_y'</span>,
-    <span class="dt">chart           =</span> <span class="st">'u'</span>,
-    <span class="dt">multiply        =</span> <span class="dv">10000</span>,
-    <span class="dt">decimals        =</span> <span class="dv">1</span>,
-    <span class="dt">show.labels     =</span> <span class="ot">TRUE</span>,
-    <span class="dt">title           =</span> <span class="st">'Hospital acquired bacteremia 2016 (U funnel chart)'</span>,
-    <span class="dt">ylab            =</span> <span class="st">'Cases per 10,000 risk days'</span>,
-    <span class="dt">xlab            =</span> <span class="st">'Hospital'</span>)</code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb44-1" data-line-number="1">hai_<span class="dv">2016</span> &lt;-<span class="st"> </span>hospital_infections <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb44-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(month    <span class="op">&gt;=</span><span class="st"> '2016-07-01'</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb44-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">hospital =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/reorder.factor">reorder</a></span>(hospital, days))</a>
+<a class="sourceLine" id="cb44-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb44-5" data-line-number="5"><span class="kw"><a href="../reference/qic.html">qic</a></span>(hospital, n, days,</a>
+<a class="sourceLine" id="cb44-6" data-line-number="6">    <span class="dt">data            =</span> hai_<span class="dv">2016</span>,</a>
+<a class="sourceLine" id="cb44-7" data-line-number="7">    <span class="dt">facets          =</span> <span class="op">~</span><span class="st"> </span>infection,</a>
+<a class="sourceLine" id="cb44-8" data-line-number="8">    <span class="dt">ncol            =</span> <span class="dv">1</span>,</a>
+<a class="sourceLine" id="cb44-9" data-line-number="9">    <span class="dt">scales          =</span> <span class="st">'free_y'</span>,</a>
+<a class="sourceLine" id="cb44-10" data-line-number="10">    <span class="dt">chart           =</span> <span class="st">'u'</span>,</a>
+<a class="sourceLine" id="cb44-11" data-line-number="11">    <span class="dt">multiply        =</span> <span class="dv">10000</span>,</a>
+<a class="sourceLine" id="cb44-12" data-line-number="12">    <span class="dt">decimals        =</span> <span class="dv">1</span>,</a>
+<a class="sourceLine" id="cb44-13" data-line-number="13">    <span class="dt">show.labels     =</span> <span class="ot">TRUE</span>,</a>
+<a class="sourceLine" id="cb44-14" data-line-number="14">    <span class="dt">title           =</span> <span class="st">'Hospital acquired bacteremia 2016 (U funnel chart)'</span>,</a>
+<a class="sourceLine" id="cb44-15" data-line-number="15">    <span class="dt">ylab            =</span> <span class="st">'Cases per 10,000 risk days'</span>,</a>
+<a class="sourceLine" id="cb44-16" data-line-number="16">    <span class="dt">xlab            =</span> <span class="st">'Hospital'</span>)</a></code></pre></div>
 <p><img src="qicharts2_files/figure-html/unnamed-chunk-47-1.png" width="686.4"></p>
 <p>One hospital, NOH, has unusually few bacteremias and urinary tract infections compared to the other hospitals. Another hospital, BFH, has unusually many <em>Clostridium difficile</em> infections. The other hospitals are indistinguishable from each other with respect to the hospital infection rates.</p>
 <p>What can we learn from NOH and BFH? It is important to stress that data presented in funnel plots should be used for learning rather than for judgement. While it may be interesting for some in need of a “case” to point fingers at the good, the bad, and the ugly, the full power of SPC will only be released when data are used for learning and improvement.</p>
@@ -794,45 +796,45 @@ gtt_ae_types &lt;-<span class="st"> </span>gtt <span class="op">%&gt;%</span>
 <a href="#case-5-prime-charts-for-count-data-with-very-large-sample-sizes" class="anchor"></a>Case 5: Prime charts for count data with very large sample sizes</h2>
 <p>P and U charts with very large sample sizes sometimes produce narrow 3-sigma limits with most of the data points outside the limits even when the process is stable.</p>
 <p>The <code>nhs_accidents</code> dataset contains the number of emergency patients seen within 4 hours of attendance. The sample sizes are very large (&gt; 250,000). See <code><a href="../reference/nhs_accidents.html">?nhs_accidents</a></code> for details.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">head</a></span>(nhs_accidents)
-<span class="co">#&gt;   i      r      n</span>
-<span class="co">#&gt; 1 1 266501 280443</span>
-<span class="co">#&gt; 2 2 264225 276823</span>
-<span class="co">#&gt; 3 3 276532 291681</span>
-<span class="co">#&gt; 4 4 281461 296155</span>
-<span class="co">#&gt; 5 5 269071 282343</span>
-<span class="co">#&gt; 6 6 261215 275888</span></code></pre></div>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb45-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">head</a></span>(nhs_accidents)</a>
+<a class="sourceLine" id="cb45-2" data-line-number="2"><span class="co">#&gt;   i      r      n</span></a>
+<a class="sourceLine" id="cb45-3" data-line-number="3"><span class="co">#&gt; 1 1 266501 280443</span></a>
+<a class="sourceLine" id="cb45-4" data-line-number="4"><span class="co">#&gt; 2 2 264225 276823</span></a>
+<a class="sourceLine" id="cb45-5" data-line-number="5"><span class="co">#&gt; 3 3 276532 291681</span></a>
+<a class="sourceLine" id="cb45-6" data-line-number="6"><span class="co">#&gt; 4 4 281461 296155</span></a>
+<a class="sourceLine" id="cb45-7" data-line-number="7"><span class="co">#&gt; 5 5 269071 282343</span></a>
+<a class="sourceLine" id="cb45-8" data-line-number="8"><span class="co">#&gt; 6 6 261215 275888</span></a></code></pre></div>
 <p>When plotted on a P chart, the 3-sigma limits appear too narrow.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/qic.html">qic</a></span>(i, r, 
-    <span class="dt">n        =</span> n, 
-    <span class="dt">data     =</span> nhs_accidents, 
-    <span class="dt">chart    =</span> <span class="st">'p'</span>,
-    <span class="dt">decimals =</span> <span class="dv">3</span>,
-    <span class="dt">title    =</span> <span class="st">'Proportion of patients seen within 4 hours of attendance (P chart)'</span>,
-    <span class="dt">ylab     =</span> <span class="ot">NULL</span>,
-    <span class="dt">xlab     =</span> <span class="st">'Week #'</span>)</code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb46-1" data-line-number="1"><span class="kw"><a href="../reference/qic.html">qic</a></span>(i, r, </a>
+<a class="sourceLine" id="cb46-2" data-line-number="2">    <span class="dt">n        =</span> n, </a>
+<a class="sourceLine" id="cb46-3" data-line-number="3">    <span class="dt">data     =</span> nhs_accidents, </a>
+<a class="sourceLine" id="cb46-4" data-line-number="4">    <span class="dt">chart    =</span> <span class="st">'p'</span>,</a>
+<a class="sourceLine" id="cb46-5" data-line-number="5">    <span class="dt">decimals =</span> <span class="dv">3</span>,</a>
+<a class="sourceLine" id="cb46-6" data-line-number="6">    <span class="dt">title    =</span> <span class="st">'Proportion of patients seen within 4 hours of attendance (P chart)'</span>,</a>
+<a class="sourceLine" id="cb46-7" data-line-number="7">    <span class="dt">ylab     =</span> <span class="ot">NULL</span>,</a>
+<a class="sourceLine" id="cb46-8" data-line-number="8">    <span class="dt">xlab     =</span> <span class="st">'Week #'</span>)</a></code></pre></div>
 <p><img src="qicharts2_files/figure-html/unnamed-chunk-49-1.png" width="686.4"></p>
 <p>This is called over-dispersion, and happens sometimes because data in practice rarely come from truly binomial or poisson distributions. When the sample sizes are small, this is not a problem. But as sample sizes increase (&gt; 1000) it becomes apparent that the assumptions of constant proportions or rates between subgroups are not true.</p>
 <p>A simple test for over-dispersion is to apply an I chart. If the I chart gives 3-sigma limits that are very different from the U or P chart, it is a signal that the underlying probability model of the U or P chart may not be correct.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/qic.html">qic</a></span>(i, r, 
-    <span class="dt">n        =</span> n, 
-    <span class="dt">data     =</span> nhs_accidents, 
-    <span class="dt">chart    =</span> <span class="st">'i'</span>,
-    <span class="dt">decimals =</span> <span class="dv">3</span>,
-    <span class="dt">title    =</span> <span class="st">'Proportion of patients seen within 4 hours of attendance (I chart)'</span>,
-    <span class="dt">ylab     =</span> <span class="ot">NULL</span>,
-    <span class="dt">xlab     =</span> <span class="st">'Week #'</span>)</code></pre></div>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb47-1" data-line-number="1"><span class="kw"><a href="../reference/qic.html">qic</a></span>(i, r, </a>
+<a class="sourceLine" id="cb47-2" data-line-number="2">    <span class="dt">n        =</span> n, </a>
+<a class="sourceLine" id="cb47-3" data-line-number="3">    <span class="dt">data     =</span> nhs_accidents, </a>
+<a class="sourceLine" id="cb47-4" data-line-number="4">    <span class="dt">chart    =</span> <span class="st">'i'</span>,</a>
+<a class="sourceLine" id="cb47-5" data-line-number="5">    <span class="dt">decimals =</span> <span class="dv">3</span>,</a>
+<a class="sourceLine" id="cb47-6" data-line-number="6">    <span class="dt">title    =</span> <span class="st">'Proportion of patients seen within 4 hours of attendance (I chart)'</span>,</a>
+<a class="sourceLine" id="cb47-7" data-line-number="7">    <span class="dt">ylab     =</span> <span class="ot">NULL</span>,</a>
+<a class="sourceLine" id="cb47-8" data-line-number="8">    <span class="dt">xlab     =</span> <span class="st">'Week #'</span>)</a></code></pre></div>
 <p><img src="qicharts2_files/figure-html/unnamed-chunk-50-1.png" width="686.4"></p>
 <p>In fact, since the I chart estimates 3-sigma limits based on the observed within subgroup variation in data rather than an assumed probability model, it is sort of like the Swiss army knife of SPC. Therefore, the I chart may be used when the true probability model of data is unknown.</p>
 <p>However, the I chart does not account for varying sample sizes and may give false signals when sample sizes vary significantly. Laney proposed an elegant solution that incorporates both within and between subgroup variation in the calculation of 3-sigma limits. This is what P’ (P prime) and U’ (U prime) charts are for. See Laney 2002 for details.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/qic.html">qic</a></span>(i, r, 
-    <span class="dt">n        =</span> n, 
-    <span class="dt">data     =</span> nhs_accidents, 
-    <span class="dt">chart    =</span> <span class="st">'pp'</span>,
-    <span class="dt">decimals =</span> <span class="dv">3</span>,
-    <span class="dt">title    =</span> <span class="st">'Proportion of patients seen within 4 hours of attendance (P</span><span class="ch">\'</span><span class="st"> chart)'</span>,
-    <span class="dt">ylab     =</span> <span class="ot">NULL</span>,
-    <span class="dt">xlab     =</span> <span class="st">'Week #'</span>)</code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb48-1" data-line-number="1"><span class="kw"><a href="../reference/qic.html">qic</a></span>(i, r, </a>
+<a class="sourceLine" id="cb48-2" data-line-number="2">    <span class="dt">n        =</span> n, </a>
+<a class="sourceLine" id="cb48-3" data-line-number="3">    <span class="dt">data     =</span> nhs_accidents, </a>
+<a class="sourceLine" id="cb48-4" data-line-number="4">    <span class="dt">chart    =</span> <span class="st">'pp'</span>,</a>
+<a class="sourceLine" id="cb48-5" data-line-number="5">    <span class="dt">decimals =</span> <span class="dv">3</span>,</a>
+<a class="sourceLine" id="cb48-6" data-line-number="6">    <span class="dt">title    =</span> <span class="st">'Proportion of patients seen within 4 hours of attendance (P</span><span class="ch">\'</span><span class="st"> chart)'</span>,</a>
+<a class="sourceLine" id="cb48-7" data-line-number="7">    <span class="dt">ylab     =</span> <span class="ot">NULL</span>,</a>
+<a class="sourceLine" id="cb48-8" data-line-number="8">    <span class="dt">xlab     =</span> <span class="st">'Week #'</span>)</a></code></pre></div>
 <p><img src="qicharts2_files/figure-html/unnamed-chunk-51-1.png" width="686.4"></p>
 <p>Laney notes that when over-dispersion is not present, prime charts will give the same results as traditional charts, and recommends always to use prime charts for proportions and rates.</p>
 <p>Comparing P and P’ charts on readmission rates from the <code>cabg</code> dataset we find that while the 3-sigma limits in the P’ chart are a little wider, the two charts reach similar conclusions.</p>
@@ -887,14 +889,14 @@ gtt_ae_types &lt;-<span class="st"> </span>gtt <span class="op">%&gt;%</span>
 <div id="appendix-2-critical-values-for-longest-run-and-number-of-crossings" class="section level2">
 <h2 class="hasAnchor">
 <a href="#appendix-2-critical-values-for-longest-run-and-number-of-crossings" class="anchor"></a>Appendix 2: Critical values for longest run and number of crossings</h2>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">n &lt;-<span class="st"> </span><span class="dv">10</span><span class="op">:</span><span class="dv">100</span>
-x &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/data.frame">data.frame</a></span>(
-  <span class="st">`</span><span class="dt">Number of useful observations</span><span class="st">`</span>       =<span class="st"> </span>n,
-  <span class="st">`</span><span class="dt">Upper limit for longest run</span><span class="st">`</span>         =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/Round">round</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/Log">log2</a></span>(n) <span class="op">+</span><span class="st"> </span><span class="dv">3</span>),
-  <span class="st">`</span><span class="dt">Lower limit for number of crossings</span><span class="st">`</span> =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/Binomial">qbinom</a></span>(<span class="fl">0.05</span>, n <span class="op">-</span><span class="st"> </span><span class="dv">1</span>, <span class="fl">0.5</span>),
-  <span class="dt">check.names                           =</span> <span class="ot">FALSE</span>)
-
-knitr<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/knitr/topics/kable">kable</a></span>(x)</code></pre></div>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb49-1" data-line-number="1">n &lt;-<span class="st"> </span><span class="dv">10</span><span class="op">:</span><span class="dv">100</span></a>
+<a class="sourceLine" id="cb49-2" data-line-number="2">x &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/data.frame">data.frame</a></span>(</a>
+<a class="sourceLine" id="cb49-3" data-line-number="3">  <span class="st">`</span><span class="dt">Number of useful observations</span><span class="st">`</span>       =<span class="st"> </span>n,</a>
+<a class="sourceLine" id="cb49-4" data-line-number="4">  <span class="st">`</span><span class="dt">Upper limit for longest run</span><span class="st">`</span>         =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/Round">round</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/Log">log2</a></span>(n) <span class="op">+</span><span class="st"> </span><span class="dv">3</span>),</a>
+<a class="sourceLine" id="cb49-5" data-line-number="5">  <span class="st">`</span><span class="dt">Lower limit for number of crossings</span><span class="st">`</span> =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/Binomial">qbinom</a></span>(<span class="fl">0.05</span>, n <span class="op">-</span><span class="st"> </span><span class="dv">1</span>, <span class="fl">0.5</span>),</a>
+<a class="sourceLine" id="cb49-6" data-line-number="6">  <span class="dt">check.names                           =</span> <span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb49-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb49-8" data-line-number="8">knitr<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/knitr/topics/kable">kable</a></span>(x)</a></code></pre></div>
 <table class="table">
 <thead><tr class="header">
 <th align="right">Number of useful observations</th>

@@ -1,4 +1,4 @@
-#' @import dplyr
+# #' @import dplyr
 runs.analysis <- function(x) {
   y                  <- x$y[x$include]
   cl                 <- x$cl[x$include]
@@ -292,7 +292,6 @@ qic.g <- function(x){
 
 c4 <- function(n) {
   n[n <= 1] <- NA
-  # sqrt(2 / (n - 1)) * gamma(n / 2) / gamma((n - 1) / 2)
   sqrt(2 / (n - 1)) * exp(lgamma(n / 2) - lgamma((n - 1) / 2))
 }
 
@@ -315,64 +314,6 @@ b4 <- function(n) {
   n[n <= 1] <- NA
   1 + 3 * c5(n) / c4(n)
 }
-
-# a3 <- function(n) {
-#   n[n == 0]    <- NA
-#   tbl          <- c(NA,
-#                     2.659, 1.954, 1.628, 1.427, 1.287, 1.182,
-#                     1.099, 1.032, 0.975, 0.927, 0.886, 0.850,
-#                     0.817, 0.789, 0.763, 0.739, 0.718, 0.698,
-#                     0.680, 0.663, 0.647, 0.633, 0.619, 0.606)
-#   # x            <- 3 / (4 * (n - 1)) * (4 * n - 3) / sqrt(n)
-#   x            <- 3 / c4(n) / sqrt(n)
-#   w            <- which(n <= 25)
-#   x[w]         <- tbl[n[w]]
-#   x[is.nan(x)] <- NA
-#   return(x)
-# }
-# 
-# b3 <- function(n) {
-#   n[n == 0]    <- NA
-#   tbl          <- c(NA,
-#                     0.000, 0.000, 0.000, 0.000, 0.030, 0.118,
-#                     0.185, 0.239, 0.284, 0.321, 0.354, 0.382,
-#                     0.406, 0.428, 0.448, 0.466, 0.482, 0.497,
-#                     0.510, 0.523, 0.534, 0.545, 0.555, 0.565)
-#   x            <- 1 - (3 / c4(n) / sqrt(2 * (n - 1)))
-#   w            <- which(n <= 25)
-#   x[w]         <- tbl[n[w]]
-#   x[is.nan(x)] <- NA
-#   return(x)
-# }
-# 
-# b4 <- function(n) {
-#   n[n == 0]    <- NA
-#   tbl          <- c(NA,
-#                     3.267, 2.568, 2.266, 2.089, 1.970, 1.882,
-#                     1.815, 1.761, 1.716, 1.679, 1.646, 1.618,
-#                     1.594, 1.572, 1.552, 1.534, 1.518, 1.503,
-#                     1.490, 1.477, 1.466, 1.455, 1.445, 1.435)
-#   x            <- 1 + (3 / c4(n) / sqrt(2 * (n - 1)))
-#   w            <- which(n <= 25)
-#   x[w]         <- tbl[n[w]]
-#   x[is.nan(x)] <- NA
-#   return(x)
-# }
-# 
-# c4 <- function(n) {
-#   n[n == 0]   <- NA
-#   tbl         <- c(NA,
-#                    0.7979, 0.8862, 0.9213, 0.9400, 0.9515, 0.9594,
-#                    0.9650, 0.9693, 0.9727, 0.9754, 0.9776, 0.9794,
-#                    0.9810, 0.9823, 0.9835, 0.9845, 0.9854, 0.9862,
-#                    0.9869, 0.9876, 0.9882, 0.9887, 0.9892, 0.9896)
-#   
-#   x            <- 4 * (n - 1) / (4 * n - 3)
-#   w            <- which(n <= 25)
-#   x[w]         <- tbl[n[w]]
-#   x[is.nan(x)] <- NA
-#   return(x)
-# }
 
 # Format line labels function
 lab.format <- function(x, decimals = 1, percent = FALSE) {
@@ -399,62 +340,140 @@ fixnotes <- function(x) {
   x <- gsub("^$", NA, x)
 }
 
+# # Function for data aggregation and analysis (needs dplyr, deprecated)
+# qic.agg <- function(d, got.n, part, agg.fun, freeze, exclude, 
+#                     chart.fun, multiply, dots.only, chart, y.neg) {
+#   x      <- quo(x)
+#   y      <- quo(y)
+#   n      <- quo(n)
+#   cl     <- quo(cl)
+#   target <- quo(target)
+#   notes  <- quo(notes)
+#   facet1 <- quo(facet1)
+#   facet2 <- quo(facet2)
+#   
+#   d <- d %>% 
+#     filter(!is.na(!!x)) %>% 
+#     group_by(!!x, !!facet1, !!facet2) %>% 
+#     summarise(y.sum    = sum(!!y, na.rm = TRUE),
+#               y.length = sum(!is.na(!!y)),
+#               y.mean   = mean(!!y, na.rm = TRUE),
+#               y.sd     = stats::sd(!!y, na.rm = TRUE),
+#               n        = sum(!!n, na.rm = got.n),
+#               y        = ifelse(got.n,
+#                                 y.sum / n,
+#                                 do.call(agg.fun, list(y, na.rm = TRUE))),
+#               cl       = first(!!cl),
+#               target   = first(!!target),
+#               notes    = paste(!!notes, collapse = '|')
+#     ) %>% 
+#     group_by(facet1, facet2) %>%
+#     mutate(part = makeparts(part, n()),
+#            xx   = seq_along(part)) %>% 
+#     ungroup() %>% 
+#     mutate(baseline = xx <= freeze,
+#            include  = !xx %in% exclude,
+#            notes    = fixnotes(notes))
+#   
+#   d <- split(d, d[c('facet1', 'facet2', 'part')]) %>% 
+#     lapply(chart.fun) %>% 
+#     lapply(runs.analysis) %>% 
+#     lapply(function(x) {
+#       within(x, {
+#         y          <- y * multiply
+#         cl         <- cl * multiply
+#         lcl        <- lcl * multiply
+#         ucl        <- ucl * multiply
+#         cl.lab     <- ifelse(xx == max(xx), cl, NA)
+#         lcl.lab    <- ifelse(xx == max(xx), lcl, NA)
+#         ucl.lab    <- ifelse(xx == max(xx), ucl, NA)
+#         target.lab <- ifelse(xx == max(xx), target, NA)
+#       })
+#     })
+#   d <- do.call(rbind, d) %>% 
+#     arrange(!!facet1, !!facet2, !!x)
+#   
+#   # Remove control lines from missing subgroups
+#   d$ucl[!is.finite(d$ucl)] <- NA
+#   d$lcl[!is.finite(d$lcl)] <- NA
+#   d$lcl.lab[!is.finite(d$lcl.lab)] <- NA
+#   d$ucl.lab[!is.finite(d$ucl.lab)] <- NA
+#   
+#   # Add sigma signals
+#   d$sigma.signal                        <- d$y > d$ucl | d$y < d$lcl
+#   d$sigma.signal[is.na(d$sigma.signal)] <- FALSE
+#   
+#   # Ignore runs analysis if subgroups are categorical or if chart type is MR
+#   if (dots.only || chart == 'mr')
+#     d$runs.signal <- FALSE
+#   
+#   # Prevent negative y axis if y.neg argument is FALSE
+#   if (!y.neg & min(d$y, na.rm = TRUE) >= 0) {
+#     d$lcl[d$lcl < 0]         <- 0
+#     d$lcl.lab[d$lcl.lab < 0] <- 0
+#   }
+#   
+#   return(d)
+# }
+
 # Function for data aggregation and analysis
 qic.agg <- function(d, got.n, part, agg.fun, freeze, exclude, 
                     chart.fun, multiply, dots.only, chart, y.neg) {
-  x      <- quo(x)
-  y      <- quo(y)
-  n      <- quo(n)
-  cl     <- quo(cl)
-  target <- quo(target)
-  notes  <- quo(notes)
-  facet1 <- quo(facet1)
-  facet2 <- quo(facet2)
+  d <- d[!is.na(d$x), ]
+  d <- split(d, d[,c('x', 'facet1', 'facet2')])
+  d <- lapply(d, function(x) {
+    data.frame(x        = x$x[1],
+               facet1   = x$facet1[1],
+               facet2   = x$facet2[1],
+               y.sum    = sum(x$y, na.rm = TRUE),
+               y.length = sum(!is.na(x$y)),
+               y.mean   = mean(x$y, na.rm = TRUE),
+               y.sd     = stats::sd(x$y, na.rm = TRUE),
+               n        = sum(x$n, na.rm = got.n),
+               y        = ifelse(got.n,
+                                 sum(x$y, na.rm = TRUE) / 
+                                   sum(x$n, na.rm = got.n),
+                                 do.call(agg.fun, list(x$y, na.rm = TRUE))),
+               cl       = x$cl[1],
+               target   = x$target[1],
+               notes    = paste(x$notes, collapse = '|'))
+  })
   
-  d <- d %>% 
-    filter(!is.na(!!x)) %>% 
-    group_by(!!x, !!facet1, !!facet2) %>% 
-    summarise(y.sum    = sum(!!y, na.rm = TRUE),
-              y.length = sum(!is.na(!!y)),
-              y.mean   = mean(!!y, na.rm = TRUE),
-              y.sd     = stats::sd(!!y, na.rm = TRUE),
-              n        = sum(!!n, na.rm = got.n),
-              y        = ifelse(got.n,
-                                y.sum / n,
-                                do.call(agg.fun, list(y, na.rm = TRUE))),
-              cl       = first(!!cl),
-              target   = first(!!target),
-              notes    = paste(!!notes, collapse = '|')
-    ) %>% 
-    group_by(facet1, facet2) %>%
-    mutate(part = makeparts(part, n()),
-           xx   = seq_along(part)) %>% 
-    ungroup() %>% 
-    mutate(baseline = xx <= freeze,
-           include  = !xx %in% exclude,
-           notes    = fixnotes(notes))
+  d <- do.call(rbind, d)
   
-  d <- split(d, d[c('facet1', 'facet2', 'part')]) %>% 
-    lapply(chart.fun) %>% 
-    lapply(runs.analysis) %>% 
-    lapply(function(x) {
-      within(x, {
-        y          <- y * multiply
-        cl         <- cl * multiply
-        lcl        <- lcl * multiply
-        ucl        <- ucl * multiply
-        cl.lab     <- ifelse(xx == max(xx), cl, NA)
-        lcl.lab    <- ifelse(xx == max(xx), lcl, NA)
-        ucl.lab    <- ifelse(xx == max(xx), ucl, NA)
-        target.lab <- ifelse(xx == max(xx), target, NA)
-      })
-    })
-  d <- do.call(rbind, d) %>% 
-    arrange(!!facet1, !!facet2, !!x)
+  d <- split(d, d[c('facet1', 'facet2')]) 
+  d <- lapply(d, function(x) {
+    x$part <- makeparts(part, nrow(x))
+    x$xx <- seq_along(x$part)
+    x
+  })
+  
+  d <- do.call(rbind, d)
+  
+  d$baseline <- d$xx <= freeze
+  d$include  <- !d$xx %in% exclude
+  d$notes    <- fixnotes(d$notes)
+  
+  d <- split(d, d[c('facet1', 'facet2', 'part')])
+  d <- lapply(d, chart.fun)
+  d <- lapply(d, runs.analysis)
+  d <- lapply(d, function(x) {
+    x$y          <- x$y * multiply
+    x$cl         <- x$cl * multiply
+    x$lcl        <- x$lcl * multiply
+    x$ucl        <- x$ucl * multiply
+    x$cl.lab     <- ifelse(x$xx == max(x$xx), x$cl, NA)
+    x$lcl.lab    <- ifelse(x$xx == max(x$xx), x$lcl, NA)
+    x$ucl.lab    <- ifelse(x$xx == max(x$xx), x$ucl, NA)
+    x$target.lab <- ifelse(x$xx == max(x$xx), x$target, NA)
+    x
+  })
+  
+  d <- do.call(rbind, c(d, make.row.names = F))
   
   # Remove control lines from missing subgroups
-  d$ucl[!is.finite(d$ucl)] <- NA
-  d$lcl[!is.finite(d$lcl)] <- NA
+  d$ucl[!is.finite(d$ucl)]         <- NA
+  d$lcl[!is.finite(d$lcl)]         <- NA
   d$lcl.lab[!is.finite(d$lcl.lab)] <- NA
   d$ucl.lab[!is.finite(d$ucl.lab)] <- NA
   

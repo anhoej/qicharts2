@@ -16,11 +16,11 @@ Description: Functions for making run charts, Shewhart control charts and
 Depends:
     R (>= 3.0.0)
 Imports:
-    dplyr (>= 0.7.0),
     ggplot2 (>= 2.2.0),
     scales,
     stats
 Suggests:
+    dplyr (>= 0.7.0),
     knitr,
     rmarkdown,
     testthat,
