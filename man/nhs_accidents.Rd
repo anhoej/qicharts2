@@ -4,9 +4,11 @@
 \name{nhs_accidents}
 \alias{nhs_accidents}
 \title{NHS accidents}
-\format{A data frame with 20 rows and 3 variables: \itemize{ \item i Week 
+\format{
+A data frame with 20 rows and 3 variables: \itemize{ \item i Week 
   number. \item r Attendances seen within 4 hours. \item n Total number of 
-  attendances. }}
+  attendances. }
+}
 \source{
 Mohammed MA, et al. Quality and Safety in Health Care
   2013;22:362–368. \url{https://doi.org/10.1136/bmjqs-2012-001373}.

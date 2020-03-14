@@ -4,12 +4,14 @@
 \name{gtt}
 \alias{gtt}
 \title{Patient harm indentified using the Global Trigger Tool}
-\format{A data frame with 340 rows and 11 variables: \itemize{ \item 
+\format{
+A data frame with 340 rows and 11 variables: \itemize{ \item 
   admission_id Admission ID. \item admission_dte Date of admission. \item 
   discharge_dte Date of discharge. \item month Month of discharge. \item days
   Duration of hospital stay in days. \item harms Number of adverse events.
   \item {E-I} Type of adverse event by severity category. E-F: Temporary
-  harm; G-H: Permanent harm; I: Fatal harm. }}
+  harm; G-H: Permanent harm; I: Fatal harm. }
+}
 \source{
 Omitted for privacy concerns.
 }

@@ -50,9 +50,8 @@ plot.qic <- function(x, title, ylab, xlab, subtitle, caption, part.labels,
           legend.position  = 'none')
   
   # Add control limits and centre and target lines
-  
-  if (getOption('qic.clshade', default = TRUE)) {
-    
+  if (getOption('qic.clshade', default = TRUE) &
+      sum(!is.na(x$lcl))) {
     p <- p +
       geom_ribbon(aes_(ymin = ~ lcl, ymax = ~ ucl),
                   fill = 'grey87',

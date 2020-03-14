@@ -3,7 +3,6 @@
 \docType{package}
 \name{qicharts2}
 \alias{qicharts2}
-\alias{qicharts2-package}
 \title{\code{qicharts2} package}
 \description{
 Statistical Process Control chart for R

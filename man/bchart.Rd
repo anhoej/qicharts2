@@ -4,8 +4,15 @@
 \alias{bchart}
 \title{Bernoulli CUSUM chart for binary data (EXPERIMENTAL)}
 \usage{
-bchart(x, target, or = 2, limit = 3.5, title = "", ylab = "CUSUM",
-  xlab = "Case #")
+bchart(
+  x,
+  target,
+  or = 2,
+  limit = 3.5,
+  title = "",
+  ylab = "CUSUM",
+  xlab = "Case #"
+)
 }
 \arguments{
 \item{x}{Logical, vector of succeses and failures.}

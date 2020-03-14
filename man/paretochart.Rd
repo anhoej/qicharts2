@@ -4,9 +4,17 @@
 \alias{paretochart}
 \title{Paretochart}
 \usage{
-paretochart(x, title = "", subtitle = NULL, caption = NULL,
-  ylab = NULL, xlab = NULL, x.angle = NULL, useNA = FALSE,
-  print.data = FALSE)
+paretochart(
+  x,
+  title = "",
+  subtitle = NULL,
+  caption = NULL,
+  ylab = NULL,
+  xlab = NULL,
+  x.angle = NULL,
+  useNA = FALSE,
+  print.data = FALSE
+)
 }
 \arguments{
 \item{x}{Categorical variable to plot.}
