@@ -7,8 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Quality Improvement Charts • qicharts2</title>
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous">
+<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
 <script src="../pkgdown.js"></script><meta property="og:title" content="Quality Improvement Charts">
 <meta property="og:description" content="">
 <meta name="twitter:card" content="summary">
@@ -36,7 +37,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">qicharts2</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.1</span>
       </span>
     </div>
 
@@ -71,6 +72,7 @@
 <!--/.navbar -->
 
       
+
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
@@ -78,7 +80,7 @@
             <h3 class="subtitle">An implementation of statistical process control charts for R</h3>
                         <h4 class="author">Jacob Anhøj</h4>
             
-            <h4 class="date">2019-04-06</h4>
+            <h4 class="date">2020-03-15</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/anhoej/qicharts2/blob/master/vignettes/qicharts2.Rmd"><code>vignettes/qicharts2.Rmd</code></a></small>
       <div class="hidden name"><code>qicharts2.Rmd</code></div>
@@ -102,22 +104,22 @@
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
 <p>Install stable version from CRAN:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/install.packages">install.packages</a></span>(<span class="st">'qicharts2'</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">'qicharts2'</span>)</a></code></pre></div>
 <p>Or install development version from GitHub:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">devtools<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/devtools/topics/reexports">install_github</a></span>(<span class="st">'anhoej/qicharts2'</span>, <span class="dt">build_vignettes =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">devtools<span class="op">::</span><span class="kw"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span>(<span class="st">'anhoej/qicharts2'</span>, <span class="dt">build_vignettes =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
 </div>
 <div id="your-first-run-and-control-charts" class="section level2">
 <h2 class="hasAnchor">
 <a href="#your-first-run-and-control-charts" class="anchor"></a>Your first run and control charts</h2>
 <p>Load <code>qicharts2</code> and generate some random numbers to play with:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="co"># Load qicharts2</span></a>
-<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(qicharts2)</a>
+<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(qicharts2)</a>
 <a class="sourceLine" id="cb3-3" data-line-number="3"></a>
 <a class="sourceLine" id="cb3-4" data-line-number="4"><span class="co"># Lock random number generator to make examples reproducible.</span></a>
-<a class="sourceLine" id="cb3-5" data-line-number="5"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/Random">set.seed</a></span>(<span class="dv">19</span>)</a>
+<a class="sourceLine" id="cb3-5" data-line-number="5"><span class="kw"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span>(<span class="dv">19</span>)</a>
 <a class="sourceLine" id="cb3-6" data-line-number="6"></a>
 <a class="sourceLine" id="cb3-7" data-line-number="7"><span class="co"># Generate 24 random numbers from a normal distribution.</span></a>
-<a class="sourceLine" id="cb3-8" data-line-number="8">y &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/Normal">rnorm</a></span>(<span class="dv">24</span>)</a></code></pre></div>
+<a class="sourceLine" id="cb3-8" data-line-number="8">y &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span>(<span class="dv">24</span>)</a></code></pre></div>
 <p>Make a run chart:</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw"><a href="../reference/qic.html">qic</a></span>(y)</a></code></pre></div>
 <p><img src="qicharts2_files/figure-html/unnamed-chunk-7-1.png" width="686.4"></p>
@@ -167,7 +169,7 @@
 <p><img src="qicharts2_files/figure-html/unnamed-chunk-9-1.png" width="686.4"></p>
 <p>However, minor to moderate shifts may go unnoticed by the 3-sigma rule for long periods of time.</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="co"># Simulate a special cause to y in the form of a moderate, persistent shift of 2 standard deviations.</span></a>
-<a class="sourceLine" id="cb7-2" data-line-number="2">y[<span class="dv">13</span><span class="op">:</span><span class="dv">24</span>] &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/Normal">rnorm</a></span>(<span class="dv">12</span>, <span class="dt">mean =</span> <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb7-2" data-line-number="2">y[<span class="dv">13</span><span class="op">:</span><span class="dv">24</span>] &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span>(<span class="dv">12</span>, <span class="dt">mean =</span> <span class="dv">2</span>)</a>
 <a class="sourceLine" id="cb7-3" data-line-number="3"></a>
 <a class="sourceLine" id="cb7-4" data-line-number="4"><span class="kw"><a href="../reference/qic.html">qic</a></span>(y, <span class="dt">chart =</span> <span class="st">'i'</span>)</a></code></pre></div>
 <p><img src="qicharts2_files/figure-html/unnamed-chunk-10-1.png" width="686.4"></p>
@@ -186,13 +188,13 @@
 </ol>
 <p>The WE rules have proven their worth during half a century. One thing to notice is that the WE rules are most effective with control charts that have between 20 and 30 data points. With fewer data points, they lose sensitivity (more false negatives), and with more data points they lose specificity (more false positives).</p>
 </div>
-<div id="the-anhj-rules" class="section level3">
+<div id="the-anhøj-rules" class="section level3">
 <h3 class="hasAnchor">
-<a href="#the-anhj-rules" class="anchor"></a>The Anhøj rules</h3>
+<a href="#the-anh%C3%B8j-rules" class="anchor"></a>The Anhøj rules</h3>
 <p>The least known tests for non-random variation are probably the Anhøj rules, proposed and validated by me in two recent publications (<a href="https://doi.org/10.1371/journal.pone.0113825">Anhøj 2014</a>, <a href="https://doi.org/10.1371/journal.pone.0121349">Anhøj 2015</a>). The Anhøj rules are the core of <code>qicharts2</code>, and consist of two tests that are based solely on the distribution of data points in relation to the centre line:</p>
 <ul>
-<li><p><strong>Unusually long runs</strong>: A run is one or more consecutive data points on the same side of the centre line. Data points that fall on the centre line neither break nor contribute to the run. The upper 95% prediction limit for longest run is approximately <span class="math inline">\(log_2(n)+3\)</span> (rounded to the nearest integer), where <span class="math inline">\(n\)</span> is the number of useful data points. For example, in a run chart with 24 data points a run of <em>more</em> than <code><a href="https://www.rdocumentation.org/packages/base/topics/Round">round(log2(24) + 3)</a></code> = 8 would suggest a shift in the process.</p></li>
-<li><p><strong>Unusually few crossings</strong>: A crossing is when two consecutive data points are on opposite sides of the centre line. In a random process, the number of crossings has a binomial distribution, <span class="math inline">\(b(n-1,0.5)\)</span>. The lower 5% prediction limit for number of crossings is found using <code><a href="https://www.rdocumentation.org/packages/stats/topics/Binomial">qbinom(p = 0.05, size = n - 1, prob = 0.5)</a></code>. Thus, in a run chart with 24 useful data points, <em>fewer</em> than <code><a href="https://www.rdocumentation.org/packages/stats/topics/Binomial">qbinom(0.05, 24 - 1, 0.5)</a></code> = 8 crossings would suggest that the process is shifting.</p></li>
+<li><p><strong>Unusually long runs</strong>: A run is one or more consecutive data points on the same side of the centre line. Data points that fall on the centre line neither break nor contribute to the run. The upper 95% prediction limit for longest run is approximately <span class="math inline">\(log_2(n)+3\)</span> (rounded to the nearest integer), where <span class="math inline">\(n\)</span> is the number of useful data points. For example, in a run chart with 24 data points a run of <em>more</em> than <code><a href="https://rdrr.io/r/base/Round.html">round(log2(24) + 3)</a></code> = 8 would suggest a shift in the process.</p></li>
+<li><p><strong>Unusually few crossings</strong>: A crossing is when two consecutive data points are on opposite sides of the centre line. In a random process, the number of crossings has a binomial distribution, <span class="math inline">\(b(n-1,0.5)\)</span>. The lower 5% prediction limit for number of crossings is found using <code><a href="https://rdrr.io/r/stats/Binomial.html">qbinom(p = 0.05, size = n - 1, prob = 0.5)</a></code>. Thus, in a run chart with 24 useful data points, <em>fewer</em> than <code><a href="https://rdrr.io/r/stats/Binomial.html">qbinom(0.05, 24 - 1, 0.5)</a></code> = 8 crossings would suggest that the process is shifting.</p></li>
 </ul>
 <p>Critical values for longest runs and number of crossings for 10 – 100 data points are tabulated in Appendix 2.</p>
 <p>Apart from being comparable in sensitivity and specificity to WE rules 2-4 with 20-30 data points, the Anhøj rules have some advantages:</p>
@@ -202,18 +204,16 @@
 </ul>
 <p>In the previous control chart, a shift of 2 standard deviations was introduced halfway through the process. While the shift is too small to be picked up by the 3-sigma rule, both Anhøj rules detect the signal. The longest run includes 13 data points (upper limit = 8), and the number of crossings is 4 (lower limit = 8). Note that the shift is also picked up by WE rule 4.</p>
 <p>Non-random variation found by the Anhøj rules is visualised by <code><a href="../reference/qic.html">qic()</a></code> using a red and dashed centre line.</p>
-<p>The parameters of the analysis are available using the <code><a href="https://www.rdocumentation.org/packages/base/topics/summary">summary()</a></code> function on a qic object. See <code><a href="../reference/summary.qic.html">?summary.qic</a></code> for details.</p>
+<p>The parameters of the analysis are available using the <code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code> function on a qic object. See <code><a href="../reference/summary.qic.html">?summary.qic</a></code> for details.</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="co"># Save qic object to o</span></a>
 <a class="sourceLine" id="cb8-2" data-line-number="2">o &lt;-<span class="st"> </span><span class="kw"><a href="../reference/qic.html">qic</a></span>(y, <span class="dt">chart =</span> <span class="st">'i'</span>)</a>
 <a class="sourceLine" id="cb8-3" data-line-number="3"></a>
 <a class="sourceLine" id="cb8-4" data-line-number="4"><span class="co"># Print summary data frame</span></a>
-<a class="sourceLine" id="cb8-5" data-line-number="5"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/summary">summary</a></span>(o)</a>
-<a class="sourceLine" id="cb8-6" data-line-number="6"><span class="co">#&gt;   facet1 facet2 part n.obs n.useful longest.run longest.run.max</span></a>
-<a class="sourceLine" id="cb8-7" data-line-number="7"><span class="co">#&gt; 1      1      1    1    24       24          13               8</span></a>
-<a class="sourceLine" id="cb8-8" data-line-number="8"><span class="co">#&gt;   n.crossings n.crossings.min runs.signal      aLCL       CL     aUCL</span></a>
-<a class="sourceLine" id="cb8-9" data-line-number="9"><span class="co">#&gt; 1           4               8           1 -2.114884 1.057091 4.229067</span></a>
-<a class="sourceLine" id="cb8-10" data-line-number="10"><span class="co">#&gt;   sigma.signal</span></a>
-<a class="sourceLine" id="cb8-11" data-line-number="11"><span class="co">#&gt; 1            0</span></a></code></pre></div>
+<a class="sourceLine" id="cb8-5" data-line-number="5"><span class="kw"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(o)</a>
+<a class="sourceLine" id="cb8-6" data-line-number="6"><span class="co">#&gt;   facet1 facet2 part n.obs n.useful longest.run longest.run.max n.crossings</span></a>
+<a class="sourceLine" id="cb8-7" data-line-number="7"><span class="co">#&gt; 1      1      1    1    24       24          13               8           4</span></a>
+<a class="sourceLine" id="cb8-8" data-line-number="8"><span class="co">#&gt;   n.crossings.min runs.signal      aLCL       CL     aUCL sigma.signal</span></a>
+<a class="sourceLine" id="cb8-9" data-line-number="9"><span class="co">#&gt; 1               8           1 -2.114884 1.057091 4.229067            0</span></a></code></pre></div>
 <p>Many additional tests for special cause variation have been proposed since Shewhart invented the 3-sigma rule, and many tests are currently being used. However, the more tests that are applied to the analysis, the higher the risk of false signals. <code>qicharts2</code> takes a conservative approach by applying only three tests, the 3-sigma rule and the two Anhøj rules. That means that a signal from <code><a href="../reference/qic.html">qic()</a></code> most likely represents a significant change in the underlying process.</p>
 </div>
 </div>
@@ -308,21 +308,21 @@
 <h2 class="hasAnchor">
 <a href="#case-1-patient-harm" class="anchor"></a>Case 1: Patient harm</h2>
 <p>The <code>gtt</code> dataset contains data on patient harm during hospitalisation. Harm is defined as any unintended physical injury resulting from treatment or care during hospitalisation and not a result of the disease itself. The Global Trigger Tool is a methodology for detection of adverse events in hospital patients using a retrospective record review approach. Each month a random sample of 20 patient records is reviewed and the number of adverse events and patient days found in the sample are counted. See <code><a href="../reference/gtt.html">?gtt</a></code> for details.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">head</a></span>(gtt)</a>
-<a class="sourceLine" id="cb9-2" data-line-number="2"><span class="co">#&gt;   admission_id admission_dte discharge_dte      month days harms</span></a>
-<a class="sourceLine" id="cb9-3" data-line-number="3"><span class="co">#&gt; 1            1    2010-01-02    2010-01-03 2010-01-01    2     0</span></a>
-<a class="sourceLine" id="cb9-4" data-line-number="4"><span class="co">#&gt; 2            2    2009-12-24    2010-01-06 2010-01-01   14     2</span></a>
-<a class="sourceLine" id="cb9-5" data-line-number="5"><span class="co">#&gt; 3            3    2009-12-28    2010-01-07 2010-01-01   11     0</span></a>
-<a class="sourceLine" id="cb9-6" data-line-number="6"><span class="co">#&gt; 4            4    2010-01-05    2010-01-08 2010-01-01    4     0</span></a>
-<a class="sourceLine" id="cb9-7" data-line-number="7"><span class="co">#&gt; 5            5    2010-01-05    2010-01-08 2010-01-01    4     0</span></a>
-<a class="sourceLine" id="cb9-8" data-line-number="8"><span class="co">#&gt; 6            6    2010-01-05    2010-01-11 2010-01-01    7     0</span></a>
-<a class="sourceLine" id="cb9-9" data-line-number="9"><span class="co">#&gt;                E                F    G    H    I</span></a>
-<a class="sourceLine" id="cb9-10" data-line-number="10"><span class="co">#&gt; 1           &lt;NA&gt;             &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt;</span></a>
-<a class="sourceLine" id="cb9-11" data-line-number="11"><span class="co">#&gt; 2 Pressure ulcer Gastrointestinal &lt;NA&gt; &lt;NA&gt; &lt;NA&gt;</span></a>
-<a class="sourceLine" id="cb9-12" data-line-number="12"><span class="co">#&gt; 3           &lt;NA&gt;             &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt;</span></a>
-<a class="sourceLine" id="cb9-13" data-line-number="13"><span class="co">#&gt; 4           &lt;NA&gt;             &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt;</span></a>
-<a class="sourceLine" id="cb9-14" data-line-number="14"><span class="co">#&gt; 5           &lt;NA&gt;             &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt;</span></a>
-<a class="sourceLine" id="cb9-15" data-line-number="15"><span class="co">#&gt; 6           &lt;NA&gt;             &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt;</span></a></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(gtt)</a>
+<a class="sourceLine" id="cb9-2" data-line-number="2"><span class="co">#&gt;   admission_id admission_dte discharge_dte      month days harms              E</span></a>
+<a class="sourceLine" id="cb9-3" data-line-number="3"><span class="co">#&gt; 1            1    2010-01-02    2010-01-03 2010-01-01    2     0           &lt;NA&gt;</span></a>
+<a class="sourceLine" id="cb9-4" data-line-number="4"><span class="co">#&gt; 2            2    2009-12-24    2010-01-06 2010-01-01   14     2 Pressure ulcer</span></a>
+<a class="sourceLine" id="cb9-5" data-line-number="5"><span class="co">#&gt; 3            3    2009-12-28    2010-01-07 2010-01-01   11     0           &lt;NA&gt;</span></a>
+<a class="sourceLine" id="cb9-6" data-line-number="6"><span class="co">#&gt; 4            4    2010-01-05    2010-01-08 2010-01-01    4     0           &lt;NA&gt;</span></a>
+<a class="sourceLine" id="cb9-7" data-line-number="7"><span class="co">#&gt; 5            5    2010-01-05    2010-01-08 2010-01-01    4     0           &lt;NA&gt;</span></a>
+<a class="sourceLine" id="cb9-8" data-line-number="8"><span class="co">#&gt; 6            6    2010-01-05    2010-01-11 2010-01-01    7     0           &lt;NA&gt;</span></a>
+<a class="sourceLine" id="cb9-9" data-line-number="9"><span class="co">#&gt;                  F    G    H    I</span></a>
+<a class="sourceLine" id="cb9-10" data-line-number="10"><span class="co">#&gt; 1             &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt;</span></a>
+<a class="sourceLine" id="cb9-11" data-line-number="11"><span class="co">#&gt; 2 Gastrointestinal &lt;NA&gt; &lt;NA&gt; &lt;NA&gt;</span></a>
+<a class="sourceLine" id="cb9-12" data-line-number="12"><span class="co">#&gt; 3             &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt;</span></a>
+<a class="sourceLine" id="cb9-13" data-line-number="13"><span class="co">#&gt; 4             &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt;</span></a>
+<a class="sourceLine" id="cb9-14" data-line-number="14"><span class="co">#&gt; 5             &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt;</span></a>
+<a class="sourceLine" id="cb9-15" data-line-number="15"><span class="co">#&gt; 6             &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt;</span></a></code></pre></div>
 <div id="run-chart-of-adverse-events-per-1000-patient-days" class="section level3">
 <h3 class="hasAnchor">
 <a href="#run-chart-of-adverse-events-per-1000-patient-days" class="anchor"></a>Run chart of adverse events per 1000 patient days</h3>
@@ -352,17 +352,17 @@
 <h3 class="hasAnchor">
 <a href="#run-and-p-control-charts-of-percent-harmed-patients" class="anchor"></a>Run and P control charts of percent harmed patients</h3>
 <p>To plot the percentage of harmed patients (patients with 1 or more harms) we need to add a variable and to aggregate data by month.</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/message">suppressPackageStartupMessages</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(dplyr))</a>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/message.html">suppressPackageStartupMessages</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(dplyr))</a>
 <a class="sourceLine" id="cb12-2" data-line-number="2"></a>
 <a class="sourceLine" id="cb12-3" data-line-number="3">gtt_by_month &lt;-<span class="st"> </span>gtt <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb12-4" data-line-number="4"><span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">harmed =</span> harms <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb12-5" data-line-number="5"><span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span>(month) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb12-6" data-line-number="6"><span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span>(<span class="dt">harms    =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/sum">sum</a></span>(harms),</a>
-<a class="sourceLine" id="cb12-7" data-line-number="7">            <span class="dt">days     =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/sum">sum</a></span>(days),</a>
-<a class="sourceLine" id="cb12-8" data-line-number="8">            <span class="dt">n.harmed =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/sum">sum</a></span>(harmed),</a>
+<a class="sourceLine" id="cb12-6" data-line-number="6"><span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span>(<span class="dt">harms    =</span> <span class="kw"><a href="https://rdrr.io/r/base/sum.html">sum</a></span>(harms),</a>
+<a class="sourceLine" id="cb12-7" data-line-number="7">            <span class="dt">days     =</span> <span class="kw"><a href="https://rdrr.io/r/base/sum.html">sum</a></span>(days),</a>
+<a class="sourceLine" id="cb12-8" data-line-number="8">            <span class="dt">n.harmed =</span> <span class="kw"><a href="https://rdrr.io/r/base/sum.html">sum</a></span>(harmed),</a>
 <a class="sourceLine" id="cb12-9" data-line-number="9">            <span class="dt">n        =</span> <span class="kw"><a href="https://dplyr.tidyverse.org/reference/n.html">n</a></span>())</a>
 <a class="sourceLine" id="cb12-10" data-line-number="10"></a>
-<a class="sourceLine" id="cb12-11" data-line-number="11"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">head</a></span>(gtt_by_month)</a>
+<a class="sourceLine" id="cb12-11" data-line-number="11"><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(gtt_by_month)</a>
 <a class="sourceLine" id="cb12-12" data-line-number="12"><span class="co">#&gt; # A tibble: 6 x 5</span></a>
 <a class="sourceLine" id="cb12-13" data-line-number="13"><span class="co">#&gt;   month      harms  days n.harmed     n</span></a>
 <a class="sourceLine" id="cb12-14" data-line-number="14"><span class="co">#&gt;   &lt;date&gt;     &lt;dbl&gt; &lt;dbl&gt;    &lt;int&gt; &lt;int&gt;</span></a>
@@ -406,13 +406,13 @@
 <a href="#pareto-analysis-of-adverse-event-types-and-severity" class="anchor"></a>Pareto analysis of adverse event types and severity</h3>
 <p>The Pareto chart, named after <a href="https://en.wikipedia.org/wiki/Vilfredo_Pareto">Vilfred Pareto</a>, was invented by <a href="https://en.wikipedia.org/wiki/Joseph_M._Juran">Joseph M. Juran</a> as a tool to identify the most important causes of a problem.</p>
 <p>Types and severity of adverse events in <code>gtt</code> are organised in an untidy wide format. Since <code><a href="../reference/paretochart.html">paretochart()</a></code> needs a vector of categorical data, we need to rearrange harm severity and harm category into separate columns.</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/message">suppressPackageStartupMessages</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(tidyr))</a>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/message.html">suppressPackageStartupMessages</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(tidyr))</a>
 <a class="sourceLine" id="cb16-2" data-line-number="2"></a>
 <a class="sourceLine" id="cb16-3" data-line-number="3">gtt_ae_types &lt;-<span class="st"> </span>gtt <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb16-4" data-line-number="4"><span class="st">  </span><span class="kw"><a href="https://tidyr.tidyverse.org/reference/gather.html">gather</a></span>(severity, category, E<span class="op">:</span>I) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb16-5" data-line-number="5"><span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/complete.cases">complete.cases</a></span>(.))</a>
+<a class="sourceLine" id="cb16-5" data-line-number="5"><span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(<span class="kw"><a href="https://rdrr.io/r/stats/complete.cases.html">complete.cases</a></span>(.))</a>
 <a class="sourceLine" id="cb16-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb16-7" data-line-number="7"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">head</a></span>(gtt_ae_types)</a>
+<a class="sourceLine" id="cb16-7" data-line-number="7"><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(gtt_ae_types)</a>
 <a class="sourceLine" id="cb16-8" data-line-number="8"><span class="co">#&gt;   admission_id admission_dte discharge_dte      month days harms severity</span></a>
 <a class="sourceLine" id="cb16-9" data-line-number="9"><span class="co">#&gt; 1            2    2009-12-24    2010-01-06 2010-01-01   14     2        E</span></a>
 <a class="sourceLine" id="cb16-10" data-line-number="10"><span class="co">#&gt; 2           11    2010-01-08    2010-01-18 2010-01-01   11     2        E</span></a>
@@ -441,7 +441,7 @@
 <h2 class="hasAnchor">
 <a href="#case-2-clostridium-difficile-infections" class="anchor"></a>Case 2: <em>Clostridium difficile</em> infections</h2>
 <p>The <code>cdi</code> dataset contains data on hospital acquired <em>Clostridium difficile</em> infections (CDI) before and after an intervention to reduce the risk of CDI. See <code><a href="../reference/cdi.html">?cdi</a></code> for details.</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">head</a></span>(cdi)</a>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(cdi)</a>
 <a class="sourceLine" id="cb19-2" data-line-number="2"><span class="co">#&gt;        month  n     days period notes</span></a>
 <a class="sourceLine" id="cb19-3" data-line-number="3"><span class="co">#&gt; 1 2012-11-01 17 14768.42    pre  &lt;NA&gt;</span></a>
 <a class="sourceLine" id="cb19-4" data-line-number="4"><span class="co">#&gt; 2 2012-12-01 12 14460.33    pre  &lt;NA&gt;</span></a>
@@ -467,7 +467,7 @@
 <a class="sourceLine" id="cb21-2" data-line-number="2">    <span class="dt">data        =</span> cdi,</a>
 <a class="sourceLine" id="cb21-3" data-line-number="3">    <span class="dt">decimals    =</span> <span class="dv">0</span>,</a>
 <a class="sourceLine" id="cb21-4" data-line-number="4">    <span class="dt">freeze      =</span> <span class="dv">24</span>,</a>
-<a class="sourceLine" id="cb21-5" data-line-number="5">    <span class="dt">part.labels =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">'Baseline'</span>, <span class="st">'Intervention'</span>),</a>
+<a class="sourceLine" id="cb21-5" data-line-number="5">    <span class="dt">part.labels =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">'Baseline'</span>, <span class="st">'Intervention'</span>),</a>
 <a class="sourceLine" id="cb21-6" data-line-number="6">    <span class="dt">title       =</span> <span class="st">'Hospital acquired Clostridium difficile infections'</span>,</a>
 <a class="sourceLine" id="cb21-7" data-line-number="7">    <span class="dt">ylab        =</span> <span class="st">'Count'</span>,</a>
 <a class="sourceLine" id="cb21-8" data-line-number="8">    <span class="dt">xlab        =</span> <span class="st">'Month'</span>)</a></code></pre></div>
@@ -532,7 +532,7 @@
 <h2 class="hasAnchor">
 <a href="#case-3-coronary-artery-bypass-graft" class="anchor"></a>Case 3: Coronary artery bypass graft</h2>
 <p>The <code>cabg</code> dataset contains data on individual coronary artery bypass operations. See <code><a href="../reference/cabg.html">?cabg</a></code> for details.</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">head</a></span>(cabg)</a>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(cabg)</a>
 <a class="sourceLine" id="cb25-2" data-line-number="2"><span class="co">#&gt;         date    age gender los death readmission</span></a>
 <a class="sourceLine" id="cb25-3" data-line-number="3"><span class="co">#&gt; 1 2011-07-01 72.534   Male   8 FALSE        TRUE</span></a>
 <a class="sourceLine" id="cb25-4" data-line-number="4"><span class="co">#&gt; 2 2011-07-01 59.225   Male   9 FALSE       FALSE</span></a>
@@ -546,7 +546,7 @@
 <p>In this and the following cases we skip the obligatory first step of using a run chart.</p>
 <p>First, we will make a control chart of the age of the last 100 patients. Since we are plotting individual measurements, we use an I chart.</p>
 <div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" data-line-number="1"><span class="kw"><a href="../reference/qic.html">qic</a></span>(age,</a>
-<a class="sourceLine" id="cb26-2" data-line-number="2">    <span class="dt">data      =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">tail</a></span>(cabg, <span class="dv">100</span>), </a>
+<a class="sourceLine" id="cb26-2" data-line-number="2">    <span class="dt">data      =</span> <span class="kw"><a href="https://rdrr.io/r/utils/head.html">tail</a></span>(cabg, <span class="dv">100</span>), </a>
 <a class="sourceLine" id="cb26-3" data-line-number="3">    <span class="dt">chart     =</span> <span class="st">'i'</span>,</a>
 <a class="sourceLine" id="cb26-4" data-line-number="4">    <span class="dt">show.grid =</span> <span class="ot">TRUE</span>,</a>
 <a class="sourceLine" id="cb26-5" data-line-number="5">    <span class="dt">title     =</span> <span class="st">'Age of the last 100 patients (I chart)'</span>,</a>
@@ -556,7 +556,7 @@
 <p>Two data points (patients number 45 and 70) are below the lower 3-sigma limit indicating that these patients are “unusually” young, i.e. representative of phenomena that are not normally present in the process.</p>
 <p>I charts are often displayed along moving range charts that show the ranges of neighbouring data points.</p>
 <div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" data-line-number="1"><span class="kw"><a href="../reference/qic.html">qic</a></span>(age,</a>
-<a class="sourceLine" id="cb27-2" data-line-number="2">    <span class="dt">data      =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">tail</a></span>(cabg, <span class="dv">100</span>), </a>
+<a class="sourceLine" id="cb27-2" data-line-number="2">    <span class="dt">data      =</span> <span class="kw"><a href="https://rdrr.io/r/utils/head.html">tail</a></span>(cabg, <span class="dv">100</span>), </a>
 <a class="sourceLine" id="cb27-3" data-line-number="3">    <span class="dt">chart     =</span> <span class="st">'mr'</span>,</a>
 <a class="sourceLine" id="cb27-4" data-line-number="4">    <span class="dt">show.grid =</span> <span class="ot">TRUE</span>,</a>
 <a class="sourceLine" id="cb27-5" data-line-number="5">    <span class="dt">title     =</span> <span class="st">'Age of the last 100 patients (MR chart)'</span>,</a>
@@ -566,9 +566,9 @@
 <p>The MR chart identifies three unusually large ranges, which are clearly produced by the two unusually young patients also found in the I chart. Note that each data point in an I chart is contained in two moving ranges in the MR chart.</p>
 <p>We should seek the cause(s) of these special causes. We may then chose to eliminate the outliers from the computations of the process centre and 3-sigma limits in order to predict the expected age range of future patients.</p>
 <div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" data-line-number="1"><span class="kw"><a href="../reference/qic.html">qic</a></span>(age,</a>
-<a class="sourceLine" id="cb28-2" data-line-number="2">    <span class="dt">data    =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">tail</a></span>(cabg, <span class="dv">100</span>), </a>
+<a class="sourceLine" id="cb28-2" data-line-number="2">    <span class="dt">data    =</span> <span class="kw"><a href="https://rdrr.io/r/utils/head.html">tail</a></span>(cabg, <span class="dv">100</span>), </a>
 <a class="sourceLine" id="cb28-3" data-line-number="3">    <span class="dt">chart   =</span> <span class="st">'i'</span>,</a>
-<a class="sourceLine" id="cb28-4" data-line-number="4">    <span class="dt">exclude =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">45</span>, <span class="dv">70</span>),</a>
+<a class="sourceLine" id="cb28-4" data-line-number="4">    <span class="dt">exclude =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">45</span>, <span class="dv">70</span>),</a>
 <a class="sourceLine" id="cb28-5" data-line-number="5">    <span class="dt">title   =</span> <span class="st">'Age of the last 100 patients (I chart)'</span>,</a>
 <a class="sourceLine" id="cb28-6" data-line-number="6">    <span class="dt">ylab    =</span> <span class="st">'Years'</span>,</a>
 <a class="sourceLine" id="cb28-7" data-line-number="7">    <span class="dt">xlab    =</span> <span class="st">'Patient #'</span>)</a></code></pre></div>
@@ -580,7 +580,7 @@
 <a href="#xbar-and-s-charts-for-average-and-standard-deviation-of-patient-age" class="anchor"></a>Xbar and S charts for average and standard deviation of patient age</h3>
 <p>We could also plot the mean age of patients by month. For this we choose an Xbar chart for multiple measurement per subgroup. First, we need to add month as the grouping variable.</p>
 <div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" data-line-number="1">cabg &lt;-<span class="st"> </span>cabg <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb29-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">month =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/as.Date">as.Date</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/cut">cut</a></span>(date, <span class="st">'month'</span>)))</a></code></pre></div>
+<a class="sourceLine" id="cb29-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">month =</span> <span class="kw"><a href="https://rdrr.io/r/base/as.Date.html">as.Date</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/cut.html">cut</a></span>(date, <span class="st">'month'</span>)))</a></code></pre></div>
 <p>Using month as the x axis variable, <code><a href="../reference/qic.html">qic()</a></code> automatically calculates the average age per month.</p>
 <div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" data-line-number="1"><span class="kw"><a href="../reference/qic.html">qic</a></span>(month, age,</a>
 <a class="sourceLine" id="cb30-2" data-line-number="2">    <span class="dt">data  =</span> cabg,</a>
@@ -605,11 +605,11 @@
 <p>To plot readmissions and mortality we first need to summarise these counts by month.</p>
 <div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" data-line-number="1">cabg_by_month &lt;-<span class="st"> </span>cabg <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb32-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span>(month) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb32-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span>(<span class="dt">deaths       =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/sum">sum</a></span>(death),</a>
-<a class="sourceLine" id="cb32-4" data-line-number="4">            <span class="dt">readmissions =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/sum">sum</a></span>(readmission),</a>
+<a class="sourceLine" id="cb32-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span>(<span class="dt">deaths       =</span> <span class="kw"><a href="https://rdrr.io/r/base/sum.html">sum</a></span>(death),</a>
+<a class="sourceLine" id="cb32-4" data-line-number="4">            <span class="dt">readmissions =</span> <span class="kw"><a href="https://rdrr.io/r/base/sum.html">sum</a></span>(readmission),</a>
 <a class="sourceLine" id="cb32-5" data-line-number="5">            <span class="dt">n            =</span> <span class="kw"><a href="https://dplyr.tidyverse.org/reference/n.html">n</a></span>())</a>
 <a class="sourceLine" id="cb32-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb32-7" data-line-number="7"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">head</a></span>(cabg_by_month)</a>
+<a class="sourceLine" id="cb32-7" data-line-number="7"><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(cabg_by_month)</a>
 <a class="sourceLine" id="cb32-8" data-line-number="8"><span class="co">#&gt; # A tibble: 6 x 4</span></a>
 <a class="sourceLine" id="cb32-9" data-line-number="9"><span class="co">#&gt;   month      deaths readmissions     n</span></a>
 <a class="sourceLine" id="cb32-10" data-line-number="10"><span class="co">#&gt;   &lt;date&gt;      &lt;int&gt;        &lt;int&gt; &lt;int&gt;</span></a>
@@ -650,7 +650,7 @@
 <a class="sourceLine" id="cb35-4" data-line-number="4"><span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">dd =</span> x <span class="op">-</span><span class="st"> </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/lead-lag.html">lag</a></span>(x),</a>
 <a class="sourceLine" id="cb35-5" data-line-number="5">         <span class="dt">dt =</span> date <span class="op">-</span><span class="st"> </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/lead-lag.html">lag</a></span>(date))</a>
 <a class="sourceLine" id="cb35-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb35-7" data-line-number="7"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">head</a></span>(fatalities)</a>
+<a class="sourceLine" id="cb35-7" data-line-number="7"><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(fatalities)</a>
 <a class="sourceLine" id="cb35-8" data-line-number="8"><span class="co">#&gt;         date    age gender los death readmission      month   x dd      dt</span></a>
 <a class="sourceLine" id="cb35-9" data-line-number="9"><span class="co">#&gt; 1 2011-07-21 91.227 Female   5  TRUE       FALSE 2011-07-01  37 NA NA days</span></a>
 <a class="sourceLine" id="cb35-10" data-line-number="10"><span class="co">#&gt; 2 2011-08-06 71.773   Male   2  TRUE       FALSE 2011-08-01  60 23 16 days</span></a>
@@ -682,10 +682,10 @@
 <p>To demonstrate the use of faceted charts, we summarise readmissions by month and gender.</p>
 <div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb38-1" data-line-number="1">cabg_by_month_gender &lt;-<span class="st"> </span>cabg <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb38-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span>(month, gender) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb38-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span>(<span class="dt">readmissions =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/sum">sum</a></span>(readmission),</a>
+<a class="sourceLine" id="cb38-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span>(<span class="dt">readmissions =</span> <span class="kw"><a href="https://rdrr.io/r/base/sum.html">sum</a></span>(readmission),</a>
 <a class="sourceLine" id="cb38-4" data-line-number="4">            <span class="dt">n            =</span> <span class="kw"><a href="https://dplyr.tidyverse.org/reference/n.html">n</a></span>())</a>
 <a class="sourceLine" id="cb38-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb38-6" data-line-number="6"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">head</a></span>(cabg_by_month_gender)</a>
+<a class="sourceLine" id="cb38-6" data-line-number="6"><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(cabg_by_month_gender)</a>
 <a class="sourceLine" id="cb38-7" data-line-number="7"><span class="co">#&gt; # A tibble: 6 x 4</span></a>
 <a class="sourceLine" id="cb38-8" data-line-number="8"><span class="co">#&gt; # Groups:   month [3]</span></a>
 <a class="sourceLine" id="cb38-9" data-line-number="9"><span class="co">#&gt;   month      gender readmissions     n</span></a>
@@ -713,7 +713,7 @@
 <h2 class="hasAnchor">
 <a href="#case-4-faceting-hospital-infections-by-hospital-and-infection" class="anchor"></a>Case 4: Faceting hospital infections by hospital and infection</h2>
 <p>The <code>hospital_infection</code> dataset contains data on hospital acquired bacteremias (BAC), <em>Clostridium difficile</em> infections (CDI), and urinary tract infections (UTI) from six hospitals in the Capital Region of Denmark. See <code><a href="../reference/hospital_infections.html">?hospital_infections</a></code> for details.</p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb40-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">head</a></span>(hospital_infections)</a>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb40-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(hospital_infections)</a>
 <a class="sourceLine" id="cb40-2" data-line-number="2"><span class="co">#&gt;   hospital infection      month  n     days</span></a>
 <a class="sourceLine" id="cb40-3" data-line-number="3"><span class="co">#&gt; 1      AHH       BAC 2015-01-01 17 17233.67</span></a>
 <a class="sourceLine" id="cb40-4" data-line-number="4"><span class="co">#&gt; 2      AHH       BAC 2015-02-01 18 15308.25</span></a>
@@ -772,7 +772,7 @@
 <p>Processes containing only common cause variation over time may be aggregated and compared across other units than time. When data have no natural time order, i.e., when the x variable is categorical, the data points are not connected by lines and runs analysis is not performed. To produce a funnel plot of infections by hospital, we filter data from a recent stable period and reorder the x variable by size.</p>
 <div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb44-1" data-line-number="1">hai_<span class="dv">2016</span> &lt;-<span class="st"> </span>hospital_infections <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb44-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(month    <span class="op">&gt;=</span><span class="st"> '2016-07-01'</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb44-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">hospital =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/reorder.factor">reorder</a></span>(hospital, days))</a>
+<a class="sourceLine" id="cb44-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">hospital =</span> <span class="kw"><a href="https://rdrr.io/r/stats/reorder.factor.html">reorder</a></span>(hospital, days))</a>
 <a class="sourceLine" id="cb44-4" data-line-number="4"></a>
 <a class="sourceLine" id="cb44-5" data-line-number="5"><span class="kw"><a href="../reference/qic.html">qic</a></span>(hospital, n, days,</a>
 <a class="sourceLine" id="cb44-6" data-line-number="6">    <span class="dt">data            =</span> hai_<span class="dv">2016</span>,</a>
@@ -796,7 +796,7 @@
 <a href="#case-5-prime-charts-for-count-data-with-very-large-sample-sizes" class="anchor"></a>Case 5: Prime charts for count data with very large sample sizes</h2>
 <p>P and U charts with very large sample sizes sometimes produce narrow 3-sigma limits with most of the data points outside the limits even when the process is stable.</p>
 <p>The <code>nhs_accidents</code> dataset contains the number of emergency patients seen within 4 hours of attendance. The sample sizes are very large (&gt; 250,000). See <code><a href="../reference/nhs_accidents.html">?nhs_accidents</a></code> for details.</p>
-<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb45-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">head</a></span>(nhs_accidents)</a>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb45-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(nhs_accidents)</a>
 <a class="sourceLine" id="cb45-2" data-line-number="2"><span class="co">#&gt;   i      r      n</span></a>
 <a class="sourceLine" id="cb45-3" data-line-number="3"><span class="co">#&gt; 1 1 266501 280443</span></a>
 <a class="sourceLine" id="cb45-4" data-line-number="4"><span class="co">#&gt; 2 2 264225 276823</span></a>
@@ -890,13 +890,13 @@
 <h2 class="hasAnchor">
 <a href="#appendix-2-critical-values-for-longest-run-and-number-of-crossings" class="anchor"></a>Appendix 2: Critical values for longest run and number of crossings</h2>
 <div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb49-1" data-line-number="1">n &lt;-<span class="st"> </span><span class="dv">10</span><span class="op">:</span><span class="dv">100</span></a>
-<a class="sourceLine" id="cb49-2" data-line-number="2">x &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/data.frame">data.frame</a></span>(</a>
+<a class="sourceLine" id="cb49-2" data-line-number="2">x &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(</a>
 <a class="sourceLine" id="cb49-3" data-line-number="3">  <span class="st">`</span><span class="dt">Number of useful observations</span><span class="st">`</span>       =<span class="st"> </span>n,</a>
-<a class="sourceLine" id="cb49-4" data-line-number="4">  <span class="st">`</span><span class="dt">Upper limit for longest run</span><span class="st">`</span>         =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/Round">round</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/Log">log2</a></span>(n) <span class="op">+</span><span class="st"> </span><span class="dv">3</span>),</a>
-<a class="sourceLine" id="cb49-5" data-line-number="5">  <span class="st">`</span><span class="dt">Lower limit for number of crossings</span><span class="st">`</span> =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/Binomial">qbinom</a></span>(<span class="fl">0.05</span>, n <span class="op">-</span><span class="st"> </span><span class="dv">1</span>, <span class="fl">0.5</span>),</a>
+<a class="sourceLine" id="cb49-4" data-line-number="4">  <span class="st">`</span><span class="dt">Upper limit for longest run</span><span class="st">`</span>         =<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/Round.html">round</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/Log.html">log2</a></span>(n) <span class="op">+</span><span class="st"> </span><span class="dv">3</span>),</a>
+<a class="sourceLine" id="cb49-5" data-line-number="5">  <span class="st">`</span><span class="dt">Lower limit for number of crossings</span><span class="st">`</span> =<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/stats/Binomial.html">qbinom</a></span>(<span class="fl">0.05</span>, n <span class="op">-</span><span class="st"> </span><span class="dv">1</span>, <span class="fl">0.5</span>),</a>
 <a class="sourceLine" id="cb49-6" data-line-number="6">  <span class="dt">check.names                           =</span> <span class="ot">FALSE</span>)</a>
 <a class="sourceLine" id="cb49-7" data-line-number="7"></a>
-<a class="sourceLine" id="cb49-8" data-line-number="8">knitr<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/knitr/topics/kable">kable</a></span>(x)</a></code></pre></div>
+<a class="sourceLine" id="cb49-8" data-line-number="8">knitr<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span>(x)</a></code></pre></div>
 <table class="table">
 <thead><tr class="header">
 <th align="right">Number of useful observations</th>
@@ -1365,6 +1365,7 @@
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
+
         <div id="tocnav">
       <h2 class="hasAnchor">
 <a href="#tocnav" class="anchor"></a>Contents</h2>
@@ -1390,17 +1391,20 @@
 </div>
 
 
+
       <footer><div class="copyright">
   <p>Developed by Jacob Anhoej.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
 </div>
+
       </footer>
 </div>
 
   
+
 
   </body>
 </html>
