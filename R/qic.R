@@ -98,7 +98,7 @@
 #'     ylab     = 'Number of infections per 10.000 risk days',
 #'     xlab     = 'Month')
 #' 
-#' @importFrom stats median
+#' @importFrom stats median coef lm
 #' @export
 
 qic <- function(x,
@@ -108,7 +108,7 @@ qic <- function(x,
                 facets           = NULL,
                 notes            = NULL,
                 chart            = c('run', 'i', 'mr', 'xbar', 's', 't',
-                                     'p', 'pp', 'c', 'u', 'up', 'g'),
+                                     'p', 'pp', 'c', 'u', 'up', 'g', 'logreg'),
                 agg.fun          = c('mean', 'median', 'sum', 'sd'),
                 multiply         = 1,
                 freeze           = NULL,
@@ -253,7 +253,7 @@ qic <- function(x,
   # Aggregate data and perform analyses
   d <- qic.agg(d, got.n, part, agg.fun, freeze, exclude, 
                chart.fun, multiply, dots.only, chart, y.neg)
-# return(d)  
+
   # Format y for p charts
   if (missing(y.percent) & chart %in% c('p', 'pp')) {
     y.percent <- TRUE
@@ -261,6 +261,12 @@ qic <- function(x,
   
   if (y.percent & missing(ylab)) {
     ylab <- NULL
+  }
+  
+  if (chart == 'logreg') {
+    d$ucl[d$ucl > max(d$y)] <- max(d$y)
+    d$lcl[d$lcl > max(d$y)] <- max(d$y)
+    d$cl[d$cl > max(d$ucl)] <- NA
   }
 
   # Build plot
@@ -276,7 +282,6 @@ qic <- function(x,
                 scales           = scales,
                 show.labels      = show.labels,
                 show.grid        = show.grid,
-                # show.sigma.lines = show.sigma.lines,
                 decimals         = decimals,
                 flip             = flip,
                 dots.only        = dots.only,

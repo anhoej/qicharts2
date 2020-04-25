@@ -10,20 +10,26 @@ plot.qic <- function(x, title, ylab, xlab, subtitle, caption, part.labels,
                      ...) {
   # Set colours
   col1      <- '#8C8C8C' # rgb(140, 140, 140, maxColorValue = 255) # grey
-  col2      <- getOption('qic.linecol', default = '#5DA5DA') # rgb(093, 165, 218, maxColorValue = 255) # blue
-  col3      <- getOption('qic.signalcol', default = '#F15854') # rgb(241, 088, 084, maxColorValue = 255) # red
-  col4      <- getOption('qic.targetcol', default = '#059748') # rgb(005, 151, 072, maxColorValue = 255) # green
+  col2      <- getOption('qic.linecol', default = '#5DA5DA')       # blue
+  col3      <- getOption('qic.signalcol', default = '#F15854')     # red
+  col4      <- getOption('qic.targetcol', default = '#059748')     # green
   col5      <- '#C8C8C8' # rgb(200, 200, 200, maxColorValue = 255) # light grey
   cols      <- c('col1' = col1,
                  'col2' = col2,
                  'col3' = col3,
                  'col4' = col4,
                  'col5' = col5)
-  x$dotcol  <- ifelse(x$sigma.signal, 'col3', 'col2')
-  x$dotcol  <- ifelse(x$include, x$dotcol, 'col5')
-  x$dotcol  <- ifelse(x$y == x$cl, 'col5', x$dotcol)
-  x$linecol <- ifelse(x$runs.signal, 'col3', 'col1')
   
+  x$dotcol  <- ifelse(x$y == x$cl, 'col5', 'col2')
+  x$dotcol  <- ifelse(x$sigma.signal, 'col3', x$dotcol)
+  x$dotcol  <- ifelse(x$include, x$dotcol, 'col5')
+  
+  # x$dotcol  <- ifelse(x$sigma.signal, 'col3', 'col2')
+  # x$dotcol  <- ifelse(x$include, x$dotcol, 'col5')
+  # x$dotcol  <- ifelse(x$y == x$cl, 'col5', x$dotcol)
+  
+  x$linecol <- ifelse(x$runs.signal, 'col3', 'col1')
+
   # Set label parameters
   lab.size <- 3
   lab.just <- ifelse(flip, 'center', -0.2)

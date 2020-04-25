@@ -153,6 +153,32 @@ qic.t <- function(x) {
   return(x)
 }
 
+qic.logreg <- function(x) {
+  base <- x$baseline & x$include
+  
+  # Transform y variable and run I chart calculations
+  y1 <- x$y
+  x$y <- log10(x$y)
+  x$y[!is.finite(x$y)] <- NA
+  
+  m <- coef(lm(x$y[base] ~ x$x[base]))
+  a <- m[[2]]
+  b <- m[[1]]
+  x$cl <- a * as.numeric(x$x) + b
+  
+  x   <- qic.i(x)
+  
+  # Back transform centre line and control limits
+  x$y   <- y1
+  x$cl  <- 10^x$cl
+  x$ucl <- 10^x$ucl
+  x$lcl <- 10^x$lcl
+  
+  x$ucl[x$ucl > max(x$y, x$cl)] <- max(x$y, x$cl)
+  
+  return(x)
+}
+
 qic.p <- function(x) {
   base <- x$baseline & x$include
   
@@ -339,82 +365,6 @@ fixnotes <- function(x) {
   x <- gsub("\\|", " | ", x)
   x <- gsub("^$", NA, x)
 }
-
-# # Function for data aggregation and analysis (needs dplyr, deprecated)
-# qic.agg <- function(d, got.n, part, agg.fun, freeze, exclude, 
-#                     chart.fun, multiply, dots.only, chart, y.neg) {
-#   x      <- quo(x)
-#   y      <- quo(y)
-#   n      <- quo(n)
-#   cl     <- quo(cl)
-#   target <- quo(target)
-#   notes  <- quo(notes)
-#   facet1 <- quo(facet1)
-#   facet2 <- quo(facet2)
-#   
-#   d <- d %>% 
-#     filter(!is.na(!!x)) %>% 
-#     group_by(!!x, !!facet1, !!facet2) %>% 
-#     summarise(y.sum    = sum(!!y, na.rm = TRUE),
-#               y.length = sum(!is.na(!!y)),
-#               y.mean   = mean(!!y, na.rm = TRUE),
-#               y.sd     = stats::sd(!!y, na.rm = TRUE),
-#               n        = sum(!!n, na.rm = got.n),
-#               y        = ifelse(got.n,
-#                                 y.sum / n,
-#                                 do.call(agg.fun, list(y, na.rm = TRUE))),
-#               cl       = first(!!cl),
-#               target   = first(!!target),
-#               notes    = paste(!!notes, collapse = '|')
-#     ) %>% 
-#     group_by(facet1, facet2) %>%
-#     mutate(part = makeparts(part, n()),
-#            xx   = seq_along(part)) %>% 
-#     ungroup() %>% 
-#     mutate(baseline = xx <= freeze,
-#            include  = !xx %in% exclude,
-#            notes    = fixnotes(notes))
-#   
-#   d <- split(d, d[c('facet1', 'facet2', 'part')]) %>% 
-#     lapply(chart.fun) %>% 
-#     lapply(runs.analysis) %>% 
-#     lapply(function(x) {
-#       within(x, {
-#         y          <- y * multiply
-#         cl         <- cl * multiply
-#         lcl        <- lcl * multiply
-#         ucl        <- ucl * multiply
-#         cl.lab     <- ifelse(xx == max(xx), cl, NA)
-#         lcl.lab    <- ifelse(xx == max(xx), lcl, NA)
-#         ucl.lab    <- ifelse(xx == max(xx), ucl, NA)
-#         target.lab <- ifelse(xx == max(xx), target, NA)
-#       })
-#     })
-#   d <- do.call(rbind, d) %>% 
-#     arrange(!!facet1, !!facet2, !!x)
-#   
-#   # Remove control lines from missing subgroups
-#   d$ucl[!is.finite(d$ucl)] <- NA
-#   d$lcl[!is.finite(d$lcl)] <- NA
-#   d$lcl.lab[!is.finite(d$lcl.lab)] <- NA
-#   d$ucl.lab[!is.finite(d$ucl.lab)] <- NA
-#   
-#   # Add sigma signals
-#   d$sigma.signal                        <- d$y > d$ucl | d$y < d$lcl
-#   d$sigma.signal[is.na(d$sigma.signal)] <- FALSE
-#   
-#   # Ignore runs analysis if subgroups are categorical or if chart type is MR
-#   if (dots.only || chart == 'mr')
-#     d$runs.signal <- FALSE
-#   
-#   # Prevent negative y axis if y.neg argument is FALSE
-#   if (!y.neg & min(d$y, na.rm = TRUE) >= 0) {
-#     d$lcl[d$lcl < 0]         <- 0
-#     d$lcl.lab[d$lcl.lab < 0] <- 0
-#   }
-#   
-#   return(d)
-# }
 
 # Function for data aggregation and analysis
 qic.agg <- function(d, got.n, part, agg.fun, freeze, exclude, 
