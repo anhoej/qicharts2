@@ -386,7 +386,7 @@ qic.agg <- function(d, got.n, part, agg.fun, freeze, exclude,
                                  do.call(agg.fun, list(x$y, na.rm = TRUE))),
                cl       = x$cl[1],
                target   = x$target[1],
-               notes    = paste(x$notes, collapse = '|'))
+               notes    = paste(unique(x$notes), collapse = '|'))
   })
   
   d <- do.call(rbind, d)
