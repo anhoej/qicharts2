@@ -153,32 +153,6 @@ qic.t <- function(x) {
   return(x)
 }
 
-qic.logreg <- function(x) {
-  base <- x$baseline & x$include
-  
-  # Transform y variable and run I chart calculations
-  y1 <- x$y
-  x$y <- log10(x$y)
-  x$y[!is.finite(x$y)] <- NA
-  
-  m <- coef(lm(x$y[base] ~ x$x[base]))
-  a <- m[[2]]
-  b <- m[[1]]
-  x$cl <- a * as.numeric(x$x) + b
-  
-  x   <- qic.i(x)
-  
-  # Back transform centre line and control limits
-  x$y   <- y1
-  x$cl  <- 10^x$cl
-  x$ucl <- 10^x$ucl
-  x$lcl <- 10^x$lcl
-  
-  x$ucl[x$ucl > max(x$y, x$cl)] <- max(x$y, x$cl)
-  
-  return(x)
-}
-
 qic.p <- function(x) {
   base <- x$baseline & x$include
   

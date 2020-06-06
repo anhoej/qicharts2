@@ -108,7 +108,7 @@ qic <- function(x,
                 facets           = NULL,
                 notes            = NULL,
                 chart            = c('run', 'i', 'mr', 'xbar', 's', 't',
-                                     'p', 'pp', 'c', 'u', 'up', 'g', 'logreg'),
+                                     'p', 'pp', 'c', 'u', 'up', 'g'),
                 agg.fun          = c('mean', 'median', 'sum', 'sd'),
                 multiply         = 1,
                 freeze           = NULL,
@@ -263,12 +263,6 @@ qic <- function(x,
     ylab <- NULL
   }
   
-  if (chart == 'logreg') {
-    d$ucl[d$ucl > max(d$y)] <- max(d$y)
-    d$lcl[d$lcl > max(d$y)] <- max(d$y)
-    d$cl[d$cl > max(d$ucl)] <- NA
-  }
-
   # Build plot
   p <- plot.qic(d, 
                 title            = title, 
