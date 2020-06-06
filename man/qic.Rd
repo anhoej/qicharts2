@@ -69,7 +69,7 @@ charts. Possible values are: 'mean' (default), 'median', 'sum', and 'sd'.}
 for percents rather than proportions. See also \code{y.percent} argument.}
 
 \item{freeze}{Integer indicating the last data point to include in 
-calculation of baseline paramenters for centre and control lines. Ignored 
+calculation of baseline parameters for centre and control lines. Ignored 
 if part argument is given.}
 
 \item{part}{Either integer vector indicating data points before recalculation
@@ -148,7 +148,7 @@ process control and improvement. Included control charts are: I, MR, Xbar, S,
 T, C, U, U', P, P', and G charts.
 }
 \details{
-Non-random variation in the form of minor to moderate persistens shifts in 
+Non-random variation in the form of minor to moderate persistent shifts in 
 data over time is identified by the Anhoej rules for unusually long runs and 
 unusually few crossing. Special cause variation in the form of larger, 
 possibly transient, shifts in data is identified by Shewhart's 3-sigma rule.

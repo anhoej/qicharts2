@@ -15,7 +15,7 @@ bchart(
 )
 }
 \arguments{
-\item{x}{Logical, vector of succeses and failures.}
+\item{x}{Logical, vector of successes and failures.}
 
 \item{target}{Baseline risk (0-1) or number (>1) of last observation to end
 baseline period.}
@@ -41,7 +41,7 @@ et al. (2017) \url{https://dx.doi.org/10.1136/bmjqs-2016-005526}.
 }
 \details{
 Note that the diagnostic properties of the Bernoulli CUSUM chart is highly
-dependent on the choise of parameters, target, or and limit, and that these
+dependent on the choice of parameters, target, or and limit, and that these
 parameters should be decided by people with a solid understanding of the
 process at hand. The default parameters, or = 2 and limit = 3.5, should,
 however, work for most processes where the baseline (target) level is about
@@ -49,11 +49,11 @@ however, work for most processes where the baseline (target) level is about
 halving of the event rate relative to the target.
 }
 \examples{
-# Generate 1000 random succeses and failures with succes rate = 0.02
+# Generate 1000 random successes and failures with success rate = 0.02
 set.seed(1)
 y <- rbinom(1000, 1, 0.02)
 
-# Plot bchart assuming succes rate = 0.01, OR = 2, control limits = +/- 3.5.
+# Plot bchart assuming success rate = 0.01, OR = 2, control limits = +/- 3.5.
 bchart(y, target = 0.01)
 
 # Plot bchart of CABG mortality using the first 200 surgeries to estimate target.

@@ -5,14 +5,14 @@
 #' et al. (2017) \url{https://dx.doi.org/10.1136/bmjqs-2016-005526}.
 #'
 #' Note that the diagnostic properties of the Bernoulli CUSUM chart is highly
-#' dependent on the choise of parameters, target, or and limit, and that these
+#' dependent on the choice of parameters, target, or and limit, and that these
 #' parameters should be decided by people with a solid understanding of the
 #' process at hand. The default parameters, or = 2 and limit = 3.5, should,
 #' however, work for most processes where the baseline (target) level is about
 #' 1%-10%, and one wants to detect changes in the order of a doubling or a
 #' halving of the event rate relative to the target.
 #'
-#' @param x Logical, vector of succeses and failures.
+#' @param x Logical, vector of successes and failures.
 #' @param target Baseline risk (0-1) or number (>1) of last observation to end
 #'   baseline period.
 #' @param or Positive odds ratio of minimal detectable change relative to
@@ -25,11 +25,11 @@
 #' @return An object of class ggplot.
 #'
 #' @examples
-#' # Generate 1000 random succeses and failures with succes rate = 0.02
+#' # Generate 1000 random successes and failures with success rate = 0.02
 #' set.seed(1)
 #' y <- rbinom(1000, 1, 0.02)
 #'
-#' # Plot bchart assuming succes rate = 0.01, OR = 2, control limits = +/- 3.5.
+#' # Plot bchart assuming success rate = 0.01, OR = 2, control limits = +/- 3.5.
 #' bchart(y, target = 0.01)
 #'
 #' # Plot bchart of CABG mortality using the first 200 surgeries to estimate target.
@@ -154,7 +154,7 @@ plot.bchart <- function(data, title, ylab, xlab, freeze) {
               size = 3.1, 
               colour = 'grey40', 
               hjust = -0.2) +
-    scale_y_continuous(expand = expand_scale(0.1)) +
+    scale_y_continuous(expand = expansion(0.1)) +
     theme_bw() +
     theme(panel.border     = element_rect(colour = 'grey93'),
           strip.background = element_rect(colour = 'grey93', fill = 'grey93'),
