@@ -13,6 +13,7 @@ qic(
   notes = NULL,
   chart = c("run", "i", "mr", "xbar", "s", "t", "p", "pp", "c", "u", "up", "g"),
   agg.fun = c("mean", "median", "sum", "sd"),
+  method = c("anhoej", "bestbox", "cutbox"),
   multiply = 1,
   freeze = NULL,
   part = NULL,
@@ -57,34 +58,37 @@ qic(
 
 \item{notes}{Character vector of notes to be added to individual data points.}
 
-\item{chart}{Character value indicating the chart type. Possible values are: 
-'run' (default), 'i', 'mr', 'xbar', 't', 's', 'c', 'u', 'up', 'p', 'pp', 
+\item{chart}{Character value indicating the chart type. Possible values are:
+'run' (default), 'i', 'mr', 'xbar', 't', 's', 'c', 'u', 'up', 'p', 'pp',
 and 'g'.}
 
 \item{agg.fun}{Aggregate function for summarising the y variable if there are
-more than one observation per subgroup. Only relevant for run charts and I 
+more than one observation per subgroup. Only relevant for run charts and I
 charts. Possible values are: 'mean' (default), 'median', 'sum', and 'sd'.}
 
-\item{multiply}{Number indicating a number to multiply y axis by, e.g. 100 
+\item{method}{Character indicating the method used for runs analysis. One of
+'anhoej' (default), 'bestbox', and 'cutbox'.}
+
+\item{multiply}{Number indicating a number to multiply y axis by, e.g. 100
 for percents rather than proportions. See also \code{y.percent} argument.}
 
-\item{freeze}{Integer indicating the last data point to include in 
-calculation of baseline parameters for centre and control lines. Ignored 
-if part argument is given.}
+\item{freeze}{Integer indicating the last data point to include in
+calculation of baseline parameters for centre and control lines. Ignored if
+part argument is given.}
 
 \item{part}{Either integer vector indicating data points before recalculation
 of centre and control lines or character vector indicating chart parts.}
 
-\item{exclude}{Integer vector indicating data points to exclude from 
+\item{exclude}{Integer vector indicating data points to exclude from
 calculations of centre and control lines.}
 
-\item{target}{Numeric, either a single value indicating a target value to be plotted as a 
-horizontal line or a vector for variable target line.}
+\item{target}{Numeric, either a single value indicating a target value to be
+plotted as a horizontal line or a vector for variable target line.}
 
-\item{cl}{Numeric, either a single value indicating the centre line if known in 
-advance or a vector for variable centre line.}
+\item{cl}{Numeric, either a single value indicating the centre line if known
+in advance or a vector for variable centre line.}
 
-\item{nrow, ncol}{Number indicating the preferred number of rows and columns 
+\item{nrow, ncol}{Number indicating the preferred number of rows and columns
 in facets.}
 
 \item{scales}{Character string, one of 'fixed' (default), 'free_y', 'free_x',
@@ -101,8 +105,8 @@ panels or free.}
 
 \item{caption}{Character string specifying the caption.}
 
-\item{part.labels}{Character vector specifying  labels for 
-chart parts created with the freeze or part argument.}
+\item{part.labels}{Character vector specifying  labels for chart parts
+created with the freeze or part argument.}
 
 \item{show.labels}{Logical indicating whether to show labels for centre and
 control lines on chart. Defaults to TRUE when facets argument is NULL.}
@@ -112,21 +116,22 @@ and control line labels.}
 
 \item{point.size}{Number specifying the size of data points.}
 
-\item{x.period}{Character string specifying the interval cut points of 
-datetime x values used for aggregating y values by week, month, etc.
-See the breaks argument of \code{?cut.POSIXt()} for possible values.}
+\item{x.period}{Character string specifying the interval cut points of
+datetime x values used for aggregating y values by week, month, etc. See
+the breaks argument of \code{?cut.POSIXt()} for possible values.}
 
-\item{x.format}{Date format of x axis labels. See \code{?strftime()} for 
+\item{x.format}{Date format of x axis labels. See \code{?strftime()} for
 possible date formats.}
 
 \item{x.angle}{Number indicating the angle of x axis labels.}
 
-\item{x.pad}{Number indicating expansion of x axis to make room for axis labels.}
+\item{x.pad}{Number indicating expansion of x axis to make room for axis
+labels.}
 
-\item{y.expand}{Numeric value to include in y axis. Useful e.g. for starting 
+\item{y.expand}{Numeric value to include in y axis. Useful e.g. for starting
 the y axis at zero.}
 
-\item{y.neg}{If TRUE (default), the y axis is allowed to be negative (only 
+\item{y.neg}{If TRUE (default), the y axis is allowed to be negative (only
 relevant for I and Xbar charts).}
 
 \item{y.percent}{If TRUE, formats y axis labels as percentages.}
@@ -143,15 +148,19 @@ relevant for I and Xbar charts).}
 A \code{qic} object. Inherits from 'ggplot'.
 }
 \description{
-The \code{qic()} function creates run charts and Shewhart control charts for 
+The \code{qic()} function creates run charts and Shewhart control charts for
 process control and improvement. Included control charts are: I, MR, Xbar, S,
 T, C, U, U', P, P', and G charts.
 }
 \details{
-Non-random variation in the form of minor to moderate persistent shifts in 
-data over time is identified by the Anhoej rules for unusually long runs and 
-unusually few crossing. Special cause variation in the form of larger, 
-possibly transient, shifts in data is identified by Shewhart's 3-sigma rule.
+Non-random variation in the form of minor to moderate persistent shifts in
+data over time is (by default) identified by the Anhoej rules for unusually
+long runs and unusually few crossing. Use the method argument to apply the
+bestbox or cutbox methods as described in Anhøj & Wentzel-Larsen (2020)
+\url{https://doi.org/10.1371/journal.pone.0233920}.
+
+Special cause variation in the form of larger, possibly
+transient, shifts in data is identified by Shewhart's 3-sigma rule.
 }
 \examples{
 # Lock random number generator to make reproducible results.
@@ -168,7 +177,7 @@ qic(y, chart = 'i')
 
 # U control chart from build-in data set of hospital infection rates faceted
 #   by hospital and type of infection.
-qic(month, n, 
+qic(month, n,
     n        = days,
     data     = hospital_infections,
     facets   = infection ~ hospital,
@@ -180,5 +189,5 @@ qic(month, n,
 
 }
 \seealso{
-\code{vignette('qic')}
+\code{vignette('qic')}.
 }
