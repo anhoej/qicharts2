@@ -212,7 +212,7 @@ qic.s <- function(x){
                      sum(x$y.length[base] - 1, na.rm = TRUE))
       # x$cl <- sum(x$y[base] * x$y.length[base]) / sum(x$y.length[base])
     } else { # Constant subgroup size: Montgomery 6.29
-      x$cl <- mean(x$y.sd, na.rm = TRUE)
+      x$cl <- mean(x$y.sd[base], na.rm = TRUE)
     }
   }
   B3     <- b3(x$y.length)
