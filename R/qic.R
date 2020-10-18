@@ -219,13 +219,14 @@ qic <- function(x,
   if (is.null(freeze) || !is.null(part)) {
     freeze <- Inf
     if(is.character(part) || is.factor(part)) {
+      part <- part[!duplicated(x)]
       part.labels <- unique(part)
       part <- match(part.labels, part)[-1] - 1
     } else {
       part <- as.integer(part)
     }
   }
-  
+print(part)  
   if (is.null(exclude)) 
     exclude <- Inf
   
