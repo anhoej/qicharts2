@@ -1,6 +1,6 @@
 qicharts2 0.6.1.9000
 ===============
-* qic gained method argument.
+* qic() gained EXPERIMENTAL method argument.
 * Fixed broken link in vignette.
 * Fixed limits in S charts using freeze argument (thanks to dirkse).
 * Fixed part argument with subgrouped data (thanks to Nathan Proudlove),
@@ -24,7 +24,7 @@ qicharts2 0.5.1
 ===============
 * Fix missing target line.
 * Use exact values for control chart constants A3, B3, and B4 (thanks to Tore Wenzel-Larsen).
-* Add x.period argument specifying interval cut points for aggregating y values by week, month, etc. (thanks to pwildenhain)
+* Add x.period argument specifying interval cut points for aggregating y values by week, month, etc. (thanks to pwildenhain).
 * P charts default to percentage on Y axis (thanks to pwildehain).
 * Add qic.linecol, qic.signalcol, and qic.targetcol to options to allow for custom colours.
 * Add qic.clshade to options to allow for choosing between lines and shaded area for control limits.

@@ -210,7 +210,6 @@ qic.s <- function(x){
     if (var.n) { # Variable subgroup size: Montgomery 6.31
       x$cl <- sqrt(sum((x$y.length[base] - 1) * x$y.sd[base]^2, na.rm = TRUE) /
                      sum(x$y.length[base] - 1, na.rm = TRUE))
-      # x$cl <- sum(x$y[base] * x$y.length[base]) / sum(x$y.length[base])
     } else { # Constant subgroup size: Montgomery 6.29
       x$cl <- mean(x$y.sd[base], na.rm = TRUE)
     }

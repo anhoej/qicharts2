@@ -6,9 +6,9 @@
 #'
 #' Non-random variation in the form of minor to moderate persistent shifts in
 #' data over time is (by default) identified by the Anhoej rules for unusually
-#' long runs and unusually few crossing. Use the method argument to apply the
-#' bestbox or cutbox methods as described in Anhøj & Wentzel-Larsen (2020)
-#' \url{https://doi.org/10.1371/journal.pone.0233920}.
+#' long runs and unusually few crossing. Use the EXPERIMENTAL method argument to
+#' apply the bestbox or cutbox methods as described in Anhøj & Wentzel-Larsen
+#' (2020) \url{https://doi.org/10.1371/journal.pone.0233920}.
 #' 
 #' Special cause variation in the form of larger, possibly
 #' transient, shifts in data is identified by Shewhart's 3-sigma rule.
@@ -26,7 +26,7 @@
 #'   more than one observation per subgroup. Only relevant for run charts and I
 #'   charts. Possible values are: 'mean' (default), 'median', 'sum', and 'sd'.
 #' @param method Character indicating the method used for runs analysis. One of
-#'   'anhoej' (default), 'bestbox', and 'cutbox'.
+#'   'anhoej' (default), 'bestbox', and 'cutbox'. EXPERIMENTAL!
 #' @param multiply Number indicating a number to multiply y axis by, e.g. 100
 #'   for percents rather than proportions. See also \code{y.percent} argument.
 #' @param freeze Integer indicating the last data point to include in
@@ -226,7 +226,7 @@ qic <- function(x,
       part <- as.integer(part)
     }
   }
-print(part)  
+
   if (is.null(exclude)) 
     exclude <- Inf
   
