@@ -101,7 +101,7 @@ SPC is the application of statistical thinking and statistical tools to continuo
 
 The purpose of analysing process data is to know when a change occurs so that we can take appropriate action. However, numbers may change even if the process stays the same (and vice versa). So how do we distinguish changes in numbers that represent change of the underlying process from those that are essentially noise?
 
-[Walther A. Shewhart](http://en.wikipedia.org/wiki/Walter_A._Shewhart), who founded SPC, described two types of variation, *chance cause variation* and *assignable cause variation*. Today, the terms *common cause* and *special cause* variation are commonly used.
+[Walther A. Shewhart](https://en.wikipedia.org/wiki/Walter_A._Shewhart), who founded SPC, described two types of variation, *chance cause variation* and *assignable cause variation*. Today, the terms *common cause* and *special cause* variation are commonly used.
 
 **Common cause variation**
 
@@ -831,17 +831,17 @@ Since runs analysis based on the Anhøj rules makes no assumptions about the dis
 
 1. Donald J. Wheeler (2000). [Understanding Variation -- The Key to Managing Chaos](https://www.spcpress.com/book_understanding_variation.php), second edition. SPC Press.
 
-1. Jacob Anhøj, Anne Vingaard Olesen (2014). [Run Charts Revisited: A Simulation Study of Run Chart Rules for Detection of Non-Random Variation in Health Care Processes](http://www.plosone.org/article/info%3Adoi%2F10.1371%2Fjournal.pone.0113825). PLoS ONE 9(11): e113825.
+1. Jacob Anhøj, Anne Vingaard Olesen (2014). [Run Charts Revisited: A Simulation Study of Run Chart Rules for Detection of Non-Random Variation in Health Care Processes](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0113825). PLoS ONE 9(11): e113825.
 
-1. Jacob Anhøj (2015). [Diagnostic Value of Run Chart Analysis: Using Likelihood Ratios to Compare Run Chart Rules on Simulated Data Series](http://www.plosone.org/article/info%3Adoi%2F10.1371%2Fjournal.pone.0121349). PLoS ONE 10(3): e0121349.
+1. Jacob Anhøj (2015). [Diagnostic Value of Run Chart Analysis: Using Likelihood Ratios to Compare Run Chart Rules on Simulated Data Series](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0121349). PLoS ONE 10(3): e0121349.
 
 1. Donald J. Wheeler (2010). [Understanding Statistical Process Control](https://www.spcpress.com/book_understanding_statistical_process_control.php), third edition. SPC Press.
 
-1. Douglas C. Montgomery (2009). [Statistical Quality Control -- A Modern Introduction](http://eu.wiley.com/WileyCDA/WileyTitle/productCd-1118322576.html), sixth edition. John Wiley & Sons.
+1. Douglas C. Montgomery (2009). [Statistical Quality Control -- A Modern Introduction](https://eu.wiley.com/WileyCDA/WileyTitle/productCd-1118322576.html), sixth edition. John Wiley & Sons.
 
 1. Lloyd S. Nelson (1982). [Control Charts for Individual Measurements](https://www.tandfonline.com/doi/abs/10.1080/00224065.1982.11978811). Journal of Quality Technology 14(3), 172-173.
 
-1. David B. Laney (2002). [Improved control charts for attributes](http://www.tandfonline.com/doi/abs/10.1081/QEN-120003555). Quality Engineering, 14(4), 531-537.
+1. David B. Laney (2002). [Improved control charts for attributes](https://www.tandfonline.com/doi/abs/10.1081/QEN-120003555). Quality Engineering, 14(4), 531-537.
 
 ----
 

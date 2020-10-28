@@ -1,4 +1,4 @@
-qicharts2 0.7.0
+qicharts2 0.7.1
 ===============
 * qic() gained EXPERIMENTAL method argument.
 * Fixed broken link in vignette.
