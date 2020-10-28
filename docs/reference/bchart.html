@@ -10,23 +10,27 @@
 
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous" />
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
 <!-- headroom.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -39,7 +43,6 @@
 <meta property="og:description" content="The Bernoulli CUSUM chart is useful for monitoring rare events data, e.g.
 surgical site infections and other types of complications. Based on Neuburger
 et al. (2017) https://dx.doi.org/10.1136/bmjqs-2016-005526." />
-<meta name="twitter:card" content="summary" />
 
 
 
@@ -67,7 +70,7 @@ et al. (2017) https://dx.doi.org/10.1136/bmjqs-2016-005526." />
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -81,7 +84,7 @@ et al. (2017) https://dx.doi.org/10.1136/bmjqs-2016-005526." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">qicharts2</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.1</span>
       </span>
     </div>
 
@@ -131,22 +134,22 @@ surgical site infections and other types of complications. Based on Neuburger
 et al. (2017) <a href='https://dx.doi.org/10.1136/bmjqs-2016-005526'>https://dx.doi.org/10.1136/bmjqs-2016-005526</a>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>bchart</span>(
-  <span class='no'>x</span>,
-  <span class='no'>target</span>,
-  <span class='kw'>or</span> <span class='kw'>=</span> <span class='fl'>2</span>,
-  <span class='kw'>limit</span> <span class='kw'>=</span> <span class='fl'>3.5</span>,
-  <span class='kw'>title</span> <span class='kw'>=</span> <span class='st'>""</span>,
-  <span class='kw'>ylab</span> <span class='kw'>=</span> <span class='st'>"CUSUM"</span>,
-  <span class='kw'>xlab</span> <span class='kw'>=</span> <span class='st'>"Case #"</span>
-)</pre>
+    <pre class="usage"><span class='fu'>bchart</span><span class='op'>(</span>
+  <span class='va'>x</span>,
+  <span class='va'>target</span>,
+  or <span class='op'>=</span> <span class='fl'>2</span>,
+  limit <span class='op'>=</span> <span class='fl'>3.5</span>,
+  title <span class='op'>=</span> <span class='st'>""</span>,
+  ylab <span class='op'>=</span> <span class='st'>"CUSUM"</span>,
+  xlab <span class='op'>=</span> <span class='st'>"Case #"</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>Logical, vector of succeses and failures.</p></td>
+      <td><p>Logical, vector of successes and failures.</p></td>
     </tr>
     <tr>
       <th>target</th>
@@ -182,7 +185,7 @@ baseline risk.</p></td>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>Note that the diagnostic properties of the Bernoulli CUSUM chart is highly
-dependent on the choise of parameters, target, or and limit, and that these
+dependent on the choice of parameters, target, or and limit, and that these
 parameters should be decided by people with a solid understanding of the
 process at hand. The default parameters, or = 2 and limit = 3.5, should,
 however, work for most processes where the baseline (target) level is about
@@ -190,27 +193,25 @@ however, work for most processes where the baseline (target) level is about
 halving of the event rate relative to the target.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># Generate 1000 random succeses and failures with succes rate = 0.02</span>
-<span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span>(<span class='fl'>1</span>)
-<span class='no'>y</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/Binomial.html'>rbinom</a></span>(<span class='fl'>1000</span>, <span class='fl'>1</span>, <span class='fl'>0.02</span>)
+    <pre class="examples"><div class='input'><span class='co'># Generate 1000 random successes and failures with success rate = 0.02</span>
+<span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>)</span>
+<span class='va'>y</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/Binomial.html'>rbinom</a></span><span class='op'>(</span><span class='fl'>1000</span>, <span class='fl'>1</span>, <span class='fl'>0.02</span><span class='op'>)</span>
 
-<span class='co'># Plot bchart assuming succes rate = 0.01, OR = 2, control limits = +/- 3.5.</span>
-<span class='fu'>bchart</span>(<span class='no'>y</span>, <span class='kw'>target</span> <span class='kw'>=</span> <span class='fl'>0.01</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: `expand_scale()` is deprecated; use `expansion()` instead.</span></div><div class='img'><img src='bchart-1.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='co'># Plot bchart assuming success rate = 0.01, OR = 2, control limits = +/- 3.5.</span>
+<span class='fu'>bchart</span><span class='op'>(</span><span class='va'>y</span>, target <span class='op'>=</span> <span class='fl'>0.01</span><span class='op'>)</span>
+</div><div class='img'><img src='bchart-1.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># Plot bchart of CABG mortality using the first 200 surgeries to estimate target.</span>
-<span class='fu'>bchart</span>(<span class='no'>cabg</span>$<span class='no'>death</span>, <span class='kw'>target</span> <span class='kw'>=</span> <span class='fl'>200</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: `expand_scale()` is deprecated; use `expansion()` instead.</span></div><div class='img'><img src='bchart-2.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='fu'>bchart</span><span class='op'>(</span><span class='va'>cabg</span><span class='op'>$</span><span class='va'>death</span>, target <span class='op'>=</span> <span class='fl'>200</span><span class='op'>)</span>
+</div><div class='img'><img src='bchart-2.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># Plot bchart of CABG readmissions setting the control limits = +/-5.</span>
-<span class='fu'>bchart</span>(<span class='no'>cabg</span>$<span class='no'>readmission</span>, <span class='kw'>target</span> <span class='kw'>=</span> <span class='fl'>200</span>, <span class='kw'>limit</span> <span class='kw'>=</span> <span class='fl'>5</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: `expand_scale()` is deprecated; use `expansion()` instead.</span></div><div class='img'><img src='bchart-3.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='fu'>bchart</span><span class='op'>(</span><span class='va'>cabg</span><span class='op'>$</span><span class='va'>readmission</span>, target <span class='op'>=</span> <span class='fl'>200</span>, limit <span class='op'>=</span> <span class='fl'>5</span><span class='op'>)</span>
+</div><div class='img'><img src='bchart-3.png' alt='' width='700' height='433' /></div><div class='input'>
 </div></pre>
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#value">Value</a></li>
-      <li><a href="#details">Details</a></li>
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 
@@ -221,7 +222,7 @@ halving of the event rate relative to the target.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

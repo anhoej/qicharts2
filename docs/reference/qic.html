@@ -10,23 +10,27 @@
 
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous" />
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
 <!-- headroom.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -36,10 +40,9 @@
 
 
 <meta property="og:title" content="Statistical process control charts. — qic" />
-<meta property="og:description" content="The qic() function creates run charts and Shewhart control charts for 
+<meta property="og:description" content="The qic() function creates run charts and Shewhart control charts for
 process control and improvement. Included control charts are: I, MR, Xbar, S,
 T, C, U, U', P, P', and G charts." />
-<meta name="twitter:card" content="summary" />
 
 
 
@@ -67,7 +70,7 @@ T, C, U, U', P, P', and G charts." />
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -81,7 +84,7 @@ T, C, U, U', P, P', and G charts." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">qicharts2</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.1</span>
       </span>
     </div>
 
@@ -126,50 +129,51 @@ T, C, U, U', P, P', and G charts." />
     </div>
 
     <div class="ref-description">
-    <p>The <code>qic()</code> function creates run charts and Shewhart control charts for 
+    <p>The <code>qic()</code> function creates run charts and Shewhart control charts for
 process control and improvement. Included control charts are: I, MR, Xbar, S,
 T, C, U, U', P, P', and G charts.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>qic</span>(
-  <span class='no'>x</span>,
-  <span class='kw'>y</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>n</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>facets</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>notes</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>chart</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"run"</span>, <span class='st'>"i"</span>, <span class='st'>"mr"</span>, <span class='st'>"xbar"</span>, <span class='st'>"s"</span>, <span class='st'>"t"</span>, <span class='st'>"p"</span>, <span class='st'>"pp"</span>, <span class='st'>"c"</span>, <span class='st'>"u"</span>, <span class='st'>"up"</span>, <span class='st'>"g"</span>),
-  <span class='kw'>agg.fun</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"mean"</span>, <span class='st'>"median"</span>, <span class='st'>"sum"</span>, <span class='st'>"sd"</span>),
-  <span class='kw'>multiply</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>freeze</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>part</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>exclude</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>target</span> <span class='kw'>=</span> <span class='fl'>NA</span> * <span class='fl'>1</span>,
-  <span class='kw'>cl</span> <span class='kw'>=</span> <span class='fl'>NA</span> * <span class='fl'>1</span>,
-  <span class='kw'>nrow</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>ncol</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>scales</span> <span class='kw'>=</span> <span class='st'>"fixed"</span>,
-  <span class='kw'>title</span> <span class='kw'>=</span> <span class='st'>""</span>,
-  <span class='kw'>ylab</span> <span class='kw'>=</span> <span class='st'>"Value"</span>,
-  <span class='kw'>xlab</span> <span class='kw'>=</span> <span class='st'>"Subgroup"</span>,
-  <span class='kw'>subtitle</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>caption</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>part.labels</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>show.labels</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/NULL.html'>is.null</a></span>(<span class='no'>facets</span>),
-  <span class='kw'>decimals</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>point.size</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>x.period</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>x.format</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>x.angle</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>x.pad</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>y.expand</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>y.neg</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>y.percent</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>show.grid</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>flip</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>strip.horizontal</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>print.summary</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
-)</pre>
+    <pre class="usage"><span class='fu'>qic</span><span class='op'>(</span>
+  <span class='va'>x</span>,
+  y <span class='op'>=</span> <span class='cn'>NULL</span>,
+  n <span class='op'>=</span> <span class='cn'>NULL</span>,
+  data <span class='op'>=</span> <span class='cn'>NULL</span>,
+  facets <span class='op'>=</span> <span class='cn'>NULL</span>,
+  notes <span class='op'>=</span> <span class='cn'>NULL</span>,
+  chart <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"run"</span>, <span class='st'>"i"</span>, <span class='st'>"mr"</span>, <span class='st'>"xbar"</span>, <span class='st'>"s"</span>, <span class='st'>"t"</span>, <span class='st'>"p"</span>, <span class='st'>"pp"</span>, <span class='st'>"c"</span>, <span class='st'>"u"</span>, <span class='st'>"up"</span>, <span class='st'>"g"</span><span class='op'>)</span>,
+  agg.fun <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"mean"</span>, <span class='st'>"median"</span>, <span class='st'>"sum"</span>, <span class='st'>"sd"</span><span class='op'>)</span>,
+  method <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"anhoej"</span>, <span class='st'>"bestbox"</span>, <span class='st'>"cutbox"</span><span class='op'>)</span>,
+  multiply <span class='op'>=</span> <span class='fl'>1</span>,
+  freeze <span class='op'>=</span> <span class='cn'>NULL</span>,
+  part <span class='op'>=</span> <span class='cn'>NULL</span>,
+  exclude <span class='op'>=</span> <span class='cn'>NULL</span>,
+  target <span class='op'>=</span> <span class='cn'>NA</span> <span class='op'>*</span> <span class='fl'>1</span>,
+  cl <span class='op'>=</span> <span class='cn'>NA</span> <span class='op'>*</span> <span class='fl'>1</span>,
+  nrow <span class='op'>=</span> <span class='cn'>NULL</span>,
+  ncol <span class='op'>=</span> <span class='cn'>NULL</span>,
+  scales <span class='op'>=</span> <span class='st'>"fixed"</span>,
+  title <span class='op'>=</span> <span class='st'>""</span>,
+  ylab <span class='op'>=</span> <span class='st'>"Value"</span>,
+  xlab <span class='op'>=</span> <span class='st'>"Subgroup"</span>,
+  subtitle <span class='op'>=</span> <span class='cn'>NULL</span>,
+  caption <span class='op'>=</span> <span class='cn'>NULL</span>,
+  part.labels <span class='op'>=</span> <span class='cn'>NULL</span>,
+  show.labels <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/NULL.html'>is.null</a></span><span class='op'>(</span><span class='va'>facets</span><span class='op'>)</span>,
+  decimals <span class='op'>=</span> <span class='fl'>1</span>,
+  point.size <span class='op'>=</span> <span class='fl'>1</span>,
+  x.period <span class='op'>=</span> <span class='cn'>NULL</span>,
+  x.format <span class='op'>=</span> <span class='cn'>NULL</span>,
+  x.angle <span class='op'>=</span> <span class='cn'>NULL</span>,
+  x.pad <span class='op'>=</span> <span class='fl'>1</span>,
+  y.expand <span class='op'>=</span> <span class='cn'>NULL</span>,
+  y.neg <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  y.percent <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  show.grid <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  flip <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  strip.horizontal <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  print.summary <span class='op'>=</span> <span class='cn'>FALSE</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -200,26 +204,31 @@ T, C, U, U', P, P', and G charts.</p>
     </tr>
     <tr>
       <th>chart</th>
-      <td><p>Character value indicating the chart type. Possible values are: 
-'run' (default), 'i', 'mr', 'xbar', 't', 's', 'c', 'u', 'up', 'p', 'pp', 
+      <td><p>Character value indicating the chart type. Possible values are:
+'run' (default), 'i', 'mr', 'xbar', 't', 's', 'c', 'u', 'up', 'p', 'pp',
 and 'g'.</p></td>
     </tr>
     <tr>
       <th>agg.fun</th>
       <td><p>Aggregate function for summarising the y variable if there are
-more than one observation per subgroup. Only relevant for run charts and I 
+more than one observation per subgroup. Only relevant for run charts and I
 charts. Possible values are: 'mean' (default), 'median', 'sum', and 'sd'.</p></td>
     </tr>
     <tr>
+      <th>method</th>
+      <td><p>Character indicating the method used for runs analysis. One of
+'anhoej' (default), 'bestbox', and 'cutbox'. EXPERIMENTAL!</p></td>
+    </tr>
+    <tr>
       <th>multiply</th>
-      <td><p>Number indicating a number to multiply y axis by, e.g. 100 
+      <td><p>Number indicating a number to multiply y axis by, e.g. 100
 for percents rather than proportions. See also <code>y.percent</code> argument.</p></td>
     </tr>
     <tr>
       <th>freeze</th>
-      <td><p>Integer indicating the last data point to include in 
-calculation of baseline paramenters for centre and control lines. Ignored 
-if part argument is given.</p></td>
+      <td><p>Integer indicating the last data point to include in
+calculation of baseline parameters for centre and control lines. Ignored if
+part argument is given.</p></td>
     </tr>
     <tr>
       <th>part</th>
@@ -228,22 +237,22 @@ of centre and control lines or character vector indicating chart parts.</p></td>
     </tr>
     <tr>
       <th>exclude</th>
-      <td><p>Integer vector indicating data points to exclude from 
+      <td><p>Integer vector indicating data points to exclude from
 calculations of centre and control lines.</p></td>
     </tr>
     <tr>
       <th>target</th>
-      <td><p>Numeric, either a single value indicating a target value to be plotted as a 
-horizontal line or a vector for variable target line.</p></td>
+      <td><p>Numeric, either a single value indicating a target value to be
+plotted as a horizontal line or a vector for variable target line.</p></td>
     </tr>
     <tr>
       <th>cl</th>
-      <td><p>Numeric, either a single value indicating the centre line if known in 
-advance or a vector for variable centre line.</p></td>
+      <td><p>Numeric, either a single value indicating the centre line if known
+in advance or a vector for variable centre line.</p></td>
     </tr>
     <tr>
       <th>nrow, ncol</th>
-      <td><p>Number indicating the preferred number of rows and columns 
+      <td><p>Number indicating the preferred number of rows and columns
 in facets.</p></td>
     </tr>
     <tr>
@@ -274,8 +283,8 @@ panels or free.</p></td>
     </tr>
     <tr>
       <th>part.labels</th>
-      <td><p>Character vector specifying  labels for 
-chart parts created with the freeze or part argument.</p></td>
+      <td><p>Character vector specifying  labels for chart parts
+created with the freeze or part argument.</p></td>
     </tr>
     <tr>
       <th>show.labels</th>
@@ -293,13 +302,13 @@ and control line labels.</p></td>
     </tr>
     <tr>
       <th>x.period</th>
-      <td><p>Character string specifying the interval cut points of 
-datetime x values used for aggregating y values by week, month, etc.
-See the breaks argument of <code>?cut.POSIXt()</code> for possible values.</p></td>
+      <td><p>Character string specifying the interval cut points of
+datetime x values used for aggregating y values by week, month, etc. See
+the breaks argument of <code>?cut.POSIXt()</code> for possible values.</p></td>
     </tr>
     <tr>
       <th>x.format</th>
-      <td><p>Date format of x axis labels. See <code>?strftime()</code> for 
+      <td><p>Date format of x axis labels. See <code>?strftime()</code> for
 possible date formats.</p></td>
     </tr>
     <tr>
@@ -308,16 +317,17 @@ possible date formats.</p></td>
     </tr>
     <tr>
       <th>x.pad</th>
-      <td><p>Number indicating expansion of x axis to make room for axis labels.</p></td>
+      <td><p>Number indicating expansion of x axis to make room for axis
+labels.</p></td>
     </tr>
     <tr>
       <th>y.expand</th>
-      <td><p>Numeric value to include in y axis. Useful e.g. for starting 
+      <td><p>Numeric value to include in y axis. Useful e.g. for starting
 the y axis at zero.</p></td>
     </tr>
     <tr>
       <th>y.neg</th>
-      <td><p>If TRUE (default), the y axis is allowed to be negative (only 
+      <td><p>If TRUE (default), the y axis is allowed to be negative (only
 relevant for I and Xbar charts).</p></td>
     </tr>
     <tr>
@@ -347,48 +357,48 @@ relevant for I and Xbar charts).</p></td>
     <p>A <code>qic</code> object. Inherits from 'ggplot'.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>Non-random variation in the form of minor to moderate persistens shifts in 
-data over time is identified by the Anhoej rules for unusually long runs and 
-unusually few crossing. Special cause variation in the form of larger, 
-possibly transient, shifts in data is identified by Shewhart's 3-sigma rule.</p>
+    <p>Non-random variation in the form of minor to moderate persistent shifts in
+data over time is (by default) identified by the Anhoej rules for unusually
+long runs and unusually few crossing. Use the EXPERIMENTAL method argument to
+apply the bestbox or cutbox methods as described in Anhøj &amp; Wentzel-Larsen
+(2020) <a href='https://doi.org/10.1371/journal.pone.0233920'>https://doi.org/10.1371/journal.pone.0233920</a>.</p>
+<p>Special cause variation in the form of larger, possibly
+transient, shifts in data is identified by Shewhart's 3-sigma rule.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code>vignette('qic')</code></p></div>
+    <div class='dont-index'><p><code>vignette('qic')</code>.</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># Lock random number generator to make reproducible results.</span>
-<span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span>(<span class='fl'>2</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span><span class='op'>(</span><span class='fl'>2</span><span class='op'>)</span>
 
 <span class='co'># Generate vector of 24 random normal numbers</span>
-<span class='no'>y</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='fl'>24</span>)
+<span class='va'>y</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span><span class='op'>(</span><span class='fl'>24</span><span class='op'>)</span>
 
 <span class='co'># Run chart</span>
-<span class='fu'>qic</span>(<span class='no'>y</span>)</div><div class='img'><img src='qic-1.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='fu'>qic</span><span class='op'>(</span><span class='va'>y</span><span class='op'>)</span>
+</div><div class='img'><img src='qic-1.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># I control chart</span>
-<span class='fu'>qic</span>(<span class='no'>y</span>, <span class='kw'>chart</span> <span class='kw'>=</span> <span class='st'>'i'</span>)</div><div class='img'><img src='qic-2.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='fu'>qic</span><span class='op'>(</span><span class='va'>y</span>, chart <span class='op'>=</span> <span class='st'>'i'</span><span class='op'>)</span>
+</div><div class='img'><img src='qic-2.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># U control chart from build-in data set of hospital infection rates faceted</span>
 <span class='co'>#   by hospital and type of infection.</span>
-<span class='fu'>qic</span>(<span class='no'>month</span>, <span class='no'>n</span>,
-    <span class='kw'>n</span>        <span class='kw'>=</span> <span class='no'>days</span>,
-    <span class='kw'>data</span>     <span class='kw'>=</span> <span class='no'>hospital_infections</span>,
-    <span class='kw'>facets</span>   <span class='kw'>=</span> <span class='no'>infection</span> ~ <span class='no'>hospital</span>,
-    <span class='kw'>chart</span>    <span class='kw'>=</span> <span class='st'>'u'</span>,
-    <span class='kw'>multiply</span> <span class='kw'>=</span> <span class='fl'>10000</span>,
-    <span class='kw'>title</span>     <span class='kw'>=</span> <span class='st'>'Hospital infection rates'</span>,
-    <span class='kw'>ylab</span>     <span class='kw'>=</span> <span class='st'>'Number of infections per 10.000 risk days'</span>,
-    <span class='kw'>xlab</span>     <span class='kw'>=</span> <span class='st'>'Month'</span>)</div><div class='img'><img src='qic-3.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='fu'>qic</span><span class='op'>(</span><span class='va'>month</span>, <span class='va'>n</span>,
+    n        <span class='op'>=</span> <span class='va'>days</span>,
+    data     <span class='op'>=</span> <span class='va'>hospital_infections</span>,
+    facets   <span class='op'>=</span> <span class='va'>infection</span> <span class='op'>~</span> <span class='va'>hospital</span>,
+    chart    <span class='op'>=</span> <span class='st'>'u'</span>,
+    multiply <span class='op'>=</span> <span class='fl'>10000</span>,
+    title     <span class='op'>=</span> <span class='st'>'Hospital infection rates'</span>,
+    ylab     <span class='op'>=</span> <span class='st'>'Number of infections per 10.000 risk days'</span>,
+    xlab     <span class='op'>=</span> <span class='st'>'Month'</span><span class='op'>)</span>
+</div><div class='img'><img src='qic-3.png' alt='' width='700' height='433' /></div><div class='input'>
 </div></pre>
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#value">Value</a></li>
-      <li><a href="#details">Details</a></li>
-      <li><a href="#see-also">See also</a></li>
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 
@@ -399,7 +409,7 @@ possibly transient, shifts in data is identified by Shewhart's 3-sigma rule.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>
