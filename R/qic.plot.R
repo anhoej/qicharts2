@@ -226,7 +226,8 @@ plot.qic <- function(x, title, ylab, xlab, subtitle, caption, part.labels,
   
   # Show grid
   if (show.grid) {
-    p <- p + theme(panel.grid = element_line())
+    p <- p + theme(panel.grid = element_line(size = 0.1, colour = col1))
+    # p <- p + theme(panel.grid = element_line())
   }
   
   # Flip chart
