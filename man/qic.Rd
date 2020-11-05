@@ -159,8 +159,9 @@ long runs and unusually few crossing. Use the EXPERIMENTAL method argument to
 apply the bestbox or cutbox methods as described in Anhøj & Wentzel-Larsen
 (2020) \url{https://doi.org/10.1371/journal.pone.0233920}.
 
-Special cause variation in the form of larger, possibly
-transient, shifts in data is identified by Shewhart's 3-sigma rule.
+Special cause variation in the form of larger, possibly transient, shifts in
+data is identified by Shewhart's 3-sigma rule (Mohammed, Worthington,
+Woodall (2008) \url{https://doi.org/10.1136/qshc.2004.012047}).
 }
 \examples{
 # Lock random number generator to make reproducible results.
