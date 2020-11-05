@@ -424,7 +424,7 @@ lab.format <- function(x, decimals = 1, percent = FALSE) {
   x <- sprintf(paste0("%.", decimals, "f"), x)
   if (percent) x <- paste0(x, '%')
   
-  x
+  return(x)
 }
 
 # Make parts function
@@ -433,6 +433,8 @@ makeparts <- function(x, n) {
   x <- x[x >= 0 & x < n]
   x <- x[order(x)]
   x <- rep(c(seq_along(x)), diff(c(x, n)))
+  
+  return(x)
 }
 
 # Fix notes function
@@ -441,6 +443,8 @@ fixnotes <- function(x) {
   x <- gsub("^\\||\\|$", "", x)
   x <- gsub("\\|", " | ", x)
   x <- gsub("^$", NA, x)
+  
+  return(x)
 }
 
 # Function for data aggregation and analysis
@@ -529,7 +533,7 @@ qic.agg <- function(d, got.n, part, agg.fun, freeze, exclude,
 }
 
 .onDetach <- function(libpath) {
-  options(qic.linecol = NULL,
+  options(qic.linecol   = NULL,
           qic.signalcol = NULL,
           qic.targetcol = NULL,
           qic.clshade   = NULL)
