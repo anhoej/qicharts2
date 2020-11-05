@@ -31,7 +31,7 @@ qic(
   part.labels = NULL,
   show.labels = is.null(facets),
   decimals = 1,
-  point.size = 1,
+  point.size = 1.2,
   x.period = NULL,
   x.format = NULL,
   x.angle = NULL,
@@ -188,7 +188,7 @@ qic(month, n,
     facets   = infection ~ hospital,
     chart    = 'u',
     multiply = 10000,
-    title     = 'Hospital infection rates',
+    title    = 'Hospital infection rates',
     ylab     = 'Number of infections per 10.000 risk days',
     xlab     = 'Month')
 

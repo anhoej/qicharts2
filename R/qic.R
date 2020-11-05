@@ -104,7 +104,7 @@
 #'     facets   = infection ~ hospital,
 #'     chart    = 'u',
 #'     multiply = 10000,
-#'     title     = 'Hospital infection rates',
+#'     title    = 'Hospital infection rates',
 #'     ylab     = 'Number of infections per 10.000 risk days',
 #'     xlab     = 'Month')
 #'
