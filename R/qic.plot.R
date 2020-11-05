@@ -3,7 +3,7 @@ plot.qic <- function(x, title, ylab, xlab, subtitle, caption, part.labels,
                      nrow, ncol, scales, show.labels, show.grid, 
                      decimals, flip, dots.only, point.size,
                      x.format, x.angle, x.pad,
-                     y.expand, y.percent, strip.horizontal,
+                     y.expand, y.percent, y.percent.accuracy, strip.horizontal,
                      col.line = '#5DA5DA', 
                      col.signal = '#F15854', 
                      col.target = '#059748',
@@ -211,7 +211,7 @@ plot.qic <- function(x, title, ylab, xlab, subtitle, caption, part.labels,
   
   # Format percent axis
   if (y.percent) {
-    p <- p + scale_y_continuous(labels = scales::percent)
+    p <- p + scale_y_continuous(labels = scales::percent_format(y.percent.accuracy))
   }
   
   # Add space for line labels

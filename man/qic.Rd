@@ -39,6 +39,7 @@ qic(
   y.expand = NULL,
   y.neg = TRUE,
   y.percent = FALSE,
+  y.percent.accuracy = NULL,
   show.grid = FALSE,
   flip = FALSE,
   strip.horizontal = FALSE,
@@ -135,6 +136,9 @@ the y axis at zero.}
 relevant for I and Xbar charts).}
 
 \item{y.percent}{If TRUE, formats y axis labels as percentages.}
+
+\item{y.percent.accuracy}{A number to round percentage labels on y axis. Use
+1 to show no decimals, 0.1 to show 1 decimal etc.}
 
 \item{show.grid}{If TRUE, shows grid.}
 

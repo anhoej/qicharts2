@@ -1,4 +1,3 @@
-# #' @import dplyr
 runs.analysis <- function(x, method) {
   y                  <- x$y[x$include]
   cl                 <- x$cl[x$include]
@@ -281,7 +280,6 @@ qic.pp <- function(x) {
   else
     sigma_z <- mean(abs(diff(z_i)), na.rm = TRUE) / 1.128
 # TESTING ##############################################  
-print(mode(x$x))
   
   stdev   <- stdev * sigma_z
   

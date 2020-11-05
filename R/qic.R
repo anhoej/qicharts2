@@ -71,6 +71,8 @@
 #' @param y.neg If TRUE (default), the y axis is allowed to be negative (only
 #'   relevant for I and Xbar charts).
 #' @param y.percent If TRUE, formats y axis labels as percentages.
+#' @param y.percent.accuracy A number to round percentage labels on y axis. Use
+#'   1 to show no decimals, 0.1 to show 1 decimal etc.
 #' @param show.grid If TRUE, shows grid.
 #' @param flip If TRUE, rotates the plot 90 degrees.
 #' @param strip.horizontal If TRUE, makes y strip horizontal.
@@ -144,6 +146,7 @@ qic <- function(x,
                 y.expand         = NULL,
                 y.neg            = TRUE,
                 y.percent        = FALSE,
+                y.percent.accuracy = NULL,
                 show.grid        = FALSE,
                 flip             = FALSE,
                 strip.horizontal = FALSE,
@@ -295,6 +298,7 @@ qic <- function(x,
                 x.pad            = x.pad,
                 y.expand         = y.expand,
                 y.percent        = y.percent,
+                y.percent.accuracy = y.percent.accuracy,
                 strip.horizontal = strip.horizontal)
   
   class(p) <- c('qic', class(p))
