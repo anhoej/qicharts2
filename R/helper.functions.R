@@ -275,7 +275,14 @@ qic.pp <- function(x) {
   # Calculate standard deviation for Laney's P prime chart, incorporating
   # between-subgroup variation.
   z_i     <- (x$y[base] - x$cl[base]) / stdev[base]
-  sigma_z <- mean(abs(diff(z_i)), na.rm = TRUE) / 1.128
+  
+# TESTING ##############################################
+  if(is.factor(x) || is.character(x))
+    sigma_z <- stats::sd(z_i)
+  else
+    sigma_z <- mean(abs(diff(z_i)), na.rm = TRUE) / 1.128
+# TESTING ##############################################  
+  
   stdev   <- stdev * sigma_z
   
   x$ucl          <- x$cl + 3 * stdev
@@ -336,7 +343,15 @@ qic.up <- function(x){
   # Calculate standard deviation for Laney's u-prime chart, incorporating
   # between-subgroup variation.
   z_i     <- (x$y[base] - x$cl[base]) / stdev[base]
-  sigma_z <- mean(abs(diff(z_i)), na.rm = TRUE) / 1.128
+  
+  # TESTING ##############################################
+  # sigma_z <- mean(abs(diff(z_i)), na.rm = TRUE) / 1.128
+  if(is.factor(x) || is.character(x))
+    sigma_z <- stats::sd(z_i)
+  else
+    sigma_z <- mean(abs(diff(z_i)), na.rm = TRUE) / 1.128
+  # TESTING ##############################################  
+  
   stdev   <- stdev * sigma_z
   
   # Calculate limits

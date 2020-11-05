@@ -217,8 +217,13 @@ plot.qic <- function(x, title, ylab, xlab, subtitle, caption, part.labels,
   # Add space for line labels
   subgroups <- unique(x$x)
   
-  if (is.factor(subgroups))
-    subgroups <- as.numeric(subgroups)
+  # TESTING ##########################
+  # if (is.factor(subgroups))
+  #   subgroups <- as.numeric(subgroups)
+  
+  if(is.character(subgroups) || is.factor(subgroups))
+    subgroups <- seq_along(subgroups)
+  # TESTING ##########################
   
   p <- p +
     expand_limits(x = max((subgroups)) +

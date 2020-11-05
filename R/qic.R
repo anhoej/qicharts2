@@ -225,8 +225,8 @@ qic <- function(x,
     } else {
       part <- as.integer(part)
     }
-  }
 
+  }
   if (is.null(exclude)) 
     exclude <- Inf
   
@@ -238,7 +238,7 @@ qic <- function(x,
   
   # Only connect data points and perform runs analysis if x is numeric
   dots.only <- is.factor(x) || mode(x) != 'numeric'
-  
+
   # Convert dates and datetimes to POSIXct
   if (inherits(x, c('Date', 'POSIXt'))) {
     x <- as.POSIXct(as.character(x), tz = 'UTC')
