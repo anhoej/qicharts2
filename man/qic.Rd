@@ -43,7 +43,8 @@ qic(
   show.grid = FALSE,
   flip = FALSE,
   strip.horizontal = FALSE,
-  print.summary = FALSE
+  print.summary = FALSE,
+  return.data = FALSE
 )
 }
 \arguments{
@@ -147,6 +148,8 @@ relevant for I and Xbar charts).}
 \item{strip.horizontal}{If TRUE, makes y strip horizontal.}
 
 \item{print.summary}{If TRUE, prints summary.}
+
+\item{return.data}{If TRUE, returns underlying data frame.}
 }
 \value{
 A \code{qic} object. Inherits from 'ggplot'.
