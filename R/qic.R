@@ -77,6 +77,7 @@
 #' @param flip If TRUE, rotates the plot 90 degrees.
 #' @param strip.horizontal If TRUE, makes y strip horizontal.
 #' @param print.summary If TRUE, prints summary.
+#' @param return.data If TRUE, returns underlying data frame.
 # @param ... Additional arguments to plot function.
 #'
 #' @return A \code{qic} object. Inherits from 'ggplot'.
@@ -150,7 +151,8 @@ qic <- function(x,
                 show.grid          = FALSE,
                 flip               = FALSE,
                 strip.horizontal   = FALSE,
-                print.summary      = FALSE) {
+                print.summary      = FALSE,
+                return.data        = FALSE) {
   
   # Check data
   if (missing(x))
@@ -267,6 +269,11 @@ qic <- function(x,
   d <- qic.agg(d, got.n, part, agg.fun, freeze, exclude, 
                chart.fun, multiply, dots.only, chart, method, y.neg)
 
+  # Return data to user if requested
+  if (return.data) {
+    return(d)
+  }
+  
   # Format y for p charts
   if (missing(y.percent) & chart %in% c('p', 'pp')) {
     y.percent <- TRUE
