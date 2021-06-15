@@ -52,3 +52,10 @@ test_that('Funnel plot of hospital infections', {
     'hai_4.rds'
   )
 })
+
+test_that('Return data matches plot data', {
+  expect_equal(
+    subset(qic(1:50)$data, select = -c(dotcol, linecol)),
+    qic(1:50, return.data = TRUE)
+  )
+})
