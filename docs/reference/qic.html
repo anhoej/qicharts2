@@ -92,7 +92,7 @@ T, C, U, U', P, P', and G charts." />
       <ul class="nav navbar-nav">
         <li>
   <a href=".././index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -106,7 +106,7 @@ T, C, U, U', P, P', and G charts." />
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/anhoej/qicharts2">
-    <span class="fa fa-github fa-lg"></span>
+    <span class="fas fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -161,7 +161,7 @@ T, C, U, U', P, P', and G charts.</p>
   part.labels <span class='op'>=</span> <span class='cn'>NULL</span>,
   show.labels <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/NULL.html'>is.null</a></span><span class='op'>(</span><span class='va'>facets</span><span class='op'>)</span>,
   decimals <span class='op'>=</span> <span class='fl'>1</span>,
-  point.size <span class='op'>=</span> <span class='fl'>1</span>,
+  point.size <span class='op'>=</span> <span class='fl'>1.2</span>,
   x.period <span class='op'>=</span> <span class='cn'>NULL</span>,
   x.format <span class='op'>=</span> <span class='cn'>NULL</span>,
   x.angle <span class='op'>=</span> <span class='cn'>NULL</span>,
@@ -169,10 +169,12 @@ T, C, U, U', P, P', and G charts.</p>
   y.expand <span class='op'>=</span> <span class='cn'>NULL</span>,
   y.neg <span class='op'>=</span> <span class='cn'>TRUE</span>,
   y.percent <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  y.percent.accuracy <span class='op'>=</span> <span class='cn'>NULL</span>,
   show.grid <span class='op'>=</span> <span class='cn'>FALSE</span>,
   flip <span class='op'>=</span> <span class='cn'>FALSE</span>,
   strip.horizontal <span class='op'>=</span> <span class='cn'>FALSE</span>,
-  print.summary <span class='op'>=</span> <span class='cn'>FALSE</span>
+  print.summary <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  return.data <span class='op'>=</span> <span class='cn'>FALSE</span>
 <span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -335,6 +337,11 @@ relevant for I and Xbar charts).</p></td>
       <td><p>If TRUE, formats y axis labels as percentages.</p></td>
     </tr>
     <tr>
+      <th>y.percent.accuracy</th>
+      <td><p>A number to round percentage labels on y axis. Use
+1 to show no decimals, 0.1 to show 1 decimal etc.</p></td>
+    </tr>
+    <tr>
       <th>show.grid</th>
       <td><p>If TRUE, shows grid.</p></td>
     </tr>
@@ -350,6 +357,10 @@ relevant for I and Xbar charts).</p></td>
       <th>print.summary</th>
       <td><p>If TRUE, prints summary.</p></td>
     </tr>
+    <tr>
+      <th>return.data</th>
+      <td><p>If TRUE, returns underlying data frame.</p></td>
+    </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
@@ -362,8 +373,9 @@ data over time is (by default) identified by the Anhoej rules for unusually
 long runs and unusually few crossing. Use the EXPERIMENTAL method argument to
 apply the bestbox or cutbox methods as described in Anhøj &amp; Wentzel-Larsen
 (2020) <a href='https://doi.org/10.1371/journal.pone.0233920'>https://doi.org/10.1371/journal.pone.0233920</a>.</p>
-<p>Special cause variation in the form of larger, possibly
-transient, shifts in data is identified by Shewhart's 3-sigma rule.</p>
+<p>Special cause variation in the form of larger, possibly transient, shifts in
+data is identified by Shewhart's 3-sigma rule (Mohammed, Worthington,
+Woodall (2008) <a href='https://doi.org/10.1136/qshc.2004.012047'>https://doi.org/10.1136/qshc.2004.012047</a>).</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code>vignette('qic')</code>.</p></div>
@@ -389,7 +401,7 @@ transient, shifts in data is identified by Shewhart's 3-sigma rule.</p>
     facets   <span class='op'>=</span> <span class='va'>infection</span> <span class='op'>~</span> <span class='va'>hospital</span>,
     chart    <span class='op'>=</span> <span class='st'>'u'</span>,
     multiply <span class='op'>=</span> <span class='fl'>10000</span>,
-    title     <span class='op'>=</span> <span class='st'>'Hospital infection rates'</span>,
+    title    <span class='op'>=</span> <span class='st'>'Hospital infection rates'</span>,
     ylab     <span class='op'>=</span> <span class='st'>'Number of infections per 10.000 risk days'</span>,
     xlab     <span class='op'>=</span> <span class='st'>'Month'</span><span class='op'>)</span>
 </div><div class='img'><img src='qic-3.png' alt='' width='700' height='433' /></div><div class='input'>
