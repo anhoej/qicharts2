@@ -3,6 +3,7 @@ qicharts2 0.7.1.9999
 * Fixed bug in plotting categorical (character) subgroups.
 * Prime charts (pp and up) now handle categorical subgroups (funnel plots).
 * qic() gained y.percent.accuracy argument.
+* Add return data param to qic() (thanks to rjake).
 
 qicharts2 0.7.1
 ===============
