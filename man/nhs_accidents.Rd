@@ -11,7 +11,7 @@ A data frame with 20 rows and 3 variables: \itemize{ \item i Week
 }
 \source{
 Mohammed MA, et al. Quality and Safety in Health Care
-  2013;22:362–368. \url{https://doi.org/10.1136/bmjqs-2012-001373}.
+  2013;22:362–368. \doi{10.1136/bmjqs-2012-001373}.
 }
 \usage{
 nhs_accidents
