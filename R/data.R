@@ -51,7 +51,7 @@
 #'   number. \item r Attendances seen within 4 hours. \item n Total number of 
 #'   attendances. }
 #' @source Mohammed MA, et al. Quality and Safety in Health Care
-#'   2013;22:362–368. \url{https://doi.org/10.1136/bmjqs-2012-001373}.
+#'   2013;22:362–368. \doi{10.1136/bmjqs-2012-001373}.
 "nhs_accidents"
 
 #' Patient harm indentified using the Global Trigger Tool

@@ -8,11 +8,11 @@
 #' data over time is (by default) identified by the Anhoej rules for unusually
 #' long runs and unusually few crossing. Use the EXPERIMENTAL method argument to
 #' apply the bestbox or cutbox methods as described in Anhøj & Wentzel-Larsen
-#' (2020) \url{https://doi.org/10.1371/journal.pone.0233920}.
+#' (2020) \doi{10.1371/journal.pone.0233920}.
 #'
 #' Special cause variation in the form of larger, possibly transient, shifts in
 #' data is identified by Shewhart's 3-sigma rule (Mohammed, Worthington,
-#' Woodall (2008) \url{https://doi.org/10.1136/qshc.2004.012047}).
+#' Woodall (2008) \doi{10.1136/qshc.2004.012047}).
 #'
 #' @param x Vector of subgroup values to plot along the x axis.
 #' @param y Vector of measures or counts to plot on the y axis (numerator).

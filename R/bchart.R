@@ -2,7 +2,7 @@
 #'
 #' The Bernoulli CUSUM chart is useful for monitoring rare events data, e.g.
 #' surgical site infections and other types of complications. Based on Neuburger
-#' et al. (2017) \url{https://dx.doi.org/10.1136/bmjqs-2016-005526}.
+#' et al. (2017) \doi{10.1136/bmjqs-2016-005526}.
 #'
 #' Note that the diagnostic properties of the Bernoulli CUSUM chart is highly
 #' dependent on the choice of parameters, target, or and limit, and that these
