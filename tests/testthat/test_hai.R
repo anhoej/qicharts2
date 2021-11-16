@@ -8,7 +8,7 @@ test_that('Single plot of hospital infections', {
       qic(month, n, days,
           data = hospital_infections,
           chart = 'u')
-    ),
+    )[,-c(12,14)],
     'hai_1.rds'
   )
 })
@@ -21,7 +21,7 @@ test_that('Single facted plot of hospital infections', {
           data = hospital_infections,
           facets = ~ infection,
           chart = 'u')
-    ),
+    )[,-c(12,14)],
     'hai_2.rds'
   )
 })
@@ -34,7 +34,7 @@ test_that('Double faceted plot of hospital infections', {
           data = hospital_infections,
           facets = hospital ~ infection,
           chart = 'u')
-    ),
+    )[,-c(12,14)],
     'hai_3.rds'
   )
 })
@@ -48,7 +48,7 @@ test_that('Funnel plot of hospital infections', {
           chart = 'u',
           facets = ~ infection,
           multiply = 10000)
-    ),
+    )[,-c(12,14)],
     'hai_4.rds'
   )
 })
