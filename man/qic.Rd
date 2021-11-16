@@ -30,6 +30,7 @@ qic(
   caption = NULL,
   part.labels = NULL,
   show.labels = is.null(facets),
+  show.95 = FALSE,
   decimals = 1,
   point.size = 1.2,
   x.period = NULL,
@@ -112,6 +113,9 @@ created with the freeze or part argument.}
 
 \item{show.labels}{Logical indicating whether to show labels for centre and
 control lines on chart. Defaults to TRUE when facets argument is NULL.}
+
+\item{show.95}{Logical indicating whether to show 95% (2 sigma)
+control limits on chart. Defaults to FALSE.}
 
 \item{decimals}{Integer indicating the preferred number of decimals in centre
 and control line labels.}
