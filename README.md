@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/anhoej/qicharts2.svg?branch=master)](https://travis-ci.org/anhoej/qicharts2)
+[![R-CMD-check](https://github.com/anhoej/qicharts2/workflows/R-CMD-check/badge.svg)](https://github.com/anhoej/qicharts2/actions)
 [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/qicharts2)](https://cran.r-project.org/package=qicharts2)
 [![DOI](https://zenodo.org/badge/96605963.svg)](https://zenodo.org/badge/latestdoi/96605963)
 [![DOI](http://joss.theoj.org/papers/10.21105/joss.00699/status.svg)](https://doi.org/10.21105/joss.00699)
