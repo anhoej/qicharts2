@@ -29,7 +29,7 @@
 summary.qic <- function(object, ...) {
   x <- object$data
   x <- as.data.frame(x)
-  x <- x[c('facet1', 'facet2', 'part', 'lcl', 'cl', 'ucl', 'n.obs', 'n.useful',
+  x <- x[c('facet1', 'facet2', 'part', 'lcl', 'lcl.95', 'cl', 'ucl.95', 'ucl', 'n.obs', 'n.useful',
            'longest.run', 'longest.run.max', 'n.crossings', 'n.crossings.min',
            'runs.signal', 'sigma.signal')]
 
@@ -47,7 +47,9 @@ summary.qic <- function(object, ...) {
       n.crossings.min = x$n.crossings.min[1],
       runs.signal = max(x$runs.signal),
       aLCL = mean(x$lcl, na.rm = TRUE),
+      aLCL.95 = mean(x$lcl.95, na.rm = TRUE),
       CL = mean(x$cl, na.rm = TRUE),
+      aUCL.95 = mean(x$ucl.95, na.rm = TRUE),
       aUCL = mean(x$ucl, na.rm = TRUE),
       sigma.signal = sum(x$sigma.signal, na.rm = TRUE)
     )

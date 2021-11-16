@@ -129,7 +129,9 @@ qic.run <- function(x) {
   if (anyNA(x$cl))
     x$cl  <- stats::median(x$y[base], na.rm = TRUE)
   x$ucl <- as.numeric(NA)
+  x$ucl.95 <- as.numeric(NA)
   x$lcl <- as.numeric(NA)
+  x$lcl.95 <- as.numeric(NA)
   
   return(x)
 }
@@ -155,7 +157,9 @@ qic.i <- function(x) {
   
   # Calculate control limits
   x$lcl <- x$cl - 3 * stdev
+  x$lcl.95 <- x$cl - 2 * stdev
   x$ucl <- x$cl + 3 * stdev
+  x$ucl.95 <- x$cl + 2 * stdev
   
   return(x)
 }
@@ -170,7 +174,9 @@ qic.mr <- function(x) {
   
   # Calculate upper limit for moving ranges
   x$lcl <- 0
+  x$lcl.95 <- 0
   x$ucl <- 3.267 * x$cl
+  x$ucl.95 <- (3.267 / 3) * 2 * x$cl
   
   return(x)
 }
@@ -193,8 +199,11 @@ qic.xbar <- function(x){
     stdev <- mean(x$y.sd[base], na.rm = TRUE)
   }
   A3    <- a3(x$y.length)
+  A3.95 <- (A3 / 3) * 2
   x$ucl <- x$cl + A3 * stdev
+  x$ucl.95 <- x$cl + A3.95 * stdev
   x$lcl <- x$cl - A3 * stdev
+  x$lcl.95 <- x$cl - A3.95 * stdev
   
   return(x)
 }
@@ -214,9 +223,13 @@ qic.s <- function(x){
     }
   }
   B3     <- b3(x$y.length)
+  B3.95  <- (B3 / 3) * 2
   B4     <- b4(x$y.length)
+  B4.95  <- (B4 / 3) * 2
   x$ucl  <- B4 * x$cl
+  x$ucl.95  <- B4.95 * x$cl
   x$lcl  <- B3 * x$cl
+  x$lcl.95  <- B3.95 * x$cl
   
   return(x)
 }
@@ -234,7 +247,9 @@ qic.t <- function(x) {
   x$y   <- x$y^3.6
   x$cl  <- x$cl^3.6
   x$ucl <- x$ucl^3.6
+  x$ucl.95 <- x$ucl.95^3.6
   x$lcl <- x$lcl^3.6
+  x$lcl.95 <- x$lcl.95^3.6
   x$lcl[x$lcl < 0 | is.nan(x$lcl)] <- 0
   
   return(x)
@@ -253,9 +268,13 @@ qic.p <- function(x) {
   
   # Calculate control limits
   x$ucl          <- x$cl + 3 * stdev
+  x$ucl.95       <- x$cl + 2 * stdev
   x$lcl          <- x$cl - 3 * stdev
+  x$lcl.95       <- x$cl - 2 * stdev
   x$ucl[x$ucl > 1 & is.finite(x$ucl)] <- 1
+  x$ucl.95[x$ucl.95 > 1 & is.finite(x$ucl.95)] <- 1
   x$lcl[x$lcl < 0 & is.finite(x$lcl)] <- 0
+  x$lcl.95[x$lcl.95 < 0 & is.finite(x$lcl.95)] <- 0
   
   return(x)
 }
@@ -284,9 +303,13 @@ qic.pp <- function(x) {
   stdev   <- stdev * sigma_z
   
   x$ucl          <- x$cl + 3 * stdev
+  x$ucl.95       <- x$cl + 2 * stdev
   x$lcl          <- x$cl - 3 * stdev
+  x$lcl.95       <- x$cl - 2 * stdev
   x$ucl[x$ucl > 1 & is.finite(x$ucl)] <- 1
+  x$ucl.95[x$ucl.95 > 1 & is.finite(x$ucl.95)] <- 1
   x$lcl[x$lcl < 0 & is.finite(x$lcl)] <- 0
+  x$lcl.95[x$lcl.95 < 0 & is.finite(x$lcl.95)] <- 0
   
   return(x)
 }
@@ -304,8 +327,11 @@ qic.c <- function(x){
   
   # Calculate control limits
   x$ucl          <- x$cl + 3 * stdev
+  x$ucl.95       <- x$cl + 2 * stdev
   x$lcl          <- x$cl - 3 * stdev
+  x$lcl.95       <- x$cl - 2 * stdev
   x$lcl[x$lcl < 0 & is.finite(x$lcl)] <- 0
+  x$lcl.95[x$lcl.95 < 0 & is.finite(x$lcl.95)] <- 0
   
   return(x)
 }
@@ -322,8 +348,11 @@ qic.u <- function(x){
   
   # Calculate control limits
   x$ucl          <- x$cl + 3 * stdev
+  x$ucl.95       <- x$cl + 2 * stdev
   x$lcl          <- x$cl - 3 * stdev
+  x$lcl.95       <- x$cl - 2 * stdev
   x$lcl[x$lcl < 0 & is.finite(x$lcl)] <- 0
+  x$lcl.95[x$lcl.95 < 0 & is.finite(x$lcl.95)] <- 0
   
   return(x)
 }
@@ -354,8 +383,11 @@ qic.up <- function(x){
   
   # Calculate limits
   x$ucl          <- x$cl + 3 * stdev
+  x$ucl.95       <- x$cl + 2 * stdev
   x$lcl          <- x$cl - 3 * stdev
+  x$lcl.95       <- x$cl - 2 * stdev
   x$lcl[x$lcl < 0 & is.finite(x$lcl)] <- 0
+  x$lcl.95[x$lcl.95 < 0 & is.finite(x$lcl.95)] <- 0
   
   return(x)
 }
@@ -375,8 +407,11 @@ qic.g <- function(x){
   
   # Calculate control limits
   x$ucl          <- x$cl + 3 * stdev
+  x$ucl.95       <- x$cl + 2 * stdev
   x$lcl          <- x$cl - 3 * stdev
+  x$lcl.95       <- x$cl - 2 * stdev
   x$lcl[x$lcl < 0] <- 0
+  x$lcl.95[x$lcl.95 < 0] <- 0
   
   # # Set centre line to theoretical median, Provost (2011) p. 228
   # x$cl <- 0.693 * x$cl
@@ -490,6 +525,8 @@ qic.agg <- function(d, got.n, part, agg.fun, freeze, exclude,
     x$y          <- x$y * multiply
     x$cl         <- x$cl * multiply
     x$lcl        <- x$lcl * multiply
+    x$lcl.95     <- x$lcl.95 * multiply
+    x$ucl.95     <- x$ucl.95 * multiply
     x$ucl        <- x$ucl * multiply
     x$cl.lab     <- ifelse(x$xx == max(x$xx), x$cl, NA)
     x$lcl.lab    <- ifelse(x$xx == max(x$xx), x$lcl, NA)
@@ -502,7 +539,9 @@ qic.agg <- function(d, got.n, part, agg.fun, freeze, exclude,
   
   # Remove control lines from missing subgroups
   d$ucl[!is.finite(d$ucl)]         <- NA
+  d$ucl.95[!is.finite(d$ucl.95)]   <- NA
   d$lcl[!is.finite(d$lcl)]         <- NA
+  d$lcl.95[!is.finite(d$lcl.95)]   <- NA
   d$lcl.lab[!is.finite(d$lcl.lab)] <- NA
   d$ucl.lab[!is.finite(d$ucl.lab)] <- NA
   
@@ -517,6 +556,7 @@ qic.agg <- function(d, got.n, part, agg.fun, freeze, exclude,
   # Prevent negative y axis if y.neg argument is FALSE
   if (!y.neg & min(d$y, na.rm = TRUE) >= 0) {
     d$lcl[d$lcl < 0]         <- 0
+    d$lcl.95[d$lcl.95 < 0]   <- 0
     d$lcl.lab[d$lcl.lab < 0] <- 0
   }
   
