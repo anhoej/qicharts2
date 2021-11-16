@@ -90,7 +90,7 @@ qic(y)
 Make an I control chart:
 
 ```{r}
-qic(y, chart = 'i',show.95=T)
+qic(y, chart = 'i')
 ```
 
 Run charts and control charts are point-and-line graphs showing measures or counts over time. A horizontal line represents the process centre expressed by either the median (run charts) or the mean (control charts). In addition, control charts visualise the limits of the natural variation inherent in the process. Because of the way these limits are computed, they are often referred to as 3-sigma limits (see Appendix 1). Other terms for 3-sigma limits are control limits and natural process limits.
@@ -141,7 +141,7 @@ Shewhart devised one test to identify special cause variation, the 3-sigma rule,
 # Simulate a special cause to y in the form of a large, transient shift of 4 standard deviations.
 y[22] <- 4
 
-qic(y, chart = 'i',show.95=T)
+qic(y, chart = 'i')
 ```
 
 However, minor to moderate shifts may go unnoticed by the 3-sigma rule for long periods of time.
@@ -150,7 +150,7 @@ However, minor to moderate shifts may go unnoticed by the 3-sigma rule for long 
 # Simulate a special cause to y in the form of a moderate, persistent shift of 2 standard deviations.
 y[13:24] <- rnorm(12, mean = 2)
 
-qic(y, chart = 'i',show.95=T)
+qic(y, chart = 'i')
 ```
 
 Therefore, many additional tests have been proposed to increase the sensitivity to non-random variation.
@@ -195,7 +195,7 @@ The parameters of the analysis are available using the `summary()` function on a
 
 ```{r}
 # Save qic object to o
-o <- qic(y, chart = 'i',show.95=T)
+o <- qic(y, chart = 'i')
 
 # Print summary data frame
 summary(o)
@@ -251,7 +251,7 @@ qic(month, harms, days,
     multiply = 1000,
     title    = 'Patient harm',
     ylab     = 'Adverse events per 1000 patient days',
-    xlab     = 'Month',show.95=T)
+    xlab     = 'Month')
 ```
 
 Since only random variation is present in the run chart, a U control chart for harm rate is appropriate for computing the limits of the common cause variation.
@@ -265,7 +265,7 @@ qic(month, harms, days,
     multiply = 1000,
     title    = 'Patient harm (U chart)',
     ylab     = 'Adverse events per 1000 patient days',
-    xlab     = 'Month',show.95=T)
+    xlab     = 'Month')
 ```
 
 Because the sample sizes (number of patient days) are not the same each month, the 3-sigma limits vary. Large samples give narrow limits and vice versa. Varying limits are also seen in P and Xbar charts.
@@ -295,7 +295,7 @@ qic(month, n.harmed,
     y.percent = TRUE,
     title     = 'Harmed patients',
     ylab      = NULL,
-    xlab      = 'Month',show.95=T)
+    xlab      = 'Month')
 ```
 
 Again, since the run chart finds random variation, a control chart may be applied. For proportion (or percent) harmed patients we use a P chart.
@@ -307,7 +307,7 @@ qic(month, n.harmed, n,
     y.percent = TRUE,
     title     = 'Harmed patients (P chart)',
     ylab      = NULL,
-    xlab      = 'Month',show.95=T)
+    xlab      = 'Month')
 ```
 
 Since both the harm rate and the proportion of harmed patients exhibit common cause variation only, we conclude that the risk of adverse events during hospitalisation is predictable: we in the future should expect around 60 adverse events per 1000 patient days, harming around 33% of patients (regardless of their length of stay), although harm rates anywhere between ~0 -- 60% would be considered within common cause variation.
@@ -323,7 +323,7 @@ qic(month,
     y.percent = TRUE,
     title     = 'Harmed patients (P chart)',
     ylab      = NULL,
-    xlab      = 'Month',show.95=T)
+    xlab      = 'Month')
 ```
 
 ### Pareto analysis of adverse event types and severity
@@ -390,7 +390,7 @@ qic(month, n,
     part.labels = c('Baseline', 'Intervention'),
     title       = 'Hospital acquired Clostridium difficile infections',
     ylab        = 'Count',
-    xlab        = 'Month',show.95=T)
+    xlab        = 'Month')
 ```
 
 The median number of CDIs per month in the before period is 19. An unusually long run of 15 data points below the median proves that the CDI rate is reduced.
@@ -418,7 +418,7 @@ qic(month, n,
     part  = 24,
     title = 'Hospital acquired Clostridium difficile infections (C chart)',
     ylab  = 'Count',
-    xlab  = 'Month',show.95=T)
+    xlab  = 'Month')
 ```
 
 The split C chart shows that the CDI rate has dropped from an average of 19 to 7 per month. Furthermore, the 3-sigma limits tell that the current process is predictable and that we in the future should expect between 0 and 15 CDIs per month.
@@ -435,7 +435,7 @@ qic(month, n, days,
     multiply = 10000, 
     title    = 'Hospital acquired Clostridium difficile infections (U chart)',
     ylab     = 'Cases per 10,000 risk days',
-    xlab     = 'Month',show.95=T)
+    xlab     = 'Month')
 ```
 
 In fact, U charts can always be used instead of C charts. When the area of opportunity is constant the two charts will reach the same conclusion. But the raw numbers in a C chart may be easier to communicate than counts per something.
@@ -481,7 +481,7 @@ qic(age,
     show.grid = TRUE,
     title     = 'Age of the last 100 patients (I chart)',
     ylab      = 'Years',
-    xlab      = 'Patient #',show.95=T)
+    xlab      = 'Patient #')
 ```
 
 Two data points (patients number 45 and 70) are below the lower 3-sigma limit indicating that these patients are "unusually" young, i.e. representative of phenomena that are not normally present in the process. 
@@ -495,7 +495,7 @@ qic(age,
     show.grid = TRUE,
     title     = 'Age of the last 100 patients (MR chart)',
     ylab      = 'Years',
-    xlab      = 'Patient #',show.95=T)
+    xlab      = 'Patient #')
 ```
 
 The MR chart identifies three unusually large ranges, which are clearly produced by the two unusually young patients also found in the I chart. Note that each data point in an I chart is contained in two moving ranges in the MR chart.
@@ -509,7 +509,7 @@ qic(age,
     exclude = c(45, 70),
     title   = 'Age of the last 100 patients (I chart)',
     ylab    = 'Years',
-    xlab    = 'Patient #',show.95=T)
+    xlab    = 'Patient #')
 ```
 
 Thus, on average we should expect future patients to be 67 years of age, and patients younger than 43 years or older than 91 years would be unusual.
@@ -531,7 +531,7 @@ qic(month, age,
     chart = 'xbar',
     title = 'Average age (Xbar chart)',
     ylab  = 'Years',
-    xlab  = 'Month',show.95=T)
+    xlab  = 'Month')
 ```
 
 Xbar charts are usually displayed along S charts displaying the within subgroup standard deviation.
@@ -542,7 +542,7 @@ qic(month, age,
     chart = 's',
     title = 'Age standard deviation (S chart)',
     ylab  = 'Years',
-    xlab  = 'Month',show.95=T)
+    xlab  = 'Month')
 ```
 
 Since both the Xbar and the S chart display common cause variation, we may conclude that the monthly average and standard deviation of patient age is predictable. Note that the mean of the Xbar chart is close to the mean of the individuals chart but that the 3-sigma limits are narrower.
