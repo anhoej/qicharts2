@@ -199,7 +199,7 @@ qic.xbar <- function(x){
     stdev <- mean(x$y.sd[base], na.rm = TRUE)
   }
   A3    <- a3(x$y.length)
-  A3.95 <- (A3 / 3) * 2
+  A3.95 <- a3(x$y.length, use.95=TRUE)
   x$ucl <- x$cl + A3 * stdev
   x$ucl.95 <- x$cl + A3.95 * stdev
   x$lcl <- x$cl - A3 * stdev
@@ -222,13 +222,13 @@ qic.s <- function(x){
       x$cl <- mean(x$y.sd[base], na.rm = TRUE)
     }
   }
-  B3     <- b3(x$y.length)
-  B3.95  <- (B3 / 3) * 2
-  B4     <- b4(x$y.length)
-  B4.95  <- (B4 / 3) * 2
-  x$ucl  <- B4 * x$cl
+  B3        <- b3(x$y.length)
+  B3.95     <- b3(x$y.length, use.95=TRUE)
+  B4        <- b4(x$y.length)
+  B4.95     <- b4(x$y.length, use.95=TRUE)
+  x$ucl     <- B4 * x$cl
   x$ucl.95  <- B4.95 * x$cl
-  x$lcl  <- B3 * x$cl
+  x$lcl     <- B3 * x$cl
   x$lcl.95  <- B3.95 * x$cl
   
   return(x)
@@ -436,19 +436,22 @@ c5 <- function(n) {
   sqrt(1 - c4(n) ^ 2)
 }
 
-a3 <- function(n) {
+a3 <- function(n, use.95 = FALSE) {
   n[n <= 1] <- NA
-  3 / (c4(n) * sqrt(n))
+  sigma <- ifelse(isTRUE(use.95), 2, 3)
+  sigma / (c4(n) * sqrt(n))
 }
 
-b3 <- function(n) {
+b3 <- function(n, use.95 = FALSE) {
   n[n <= 1] <- NA
-  pmax(0, 1 - 3 * c5(n) / c4(n))
+  sigma <- ifelse(isTRUE(use.95), 2, 3)
+  pmax(0, 1 - sigma * c5(n) / c4(n))
 }
 
-b4 <- function(n) {
+b4 <- function(n, use.95 = FALSE) {
   n[n <= 1] <- NA
-  1 + 3 * c5(n) / c4(n)
+  sigma <- ifelse(isTRUE(use.95), 2, 3)
+  1 + sigma * c5(n) / c4(n)
 }
 
 # Format line labels function
