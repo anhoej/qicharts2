@@ -8,7 +8,7 @@ test_that('Example 6.3_1 is equal to reference', {
   expect_equal_to_reference(
     qic(sample, obs,
         data = tbl_06.03,
-        chart = 'xbar')$data
+        chart = 'xbar')$data[,-c(18,20)]
     ,
     'ex_6.3_1.rds'
   )
@@ -16,7 +16,7 @@ test_that('Example 6.3_1 is equal to reference', {
   expect_equal_to_reference(
     qic(sample, obs,
         data = tbl_06.03,
-        chart = 's')$data
+        chart = 's')$data[,-c(18,20)]
     ,
     'ex_6.3_2.rds'
   )
@@ -29,7 +29,7 @@ test_that('Example 6.4 is equal to reference', {
   expect_equal_to_reference(
     qic(sample, obs,
         data = tbl_06.04,
-        chart = 'xbar')$data
+        chart = 'xbar')$data[,-c(18,20)]
     ,
     'ex_6.4_1.rds'
   )
@@ -37,7 +37,7 @@ test_that('Example 6.4 is equal to reference', {
   expect_equal_to_reference(
     qic(sample, obs,
         data = tbl_06.04,
-        chart = 's')$data
+        chart = 's')$data[,-c(18,20)]
     ,
     'ex_6.4_2.rds'
   )
@@ -51,7 +51,7 @@ test_that('Example 6.5 is equal to reference', {
     qic(weeks, cost,
         data = tbl_06.07,
         chart = 'i',
-        freeze = 20)$data
+        freeze = 20)$data[,-c(18,20)]
     ,
     'ex_6.5_3.rds'
   )
@@ -60,7 +60,7 @@ test_that('Example 6.5 is equal to reference', {
     qic(weeks, cost,
         data = tbl_06.07,
         chart = 'mr',
-        freeze = 20)$data
+        freeze = 20)$data[,-c(18,20)]
     ,
     'ex_6.5_4.rds'
   )
@@ -75,7 +75,7 @@ test_that('Example 7.1 is equal to reference', {
         data = tbl_07.03,
         chart = 'p',
         exclude = c(15, 23),
-        part = 30)$data
+        part = 30)$data[,-c(18,20)]
     ,
     'ex_7.1_5.rds'
   )
@@ -88,7 +88,7 @@ test_that('Table 7.4 is equal to reference', {
   expect_equal_to_reference(
     qic(sample, count, size,
         data = tbl_07.04,
-        chart = 'p')$data
+        chart = 'p')$data[,-c(18,20)]
     ,
     'tbl_7.4_1.rds'
   )
@@ -103,7 +103,7 @@ test_that('Example 7.3 is equal to reference', {
         data = tbl_07.08,
         chart = 'c',
         exclude = c(6, 20),
-        freeze = 26)$data
+        freeze = 26)$data[,-c(18,20)]
     ,
     'ex_7.3_3.rds'
   )
@@ -116,7 +116,7 @@ test_that('Example 7.4 is equal to reference', {
   expect_equal_to_reference(
     qic(sample, count, size,
         data = tbl_07.10,
-        chart = 'u')$data
+        chart = 'u')$data[,-c(18,20)]
     ,
     'ex_7.4_1.rds'
   )
@@ -130,7 +130,7 @@ test_that('Example 7.5 is equal to reference', {
     qic(roll, count, meters,
         data = tbl_07.11,
         chart = 'u',
-        multiply = 50)$data
+        multiply = 50)$data[,-c(18,20)]
     ,
     'ex_7.5_1.rds'
   )
@@ -143,7 +143,7 @@ test_that('Example 7.6 is equal to reference', {
   expect_equal_to_reference(
     qic(failure, hours,
         data = tbl_07.14,
-        chart = 't')$data
+        chart = 't')$data[,-c(18,20)]
     ,
     'ex_7.6_1.rds'
   )
@@ -156,7 +156,7 @@ test_that('NA test is equal to reference', {
   expect_equal_to_reference(
     qic(sample, obs,
         data = NA_test,
-        chart = 'xbar')$data
+        chart = 'xbar')$data[,-c(18,20)]
     ,
     'NA_test.rds'
   )

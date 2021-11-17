@@ -1,6 +1,6 @@
 #' @import ggplot2
 plot.qic <- function(x, title, ylab, xlab, subtitle, caption, part.labels,
-                     nrow, ncol, scales, show.labels, show.grid, 
+                     nrow, ncol, scales, show.labels, show.grid, show.95,
                      decimals, flip, dots.only, point.size,
                      x.format, x.angle, x.pad,
                      y.expand, y.percent, y.percent.accuracy, strip.horizontal,
@@ -63,6 +63,12 @@ plot.qic <- function(x, title, ylab, xlab, subtitle, caption, part.labels,
     
     p <- p +
       geom_line(aes_(y = ~ ucl), colour = col1, na.rm = T)
+  }
+
+  if (isTRUE(show.95)) {
+    p <- p +
+      geom_line(aes_(y = ~ lcl.95), colour = col1, na.rm = T) +
+      geom_line(aes_(y = ~ ucl.95), colour = col1, na.rm = T)
   }
   
   p <- p +
