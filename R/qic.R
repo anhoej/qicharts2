@@ -195,6 +195,7 @@ qic <- function(x,
   cl     <- eval(substitute(cl), data, parent.frame())
   target <- eval(substitute(target), data, parent.frame())
   facets <- all.vars(facets)
+  n.facets <- length(facets) 
   
   part <- eval(substitute(part), data, parent.frame())
   
@@ -294,6 +295,7 @@ qic <- function(x,
                 subtitle           = subtitle, 
                 caption            = caption, 
                 part.labels        = part.labels, 
+                n.facets           = n.facets,
                 nrow               = nrow, 
                 ncol               = ncol, 
                 scales             = scales,

@@ -1,5 +1,6 @@
 #' @import ggplot2
 plot.qic <- function(x, title, ylab, xlab, subtitle, caption, part.labels,
+                     n.facets,
                      nrow, ncol, scales, show.labels, show.grid, show.95,
                      decimals, flip, dots.only, point.size,
                      x.format, x.angle, x.pad,
@@ -30,8 +31,8 @@ plot.qic <- function(x, title, ylab, xlab, subtitle, caption, part.labels,
   lab.just <- ifelse(flip, 'center', -0.2)
   
   # Get number of facet dimensions
-  n.facets <- sum((length(unique(x$facet1))) > 1,
-                  (length(unique(x$facet2)) > 1))
+  # n.facets <- sum((length(unique(x$facet1))) > 1,
+  #                 (length(unique(x$facet2)) > 1))
   
   # Get freeze point
   freeze <- max(x$xx[x$baseline])
