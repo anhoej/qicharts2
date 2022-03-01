@@ -12,7 +12,7 @@ qic(
   facets = NULL,
   notes = NULL,
   chart = c("run", "i", "mr", "xbar", "s", "t", "p", "pp", "c", "u", "up", "g"),
-  agg.fun = c("mean", "median", "sum", "sd"),
+  agg.fun = c("mean", "median", "sum", "sd", "IQR"),
   method = c("anhoej", "bestbox", "cutbox"),
   multiply = 1,
   freeze = NULL,
