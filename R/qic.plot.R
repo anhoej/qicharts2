@@ -73,7 +73,11 @@ plot.qic <- function(x, title, ylab, xlab, subtitle, caption, part.labels,
   }
   
   p <- p +
-    geom_line(aes_(y = ~ target), colour = col1, na.rm = T, linetype = 'dotted')
+    geom_line(aes_(y = ~ target), 
+              colour = col1, 
+              na.rm = T, 
+              # size = 1,
+              linetype = 4)
   
   p <- p +
     geom_line(aes_(y = ~ cl, linetype = ~ runs.signal, colour = ~ linecol),
