@@ -294,10 +294,21 @@ qic.pp <- function(x) {
   # between-subgroup variation.
   z_i     <- (x$y[base] - x$cl[base]) / stdev[base]
   # TESTING ##############################################
-  if(is.factor(x$x) || is.character(x$x))
+  if(is.factor(x$x) || is.character(x$x)) {
     sigma_z <- stats::sd(z_i)
-  else
-    sigma_z <- mean(abs(diff(z_i)), na.rm = TRUE) / 1.128
+  } else {
+    mr  <- abs(diff(z_i))
+    amr <- mean(mr, na.rm = TRUE)
+
+    # Upper limit for moving ranges
+    ulmr <- 3.267 * amr
+
+    # Remove moving ranges greater than ulmr and recalculate amr, Nelson 1982
+    mr  <- mr[mr < ulmr]
+    amr <- mean(mr, na.rm = TRUE)
+
+    sigma_z <- amr / 1.128
+  }
   # TESTING ##############################################  
   
   stdev   <- stdev * sigma_z
@@ -373,10 +384,21 @@ qic.up <- function(x){
   
   # TESTING ##############################################
   # sigma_z <- mean(abs(diff(z_i)), na.rm = TRUE) / 1.128
-  if(is.factor(x$x) || is.character(x$x))
+  if(is.factor(x$x) || is.character(x$x)) {
     sigma_z <- stats::sd(z_i)
-  else
-    sigma_z <- mean(abs(diff(z_i)), na.rm = TRUE) / 1.128
+  } else {
+    mr  <- abs(diff(z_i))
+    amr <- mean(mr, na.rm = TRUE)
+
+    # Upper limit for moving ranges
+    ulmr <- 3.267 * amr
+
+    # Remove moving ranges greater than ulmr and recalculate amr, Nelson 1982
+    mr  <- mr[mr < ulmr]
+    amr <- mean(mr, na.rm = TRUE)
+
+    sigma_z <- amr / 1.128
+  }
   # TESTING ##############################################  
   
   stdev   <- stdev * sigma_z
