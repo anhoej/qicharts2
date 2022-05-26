@@ -32,7 +32,7 @@ qic(
   show.labels = is.null(facets),
   show.95 = FALSE,
   decimals = 1,
-  point.size = 1.2,
+  point.size = 1.5,
   x.period = NULL,
   x.format = NULL,
   x.angle = NULL,
