@@ -5,6 +5,7 @@ qicharts2 0.7.2.9000
 * Replace the old travis build check with a Github Actions R-CMD-CHECK (thanks to andrjohns).
 * Add option to show 2 sigma limits (thanks to andrjohns).
 * Increased default point size.
+* Do not change line colour according to runs analysis.
 
 qicharts2 0.7.2
 ===============
