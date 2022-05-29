@@ -4,7 +4,7 @@ context('Control charts from Montgomery')
 # Example 6.3 ----
 test_that('Example 6.3_1 is equal to reference', {
   skip_on_cran()
-  skip_on_travis()
+  skip_on_ci()
   expect_equal_to_reference(
     qic(sample, obs,
         data = tbl_06.03,
@@ -25,7 +25,7 @@ test_that('Example 6.3_1 is equal to reference', {
 # Example 6.4 ----
 test_that('Example 6.4 is equal to reference', {
   skip_on_cran()
-  skip_on_travis()
+  skip_on_ci()
   expect_equal_to_reference(
     qic(sample, obs,
         data = tbl_06.04,
@@ -46,7 +46,7 @@ test_that('Example 6.4 is equal to reference', {
 # Example 6.5 ----
 test_that('Example 6.5 is equal to reference', {
   skip_on_cran()
-  skip_on_travis()
+  skip_on_ci()
   expect_equal_to_reference(
     qic(weeks, cost,
         data = tbl_06.07,
@@ -69,7 +69,7 @@ test_that('Example 6.5 is equal to reference', {
 # Example 7.1 ----
 test_that('Example 7.1 is equal to reference', {
   skip_on_cran()
-  skip_on_travis()
+  skip_on_ci()
   expect_equal_to_reference(
     qic(sample, count, size, notes = note,
         data = tbl_07.03,
@@ -84,7 +84,7 @@ test_that('Example 7.1 is equal to reference', {
 # Table 7.4 ----
 test_that('Table 7.4 is equal to reference', {
   skip_on_cran()
-  skip_on_travis()
+  skip_on_ci()
   expect_equal_to_reference(
     qic(sample, count, size,
         data = tbl_07.04,
@@ -97,7 +97,7 @@ test_that('Table 7.4 is equal to reference', {
 # Example 7.3 ----
 test_that('Example 7.3 is equal to reference', {
   skip_on_cran()
-  skip_on_travis()
+  skip_on_ci()
   expect_equal_to_reference(
     qic(sample, count,
         data = tbl_07.08,
@@ -112,7 +112,7 @@ test_that('Example 7.3 is equal to reference', {
 # Example 7.4 ----
 test_that('Example 7.4 is equal to reference', {
   skip_on_cran()
-  skip_on_travis()
+  skip_on_ci()
   expect_equal_to_reference(
     qic(sample, count, size,
         data = tbl_07.10,
@@ -125,7 +125,7 @@ test_that('Example 7.4 is equal to reference', {
 # Example 7.5 ----
 test_that('Example 7.5 is equal to reference', {
   skip_on_cran()
-  skip_on_travis()
+  skip_on_ci()
   expect_equal_to_reference(
     qic(roll, count, meters,
         data = tbl_07.11,
@@ -139,7 +139,7 @@ test_that('Example 7.5 is equal to reference', {
 # Example 7.6 ----
 test_that('Example 7.6 is equal to reference', {
   skip_on_cran()
-  skip_on_travis()
+  skip_on_ci()
   expect_equal_to_reference(
     qic(failure, hours,
         data = tbl_07.14,
@@ -152,7 +152,7 @@ test_that('Example 7.6 is equal to reference', {
 # NA test ----
 test_that('NA test is equal to reference', {
   skip_on_cran()
-  skip_on_travis()
+  skip_on_ci()
   expect_equal_to_reference(
     qic(sample, obs,
         data = NA_test,
