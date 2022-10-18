@@ -5,9 +5,9 @@ plot.qic <- function(x, title, ylab, xlab, subtitle, caption, part.labels,
                      decimals, flip, dots.only, point.size,
                      x.format, x.angle, x.pad,
                      y.expand, y.percent, y.percent.accuracy, strip.horizontal,
-                     col.line = '#5DA5DA', 
-                     col.signal = '#F15854', 
-                     col.target = '#059748',
+                     # col.line = '#5DA5DA', 
+                     # col.signal = '#F15854', 
+                     # col.target = '#059748',
                      ...) {
   # Set colours
   col1      <- '#8C8C8C' # rgb(140, 140, 140, maxColorValue = 255) # grey
@@ -78,12 +78,12 @@ plot.qic <- function(x, title, ylab, xlab, subtitle, caption, part.labels,
               colour = col1, 
               na.rm = T, 
               # size = 1,
-              linetype = 4)
+              linetype = 2)
   
   p <- p +
     geom_line(aes_(y = ~ cl, linetype = ~ runs.signal, colour = ~ linecol),
               na.rm = TRUE) +
-    scale_linetype_manual(values = c('FALSE' = 'solid', 'TRUE' = 'dashed'))
+    scale_linetype_manual(values = c('FALSE' = 'solid', 'TRUE' = 'longdash'))
   
   # Add data points and line
   if (dots.only) {
