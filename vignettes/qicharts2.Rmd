@@ -839,9 +839,9 @@ Since runs analysis based on the Anhøj rules makes no assumptions about the dis
 
 1. Douglas C. Montgomery (2009). [Statistical Quality Control -- A Modern Introduction](https://eu.wiley.com/WileyCDA/WileyTitle/productCd-1118322576.html), sixth edition. John Wiley & Sons.
 
-1. Lloyd S. Nelson (1982). [Control Charts for Individual Measurements](https://www.tandfonline.com/doi/abs/10.1080/00224065.1982.11978811). Journal of Quality Technology 14(3), 172-173.
+1. Lloyd S. Nelson (1982). [Control Charts for Individual Measurements](https://doi.org/10.1080/00224065.1982.11978811). Journal of Quality Technology 14(3), 172-173.
 
-1. David B. Laney (2002). [Improved control charts for attributes](https://www.tandfonline.com/doi/abs/10.1081/QEN-120003555). Quality Engineering, 14(4), 531-537.
+1. David B. Laney (2002). [Improved control charts for attributes](https://doi.org/10.1081/QEN-120003555). Quality Engineering, 14(4), 531-537.
 
 ----
 

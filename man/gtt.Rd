@@ -23,6 +23,6 @@ A dataset with data on adverse events during hospitalisation found by the
 Global Trigger Tool.
 }
 \references{
-\url{http://www.ihi.org/resources/Pages/Tools/IHIGlobalTriggerToolforMeasuringAEs.aspx}
+\url{https://www.ihi.org/resources/Pages/Tools/IHIGlobalTriggerToolforMeasuringAEs.aspx}
 }
 \keyword{datasets}

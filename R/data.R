@@ -10,7 +10,7 @@
 #'   infection. \item{month} First day of month. \item {n} Number of cases.
 #'   \item{days} Number of risk days. A risk day is a patient day without
 #'   infection. }
-#' @source \url{https://www.esundhed.dk/Emner/Patienter-og-sygehuse/HAIBA/}
+#' @source \url{https://www.esundhed.dk/}
 #'   (Capital Region of Denmark).
 "hospital_infections"
 
@@ -67,6 +67,6 @@
 #'   harm; G-H: Permanent harm; I: Fatal harm. }
 #' @source Omitted for privacy concerns.
 #' @references
-#'   \url{http://www.ihi.org/resources/Pages/Tools/IHIGlobalTriggerToolforMeasuringAEs.aspx}
+#'   \url{https://www.ihi.org/resources/Pages/Tools/IHIGlobalTriggerToolforMeasuringAEs.aspx}
 #'   
 "gtt"
