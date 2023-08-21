@@ -5,8 +5,8 @@
 #' #' See the README on
 #' \url{https://github.com/anhoej/qicharts2/}
 #' 
-#' @docType package
 #' @name qicharts2
+#' @aliases qicharts2-package
 NULL
 
 ## Prevent R CMD check notes about missing bindings for global variables
