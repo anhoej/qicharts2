@@ -1,7 +1,7 @@
 Package: qicharts2
 Title: Quality Improvement Charts
-Version: 0.7.2.9000
-Date: 2021-06-08
+Version: 0.7.3
+Date: 2023-08-21
 Authors@R: person('Jacob', 'Anhoej', email = 'jacob@anhoej.net',
     role = c('aut', 'cre'))
 Description: Functions for making run charts, Shewhart control charts and
