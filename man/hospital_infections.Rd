@@ -13,8 +13,7 @@ A data frame with 432 rows and 5 variables: \itemize{ \item
   infection. }
 }
 \source{
-\url{https://www.esundhed.dk/Emner/Patienter-og-sygehuse/HAIBA/}
-  (Capital Region of Denmark).
+www.esundhed.dk (Capital Region of Denmark).
 }
 \usage{
 hospital_infections

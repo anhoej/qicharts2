@@ -12,8 +12,7 @@ A data frame with 36 rows and 5 variables: \itemize{ \item {month}
   Annotations. }
 }
 \source{
-\url{https://www.esundhed.dk/Emner/Patienter-og-sygehuse/HAIBA/}
-  (Amager Hvidovre Hospital).
+www.esundhed.dk (Amager Hvidovre Hospital).
 }
 \usage{
 cdi
