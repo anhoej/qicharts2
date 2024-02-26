@@ -78,7 +78,7 @@ plot.qic <- function(x, title, ylab, xlab, subtitle, caption, part.labels,
               colour = col1, 
               na.rm = T, 
               # size = 1,
-              linetype = 2)
+              linetype = 3)
   
   p <- p +
     geom_line(aes_(y = ~ cl, linetype = ~ runs.signal, colour = ~ linecol),
