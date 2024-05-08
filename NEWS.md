@@ -1,3 +1,7 @@
+qicharts2 0.7.4.9999
+===============
+
+
 qicharts2 0.7.4
 ===============
 * Fix \docType{package} error

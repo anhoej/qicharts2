@@ -1,7 +1,9 @@
-[![R-CMD-check](https://github.com/anhoej/qicharts2/workflows/R-CMD-check/badge.svg)](https://github.com/anhoej/qicharts2/actions)
+<!-- badges: start -->
+[![R-CMD-check](https://github.com/anhoej/qicharts2/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/anhoej/qicharts2/actions/workflows/R-CMD-check.yaml)
 [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/qicharts2)](https://cran.r-project.org/package=qicharts2)
 [![DOI](https://zenodo.org/badge/96605963.svg)](https://zenodo.org/badge/latestdoi/96605963)
 [![DOI](http://joss.theoj.org/papers/10.21105/joss.00699/status.svg)](https://doi.org/10.21105/joss.00699)
+<!-- badges: end -->
 
 # Quality improvement charts for R
 
