@@ -65,6 +65,6 @@
 #'   harm; G-H: Permanent harm; I: Fatal harm. }
 #' @source Omitted for privacy concerns.
 #' @references
-#'   \url{https://www.ihi.org/resources/Pages/Tools/IHIGlobalTriggerToolforMeasuringAEs.aspx}
+#'   \url{https://www.ihi.org/resources/white-papers/ihi-global-trigger-tool-measuring-adverse-events}
 #'   
 "gtt"

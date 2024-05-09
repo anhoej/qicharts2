@@ -42,13 +42,13 @@
 #' @export
 
 bchart <- function(
-  x,
-  target,
-  or    = 2,
-  limit = 3.5,
-  title = '',
-  ylab  = 'CUSUM', 
-  xlab  = 'Case #') {
+    x,
+    target,
+    or    = 2,
+    limit = 3.5,
+    title = '',
+    ylab  = 'CUSUM', 
+    xlab  = 'Case #') {
   if(target > 1) {
     freeze <- target
     p0 <- mean(x[1:target])

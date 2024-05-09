@@ -233,7 +233,7 @@ I recommend to always begin any analysis with the "assumption free" run chart. I
 >
 >If it did, then it makes no sense to do a control chart at this time because the overall average of all these data doesn't exist. (Sort of like: If I put my right foot in a bucket of boiling water and my left foot in a bucket of ice water, on average, I'm pretty comfortable.)
 >
-> Davis Balestracci. [Quality Digest 2014](https://www.qualitydigest.com/inside/quality-insider-column/control-charts-simple-elegance-or-legalized-torture.html)
+> Davis Balestracci. [Quality Digest 2014](https://www.qualitydigest.com/inside/six-sigma-column/control-charts-simple-elegance-or-legalized-torture-010614.html)
 
 ## Case 1: Patient harm
 
