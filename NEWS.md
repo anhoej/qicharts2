@@ -4,6 +4,7 @@ qicharts2 0.7.5
 * Minor fixes to docs
 * Change target line to dotted
 
+
 qicharts2 0.7.4
 ===============
 * Fix \docType{package} error
