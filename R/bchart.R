@@ -144,16 +144,26 @@ plot.bchart <- function(data, title, ylab, xlab, freeze) {
               na.rm = T, 
               colour = 'grey40',
               size = 3.1) +
-    geom_text(aes_(~max(x), limit, label = limit), 
-              check_overlap = T, 
-              size = 3.1, 
-              colour = 'grey40', 
-              hjust = -0.2) +
-    geom_text(aes_(~max(x), -limit, label = -limit), 
-              check_overlap = T, 
-              size = 3.1, 
-              colour = 'grey40', 
-              hjust = -0.2) +
+    annotate('text', max(data$x), limit, label = limit,
+             check_overlap = T,
+             size = 3.1,
+             colour = 'grey40',
+             hjust = -0.2) +
+    annotate('text', max(data$x), -limit, label = -limit,
+             check_overlap = T,
+             size = 3.1,
+             colour = 'grey40',
+             hjust = -0.2) +
+    # geom_text(aes_(~max(x), limit, label = limit),
+    #           check_overlap = T,
+    #           size = 3.1,
+    #           colour = 'grey40',
+    #           hjust = -0.2) +
+    # geom_text(aes_(~max(x), -limit, label = -limit),
+    #           check_overlap = T,
+    #           size = 3.1,
+    #           colour = 'grey40',
+    #           hjust = -0.2) +
     scale_y_continuous(expand = expansion(0.1)) +
     theme_bw() +
     theme(panel.border     = element_rect(colour = 'grey93'),
