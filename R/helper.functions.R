@@ -140,7 +140,7 @@ qic.i <- function(x) {
   base <- x$baseline & x$include
   if (anyNA(x$cl))
     x$cl <- mean(x$y[base], na.rm = TRUE)
-  
+
   # Average moving range
   mr  <- abs(diff(x$y[base] - x$cl[base]))
   amr <- mean(mr, na.rm = TRUE)
@@ -180,6 +180,35 @@ qic.mr <- function(x) {
   
   return(x)
 }
+
+qic.in <- function(x) {
+  base <- x$baseline & x$include
+  
+  # Fix missing denominator
+  if (all(is.na(x$n))) {
+    x$n <- 1    
+  }
+
+  if (anyNA(x$cl)) {
+    x$cl <- sum(x$y.sum[base], na.rm = TRUE) / sum(x$n[base], na.rm = TRUE)
+  }
+  
+  # Standard deviation
+  l     <- nrow(x)
+  d1    <- abs(diff(x$y, na.rm = T))
+  d2    <- sqrt((1 / x$n[1:(l - 1)]) + (1 / x$n[2:l]))
+  s     <- sqrt(pi / 2) * d1 / d2
+  stdev <- mean(s, na.rm = T) * sqrt(1 / x$n)
+
+  # Calculate control limits
+  x$lcl    <- x$cl - 3 * stdev
+  x$ucl    <- x$cl + 3 * stdev
+  x$lcl.95 <- x$cl - 2 * stdev
+  x$ucl.95 <- x$cl + 2 * stdev
+  
+  return(x)
+}
+
 
 qic.xbar <- function(x){
   base  <- x$baseline & x$include
