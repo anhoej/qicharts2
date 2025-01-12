@@ -52,7 +52,7 @@
 #'   2013;22:362–368. \doi{10.1136/bmjqs-2012-001373}.
 "nhs_accidents"
 
-#' Patient harm indentified using the Global Trigger Tool
+#' Patient harm identified using the Global Trigger Tool
 #'
 #' A dataset with data on adverse events during hospitalisation found by the
 #' Global Trigger Tool.
@@ -68,3 +68,21 @@
 #'   \url{https://www.ihi.org/resources/white-papers/ihi-global-trigger-tool-measuring-adverse-events}
 #'   
 "gtt"
+
+#' Complaints
+#' 
+#' A data frame with 20 rows and 3 variables: \itemize{ \item month Month. 
+#' \item  Number of complaints. \item sales Sales volume. }
+#' @source Wayne Taylor (variation.com)
+#' @references
+#'   \url{https://variation.com/normalized-individuals-control-chart/}
+"complaints"
+
+#' Lots
+#' 
+#' A data frame with 20 rows and 3 variables: \itemize{ \item lot Lot number. 
+#' \item value Average value. \item n Lot size. }
+#' @source Wayne Taylor (variation.com)
+#' @references
+#'   \url{https://variation.com/normalized-individuals-control-chart/}
+"lots"

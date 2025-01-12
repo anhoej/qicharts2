@@ -3,7 +3,7 @@
 \docType{data}
 \name{gtt}
 \alias{gtt}
-\title{Patient harm indentified using the Global Trigger Tool}
+\title{Patient harm identified using the Global Trigger Tool}
 \format{
 A data frame with 340 rows and 11 variables: \itemize{ \item
   admission_id Admission ID. \item admission_dte Date of admission. \item
