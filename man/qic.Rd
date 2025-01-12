@@ -11,7 +11,7 @@ qic(
   data = NULL,
   facets = NULL,
   notes = NULL,
-  chart = c("run", "i", "mr", "xbar", "s", "t", "p", "pp", "c", "u", "up", "g"),
+  chart = c("run", "i", "mr", "xbar", "s", "t", "p", "pp", "c", "u", "up", "g", "in"),
   agg.fun = c("mean", "median", "sum", "sd"),
   method = c("anhoej", "bestbox", "cutbox"),
   multiply = 1,
