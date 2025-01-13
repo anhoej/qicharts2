@@ -183,10 +183,10 @@ qic.mr <- function(x) {
 
 qic.in <- function(x) {
   base <- x$baseline & x$include
-  
+
   # Fix missing denominator
   if (all(is.na(x$n))) {
-    x$n <- 1    
+    x$n <- x$y.length
   }
 
   if (anyNA(x$cl)) {
