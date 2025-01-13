@@ -209,7 +209,6 @@ qic.in <- function(x) {
   return(x)
 }
 
-
 qic.xbar <- function(x){
   base  <- x$baseline & x$include
   var.n <- as.logical(length(unique(x$y.length)) - 1)
@@ -251,6 +250,7 @@ qic.s <- function(x){
       x$cl <- mean(x$y.sd[base], na.rm = TRUE)
     }
   }
+  
   B3        <- b3(x$y.length)
   B3.95     <- b3(x$y.length, use.95=TRUE)
   B4        <- b4(x$y.length)
@@ -322,7 +322,7 @@ qic.pp <- function(x) {
   # Calculate standard deviation for Laney's P prime chart, incorporating
   # between-subgroup variation.
   z_i     <- (x$y[base] - x$cl[base]) / stdev[base]
-  # TESTING ##############################################
+  
   if(is.factor(x$x) || is.character(x$x)) {
     sigma_z <- stats::sd(z_i)
   } else {
@@ -338,7 +338,6 @@ qic.pp <- function(x) {
 
     sigma_z <- amr / 1.128
   }
-  # TESTING ##############################################  
   
   stdev   <- stdev * sigma_z
   
@@ -411,7 +410,6 @@ qic.up <- function(x){
   # between-subgroup variation.
   z_i     <- (x$y[base] - x$cl[base]) / stdev[base]
   
-  # TESTING ##############################################
   # sigma_z <- mean(abs(diff(z_i)), na.rm = TRUE) / 1.128
   if(is.factor(x$x) || is.character(x$x)) {
     sigma_z <- stats::sd(z_i)
@@ -428,7 +426,6 @@ qic.up <- function(x){
 
     sigma_z <- amr / 1.128
   }
-  # TESTING ##############################################  
   
   stdev   <- stdev * sigma_z
   
@@ -448,10 +445,10 @@ qic.g <- function(x){
   
   # Calculate centre line
   calccl <- anyNA(x$cl)
+  
   if (anyNA(x$cl)) {
     x$cl <- mean(x$y[base], na.rm = TRUE)
   }
-  
   
   # Calculate standard deviation, Montgomery, p. 319
   stdev <- sqrt(x$cl * (x$cl + 1))
