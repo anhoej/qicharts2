@@ -44,7 +44,7 @@ plot.qic <- function(x, title, ylab, xlab, subtitle, caption, part.labels,
   }
   
   # Prepare plot
-  p <- ggplot(x, aes_( ~ x, ~ y, group = ~ part)) +
+  p <- ggplot(x, aes({ x }, { y }, group = { part })) +
     theme_bw() +
     theme(panel.border     = element_rect(colour = 'grey93'),
           strip.background = element_rect(colour = 'grey93', fill = 'grey93'),
@@ -56,66 +56,66 @@ plot.qic <- function(x, title, ylab, xlab, subtitle, caption, part.labels,
   if (getOption('qic.clshade', default = TRUE) &
       sum(!is.na(x$lcl))) {
     p <- p +
-      geom_ribbon(aes_(ymin = ~ lcl, ymax = ~ ucl),
-                  fill = 'grey87',
+      geom_ribbon(aes(ymin ={ lcl }, ymax = { ucl }),
+                              fill = 'grey87',
                   alpha = 0.4)
   } else {
     p <- p +
-      geom_line(aes_(y = ~ lcl), colour = col1, na.rm = T)
+      geom_line(aes(y = { lcl }), colour = col1, na.rm = T)
     
     p <- p +
-      geom_line(aes_(y = ~ ucl), colour = col1, na.rm = T)
+      geom_line(aes(y = { ucl }), colour = col1, na.rm = T)
   }
 
   if (isTRUE(show.95)) {
     p <- p +
-      geom_line(aes_(y = ~ lcl.95), colour = col1, na.rm = T) +
-      geom_line(aes_(y = ~ ucl.95), colour = col1, na.rm = T)
+      geom_line(aes(y = { lcl.95 }), colour = col1, na.rm = T) +
+      geom_line(aes(y = { ucl.95 }), colour = col1, na.rm = T)
   }
   
   p <- p +
-    geom_line(aes_(y = ~ target), 
-              colour = col1, 
+    geom_line(aes(y = { target }), 
+                        colour = col1, 
               na.rm = T, 
               # size = 1,
               linetype = 3)
   
   p <- p +
-    geom_line(aes_(y = ~ cl, linetype = ~ runs.signal, colour = ~ linecol),
-              na.rm = TRUE) +
+    geom_line(aes(y = { cl }, linetype = { runs.signal }, colour = { linecol }),
+                        na.rm = TRUE) +
     scale_linetype_manual(values = c('FALSE' = 'solid', 'TRUE' = 'longdash'))
   
   # Add data points and line
   if (dots.only) {
     p <- p + 
-      geom_point(aes_(colour = ~ dotcol), size = 3 * point.size, na.rm = TRUE)
+      geom_point(aes(colour = { dotcol }), size = 3 * point.size, na.rm = TRUE)
   } else {
     p <- p +
-      geom_line(colour = col2, size = 1.1, na.rm = TRUE) +
-      geom_point(aes_(colour = ~ dotcol), size = point.size, na.rm = TRUE)
+      geom_line(colour = col2, linewidth = 1.1, na.rm = TRUE) +
+      geom_point(aes(colour = { dotcol }), size = point.size, na.rm = TRUE)
   }
   p <- p + scale_colour_manual(values = cols)
   
   # Add line labels
   if (show.labels) {
     p <- p +
-      geom_text(aes_(y = ~ target.lab,
-                     label = ~ lab.format(target.lab, decimals, y.percent)),
+      geom_text(aes(y = { target.lab },
+                     label = { lab.format(target.lab, decimals, y.percent) }),
                 na.rm = TRUE,
                 size = lab.size,
                 hjust = lab.just) +
-      geom_text(aes_(y = ~ lcl.lab,
-                     label = ~ lab.format(lcl.lab, decimals, y.percent)),
+      geom_text(aes(y = { lcl.lab },
+                     label = { lab.format(lcl.lab, decimals, y.percent) }),
                 na.rm = TRUE,
                 size = lab.size,
                 hjust = lab.just) +
-      geom_text(aes_(y = ~ ucl.lab,
-                     label = ~ lab.format(ucl.lab, decimals, y.percent)),
+      geom_text(aes(y = { ucl.lab },
+                     label = { lab.format(ucl.lab, decimals, y.percent) }),
                 na.rm = TRUE,
                 size = lab.size,
                 hjust = lab.just) +
-      geom_text(aes_(y = ~ cl.lab,
-                     label = ~ lab.format(cl.lab, decimals, y.percent)),
+      geom_text(aes(y = { cl.lab },
+                     label = { lab.format(cl.lab, decimals, y.percent) }),
                 na.rm = TRUE,
                 size = lab.size,
                 hjust = lab.just)
@@ -124,7 +124,7 @@ plot.qic <- function(x, title, ylab, xlab, subtitle, caption, part.labels,
   # Add freeze line and part labels
   if (is.finite(freeze)) {
     p <- p + 
-      geom_vline(aes_(xintercept = freeze), colour = col1, linetype = 3)
+      geom_vline(aes(xintercept = freeze), colour = col1, linetype = 3)
   }
   
   if (!is.null(part.labels)) {
@@ -148,7 +148,7 @@ plot.qic <- function(x, title, ylab, xlab, subtitle, caption, part.labels,
       }
       
       p <- p +
-        geom_label(aes_(y = ~ y, label = ~ z, group = 1), 
+        geom_label(aes(y = { y }, label = { z }, group = 1), 
                    data = plabs,
                    na.rm = T,
                    label.size = 0,
@@ -167,11 +167,11 @@ plot.qic <- function(x, title, ylab, xlab, subtitle, caption, part.labels,
   
   if (nrow(x.notes)) {
     p <- p +
-      geom_segment(aes_(xend = ~ x, yend = Inf),
+      geom_segment(aes(xend = { x }, yend = Inf),
                    data = x.notes,
                    linetype = 3,
                    colour = col1) +
-      geom_label(aes_(y = Inf, label = ~ notes),
+      geom_label(aes(y = Inf, label = { notes }),
                  data = x.notes,
                  label.size = NA,
                  label.padding = unit(0.3, 'lines'),

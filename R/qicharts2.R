@@ -12,19 +12,23 @@ NULL
 ## Prevent R CMD check notes about missing bindings for global variables
 if(getRversion() >= "2.15.1")  
   utils::globalVariables(c(
-    # '.',
-    # 'baseline',
-    # 'dotcol',
-    # 'linecol',
-    # 'facet1',
-    # 'facet2',
-    # 'include',
-    # 'runs.signal',
-    # 'sigma.signal',
-    # 'lcl',
-    # 'ucl',
-    # 'notes',
     'xx',
-    'y.sum')
+    'y.sum',
+    'cl',
+    'cl.lab',
+    'dotcol',
+    'lcl',
+    'lcl.95',
+    'lcl.lab',
+    'linecol',
+    'notes',
+    'part',
+    'runs.signal',
+    'target',
+    'target.lab',
+    'ucl',
+    'ucl.95',
+    'ucl.lab',
+    'y')
   )
 
