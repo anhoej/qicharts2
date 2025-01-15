@@ -198,7 +198,14 @@ qic.in <- function(x) {
   d1    <- abs(diff(x$y, na.rm = T))
   d2    <- sqrt((1 / x$n[1:(l - 1)]) + (1 / x$n[2:l]))
   s     <- sqrt(pi / 2) * d1 / d2
-  stdev <- mean(s, na.rm = T) * sqrt(1 / x$n)
+  
+  # remove s
+  as <- mean(s, na.rm = T)
+  uls <- as * 3.2665
+  s  <- s[s < uls]
+  as <- mean(s, na.rm = TRUE)
+  stdev <- as * sqrt(1 / x$n)
+  # stdev <- mean(s, na.rm = T) * sqrt(1 / x$n)
 
   # Calculate control limits
   x$lcl    <- x$cl - 3 * stdev
