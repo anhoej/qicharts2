@@ -190,7 +190,9 @@ qic.in <- function(x) {
   }
 
   if (anyNA(x$cl)) {
-    x$cl <- sum(x$y.sum[base], na.rm = TRUE) / sum(x$n[base], na.rm = TRUE)
+    # x$cl <- sum(x$y.sum[base], na.rm = TRUE) / sum(x$n[base], na.rm = TRUE)
+    x$cl <- sum(x$y[base] * x$n[base], na.rm = TRUE) / 
+      sum(x$n[base], na.rm = TRUE)
   }
   
   # Standard deviation
