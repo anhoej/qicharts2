@@ -181,7 +181,7 @@ qic.mr <- function(x) {
   return(x)
 }
 
-qic.in <- function(x) {
+qic.ip <- function(x) {
   base <- x$baseline & x$include
 
   # Fix missing denominator
@@ -201,7 +201,7 @@ qic.in <- function(x) {
   d2    <- sqrt((1 / x$n[1:(l - 1)]) + (1 / x$n[2:l]))
   s     <- sqrt(pi / 2) * d1 / d2
   
-  # remove s
+  # remove s values above upper limit before calculating stdev
   as <- mean(s, na.rm = T)
   uls <- as * 3.2665
   s  <- s[s < uls]

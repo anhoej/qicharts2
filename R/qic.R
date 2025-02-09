@@ -21,7 +21,7 @@
 #' @param notes Character vector of notes to be added to individual data points.
 #' @param facets One or two sided formula with factors used for facetting plots.
 #' @param chart Character value indicating the chart type. Possible values are:
-#'   'run' (default), 'i', 'mr', 'xbar', 't', 's', 'c', 'u', 'up', 'p', 'pp',
+#'   'run' (default), 'i', 'ip', 'mr', 'xbar', 't', 's', 'c', 'u', 'up', 'p', 'pp',
 #'   and 'g'.
 #' @param agg.fun Aggregate function for summarising the y variable if there are
 #'   more than one observation per subgroup. Only relevant for run charts and I
@@ -121,7 +121,7 @@ qic <- function(x,
                 facets             = NULL,
                 notes              = NULL,
                 chart              = c('run', 'i', 'mr', 'xbar', 's', 't',
-                                       'p', 'pp', 'c', 'u', 'up', 'g', 'in'),
+                                       'p', 'pp', 'c', 'u', 'up', 'g', 'ip'),
                 agg.fun            = c('mean', 'median', 'sum', 'sd'),
                 method             = c('anhoej', 'bestbox', 'cutbox'),
                 multiply           = 1,
