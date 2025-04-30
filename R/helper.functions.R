@@ -27,7 +27,7 @@ runs.analysis <- function(x, method) {
     n.crossings.min  <- NA
     runs.signal      <- FALSE
   }
-
+  
   x$n.obs           <- n.obs
   x$n.useful        <- n.useful
   x$runs.signal     <- runs.signal
@@ -140,7 +140,7 @@ qic.i <- function(x) {
   base <- x$baseline & x$include
   if (anyNA(x$cl))
     x$cl <- mean(x$y[base], na.rm = TRUE)
-
+  
   # Average moving range
   mr  <- abs(diff(x$y[base] - x$cl[base]))
   amr <- mean(mr, na.rm = TRUE)
@@ -148,9 +148,11 @@ qic.i <- function(x) {
   # Upper limit for moving ranges
   ulmr <- 3.267 * amr
   
-  # Remove moving ranges greater than ulmr and recalculate amr, Nelson 1982
-  mr  <- mr[mr < ulmr]
-  amr <- mean(mr, na.rm = TRUE)
+  if (getOption('qic.mrscreened', default = FALSE)) {
+    # Remove moving ranges greater than ulmr and recalculate amr, Nelson 1982
+    mr  <- mr[mr < ulmr]
+    amr <- mean(mr, na.rm = TRUE)
+  }
   
   # Calculate standard deviation, Montgomery, 6.33
   stdev <- amr / 1.128
@@ -183,12 +185,12 @@ qic.mr <- function(x) {
 
 qic.ip <- function(x) {
   base <- x$baseline & x$include
-
+  
   # Fix missing denominator
   if (all(is.na(x$n))) {
     x$n <- x$y.length
   }
-
+  
   if (anyNA(x$cl)) {
     # x$cl <- sum(x$y.sum[base], na.rm = TRUE) / sum(x$n[base], na.rm = TRUE)
     x$cl <- sum(x$y[base] * x$n[base], na.rm = TRUE) / 
@@ -208,7 +210,7 @@ qic.ip <- function(x) {
   as <- mean(s, na.rm = TRUE)
   stdev <- as * sqrt(1 / x$n)
   # stdev <- mean(s, na.rm = T) * sqrt(1 / x$n)
-
+  
   # Calculate control limits
   x$lcl    <- x$cl - 3 * stdev
   x$ucl    <- x$cl + 3 * stdev
@@ -337,14 +339,14 @@ qic.pp <- function(x) {
   } else {
     mr  <- abs(diff(z_i))
     amr <- mean(mr, na.rm = TRUE)
-
+    
     # Upper limit for moving ranges
     ulmr <- 3.267 * amr
-
+    
     # Remove moving ranges greater than ulmr and recalculate amr, Nelson 1982
     mr  <- mr[mr < ulmr]
     amr <- mean(mr, na.rm = TRUE)
-
+    
     sigma_z <- amr / 1.128
   }
   
@@ -425,14 +427,14 @@ qic.up <- function(x){
   } else {
     mr  <- abs(diff(z_i))
     amr <- mean(mr, na.rm = TRUE)
-
+    
     # Upper limit for moving ranges
     ulmr <- 3.267 * amr
-
+    
     # Remove moving ranges greater than ulmr and recalculate amr, Nelson 1982
     mr  <- mr[mr < ulmr]
     amr <- mean(mr, na.rm = TRUE)
-
+    
     sigma_z <- amr / 1.128
   }
   
@@ -627,7 +629,8 @@ qic.agg <- function(d, got.n, part, agg.fun, freeze, exclude,
           # qic.signalcol = '#F15854',
           qic.signalcol = '#FAA43A',
           qic.targetcol = '#059748',
-          qic.clshade   = TRUE)
+          qic.clshade   = TRUE,
+          qic.mrscreened = FALSE)
 }
 
 .onDetach <- function(libpath) {
