@@ -631,17 +631,17 @@ qic.agg <- function(d, got.n, part, agg.fun, freeze, exclude,
 }
 
 .onAttach <- function(libname, pkgname) {
-  options(qic.linecol   = '#5DA5DA',
-          qic.signalcol = '#FAA43A',
-          qic.targetcol = '#059748',
-          qic.clshade   = TRUE,
+  options(qic.linecol    = '#5DA5DA',
+          qic.signalcol  = '#FAA43A',
+          qic.targetcol  = '#059748',
+          qic.clshade    = TRUE,
           qic.screenedmr = TRUE)
 }
 
 .onDetach <- function(libpath) {
-  options(qic.linecol   = NULL,
-          qic.signalcol = NULL,
-          qic.targetcol = NULL,
-          qic.clshade   = NULL,
+  options(qic.linecol    = NULL,
+          qic.signalcol  = NULL,
+          qic.targetcol  = NULL,
+          qic.clshade    = NULL,
           qic.screenedmr = NULL)
 }
