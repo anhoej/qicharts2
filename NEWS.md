@@ -1,3 +1,9 @@
+qicharts2 0.7.5.9999
+===============
+* Add option qic.mrscreened.
+
+
+
 qicharts2 0.7.5
 ===============
 * Build for R 4.4.0

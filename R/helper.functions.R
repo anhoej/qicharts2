@@ -145,11 +145,10 @@ qic.i <- function(x) {
   mr  <- abs(diff(x$y[base] - x$cl[base]))
   amr <- mean(mr, na.rm = TRUE)
   
-  # Upper limit for moving ranges
-  ulmr <- 3.267 * amr
-  
-  if (getOption('qic.mrscreened', default = FALSE)) {
-    # Remove moving ranges greater than ulmr and recalculate amr, Nelson 1982
+  # Remove moving ranges greater than ulmr and recalculate amr, Nelson 1982
+  if (getOption('qic.screenedmr', default = FALSE)) {
+    # Upper limit for moving ranges
+    ulmr <- 3.267 * amr
     mr  <- mr[mr < ulmr]
     amr <- mean(mr, na.rm = TRUE)
   }
@@ -204,9 +203,12 @@ qic.ip <- function(x) {
   s     <- sqrt(pi / 2) * d1 / d2
   
   # remove s values above upper limit before calculating stdev
-  as <- mean(s, na.rm = T)
-  uls <- as * 3.2665
-  s  <- s[s < uls]
+  if (getOption('qic.screenedmr', default = FALSE)) {
+    as <- mean(s, na.rm = T)
+    uls <- as * 3.2665
+    s  <- s[s < uls]
+  }
+  
   as <- mean(s, na.rm = TRUE)
   stdev <- as * sqrt(1 / x$n)
   # stdev <- mean(s, na.rm = T) * sqrt(1 / x$n)
@@ -344,8 +346,10 @@ qic.pp <- function(x) {
     ulmr <- 3.267 * amr
     
     # Remove moving ranges greater than ulmr and recalculate amr, Nelson 1982
-    mr  <- mr[mr < ulmr]
-    amr <- mean(mr, na.rm = TRUE)
+    if (getOption('qic.screenedmr', default = FALSE)) {
+      mr  <- mr[mr < ulmr]
+      amr <- mean(mr, na.rm = TRUE)
+    }
     
     sigma_z <- amr / 1.128
   }
@@ -428,12 +432,14 @@ qic.up <- function(x){
     mr  <- abs(diff(z_i))
     amr <- mean(mr, na.rm = TRUE)
     
-    # Upper limit for moving ranges
-    ulmr <- 3.267 * amr
-    
     # Remove moving ranges greater than ulmr and recalculate amr, Nelson 1982
-    mr  <- mr[mr < ulmr]
-    amr <- mean(mr, na.rm = TRUE)
+    if (getOption('qic.screenedmr', default = FALSE)) {
+      # Upper limit for moving ranges
+      ulmr <- 3.267 * amr
+      
+      mr  <- mr[mr < ulmr]
+      amr <- mean(mr, na.rm = TRUE)
+    }
     
     sigma_z <- amr / 1.128
   }
@@ -626,16 +632,16 @@ qic.agg <- function(d, got.n, part, agg.fun, freeze, exclude,
 
 .onAttach <- function(libname, pkgname) {
   options(qic.linecol   = '#5DA5DA',
-          # qic.signalcol = '#F15854',
           qic.signalcol = '#FAA43A',
           qic.targetcol = '#059748',
           qic.clshade   = TRUE,
-          qic.mrscreened = FALSE)
+          qic.screenedmr = TRUE)
 }
 
 .onDetach <- function(libpath) {
   options(qic.linecol   = NULL,
           qic.signalcol = NULL,
           qic.targetcol = NULL,
-          qic.clshade   = NULL)
+          qic.clshade   = NULL,
+          qic.screenedmr = NULL)
 }
