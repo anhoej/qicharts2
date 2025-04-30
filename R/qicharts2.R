@@ -29,6 +29,7 @@ if(getRversion() >= "2.15.1")
     'ucl',
     'ucl.95',
     'ucl.lab',
-    'y')
+    'y',
+    'z')
   )
 
