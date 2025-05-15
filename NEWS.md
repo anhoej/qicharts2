@@ -1,8 +1,7 @@
-qicharts2 0.7.5.9999
+qicharts2 0.8.0
 ===============
 * Add option qic.mrscreened.
-
-
+* Add I prime chart (ip).
 
 qicharts2 0.7.5
 ===============
