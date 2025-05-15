@@ -13,7 +13,7 @@ Description: Functions for making run charts, Shewhart control charts and
     identified by Shewhart's 3-sigma rule [Mohammed, Worthington, Woodall (2008)
     <doi:10.1136/qshc.2004.012047>].
 Depends:
-    R (>= 3.0.0)
+    R (>= 3.5.0)
 Imports:
     ggplot2 (>= 2.2.0),
     scales,

@@ -837,7 +837,7 @@ Since runs analysis based on the Anhøj rules makes no assumptions about the dis
 
 1. Donald J. Wheeler (2010). [Understanding Statistical Process Control](https://www.spcpress.com/book_understanding_statistical_process_control.php), third edition. SPC Press.
 
-1. Douglas C. Montgomery (2009). [Statistical Quality Control -- A Modern Introduction](https://eu.wiley.com/WileyCDA/WileyTitle/productCd-1118322576.html), sixth edition. John Wiley & Sons.
+1. Douglas C. Montgomery (2009). [Statistical Quality Control -- A Modern Introduction](https://www.wiley.com/en-dk/Introduction+to+Statistical+Quality+Control%2C+8th+Edition-p-9781119723097), sixth edition. John Wiley & Sons.
 
 1. Lloyd S. Nelson (1982). [Control Charts for Individual Measurements](https://doi.org/10.1080/00224065.1982.11978811). Journal of Quality Technology 14(3), 172-173.
 
