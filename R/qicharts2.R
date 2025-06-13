@@ -30,6 +30,14 @@ if(getRversion() >= "2.15.1")
     'ucl.95',
     'ucl.lab',
     'y',
-    'z')
+    'z',
+    'cusum1',
+    'cusum2',
+    'limit1',
+    'limit2',
+    'p.cum',
+    'signal1',
+    'signal2',
+    'x')
   )
 

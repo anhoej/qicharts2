@@ -128,19 +128,19 @@ plot.bchart <- function(data, title, ylab, xlab, freeze) {
   col2 <- '#5DA5DA'
   col3 <- '#F15854'
   
-  p <- ggplot(data, aes_(~x, ~cusum1)) +
-    geom_line(aes_(y = ~limit1), colour = col1) +
-    geom_line(aes_(y = ~limit2), colour = col1) +
-    geom_line(aes_(y = 0), colour = col1) +
-    geom_point(aes_(y = ~signal1), na.rm = T, colour = col3) +
-    geom_point(aes_(y = ~signal2),  na.rm = T, colour = col3, size = 2) +
-    geom_line(colour = col2, size = 1.1) +
-    geom_line(aes_(y = ~cusum2), colour = col2, size = 1.1) +
-    geom_text(aes_(y = ~signal1, label = ~x, vjust = -0.7),
+  p <- ggplot(data, aes({ x }, { cusum1 })) +
+    geom_line(aes(y = { limit1 }), colour = col1) +
+    geom_line(aes(y = { limit2 }), colour = col1) +
+    geom_line(aes(y = 0), colour = col1) +
+    geom_point(aes(y = { signal1 }), na.rm = T, colour = col3) +
+    geom_point(aes(y = { signal2 }),  na.rm = T, colour = col3, size = 2) +
+    geom_line(colour = col2, linewidth = 1.1) +
+    geom_line(aes(y = { cusum2 }), colour = col2, size = 1.1) +
+    geom_text(aes(y = { signal1 }, label = { x }, vjust = -0.7),
               na.rm = T, 
               colour = 'grey40',
               size = 3.1) +
-    geom_text(aes_(y = ~signal2, label = ~x, vjust = 1.7),
+    geom_text(aes(y = { signal2 }, label = { x }, vjust = 1.7),
               na.rm = T, 
               colour = 'grey40',
               size = 3.1) +
@@ -154,16 +154,6 @@ plot.bchart <- function(data, title, ylab, xlab, freeze) {
              size = 3.1,
              colour = 'grey40',
              hjust = -0.2) +
-    # geom_text(aes_(~max(x), limit, label = limit),
-    #           check_overlap = T,
-    #           size = 3.1,
-    #           colour = 'grey40',
-    #           hjust = -0.2) +
-    # geom_text(aes_(~max(x), -limit, label = -limit),
-    #           check_overlap = T,
-    #           size = 3.1,
-    #           colour = 'grey40',
-    #           hjust = -0.2) +
     scale_y_continuous(expand = expansion(0.1)) +
     theme_bw() +
     theme(panel.border     = element_rect(colour = 'grey93'),
@@ -179,10 +169,11 @@ plot.bchart <- function(data, title, ylab, xlab, freeze) {
                           ', P+ = ', p1,
                           ', OR- = ', signif(1 / or, 2),
                           ', P- = ', p2),
-         ', Limit = ', limit)
+         # ', Limit = ', limit
+         )
   
   if(!is.null(freeze))
-    p <- p + geom_vline(aes_(xintercept = ~freeze), linetype = 3, colour = col1)
+    p <- p + geom_vline(aes(xintercept = { freeze }), linetype = 3, colour = col1)
   
   return(p)
 }

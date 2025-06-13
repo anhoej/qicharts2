@@ -51,11 +51,11 @@ paretochart <- function(x,
   if (!is.null(title) && title == '') 
     title <- paste('Pareto Chart', 'of', varname)
   
-  p <- ggplot(x, aes_(x = ~ x, y = ~ p.cum)) +
-    geom_col(aes_(y = ~ p), fill = '#88BDE6') +
-    geom_line(aes_(group = 1), colour = 'grey33') +
+  p <- ggplot(x, aes(x = { x }, y = { p.cum })) +
+    geom_col(aes(y = { p }), fill = '#88BDE6') +
+    geom_line(aes(group = 1), colour = 'grey33') +
     geom_point(colour = 'grey33') +
-    geom_text(aes_(y = ~ p, label = ~ y), vjust = -1) +
+    geom_text(aes(y = { p }, label = { y }), vjust = -1) +
     scale_y_continuous(breaks = seq(0, 1, 0.2),
                        labels = scales::percent) +
     theme_minimal() +
