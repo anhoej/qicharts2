@@ -135,7 +135,7 @@ plot.bchart <- function(data, title, ylab, xlab, freeze) {
     geom_point(aes(y = { signal1 }), na.rm = T, colour = col3) +
     geom_point(aes(y = { signal2 }),  na.rm = T, colour = col3, size = 2) +
     geom_line(colour = col2, linewidth = 1.1) +
-    geom_line(aes(y = { cusum2 }), colour = col2, size = 1.1) +
+    geom_line(aes(y = { cusum2 }), colour = col2, linewidth = 1.1) +
     geom_text(aes(y = { signal1 }, label = { x }, vjust = -0.7),
               na.rm = T, 
               colour = 'grey40',

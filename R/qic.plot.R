@@ -77,7 +77,6 @@ plot.qic <- function(x, title, ylab, xlab, subtitle, caption, part.labels,
     geom_line(aes(y = { target }), 
                         colour = col1, 
               na.rm = T, 
-              # size = 1,
               linetype = 3)
   
   p <- p +
@@ -151,7 +150,7 @@ plot.qic <- function(x, title, ylab, xlab, subtitle, caption, part.labels,
         geom_label(aes(y = { y }, label = { z }, group = 1), 
                    data = plabs,
                    na.rm = T,
-                   label.size = 0,
+                   linewidth = 0,
                    label.padding = unit(0.5, 'lines'),
                    size = lab.size,
                    alpha = 0.5,
@@ -173,7 +172,7 @@ plot.qic <- function(x, title, ylab, xlab, subtitle, caption, part.labels,
                    colour = col1) +
       geom_label(aes(y = Inf, label = { notes }),
                  data = x.notes,
-                 label.size = NA,
+                 linewidth = NA,
                  label.padding = unit(0.3, 'lines'),
                  size = lab.size,
                  alpha = 0.5,
@@ -233,7 +232,7 @@ plot.qic <- function(x, title, ylab, xlab, subtitle, caption, part.labels,
   
   # Show grid
   if (show.grid) {
-    p <- p + theme(panel.grid = element_line(size = 0.1, colour = col1))
+    p <- p + theme(panel.grid = element_line(linewidth = 0.1, colour = col1))
     # p <- p + theme(panel.grid = element_line())
   }
   
