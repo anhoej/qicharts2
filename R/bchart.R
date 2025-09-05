@@ -49,11 +49,15 @@ bchart <- function(
     title = '',
     ylab  = 'CUSUM', 
     xlab  = 'Case #') {
-  if(target > 1) {
+  freeze <- NULL
+  
+  if (missing(target)) {
+    p0 <- mean(x)
+  } else if(target > 1) {
     freeze <- target
     p0 <- mean(x[1:target])
   } else {
-    freeze <- NULL
+    # freeze <- NULL
     p0 <- target
   }
   
@@ -170,7 +174,7 @@ plot.bchart <- function(data, title, ylab, xlab, freeze) {
                           ', OR- = ', signif(1 / or, 2),
                           ', P- = ', p2),
          # ', Limit = ', limit
-         )
+    )
   
   if(!is.null(freeze))
     p <- p + geom_vline(aes(xintercept = { freeze }), linetype = 3, colour = col1)
