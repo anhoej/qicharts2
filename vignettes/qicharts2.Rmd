@@ -9,8 +9,10 @@ output:
     toc_depth: 3
 vignette: >
   %\VignetteIndexEntry{Quality Improvement Charts}
-  %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+editor_options: 
+  chunk_output_type: console
 ---
       
 ```{r, echo = FALSE, message=FALSE}
@@ -597,7 +599,7 @@ Rare events are often better analysed as time or opportunities between events. F
 fatalities <- cabg %>% 
   mutate(x = row_number()) %>% 
   filter(death) %>% 
-  mutate(dd = x - lag(x),
+  mutate(dd = x - lag(x) - 1,  # subtract 1 to get number between
          dt = date - lag(date))
 
 head(fatalities)
