@@ -191,16 +191,20 @@ qic.ip <- function(x) {
   }
   
   if (anyNA(x$cl)) {
-    # x$cl <- sum(x$y.sum[base], na.rm = TRUE) / sum(x$n[base], na.rm = TRUE)
     x$cl <- sum(x$y[base] * x$n[base], na.rm = TRUE) / 
       sum(x$n[base], na.rm = TRUE)
   }
   
   # Standard deviation
-  l     <- nrow(x)
-  d1    <- abs(diff(x$y, na.rm = T))
-  d2    <- sqrt((1 / x$n[1:(l - 1)]) + (1 / x$n[2:l]))
-  s     <- sqrt(pi / 2) * d1 / d2
+  # l     <- nrow(x)
+  # d1    <- abs(diff(x$y, na.rm = T))
+  # d2    <- sqrt((1 / x$n[1:(l - 1)]) + (1 / x$n[2:l]))
+  y  <- x$y[base]
+  n  <- x$n[base]
+  l  <- length(y)
+  d1 <- abs(diff(y, na.rm = T))
+  d2 <- sqrt((1 / n[1:(l - 1)]) + (1 / n[2:l]))
+  s  <- sqrt(pi / 2) * d1 / d2
   
   # remove s values above upper limit before calculating stdev
   if (getOption('qic.screenedmr', default = FALSE)) {
@@ -211,7 +215,6 @@ qic.ip <- function(x) {
   
   as <- mean(s, na.rm = TRUE)
   stdev <- as * sqrt(1 / x$n)
-  # stdev <- mean(s, na.rm = T) * sqrt(1 / x$n)
   
   # Calculate control limits
   x$lcl    <- x$cl - 3 * stdev

@@ -1,6 +1,7 @@
 qicharts2 0.8.1.9999
 ===============
 * Allow missing target in bchart().
+* Fix error when using freeze in ip chart (thanks to NathanProudlove.
 
 qicharts2 0.8.1
 ===============

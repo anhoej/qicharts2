@@ -5,6 +5,8 @@ export(bchart)
 export(paretochart)
 export(qic)
 import(ggplot2)
-importFrom(stats,coef)
-importFrom(stats,lm)
-importFrom(stats,median)
+importFrom(stats,
+  coef,
+  lm,
+  median
+)
